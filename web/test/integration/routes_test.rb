@@ -1,14 +1,26 @@
 require 'test_helper'
 
 class RoutesTest < ActionController::IntegrationTest
-  test 'route test' do
+  test 'root route' do
     assert_generates '/', {:controller => 'static', :action => 'home'}
+  end
+
+  test 'dev routes' do
     assert_generates '/devs', {:controller => 'devs', :action => 'index'}
-    assert_generates '/devs/729382179481724', {:controller => 'devs', :action => 'show'}
+    assert_generates '/devs/1', {:controller => 'devs', :action => 'show', :id => 1}
+  end
+
+  test 'registration route' do
     assert_generates '/register', {:controller => 'devs', :action => 'new'}
+  end
+
+  test 'session routes' do
     assert_generates '/login', {:controller => 'sessions', :action => 'create'}
     assert_generates '/logout', {:controller => 'sessions', :action => 'destroy'}
-    assert_generates '/apps/729382179481724', {:controller => 'apps', :action => 'show'}
-    assert_generates '/apps/729382179481724/flag', {:controller => 'apps', :action => 'flag'} # RESTful?
+  end
+
+  test 'app routes' do
+    assert_generates '/apps/1', {:controller => 'apps', :action => 'show', :id => 1}
+    assert_generates '/apps/1/flag', {:controller => 'apps', :action => 'flag', :app_id => 1} # RESTful?
   end
 end
