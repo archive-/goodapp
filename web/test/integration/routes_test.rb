@@ -20,7 +20,8 @@ class RoutesTest < ActionController::IntegrationTest
   end
 
   test 'app routes' do
+    assert_generates '/apps', {:controller => 'apps', :action => 'index'}
     assert_generates '/apps/1', {:controller => 'apps', :action => 'show', :id => 1}
-    assert_generates '/apps/1/flag', {:controller => 'apps', :action => 'flag', :app_id => 1} # RESTful?
+    assert_generates '/apps/1/flag', {:controller => 'apps', :action => 'flag', :id => 1} # RESTful?
   end
 end
