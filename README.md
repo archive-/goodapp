@@ -23,4 +23,4 @@ GETTING STARTED
 NOTES
 -----
 - generated web directory with:
-    rails new web --skip-javascript --old-style-hash
+    rails new web

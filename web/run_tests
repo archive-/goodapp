@@ -1,0 +1,2 @@
+#!/bin/bash
+ruby -Itest test/integration/routes_test.rb
