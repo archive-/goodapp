@@ -24,4 +24,10 @@ class RoutesTest < ActionController::IntegrationTest
     assert_generates '/apps/1', {:controller => 'apps', :action => 'show', :id => 1}
     assert_generates '/apps/1/flag', {:controller => 'apps', :action => 'flag', :id => 1} # RESTful?
   end
+
+  # TODO make a resource controller+model?
+  test 'other static routes' do
+    assert_generates '/search', {:controller => 'static', :action => 'search'}
+    assert_generates '/about', {:controller => 'static', :action => 'about'}
+  end
 end

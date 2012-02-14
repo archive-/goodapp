@@ -1,8 +1,10 @@
 Web::Application.routes.draw do
   root :to => 'static#home'
 
-  get '/register' => 'devs#new', :as => :register
+  get '/search' => 'static#search', :as => :search
+  get '/about' => 'static#about', :as => :about
 
+  get '/register' => 'devs#new', :as => :register
   get '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create', :as => :login
   post '/logout' => 'sessions#destroy', :as => :logout
