@@ -10,4 +10,13 @@ class DevsController < ApplicationController
   def new
     @dev = Dev.new
   end
+
+  def create
+    @dev = Dev.new(params[:dev])
+    if @dev.save
+      redirect_to root_url, :notice => 'Signed up!'
+    else
+      render 'new'
+    end
+  end
 end
