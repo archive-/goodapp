@@ -8,4 +8,9 @@ class StaticController < ApplicationController
 
   def search
   end
+
+  def contact
+  	@active[:contact] = true
+  end
+
 end

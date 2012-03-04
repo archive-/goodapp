@@ -3,6 +3,7 @@ Web::Application.routes.draw do
 
   get '/search' => 'static#search', :as => :search
   get '/about' => 'static#about', :as => :about
+  get '/contact' => 'static#contact', :as => :contact
 
   get '/register' => 'devs#new', :as => :register
   get '/login' => 'sessions#new', :as => :login

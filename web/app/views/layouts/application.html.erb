@@ -9,11 +9,14 @@
 <body>
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div class="container">
-        <a href="/" class="brand">Goodapp</a>
+      <div class="container">        
+        <a href="/" class="brand">GoodApp</a>   
         <ul class="nav">
           <li class="<%= 'active' if @active[:about] %>"><a href="/about">About</a></li>
         </ul>
+        <ul class="nav">
+          <li class="<%= 'active' if @active[:contact] %>"><a href="/contact">Contact Us</a></li>
+        </ul>     
         <form class="navbar-search" action="/search" method="get">
           <input type="text" name="q" class="search-query" value="<%= params[:q] %>" placeholder="Search by app or dev" />
         </form>
