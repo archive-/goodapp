@@ -9,4 +9,7 @@ class AppsController < ApplicationController
 
   def flag
   end
+
+  def new
+  end
 end
