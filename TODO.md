@@ -1,0 +1,3 @@
+- standardize page headers (decide h1/h2 but then move it to a helper)
+- integrate bootstrap form as a 'plugin' or something
+- remove gutters from everywhere -- can style the same but doesn\'t work
