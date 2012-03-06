@@ -10,7 +10,7 @@ class StaticController < ApplicationController
   end
 
   def contact
-  	@active[:contact] = true
+    @active[:contact] = true
   end
 
 end

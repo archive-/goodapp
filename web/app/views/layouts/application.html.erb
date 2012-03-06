@@ -9,14 +9,14 @@
 <body>
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div class="container">        
-        <a href="/" class="brand">GoodApp</a>   
+      <div class="container">
+        <a href="/" class="brand">GoodApp</a>
         <ul class="nav">
           <li class="<%= 'active' if @active[:about] %>"><a href="/about">About</a></li>
         </ul>
         <ul class="nav">
           <li class="<%= 'active' if @active[:contact] %>"><a href="/contact">Contact Us</a></li>
-        </ul>     
+        </ul>
         <form class="navbar-search" action="/search" method="get">
           <input type="text" name="q" class="search-query" value="<%= params[:q] %>" placeholder="Search by app or dev" />
         </form>
@@ -27,17 +27,12 @@
       </div>
     </div>
   </div>
-  <div class="container" id="content">
-    <%# TODO clean flash message stuff %>
-    <% flash.each do |f| %>
-      <% case f[0] %>
-      <% when :notice %>
-        <%= 'hi' %>
-      <% when :alert %>
-        <div class="alert alert-error"><%= f[1] %></div>
-      <% end %>
-    <% end %>
+  <div id="content" class="container">
+    <%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
     <%= yield %>
+  </div>
+  <div id="footer" class="container">
+    <p><strong>NULL &copy; 2012</strong></p>
   </div>
 </body>
 </html>
