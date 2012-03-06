@@ -8,10 +8,10 @@ Web::Application.routes.draw do
   get '/register' => 'users#new', :as => :register
   get '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create', :as => :login
-  post '/logout' => 'sessions#destroy', :as => :logout
+  get '/logout' => 'sessions#destroy', :as => :logout
 
   get '/users' => 'users#index', :as => :users
-  get '/users/:id' => 'users#show', :as => :users
+  get '/users/:id' => 'users#show', :as => :user
   post '/users' => 'users#create', :as => :users
 
   get '/apps' => 'apps#index', :as => :apps
