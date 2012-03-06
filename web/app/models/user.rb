@@ -1,4 +1,4 @@
-class Dev < ActiveRecord::Base
+class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
 
   attr_accessor :password
@@ -10,8 +10,8 @@ class Dev < ActiveRecord::Base
   validates_uniqueness_of :email
 
   def self.authenticate(email, password)
-    dev = find_by_email(email)
-    dev if dev && dev.password_hash == BCrypt::Engine.hash_secret(password, dev.password_salt)
+    user = find_by_email(email)
+    user if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
   end
 
   def encrypt_password

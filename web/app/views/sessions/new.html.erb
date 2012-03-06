@@ -1,0 +1,14 @@
+<h1>Login</h1>
+
+<%= twitter_bootstrap_form_for login_path do |f| %>
+  <%# label_tag :email %>
+  <%= f.text_field :email, :add_on => :prepend do %>
+    <span class="add-on"><i class="icon-envelope"></i></span>
+  <% end %>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <div class="form-actions">
+    <%= button_tag 'Login', :class => 'btn btn-primary' %>
+    <%= button_tag 'Cancel', :type => 'reset', :class => 'btn' %>
+  </div>
+<% end %>

@@ -5,13 +5,14 @@ class RoutesTest < ActionController::IntegrationTest
     assert_generates '/', {:controller => 'static', :action => 'home'}
   end
 
-  test 'dev routes' do
-    assert_generates '/devs', {:controller => 'devs', :action => 'index'}
-    assert_generates '/devs/1', {:controller => 'devs', :action => 'show', :id => 1}
+  test 'user routes' do
+    assert_generates '/users', {:controller => 'users', :action => 'index'}
+    assert_generates '/users', {:controller => 'users', :action => 'create'}
+    assert_generates '/users/1', {:controller => 'users', :action => 'show', :id => 1}
   end
 
   test 'registration route' do
-    assert_generates '/register', {:controller => 'devs', :action => 'new'}
+    assert_generates '/register', {:controller => 'users', :action => 'new'}
   end
 
   test 'session routes' do

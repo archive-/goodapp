@@ -16,11 +16,16 @@ GETTING STARTED
   - (installs gems from the Gemfile in current directory)
 - then: 'cd web' (to go into the ruby on rails directory)
 - then: 'bundle install' again (to install the gems specific to the web stuff)
-- type: 'git submodule init' (to get bootstrap)
-- then: 'git submodule update'
 - finally, inside the web directory, just type 'rails server' and go to localhost:3000
 
 NOTES
 -----
 - generated web directory with:
     rails new web
+
+TODO
+----
+- write more tests (see 'rake stats' --> get closer to 1:2)
+- replace twitter_bootstrap_form_for_ gem
+- get CanCan in there for protecting upload to just devs (tie dev to binary)
+  - or have dev_id_ accessible if the person is admin (or app store)
