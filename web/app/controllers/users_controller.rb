@@ -4,15 +4,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @active[:user] = true
+    @user = User.find(params[:id])
   end
 
   def new
+    @active[:register] = true
     @user = User.new
   end
 
   def create
+    @active[:register] = true
     @user = User.new(params[:user])
     if @user.save
       redirect_to root_url, :notice => 'Signed up!'

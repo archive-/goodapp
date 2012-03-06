@@ -14,6 +14,7 @@ Web::Application.routes.draw do
   get '/users/:id' => 'users#show', :as => :user
   post '/users' => 'users#create', :as => :users
 
+  get '/upload' => 'apps#new', :as => :upload
   get '/apps' => 'apps#index', :as => :apps
   get '/apps/:id' => 'apps#show', :as => :app
   post '/apps/:id/flag' => 'apps#flag', :as => :app_flag

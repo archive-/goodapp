@@ -13,8 +13,6 @@
         <a href="/" class="brand">GoodApp</a>
         <ul class="nav">
           <li class="<%= 'active' if @active[:about] %>"><a href="/about">About</a></li>
-        </ul>
-        <ul class="nav">
           <li class="<%= 'active' if @active[:contact] %>"><a href="/contact">Contact Us</a></li>
         </ul>
         <form class="navbar-search" action="/search" method="get">
@@ -25,10 +23,13 @@
           <li class="<%= 'active' if @active[:user] %>"><%= link_to '@'+current_user.name, current_user %></li>
           <li><%= link_to 'Logout', logout_path %></li>
         <% else %>
-          <li><%= link_to 'Register', register_path %></li>
-          <li><%= link_to 'Login', login_path %></li>
+          <li class="<%= 'active' if @active[:register] %>"><%= link_to 'Register', register_path %></li>
+          <li class="<%= 'active' if @active[:login] %>"><%= link_to 'Login', login_path %></li>
         <% end %>
         </ul>
+        <% if current_user %>
+          <%= link_to 'Upload an App', upload_path, :id => 'upload-button', :class => 'btn btn-primary pull-right' %>
+        <% end %>
       </div>
     </div>
   </div>
