@@ -11,5 +11,7 @@
  *= require bootstrap.min
 */
 
+html {overflow-y: scroll}
 #content {margin-top: 60px}
 h1 {margin-bottom: 20px}
+.help-inline {color: red}

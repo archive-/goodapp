@@ -1,0 +1,21 @@
+- users register on goodapp
+- if they have a binary tied to their account, then they are a developer and thus they have a rating
+- user creates account with email address that we confirm (tie to the user)
+  - this email needs to be something that identifies them elsewhere too
+  - what we have: APP STORE DEV -->> email <<-- GOODAPP USER (is_dev => true)
+- user upploads a binary of theirs
+  - we run this binary over as many scanners as we can to generate a baseline
+    - [!] this should never yield negative results, otherwise, immediately throw up flag
+  - have developers somehow gather people to sign off on the validity of their app
+    - api calls so users of dev stores can do this too
+    - this will have a decent influence on the rating (algorithm to be determined)
+  - have developers with certain threshold of trust ENDORSE other developers
+    - this will also have a decent influence on the rating
+- have an api accessible by users with is_distributor => true (supply API key on their dashboard)
+  - fetch information on a developer using their email as a key
+  - allow a system for rating integration + flagging
+    - [!] distributor privilege problem will affect all changes in rating they have made
+
+- drag an drop links onto various boxes ('Apple Store', 'website', 'Windows Store', etc.)
+
+- model on Yelp

@@ -1,0 +1,13 @@
+<h1>Register</h1>
+
+<%= twitter_bootstrap_form_for @user do |f| %>
+  <%= f.text_field :email, :class => 'medium', :add_on => :prepend do %>
+    <span class="add-on"><i class="icon-envelope"></i></span>
+  <% end %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <div class="form-actions">
+    <%= f.button 'Register', :class => 'btn btn-primary' %>
+    <%= button_tag 'Cancel', :type => 'reset', :class => 'btn' %>
+  </div>
+<% end %>

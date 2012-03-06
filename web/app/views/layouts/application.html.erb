@@ -25,6 +25,15 @@
     </div>
   </div>
   <div class="container" id="content">
+    <%# TODO clean flash message stuff %>
+    <% flash.each do |f| %>
+      <% case f[0] %>
+      <% when :notice %>
+        <%= 'hi' %>
+      <% when :alert %>
+        <div class="alert alert-error"><%= f[1] %></div>
+      <% end %>
+    <% end %>
     <%= yield %>
   </div>
 </body>
