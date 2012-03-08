@@ -1,12 +1,12 @@
 <h1>About GoodApp</h1>
 
 <h2>Overview</h2>
-<div class="news-column">
+<div class="section">
 <p>Goodapp is a community of apps and developers. This community establishes a web of trust between its members, and developers is assigned a rating based on this trust network. These ratings gives users valuable information about which developers have an established and trusted reputation in the community, and which developers should be avoided. </p>
 </div>
 
 <h2>Metrics</h2>
-<div class="news-column">
+<div class="section">
 <p>Goodapp is a software application that scans app binaries, attempts to detect malicious activity and creates a web of trust. Each developer account comes with a rating. A trusted user's rating will be based on the following metrics:</p>
   <ul>
     <li>other trusted developer's reviews of this user</li>
@@ -17,13 +17,23 @@
 </div>
 
 <h2>The Team</h2>
-<div class="news-column">
-  <b>Yulia Dubinina &nbsp;&nbsp;&nbsp;&nbsp;TJ Koblentz &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Victor Moreira &nbsp;&nbsp;&nbsp;&nbsp;Jasper Fredrickson </b> <br/> 
-    <%= image_tag("head_shot.jpg", :size => "100x100") %> &nbsp;
-    <%= image_tag("TJKoblentz.JPG", :size => "88x88") %> &nbsp;
-    <%= image_tag("VictorMoreira.jpg", :size => "104x104") %> &nbsp;
-    <%= image_tag("jasper.jpeg", :size => "60x60") %> &nbsp;
-<br/></br>
-<p> Project in collaboration with <b>Microsoft</b> through UCSB CS189A-B Capstone courses. </p>
-<a href="/contact">Contact Us</a>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3 headshot">
+      <%= image_tag("head_shot.jpg", :size => "100x100") %> &nbsp;
+      <h3>Yulia Dubinina</h3>
+    </div>
+    <div class="span3 headshot">
+      <%= image_tag("TJKoblentz.JPG", :size => "88x88") %> &nbsp;
+      <h3>TJ Koblentz</h3>
+    </div>
+    <div class="span3 headshot">
+      <%= image_tag("VictorMoreira.jpg", :size => "104x104") %> &nbsp;
+      <h3>Victor Moreira</h3>
+    </div>
+    <div class="span3 headshot">
+      <%= image_tag("jasper.jpeg", :size => "60x60") %> &nbsp;
+      <h3>Jasper Fredrickson</h3>
+    </div>
+  </div>
 </div>
