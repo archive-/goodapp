@@ -14,15 +14,10 @@ class AppsController < ApplicationController
   def create
     @app = App.new(params[:app])
     if @app.save
-
     else
-
     end
   end
 
   def flag
-  end
-
-  def new
   end
 end

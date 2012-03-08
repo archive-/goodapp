@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :init_active_hash
+  before_filter :activate_nil
   helper_method :current_user
 
   private
@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def init_active_hash
-    @active = {}
+  def activate_nil
+    @active = nil
   end
 end

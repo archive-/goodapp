@@ -1,0 +1,6 @@
+<% if current_user && current_user.is_dev %>
+  <h4>You are a developer.</h4>
+  <%= button_to 'Downgrade Account', downgrade_path, :id => 'downgrade-button', :class => 'btn btn-danger' %>
+<% end %>
+
+<%= render :partial => 'users/form' %>

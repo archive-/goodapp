@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
   def new
-    @active[:login] = true
+    @active = :login
   end
 
   def create
-    @active[:login] = true
+    @active = :login
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id

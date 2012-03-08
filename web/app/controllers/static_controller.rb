@@ -3,14 +3,17 @@ class StaticController < ApplicationController
   end
 
   def about
-    @active[:about] = true
+    @active = :about
   end
 
   def search
   end
 
   def contact
-    @active[:contact] = true
+    @active = :contact
   end
 
+  def api
+    @active = :api
+  end
 end
