@@ -11,11 +11,8 @@
     <div class="control-group <%= control_status(@user, :email) %>">
       <%= f.label :email, :class => 'control-label' %>
       <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-envelope"></i></span>
-          <%= f.text_field :email, :class => 'input-xlarge' %>
-          <span class="help-inline"><%= @user.errors[:email][0] %></span>
-        </div>
+        <%= f.text_field :email, :class => 'input-xlarge' %>
+        <span class="help-inline"><%= @user.errors[:email][0] %></span>
       </div>
     </div>
     <div class="control-group <%= control_status(@user, :password) %>">

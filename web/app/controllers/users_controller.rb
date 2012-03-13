@@ -10,12 +10,12 @@ class UsersController < ApplicationController
   end
 
   def new
-    @active = :register
+    @active[:register] = true
     @user = User.new
   end
 
   def create
-    @active = :register
+    @active[:register] = true
     @user = User.new(params[:user])
     if @user.save
       redirect_to root_url, :notice => 'Signed up!'
@@ -49,6 +49,6 @@ class UsersController < ApplicationController
   private
 
   def activate_user
-    @active = :user
+    @active[:user] = true
   end
 end
