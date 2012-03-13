@@ -1,1 +1,31 @@
 <h1><%= @user.name %></h1>
+<div class="row">
+  <div class="span9">
+    <div class="dev-profile-columns">
+      <!-- Picture goes here -->
+      <div class="span4">
+        <%= image_tag("default-profile.jpg", :size => "250x250") %> &nbsp;
+      </div>
+      <!--Other information about user goes here -->
+      <h3>Full Name</h3>
+      <h3>E-Mail:</h3>
+      <h3>About:</h3>
+
+      <div class="span8">
+        <!-- for basic users -->
+        <p>if user - Recent Comment activity goes here </p>
+        <!-- ONLY FOR DEVS -->
+        <p>if dev - Activity of dev stuff goes here  </p>
+        List Apps: <br/>
+      </div>
+    </div>
+  </div>
+  <div class="span3">
+      <div class="dev-profile-columns">
+      <!-- ONLY FOR DEVS -->
+      <h3>Rating</h3>
+      Overall Rating [in Big and bold] <br/>
+      Rating by each category <br/>
+    </div>
+  </div>
+</div>
