@@ -1,31 +1,35 @@
 <h1><%= @user.name %></h1>
-<div class="row">
-  <div class="span9">
-    <div class="dev-profile-columns">
-      <!-- Picture goes here -->
-      <div class="span4">
-        <%= image_tag("default-profile.jpg", :size => "250x250") %> &nbsp;
-      </div>
-      <!--Other information about user goes here -->
-      <h3>Full Name</h3>
-      <h3>E-Mail:</h3>
-      <h3>About:</h3>
-
-      <div class="span8">
-        <!-- for basic users -->
-        <p>if user - Recent Comment activity goes here </p>
-        <!-- ONLY FOR DEVS -->
-        <p>if dev - Activity of dev stuff goes here  </p>
-        List Apps: <br/>
-      </div>
+<div class="row-fluid">
+  <div class="span2">
+    <!-- Picture goes here -->
+    <%= image_tag @user.avatar.url(:profile) %>
+    <!--Other information about user goes here -->
+    <h3>About</h3>
+    <% unless @user.about.blank? %>
+      <p><%= @user.about %></p>
+    <% else %>
+      <p>Your about message is not set, go to your <%= link_to 'account settings', edit_user_path(current_user) %> to set it.</p>
+    <% end %>
+  </div>
+  <div class="span7">
+    <div id="rating-box">
+      <h3>Rating Box</h3>
+      Overall Rating [in Big and bold] <br/>
+      Rating by each category <br/>
+      <p>if user - Recent Comment activity goes here </p>
+      <p>if dev - Activity of dev stuff goes here  </p>
+    </div>
+    <div id="activity-box">
+      <h3>Activity Feed</h3>
+      <p>Bla did bla.</p>
     </div>
   </div>
   <div class="span3">
-      <div class="dev-profile-columns">
-      <!-- ONLY FOR DEVS -->
-      <h3>Rating</h3>
-      Overall Rating [in Big and bold] <br/>
-      Rating by each category <br/>
-    </div>
+    <h3>Apps Owned</h3>
+    <ul>
+    <% @user.owned_apps.each do |app| %>
+      <li><%= link_to app.name, app %></li>
+    <% end %>
+    </ul>
   </div>
 </div>

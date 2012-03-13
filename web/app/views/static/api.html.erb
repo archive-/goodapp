@@ -1,1 +1,7 @@
-<h1>GoodApp API (current version = 0.00)</h1>
+<h1>API (version)</h1>
+
+<table class="table">
+  <% @routes.each do |r| %>
+    <%= content_tag(:tr, content_tag(:th, r.path.spec)) %>
+  <% end %>
+</table>

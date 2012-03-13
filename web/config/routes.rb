@@ -14,14 +14,15 @@ Web::Application.routes.draw do
   get '/users' => 'users#index', :as => :users
   get '/users/:id' => 'users#show', :as => :user
   get '/users/:id/edit' => 'users#edit', :as => :edit_user
+  put '/users/:id' => 'users#update', :as => :user
   post '/users' => 'users#create', :as => :users
 
   post '/upgrade' => 'users#upgrade', :as => :upgrade
   post '/downgrade' => 'users#downgrade', :as => :downgrade
 
   get '/upload' => 'apps#new', :as => :upload
-  post '/uploads' => 'apps#create', :as => :apps
   get '/apps' => 'apps#index', :as => :apps
+  post '/apps' => 'apps#create', :as => :apps
   get '/apps/:id' => 'apps#show', :as => :app
   post '/apps/:id/flag' => 'apps#flag', :as => :app_flag
 end

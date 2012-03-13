@@ -25,6 +25,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.update_attributes(params[:user])
+      redirect_to @user, :notice => 'Successfully updated your account settings.'
+    else
+      flash.now.alert = 'A problem occured when trying to update your account settings.'
+      render 'new'
+    end
   end
 
   def upgrade
