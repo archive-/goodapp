@@ -17,3 +17,5 @@ end
 gem 'jquery-rails'
 gem 'paperclip', '~> 2.7'
 gem 'cancan'
+gem 'populator'
+gem 'faker'
