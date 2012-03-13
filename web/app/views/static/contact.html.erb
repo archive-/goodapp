@@ -1,26 +1,27 @@
-<h1>Contact the Devs of GoodApp</h1>
-<div class="news-column">
-  <%= form_tag do %>
-  <fieldset>
-    <div class="control-group">
-      <%= label_tag :email %>
-      <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-envelope"></i></span>
-          <%= text_field_tag :email, '', :class => 'input-xlarge' %>
-        </div>
-      </div>
+<h1>Contact Us</h1>
+<%= form_tag '', :class => 'form-horizontal' do %>
+<fieldset>
+  <div class="control-group">
+    <%= label_tag :email, 'Your Email', :class => 'control-label' %>
+    <div class="controls">
+      <%= text_field_tag :email, '', :class => 'input-xlarge' %>
     </div>
-    <div class="control-group">
-      <%= label_tag :name %>
-      <div class="controls">
-          <%= text_field_tag :name, '', :class => 'input-xlarge' %>
-      </div>
-    </div>    
-      <div class="form-actions">
-        <%= button_tag 'Login', :class => 'btn btn-primary' %>
-        <%= button_tag 'Cancel', :type => 'reset', :class => 'btn' %>
-      </div>
-    </fieldset> 
-    <% end %>
-</div>
+  </div>
+  <div class="control-group">
+    <%= label_tag :name, 'Your Name', :class => 'control-label' %>
+    <div class="controls">
+        <%= text_field_tag :name, '', :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag :message, 'Your Message', :class => 'control-label' %>
+    <div class="controls">
+      <%= text_area_tag :message, '', :rows => 6, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= button_tag 'Send', :class => 'btn btn-primary' %>
+    <%= button_tag 'Cancel', :type => 'reset', :class => 'btn' %>
+  </div>
+  </fieldset>
+<% end %>

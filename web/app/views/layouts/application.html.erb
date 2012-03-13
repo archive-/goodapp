@@ -11,7 +11,7 @@
     <div class="navbar-inner">
       <div class="container">
         <a href="/" class="brand">GoodApp</a>
-        <ul class="nav">
+        <ul id="menu-bar" class="nav">
           <li class="<%= 'active' if @active[:about] %>"><%= link_to 'About', about_path %></li>
           <li class="<%= 'active' if @active[:contact] %>"><%= link_to 'Contact', contact_path %></li>
           <li class="<%= 'active' if @active[:api] %>"><%= link_to 'API', api_path %></li>
@@ -24,7 +24,7 @@
           <li class="dropdown <%= 'active' if @active == :user %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %><b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to 'Dashboard', user_path(current_user) %></li>
+              <li><%= link_to 'Profile', current_user %></li>
               <li><%= link_to 'Account Settings', edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li><%= link_to 'Logout', logout_path %></li>
@@ -39,7 +39,7 @@
           <% if current_user.is_dev %>
             <%= link_to 'Upload an App', upload_path, :id => 'upload-button', :class => 'btn btn-primary pull-right' %>
           <% else %>
-            <%= button_to 'Upgrade to Dev', upgrade_path, :id => 'upgrade-button', :class => 'btn btn-info pull-right' %>
+            <%= button_to 'Upgrade to Dev', upgrade_path, :id => 'upgrade-button', :class => 'btn btn-success pull-right' %>
           <% end %>
         <% end %>
       </div>
@@ -50,7 +50,7 @@
     <%= yield %>
   </div>
   <div id="footer" class="container">
-    <p><strong>NULL &copy; 2012</strong> - Project in collaboration with <b>Microsoft</b> through UCSB CS189A-B Capstone courses. </p>
+    <p><strong>NULL &copy; 2012</strong> - Project in collaboration with <b>Microsoft</b> through UCSB CS189A-B Capstone courses.</p>
   </div>
 </body>
 </html>

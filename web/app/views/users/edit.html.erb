@@ -1,6 +1,14 @@
-<% if current_user && current_user.is_dev %>
-  <h4>You are a developer.</h4>
-  <%= button_to 'Downgrade Account', downgrade_path, :id => 'downgrade-button', :class => 'btn btn-danger' %>
-<% end %>
+<h1>Account Settings</h1>
 
 <%= render :partial => 'users/form' %>
+
+<% if logged_in? %>
+  <% if current_user.is_dev %>
+    <h4>You are a developer</h4>
+    <%= button_to 'Downgrade to Normal User Account', downgrade_path, :id => 'downgrade-button', :confirm => 'Are you sure you would like to downgrade your account?', :class => 'btn btn-danger' %>
+    <p class="help-block">CAUTION. Downgrading your account to a normal user means you will lose your developer status and trust, as well as the link between you and your App.</p>
+  <% else %>
+    <h4>You are a regular user</h4>
+    <%= button_to 'Upgrade to Developer Account', upgrade_path, :id => 'upgrade-button', :class => 'btn btn-success' %>
+  <% end %>
+<% end %>

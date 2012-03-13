@@ -1,4 +1,6 @@
 class AppsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @apps = App.all
   end
