@@ -3,6 +3,12 @@
   <%= form_tag do %>
   <fieldset>
     <div class="control-group">
+      <%= label_tag :name %>
+      <div class="controls">
+          <%= text_field_tag :name, '', :class => 'input-xlarge' %>
+      </div>
+    </div> 
+    <div class="control-group">
       <%= label_tag :email %>
       <div class="controls">
         <div class="input-prepend">
@@ -10,15 +16,15 @@
           <%= text_field_tag :email, '', :class => 'input-xlarge' %>
         </div>
       </div>
-    </div>
+    </div>   
     <div class="control-group">
-      <%= label_tag :name %>
+      <%= label_tag :Message %>
       <div class="controls">
-          <%= text_field_tag :name, '', :class => 'input-xlarge' %>
+          <%= text_area_tag :message, '', :class => 'input-xlarge' %>
       </div>
-    </div>    
+    </div>     
       <div class="form-actions">
-        <%= button_tag 'Login', :class => 'btn btn-primary' %>
+        <%= button_tag 'Submit', :class => 'btn btn-primary' %>
         <%= button_tag 'Cancel', :type => 'reset', :class => 'btn' %>
       </div>
     </fieldset> 
