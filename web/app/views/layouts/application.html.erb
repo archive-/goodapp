@@ -19,8 +19,9 @@
         <form class="navbar-search" action="/search" method="get">
           <input type="text" name="q" class="search-query" value="<%= params[:q] %>" placeholder="Search by app or dev" />
         </form>
-        <ul id="user-info" class="nav pull-right">
+        <div class="pull-right">
         <% if current_user %>
+        <ul id="user-info" class="nav">
           <li class="dropdown <%= 'active' if @active == :user %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %><b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -30,11 +31,12 @@
               <li><%= link_to 'Logout', logout_path %></li>
             </ul>
           </li>
-        <% else %>
-          <li class="<%= 'active' if @active[:register] %>"><%= link_to 'Register', register_path %></li>
-          <li class="<%= 'active' if @active[:login] %>"><%= link_to 'Login', login_path %></li>
-        <% end %>
         </ul>
+        <% else %>
+          <%= link_to raw('Login &raquo;'), login_path, :class => 'btn btn-success' %>
+          <%= link_to raw('Register &raquo;'), register_path, :class => 'btn btn-info' %>
+        <% end %>
+        </div>
         <% if current_user %>
           <% if current_user.is_dev %>
             <%= link_to 'Upload an App', upload_path, :id => 'upload-button', :class => 'btn btn-primary pull-right' %>

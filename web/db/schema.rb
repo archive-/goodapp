@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308194023) do
+ActiveRecord::Schema.define(:version => 20120313020952) do
+
+  create_table "app_ownerships", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "app_id",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "app_usages", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "app_id",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -34,8 +48,13 @@ ActiveRecord::Schema.define(:version => 20120308194023) do
     t.string   "password_hash"
     t.string   "password_salt"
     t.boolean  "is_dev"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.text     "about"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

@@ -17,5 +17,6 @@ class StaticController < ApplicationController
 
   def api
     @active[:api] = true
+    @routes = Rails.application.routes.routes
   end
 end

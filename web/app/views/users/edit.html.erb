@@ -1,6 +1,33 @@
 <h1>Account Settings</h1>
 
-<%= render :partial => 'users/form' %>
+<div class="row">
+  <div class="span6">
+    <%= render :partial => 'users/form' %>
+  </div>
+  <div class="span6">
+    <%= form_for @user, :html => {:multipart => true, :class => 'form-horizontal'} do |f| %>
+      <fieldset>
+        <legend>Profile Info</legend>
+        <div class="control-group <%= control_status(@user, :about) %>">
+          <%= f.label :about, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_area :about, :rows => 4, :class => 'input-xlarge' %>
+          </div>
+        </div>
+        <div class="control-group <%= control_status(@user, :avatar) %>">
+          <%= f.label :avatar, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.file_field :avatar, :class => 'input-xlarge' %>
+          </div>
+        </div>
+        <div class="form-actions">
+          <%= f.submit 'Update Profile', :class => 'btn btn-primary' %>
+          <%= button_tag 'Cancel', :type => 'reset', :class => 'btn' %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
 
 <% if logged_in? %>
   <% if current_user.is_dev %>

@@ -2,21 +2,22 @@ class AppsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @apps = App.all
   end
 
   def show
-    @app = App.find(params[:id])
   end
 
   def new
-    @app = App.new
   end
 
   def create
-    @app = App.new(params[:app])
     if @app.save
+      # TODO use build
+      owned_app = AppOwnership.create(:user_id => current_user.id, :app_id => @app.id)
+      redirect_to root_url, :notice => 'Successfully uploaded your App.'
     else
+      flash.now.alert = 'App was not uploaded properly.'
+      render 'new'
     end
   end
 
