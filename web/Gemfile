@@ -14,9 +14,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'        # jquery + rails
-gem 'paperclip', '~> 2.7' # attachments
-gem 'cancan'              # authorization
-gem 'delayed_job'         # background processing
-gem 'populator'           # seeding
-gem 'faker'               # seeding
+gem 'json'                      # may be a dependency already
+gem 'jquery-rails'              # jquery + rails
+gem 'paperclip', '~> 2.7'       # attachments
+gem 'cancan'                    # authorization
+gem 'delayed_job_active_record' # background processing
+gem 'populator'                 # seeding
+gem 'faker'                     # seeding
+gem 'settingslogic'             # putting sensitive info not to check in (api keys)
+gem 'rest-client'               # for virus total communication

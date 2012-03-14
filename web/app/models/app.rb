@@ -10,4 +10,27 @@ class App < ActiveRecord::Base
   has_many :owners, :through => :app_ownerships, :source => :user
   has_many :app_usages
   has_many :users, :through => :app_usages, :source => :user
+
+  after_save :scan
+
+  private
+
+  def scan
+    # TODO limit when this scan occurs
+    url = 'https://wwww.virustotal.com/vtapi/v2/file/scan'
+    # TODO file not found ENOENT!!
+    json = RestClient.post(url, :key => Settings.vtapi_key,
+                          :file => File.new(self.file_file_name, 'rb'))
+    res = JSON.parse(json)
+    if res['response_code'] == 1
+      sr = self.build_scan_result
+      sr.vtresource = res['resource']
+      sr.vtscan_id = res['scan_id']
+      sr.vtpermalink = res['permalink']
+      sr.sha256 = res['sha256']
+      sr.save
+    end
+  end
+
+  handle_asynchronously :scan
 end

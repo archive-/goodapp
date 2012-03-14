@@ -8,7 +8,18 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true, :presence => true, :email => true
   validates :password, :presence => true, :confirmation => true, :on => :create
 
-  has_attached_file :avatar, :styles => {:medium => "300x300>", :profile => "180x180>", :thumb => "100x100>"}, :default_url => '/assets/default-profile.jpg'
+  Paperclip::Attachment.interpolations[:gravatar_url] = Proc.new do |attachment, style|
+    size = nil
+    if size_data = attachment.styles[style].first
+      if thumb_size = size_data.match(/\d+/).to_a.first
+        size = thumb_size.to_i
+      end
+    end
+    attachment.instance.gravatar_url(nil, size)
+  end
+
+
+  has_attached_file :avatar, :styles => {:medium => "300x300>", :profile => "180x180>", :thumb => "100x100>"}, :default_url => :gravatar_url
 
   has_many :app_ownerships
   has_many :owned_apps, :through => :app_ownerships, :source => :app
@@ -25,6 +36,11 @@ class User < ActiveRecord::Base
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
+  end
+
+  def gravatar_url(default='', size=180)
+    hash = Digest::MD5.hexdigest(email.downcase.strip)[0..31]
+    "http://www.gravatar.com/avatar/#{hash}.jpg?size=#{size}&d=#{CGI::escape(default)}"
   end
 
   def admin?

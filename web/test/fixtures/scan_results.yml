@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  app_id: 1
+  sha256: MyString
+  filetype: MyString
+  vtresource: MyString
+  vtscan_id: MyString
+  vtpermalink: MyString
+
+two:
+  app_id: 1
+  sha256: MyString
+  filetype: MyString
+  vtresource: MyString
+  vtscan_id: MyString
+  vtpermalink: MyString
