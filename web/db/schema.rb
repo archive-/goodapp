@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120313020952) do
+ActiveRecord::Schema.define(:version => 20120314012607) do
 
   create_table "app_ownerships", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20120313020952) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.text     "description"
+    t.string   "type"
   end
 
   create_table "users", :force => true do |t|
