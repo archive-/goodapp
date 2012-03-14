@@ -4,6 +4,7 @@ Web::Application.routes.draw do
   get '/search' => 'static#search', :as => :search
   get '/about' => 'static#about', :as => :about
   get '/contact' => 'static#contact', :as => :contact
+  post '/contact' => 'static#submit', :as => :contact
   get '/api' => 'static#api', :as => :api
 
   get '/register' => 'users#new', :as => :register
