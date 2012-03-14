@@ -1,3 +1,29 @@
 <h1><%= @app.name %></h1>
 
+<div class="row-fluid">
+  <div class="span2">
+    <!-- Picture goes here , default will be this, unless one if uploaded with-->
+    <%= image_tag("no_logo_uploaded.png", :size => "100x100") %> &nbsp;
+    <!--Other information about user goes here -->
+    <p>Description</p>
+    <p>Version</p> 
+    <p>Type [apple, android, Windows]</p>
+  </div>
+  <div class="span7">
+    <div id="rating-box">
+      <h3>More about this App. </h3>
+      developer name <br/>
+      How many people have used it on out site <br/>
+      How many peopl are using it based on scaping<br/>
+    </div>
+    <div id="activity-box">
+      <h3>Feedback Feed</h3>
+      <p>User this left this feedback</p>
+    </div>
+  </div>
+  <div class="span3">
+    <p> Button to Review App </p>
+    <h3>Other Apps Similar to this one</h3>
 
+  </div>
+</div>
