@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :endorsements
   has_many :endorsees, :through => :endorsements, :source => :user
   has_many :endorsers, :through => :endorsements, :source => :user
+  has_many :basic_feedbacks
 
   def self.authenticate(email, password)
     user = find_by_email(email)

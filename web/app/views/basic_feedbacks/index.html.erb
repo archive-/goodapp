@@ -1,0 +1,30 @@
+<h1>Listing basic_feedbacks</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Good</th>
+    <th>Bad</th>
+    <th>Score</th>
+    <th>App</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @basic_feedbacks.each do |basic_feedback| %>
+  <tr>
+    <td><%= basic_feedback.user_id %></td>
+    <td><%= basic_feedback.good %></td>
+    <td><%= basic_feedback.bad %></td>
+    <td><%= basic_feedback.score %></td>
+    <td><%= basic_feedback.app_id %></td>
+    <td><%= link_to 'Show', basic_feedback %></td>
+    <td><%= link_to 'Destroy', basic_feedback, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Basic feedback', new_basic_feedback_path %>

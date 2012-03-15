@@ -17,8 +17,11 @@
   <div class="span7">
     <div id="rating-box">
       <h3>More about this App. </h3>
-      developer name <br/>
-
+      <p>developer name:  
+        <% @app.owners.each do |owner| %>
+          <%= link_to owner.name, owner %> 
+        <% end %>
+      </p>
       dev rating <br/>
       How many people have used it on out site <br/>
       How many peopl are using it based on scaping<br/>
@@ -32,16 +35,24 @@
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="feedback">
-          <p>stuff</p>
-          <p> this user left this feedback type of thing</p>
+          <h3>User Reviews</h3>
+          <% @feedback.each do |fb| %>
+            <%= fb.user.name %>
+            <ul>
+            <% fb.good.split("::").each do |g| %>
+              <li><%= @options["good"]["#{g}"] %></li>
+            <% end %>
+            <% fb.bad.split("::").each do |g| %>
+             <li> <%= @options["bad"]["#{g}"] %></li>
+            <% end %>
+            </ul>
+          <% end %>  
         </div>
         <div class="tab-pane" id="tfeedback">
-          <p>stuff2</p>
-          <p> more techincal feebdack showed </p>
+          <p>Technical Form goes here</p>
         </div>
         <div class="tab-pane" id="review">
-          <p>stuff3</p>
-          <p> could we put the review form in here? or just a link>
+          <%= render 'basic_feedback' %>
         </div>
         <div class="tab-pane" id="other">
           <p>stuff4 - anything else</p>
