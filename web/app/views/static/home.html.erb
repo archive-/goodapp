@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span4">
     <div class="news-column">
-      <h3>Recent Announcements. </h3>
+      <h3>Recent Announcements</h3>
       <br/>
       <%= link_to "Windows Store Launches", "http://www.wired.com/gadgetlab/2011/12/windows-8-store-introduced/" %>
       <br/><br/>
@@ -23,19 +23,21 @@
 
   <div class="span4">
     <div class="news-column">
-      <h3> Recent Developer Activity. </h3>
-      <br/>
-      Developer activity goes here, such as endorsement, app upload <br/>
+      <h3>Users</h3>
+      <% User.all.each do |dev| %>
+        <a href="<%= user_url(dev) %>" rel="tooltip" class="tooltipped" title="<%= dev.name %>">
+          <%= image_tag dev.avatar.url(:thumb) %>
+        </a>
+      <% end %>
     </div>
   </div>
-  
+
   <div class="span4">
     <div class="news-column">
-      <h3> Recent App Activity. </h3>
-      <br/>
-    <%= image_tag("android_logo.jpeg", :border=>0, :class => 'dock-item') %>
-    <img src="../../assests/images/android_logo.jpeg" alt="rss feed" />
-      List of populat apps
+      <h3>Recent App Activity</h3>
+        <%= image_tag("android_logo.jpeg", :border=>0, :class => 'dock-item') %>
+        <img src="../../assests/images/android_logo.jpeg" alt="rss feed" />
+        List of populare apps
     </div>
   </div>
 </div>

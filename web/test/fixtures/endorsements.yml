@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  endorser_id: 1
+  endorsee_id: 1
+  message: MyText
+
+two:
+  endorser_id: 1
+  endorsee_id: 1
+  message: MyText

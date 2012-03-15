@@ -15,11 +15,10 @@ class StaticController < ApplicationController
     @active[:contact] = true
   end
 
-  def submit
-    if request.post?
-    UserMailer.deliver_message_from_visitor(params[:email], params[:message])
+  def send_contact_mail
+    # FIX THIS -- need validations -- make form_for with mail object?
+    UserMailer.send_contact_mail(params[:email], params[:name], params[:message])
     redirect_to root_url, :notice => 'Message successfully sent.'
-    end
   end
 
   def api

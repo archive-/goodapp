@@ -13,3 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
+
+$(function() {
+  $('.tooltipped').tooltip();
+});

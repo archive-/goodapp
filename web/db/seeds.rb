@@ -1,6 +1,6 @@
 password = "password"
 
-User.populate(5) do |user|
+User.populate(100) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
   user.password_salt = BCrypt::Engine.generate_salt
@@ -12,9 +12,12 @@ end
 # there should be other fields added to the app database
 # version, description, type [apple, android, windows]
 # that way we can generate more info
-App.populate(10) do |app|
+App.populate(40) do |app|
   app.name = Populator.words(2)
 end
+
+# TODO PROBLEM some apps aren't linked...
+# should be in loop above where they are asigned
 
 # not sure if this should be App or user
 # and problem here is that we don't want the same app to be

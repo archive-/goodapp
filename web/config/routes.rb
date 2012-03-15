@@ -4,7 +4,7 @@ Web::Application.routes.draw do
   get '/search' => 'static#search', :as => :search
   get '/about' => 'static#about', :as => :about
   get '/contact' => 'static#contact', :as => :contact
-  post '/contact' => 'static#submit', :as => :contact
+  post '/contact' => 'static#send_contact_mail', :as => :send_contact_mail
   get '/api' => 'static#api', :as => :api
 
   get '/register' => 'users#new', :as => :register
@@ -26,4 +26,6 @@ Web::Application.routes.draw do
   post '/apps' => 'apps#create', :as => :apps
   get '/apps/:id' => 'apps#show', :as => :app
   post '/apps/:id/flag' => 'apps#flag', :as => :app_flag
+
+  post '/endorsements' => 'endorsements#create', :as => :endorsements
 end

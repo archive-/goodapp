@@ -1,5 +1,5 @@
 <h1>Contact Us</h1>
-<%= form_tag '', :class => 'form-horizontal', :action => 'submit' do %>
+<%= form_tag send_contact_mail_path, :class => 'form-horizontal' do %>
 <fieldset>
   <div class="control-group">
     <%= label_tag :email, 'Your Email', :class => 'control-label' %>

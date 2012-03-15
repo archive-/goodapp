@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @endorsement = Endorsement.new
   end
 
   def new

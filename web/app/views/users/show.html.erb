@@ -1,35 +1,75 @@
+<% if can?(:create, @endorsement) && @user != current_user %>
+  <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#endorse-modal">Endorse</a>
+  <div class="fade modal" id="endorse-modal">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>Endorse <%= @user.name %></h3>
+    </div>
+    <%= form_for endorsements_path, :html => {:class => 'modal-form'} do |f| %>
+    <div class="modal-body">
+      <div class="control-group">
+        <%= f.label :message, 'Message (optional)' %>
+        <%= f.text_area :message, :rows => 6, :class => 'input-block-level' %>
+      </div>
+      <%= f.hidden_field :endorsee_id %>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit 'Submit Endorsement', :confirm => 'Are you sure?', :class => 'btn btn-primary' %>
+    </div>
+    <% end %>
+  </div>
+<% end %>
 <h1><%= @user.name %></h1>
 <div class="row-fluid">
   <div class="span2">
     <!-- Picture goes here -->
     <%= image_tag @user.avatar.url(:profile) %>
     <!--Other information about user goes here -->
-    <h3>About</h3>
-    <% unless @user.about.blank? %>
+    <% if !@user.about.blank? %>
+      <h3>About</h3>
       <p><%= @user.about %></p>
-    <% else %>
+    <% elsif its_you %>
+      <h3>About</h3>
       <p>Your about message is not set, go to your <%= link_to 'account settings', edit_user_path(current_user) %> to set it.</p>
     <% end %>
   </div>
   <div class="span7">
+    <% if @user.is_dev %>
     <div id="rating-box">
-      <h3>Rating Box</h3>
-      Overall Rating [in Big and bold] <br/>
-      Rating by each category <br/>
-      <p>if user - Recent Comment activity goes here </p>
-      <p>if dev - Activity of dev stuff goes here  </p>
+      <table class="table centered-columns">
+        <tr>
+          <th>Overall</th>
+          <th>Endorsement</th>
+          <th>Feedback</th>
+        </tr>
+        <tr>
+          <td>10.0</td>
+          <td>10.0</td>
+          <td>10.0</td>
+        </tr>
+      </table>
     </div>
+    <% end %>
     <div id="activity-box">
       <h3>Activity Feed</h3>
       <p>Bla did bla.</p>
     </div>
   </div>
   <div class="span3">
-    <h3>Apps Owned</h3>
-    <ul>
-    <% @user.owned_apps.each do |app| %>
-      <li><%= link_to app.name, app %></li>
+    <% if @user.is_dev %>
+      <h3>Apps Owned</h3>
+      <ul>
+      <% @user.owned_apps.each do |app| %>
+        <li><%= link_to app.name, app %></li>
+      <% end %>
+      </ul>
+    <% else %>
+      <h3>Apps Used</h3>
+      <ul>
+      <% @user.used_apps.each do |app| %>
+        <li><%= link_to app.name, app %></li>
+      <% end %>
+      </ul>
     <% end %>
-    </ul>
   </div>
 </div>

@@ -1,13 +1,12 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
-  default to: "yulia.dubinina@gmail.com"
+  # default :to => "example@goodapp.com"
+  default :to => "tj.koblentz@gmail.com"
 
-  def deliver_message_from_visitor(email, message)
-    subject = "Email sent via your website"
+  def send_contact_mail(from_email, from_name, message)
     body = message
-    recipients = "skiswithtwotips@gmail.com"
-    from = email
-    sent_on = Time.now
+    mail(:subject => "Contact Form filled out by #{from_name}",
+         :reply_to => from_email,
+         :date => Time.now).deliver
   end
 
 end
