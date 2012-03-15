@@ -3,7 +3,7 @@ class App < ActiveRecord::Base
   validates_attachment_content_type :logo, :content_type => /image/
   validates_attachment_presence :file
 
-  has_attached_file :logo, :styles => {:medium => "300x300>", :thumb => "100x100>"}
+  has_attached_file :logo, :styles => {:medium => "300x300>", :thumb => "60x60#"}, :default_url => '/assets/no_logo_uploaded.png'
   has_attached_file :file
 
   has_many :app_ownerships

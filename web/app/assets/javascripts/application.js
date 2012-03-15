@@ -16,4 +16,5 @@
 
 $(function() {
   $('.tooltipped').tooltip();
+  $('.tooltipped-bottom').tooltip({'placement': 'bottom'});
 });

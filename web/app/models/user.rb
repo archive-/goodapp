@@ -10,9 +10,11 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => {:medium => "300x300>", :profile => "180x180>", :thumb => "60x60#"}, :default_url => :gravatar_url
 
+  # TODO fix this!!!
   Paperclip.interpolates :gravatar_url do |attachment, style|
     size = nil
-    if size_data = attachment.styles[style][:geometry]
+    if size_data = attachment.styles[style].first
+      p size_data
       if thumb_size = size_data.match(/\d+/).to_a.first
         size = thumb_size.to_i
       end
@@ -24,9 +26,10 @@ class User < ActiveRecord::Base
   has_many :owned_apps, :through => :app_ownerships, :source => :app
   has_many :app_usages
   has_many :used_apps, :through => :app_usages, :source => :app
-  has_many :endorsements
-  has_many :endorsees, :through => :endorsements, :source => :user
-  has_many :endorsers, :through => :endorsements, :source => :user
+  has_many :endorsementees, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
+  has_many :endorsees, :through => :endorsementees, :class_name => 'User'
+  has_many :endorsementers, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
+  has_many :endorsers, :through => :endorsementers, :class_name => 'User'
   has_many :basic_feedbacks
 
   def self.authenticate(email, password)

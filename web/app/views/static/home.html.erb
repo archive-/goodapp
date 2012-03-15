@@ -25,15 +25,14 @@
     <div class="news-column">
       <h3>Users</h3>
       <% User.all.each do |dev| %>
-        <a href="<%= user_url(dev) %>" rel="tooltip" class="tooltipped" title="<%= dev.name %>">
-          <%= image_tag dev.avatar.url(:thumb) %>
-        </a>
+        <%= user_show(dev) %>
       <% end %>
     </div>
   </div>
 
   <div class="span4">
     <div class="news-column">
+
       <h3>Recently Uploaded Apps</h3>
       <ul>
         <% App.all.each do |app| %>

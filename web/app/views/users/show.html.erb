@@ -1,17 +1,17 @@
-<% if can?(:create, @endorsement) && @user != current_user %>
+<% if can?(:create, @endorsement) && @user != current_user && @user.is_dev && !current_user.endorsees.index(@user) %>
   <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#endorse-modal">Endorse</a>
   <div class="fade modal" id="endorse-modal">
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&times;</a>
       <h3>Endorse <%= @user.name %></h3>
     </div>
-    <%= form_for endorsements_path, :html => {:class => 'modal-form'} do |f| %>
+    <%= form_for @endorsement, :html => {:class => 'modal-form'} do |f| %>
     <div class="modal-body">
       <div class="control-group">
         <%= f.label :message, 'Message (optional)' %>
         <%= f.text_area :message, :rows => 6, :class => 'input-block-level' %>
       </div>
-      <%= f.hidden_field :endorsee_id %>
+      <%= f.hidden_field :endorsee_id, :value => @user.id %>
     </div>
     <div class="modal-footer">
       <%= f.submit 'Submit Endorsement', :confirm => 'Are you sure?', :class => 'btn btn-primary' %>
@@ -19,11 +19,13 @@
     <% end %>
   </div>
 <% end %>
+
 <h1><%= @user.name %></h1>
+
 <div class="row-fluid">
   <div class="span2">
     <!-- Picture goes here -->
-    <%= image_tag @user.avatar.url(:profile) %>
+    <%= image_tag @user.avatar.url(:profile), :width => "180" %>
     <!--Other information about user goes here -->
     <% if !@user.about.blank? %>
       <h3>About</h3>
@@ -43,11 +45,16 @@
           <th>Feedback</th>
         </tr>
         <tr>
-          <td>10.0</td>
-          <td>10.0</td>
-          <td>10.0</td>
+          <td>*</td>
+          <td>*</td>
+          <td>*</td>
         </tr>
       </table>
+      <ul class="no-bullet ul-inline">
+      <% @user.owned_apps.limit(4).each do |app| %>
+        <li><%= app_show(app) %></li>
+      <% end %>
+      </ul>
     </div>
     <% end %>
     <div id="activity-box">
@@ -57,12 +64,20 @@
   </div>
   <div class="span3">
     <% if @user.is_dev %>
-      <h3>Apps Owned</h3>
-      <ul>
-      <% @user.owned_apps.each do |app| %>
-        <li><%= link_to app.name, app %></li>
+      <%# TODO SOMETHING WRONG HERE %>
+      <% endorsers = @user.endorsers %>
+      <% num_endorsers = endorsers.size %>
+      <% if num_endorsers.zero? %>
+        <h3>Not Endorsed</h3>
+        <!-- TODO know him/her? endorse them! -->
+      <% else %>
+        <h3>Endorsed By</h3>
+        <ul class="no-bullet">
+        <% endorsers.each do |endorser| %>
+          <li><%= user_show(endorser) %></li>
+        <% end %>
+        </ul>
       <% end %>
-      </ul>
     <% else %>
       <h3>Apps Used</h3>
       <ul>
