@@ -1,35 +1,20 @@
+<a href="<%= user_url(4) %>" rel="tooltip" class="tooltipped-bottom pull-right" title="<%= User.find(4).name %>"><%= image_tag User.find(4).avatar.url(:thumb), :class => 'pull-right space-left' %></a>
+<a href="<%= user_url(3) %>" rel="tooltip" class="tooltipped-bottom pull-right" title="<%= User.find(3).name %>"><%= image_tag User.find(3).avatar.url(:thumb), :class => 'pull-right space-left' %></a>
+<a href="<%= user_url(1) %>" rel="tooltip" class="tooltipped-bottom pull-right" title="<%= User.find(1).name %>"><%= image_tag User.find(1).avatar.url(:thumb), :class => 'pull-right space-left' %></a>
+<a href="<%= user_url(2) %>" rel="tooltip" class="tooltipped-bottom pull-right" title="<%= User.find(2).name %>"><%= image_tag User.find(2).avatar.url(:thumb), :class => 'pull-right space-left' %></a>
+
 <h1>About GoodApp</h1>
 
-<div class="row-fluid">
-  <div class="span2">
-    <h2>The Team</h2>
-    <div class="headshot">
-      <%= image_tag("head_shot.jpg", :size => "100x100") %> &nbsp;
-      <h3>Yulia Dubinina</h3>
-    </div>
-    <div class="headshot">
-      <%= image_tag("TJKoblentz.JPG", :size => "88x88") %> &nbsp;
-      <h3>TJ Koblentz</h3>
-    </div>
-    <div class="headshot">
-      <%= image_tag("VictorMoreira.jpg", :size => "104x104") %> &nbsp;
-      <h3>Victor Moreira</h3>
-    </div>
-    <div class="headshot">
-      <%= image_tag("jasper.jpeg", :size => "60x60") %> &nbsp;
-      <h3>Jasper Fredrickson</h3>
-    </div>
-  </div>
-  <div class="span10">
-    <h2>Overview</h2>
-    <p>Goodapp is a community of apps and developers. This community establishes a web of trust between its members, and developers is assigned a rating based on this trust network. These ratings gives users valuable information about which developers have an established and trusted reputation in the community, and which developers should be avoided. </p>
-    <h2>Metrics</h2>
-    <p>Goodapp is a software application that scans app binaries, attempts to detect malicious activity and creates a web of trust. Each developer account comes with a rating. A trusted user's rating will be based on the following metrics:</p>
-    <ul>
-      <li>other trusted developer's reviews of this user</li>
-      <li>basic user feedback about apps from an untrusted member of the community</li>
-      <li>rating of each app that the user submitted awarded by the virus/malware scanners</li>
-      <li>tatistics based on how many people use the app and the rating of the app itself [e.g. how many downloads recorded from app store] </li>
-    </ul>
-  </div>
-</div>
+<h2>Overview</h2>
+
+<p>Goodapp is a community of apps and developers. This community establishes a web of trust between its members, and developers is assigned a rating based on this trust network. These ratings gives users valuable information about which developers have an established and trusted reputation in the community, and which developers should be avoided. </p>
+<h2>Metrics</h2>
+
+<p>Goodapp is a software application that scans app binaries, attempts to detect malicious activity and creates a web of trust. Each developer account comes with a rating. A trusted user's rating will be based on the following metrics:</p>
+
+<ul>
+  <li>other trusted developer's reviews of this user</li>
+  <li>basic user feedback about apps from an untrusted member of the community</li>
+  <li>rating of each app that the user submitted awarded by the virus/malware scanners</li>
+  <li>tatistics based on how many people use the app and the rating of the app itself [e.g. how many downloads recorded from app store] </li>
+</ul>

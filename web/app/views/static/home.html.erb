@@ -25,19 +25,17 @@
     <div class="news-column">
       <h3>Users</h3>
       <% User.all.each do |dev| %>
-        <a href="<%= user_url(dev) %>" rel="tooltip" class="tooltipped" title="<%= dev.name %>">
-          <%= image_tag dev.avatar.url(:thumb) %>
-        </a>
+        <%= user_show(dev) %>
       <% end %>
     </div>
   </div>
 
   <div class="span4">
     <div class="news-column">
-      <h3>Recent App Activity</h3>
-        <%= image_tag("android_logo.jpeg", :border=>0, :class => 'dock-item') %>
-        <img src="../../assests/images/android_logo.jpeg" alt="rss feed" />
-        List of populare apps
+      <h3>Apps</h3>
+      <% App.all.each do |app| %>
+        <%= app_show(app) %>
+      <% end %>
     </div>
   </div>
 </div>
