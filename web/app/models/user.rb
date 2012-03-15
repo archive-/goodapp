@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :owned_apps, :through => :app_ownerships, :source => :app
   has_many :app_usages
   has_many :used_apps, :through => :app_usages, :source => :app
+  has_many :basic_feedbacks
 
   def self.authenticate(email, password)
     user = find_by_email(email)
