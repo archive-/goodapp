@@ -8,6 +8,7 @@ class UserMailer < ActionMailer::Base
     recipients = "skiswithtwotips@gmail.com"
     from = email
     sent_on = Time.now
+    mail(:to => recipients, :subject => subject)    
   end
 
 end

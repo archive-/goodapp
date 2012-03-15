@@ -1,0 +1,45 @@
+<%= form_for(@basic_feedback, :html => {:class => 'form-horizontal'}) do |f| %>
+  <% if @basic_feedback.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@basic_feedback.errors.count, "error") %> prohibited this basic_feedback from being saved:</h2>
+
+      <ul>
+      <% @basic_feedback.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <div class="control-group">
+      <%= f.label :good_1, 'Good App', :class => 'control-label' %>
+      <div class="controls">
+        <%= check_box :good, :good_1  %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :good_2, 'Good 2 App', :class => 'control-label' %>
+      <div class="controls">
+        <%= check_box :good, :good_2  %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control-group">
+      <%= f.label :bad_1, 'Bad App', :class => 'control-label' %>
+      <div class="controls">
+        <%= check_box :bad, :bad_1  %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :bad_2, 'Bad 2 App', :class => 'control-label' %>
+      <div class="controls">
+        <%= check_box :bad, :bad_2  %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

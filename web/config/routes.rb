@@ -1,4 +1,6 @@
 Web::Application.routes.draw do
+  resources :basic_feedbacks
+
   root :to => 'static#home'
 
   get '/search' => 'static#search', :as => :search
@@ -26,4 +28,5 @@ Web::Application.routes.draw do
   post '/apps' => 'apps#create', :as => :apps
   get '/apps/:id' => 'apps#show', :as => :app
   post '/apps/:id/flag' => 'apps#flag', :as => :app_flag
+  match 'apps/:app_id/submit_feedback', :to => 'basic_feedbacks#create'
 end

@@ -20,4 +20,5 @@ class ApplicationController < ActionController::Base
   def empty_active
     @active = {}
   end
+
 end
