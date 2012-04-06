@@ -1,19 +1,17 @@
-<% if can?(:create, @review) && !@app.reviewers.index(@user) %>
+<% if true %> <%# !@app.reviewers.index(@user) %>
   <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#review-modal">Review</a>
   <div class="fade modal" id="review-modal">
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&times;</a>
       <h3>Review <%= @app.name %></h3>
     </div>
-    <%= form_for @review, :html => {:class => 'modal-form'} do |f| %>
     <div class="modal-body">
       <p>form stuff</p>
-      <%= f.hidden_field :app_id, :value => @app.id %>
+      <div class="next_section"><%= next_section %></div>
     </div>
     <div class="modal-footer">
-      <%= f.submit 'Submit Review', :confirm => 'Are you sure?', :class => 'btn btn-primary' %>
     </div>
-    <% end %>
+    <%# end %>
   </div>
 <% end %>
 

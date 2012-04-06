@@ -7,7 +7,9 @@ class AppsController < ApplicationController
 
   def show
     @options = get_options
-    @feedback = @app.basic_feedbacks
+    # @feedback = @app.basic_feedbacks
+    @survey = Survey.first
+    @response_set = ResponseSet.create(:survey => @survey, :user_id => current_user.id)
   end
 
   def new

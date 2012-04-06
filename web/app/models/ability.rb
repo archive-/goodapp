@@ -8,9 +8,6 @@ class Ability
     else
       can :manage, User, :id => user.id
       can :read, :all
-      if user.id # logged in
-        # can submit a survey fill out!
-      end
       if user.is_dev # TODO fix this
         can :create, App
         can :create, Endorsement
