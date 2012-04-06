@@ -6,7 +6,7 @@
 
 
 notes by Yulia.
-need new databases: 
+need new databases:
 -rating
 	dev_id
 	overall_rating
@@ -27,7 +27,3 @@ need new databases:
 	usability
 	flexibility
 	...blah [ lots of these - each category on answer - new column]
-
-
-
-
