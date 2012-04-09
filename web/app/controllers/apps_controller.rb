@@ -6,10 +6,8 @@ class AppsController < ApplicationController
   end
 
   def show
-    @options = get_options
-    @feedback = @app.basic_feedbacks
     @survey = Survey.first
-    @response_set = ResponseSet.create(:survey => @survey, :user_id => current_user.id)
+    @response_set = ResponseSet.find_or_create_by_user_id(current_user.id, :survey => @survey)
   end
 
   def new

@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
   def admin?
     self.name == 'admin' # TODO
   end
+
+  def overall_rating
+    0.0 # TODO
+  end
 end

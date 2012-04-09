@@ -20,6 +20,7 @@ module SurveyorControllerCustomMethods
   end
   def update
     super
+    flash[:notice] = 'Successfully submitted feedback'
   end
 
   # Paths
@@ -29,7 +30,8 @@ module SurveyorControllerCustomMethods
   end
   def surveyor_finish
     # the update action redirects to this method if given params[:finish]
-    super # available_surveys_path
+    # super # available_surveys_path
+    app_path(:id => params[:app_id])
   end
 end
 class SurveyorController < ApplicationController

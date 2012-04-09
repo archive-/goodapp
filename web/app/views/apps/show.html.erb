@@ -6,14 +6,17 @@
     <h3>Review <%= @app.name %></h3>
   </div>
   <%# TODO fix the url to post to right path %>
-  <%= semantic_form_for(@response_set, :as => :r, :url => root_url, :html => {:class => 'modal-form'}) do |f| %>
+  <%= semantic_form_for(@response_set, :as => :r, :url => update_my_survey_path(:survey_code => @survey.access_code, :response_set_code => @response_set.access_code, :finish => '1', :app_id => @app.id), :html => {:class => 'modal-form'}) do |f| %>
   <div class="modal-body">
     <% @survey.sections.each do |section| %>
       <% @section = section %>
-      <%= render :partial => 'partials/section', :locals => {:f => f} %>
+      <% (questions = @section.questions).each_with_index do |q, i| %>
+        <%= render :partial => 'partials/question', :locals => {:f => f, :q => q} %>
+      <% end %>
     <% end %>
   </div>
   <div class="modal-footer">
+    <%= f.submit 'Submit Feedback', :class => 'btn btn-primary' %>
   </div>
   <% end %>
 </div>
@@ -71,23 +74,11 @@
       <div class="tab-content">
         <div class="tab-pane active" id="feedback">
           <h3>User Reviews</h3>
-          <% @feedback.each do |fb| %>
-            <%= fb.user.name %>
-            <ul>
-            <% fb.good.split("::").each do |g| %>
-              <li><%= @options["good"]["#{g}"] %></li>
-            <% end %>
-            <% fb.bad.split("::").each do |g| %>
-             <li> <%= @options["bad"]["#{g}"] %></li>
-            <% end %>
-            </ul>
-          <% end %>
         </div>
         <div class="tab-pane" id="tfeedback">
           <p>Technical Form goes here</p>
         </div>
         <div class="tab-pane" id="review">
-          <%= render 'basic_feedback' %>
         </div>
         <div class="tab-pane" id="other">
           <p>Coming up soon</p>
