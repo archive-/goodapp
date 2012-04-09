@@ -30,34 +30,47 @@
     <!-- Picture goes here , default will be this, unless one if uploaded with-->
     <%= image_tag("no_logo_uploaded.png", :size => "100x100") %> &nbsp;
     <!--Other information about user goes here -->
-    <h3>Description</h3>
+    <h3>Description:</h3>
     <% unless @app.description.blank? %>
       <p><%= @app.description %></p>
     <% else %>
       <p>No description available. Needs to be set. </p>
     <% end %>
-    <h3>Version</h3>
-    <h3>Type</h3>
-    <p>[apple, android, Windows]</p>
+    <h3>Version:</h3>
+    <h3>Type:</h3>
   </div>
   <div class="span7">
     <div id="rating-box">
-      <h3>More about this App. </h3>
-      <p>developer name:
+      <h3>Developed by:
         <% @app.owners.each do |owner| %>
           <%= link_to owner.name, owner %>
         <% end %>
-      </p>
-      dev rating <br/>
-      How many people have used it on out site <br/>
-      How many peopl are using it based on scaping<br/>
+      </h3> <br/>
+      <h3>App stats</h3>
+      <table class="table centered-columns">
+        <tr>
+          <th># Downloads</th>
+          <th># Reviews in Store</th>
+          <th>Rating</th>
+        </tr>
+        <tr>
+          <td>40</td>
+          <td>5</td>
+          <td>
+              <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
+      <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
+    <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
+
+          </td>
+        </tr>
+      </table>
     </div>
     <div id="activity-box">
       <ul class="nav nav-tabs">
       <li class="active"><a href="#feedback" data-toggle="tab">Feedback</a></li>
       <li><a href="#tfeedback" data-toggle="tab">Techinal Feedback</a></li>
-      <li><a href="#review" data-toggle="tab">Review App</a></li>
-      <li><a href="#other" data-toggle="tab">Other</a></li>
+      <li><a href="#review" data-toggle="tab">Leave Feedback</a></li>
+      <li><a href="#other" data-toggle="tab">Leave Technical Feedback</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="feedback">
@@ -72,7 +85,11 @@
              <li> <%= @options["bad"]["#{g}"] %></li>
             <% end %>
             </ul>
+<<<<<<< HEAD
           <% end %>
+=======
+          <% end %>
+>>>>>>> master
         </div>
         <div class="tab-pane" id="tfeedback">
           <p>Technical Form goes here</p>
@@ -81,12 +98,16 @@
           <%= render 'basic_feedback' %>
         </div>
         <div class="tab-pane" id="other">
-          <p>stuff4 - anything else</p>
+          <p>Coming up soon</p>
         </div>
       </div>
     </div>
   </div>
   <div class="span3">
+<<<<<<< HEAD
     <h3>Other Apps Similar to this one</h3>
+=======
+    <h3>Similar Apps</h3>
+>>>>>>> master
   </div>
 </div>

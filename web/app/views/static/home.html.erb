@@ -32,10 +32,17 @@
 
   <div class="span4">
     <div class="news-column">
-      <h3>Apps</h3>
-      <% App.all.each do |app| %>
-        <%= app_show(app) %>
-      <% end %>
+
+      <h3>Recently Uploaded Apps</h3>
+      <ul>
+        <% App.all.each do |app| %>
+        <li> 
+          <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
+          <%= link_to app.name, app %>
+          </a>
+        </li> 
+      <% end %>  
+      </ul>      
     </div>
   </div>
 </div>
