@@ -1,4 +1,4 @@
-<% if true %> <%# !@app.reviewers.index(@user) %>
+<% unless @app.owners.index(current_user) %> <%# !@app.reviewers.index(@user) %>
 <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#review-modal">Review</a>
 <div class="fade modal" id="review-modal">
   <div class="modal-header">
