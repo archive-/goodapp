@@ -1,21 +1,29 @@
-<% if true %> <%# !@app.reviewers.index(@user) %>
-  <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#review-modal">Review</a>
-  <div class="fade modal" id="review-modal">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">&times;</a>
-      <h3>Review <%= @app.name %></h3>
+<div class="fixy">
+  <div class="fixy-inner">
+    <% if true %> <%# !@app.reviewers.index(@user) %>
+    <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#review-modal">Review</a>
+    <div class="fade modal" id="review-modal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>Review <%= @app.name %></h3>
+      </div>
+      <%# TODO fix the url to post to right path %>
+      <%= semantic_form_for(@response_set, :as => :r, :url => root_url, :html => {:class => 'modal-form'}) do |f| %>
+      <div class="modal-body">
+        <% @survey.sections.each do |section| %>
+          <% @section = section %>
+          <%= render :partial => 'partials/section', :locals => {:f => f} %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <% end %>
     </div>
-    <div class="modal-body">
-      <p>form stuff</p>
-      <div class="next_section"><%= next_section %></div>
-    </div>
-    <div class="modal-footer">
-    </div>
-    <%# end %>
-  </div>
-<% end %>
+    <% end %>
 
-<h1><%= @app.name %></h1>
+    <h1><%= @app.name %></h1>
+  </div>
+</div>
 
 <div class="row-fluid">
   <div class="span2">

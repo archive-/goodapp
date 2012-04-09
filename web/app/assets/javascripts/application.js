@@ -17,4 +17,19 @@
 $(function() {
   $('.tooltipped').tooltip();
   $('.tooltipped-bottom').tooltip({'placement': 'bottom'});
+
+  var $fixy = $('.fixy'),
+      fixyTop = $('.fixy').length && $('.fixy').offset().top - 45,
+      isFixed = 0;
+  $(document).scroll(function() {
+    var scrollTop = $(this).scrollTop();
+    if (scrollTop >= fixyTop && !isFixed) {
+      isFixed = 1;
+      $fixy.addClass('scrolled');
+    } else if (scrollTop <= fixyTop && isFixed) {
+      isFixed = 0;
+      $fixy.removeClass('scrolled');
+    }
+  });
 });
+
