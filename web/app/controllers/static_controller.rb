@@ -1,7 +1,9 @@
 class StaticController < ApplicationController
   skip_authorization_check
+include StaticHelper
 
   def home
+    @title, @decsr = scrape
   end
 
   def about
