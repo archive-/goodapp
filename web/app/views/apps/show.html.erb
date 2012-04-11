@@ -1,4 +1,29 @@
+<% unless @app.owners.index(current_user) %> <%# !@app.reviewers.index(@user) %>
+<a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#review-modal">Review</a>
+<div class="fade modal" id="review-modal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3>Review <%= @app.name %></h3>
+  </div>
+  <%# TODO fix the url to post to right path %>
+  <%= semantic_form_for(@response_set, :as => :r, :url => update_my_survey_path(:survey_code => @survey.access_code, :response_set_code => @response_set.access_code, :finish => '1', :app_id => @app.id), :html => {:class => 'modal-form'}) do |f| %>
+  <div class="modal-body">
+    <% @survey.sections.each do |section| %>
+      <% @section = section %>
+      <% (questions = @section.questions).each_with_index do |q, i| %>
+        <%= render :partial => 'partials/question', :locals => {:f => f, :q => q} %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit 'Submit Feedback', :class => 'btn btn-primary' %>
+  </div>
+  <% end %>
+</div>
+<% end %>
+
 <h1><%= @app.name %></h1>
+
 <div class="row-fluid">
   <div class="span2">
     <!-- Picture goes here , default will be this, unless one if uploaded with-->
@@ -15,12 +40,12 @@
   </div>
   <div class="span7">
     <div id="rating-box">
-      <h3>Developed by:  
+      <h3>Developed by:
         <% @app.owners.each do |owner| %>
-          <%= link_to owner.name, owner %> 
+          <%= link_to owner.name, owner %>
         <% end %>
       </h3> <br/>
-      <h3>App stats</h3> 
+      <h3>App stats</h3>
       <table class="table centered-columns">
         <tr>
           <th># Downloads</th>
@@ -49,23 +74,11 @@
       <div class="tab-content">
         <div class="tab-pane active" id="feedback">
           <h3>User Reviews</h3>
-          <% @feedback.each do |fb| %>
-            <%= fb.user.name %>
-            <ul>
-            <% fb.good.split("::").each do |g| %>
-              <li><%= @options["good"]["#{g}"] %></li>
-            <% end %>
-            <% fb.bad.split("::").each do |g| %>
-             <li> <%= @options["bad"]["#{g}"] %></li>
-            <% end %>
-            </ul>
-          <% end %> 
         </div>
         <div class="tab-pane" id="tfeedback">
           <p>Technical Form goes here</p>
         </div>
         <div class="tab-pane" id="review">
-          <%= render 'basic_feedback' %>
         </div>
         <div class="tab-pane" id="other">
           <p>Coming up soon</p>

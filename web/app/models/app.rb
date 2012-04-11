@@ -14,17 +14,21 @@ class App < ActiveRecord::Base
   after_save :scan
   has_many :basic_feedbacks
 
+  has_many :scan_results
+
   private
 
-  def scan
+  def scan(force=false)
+    # pass force if rescan
+    return if !self.scan_results.empty? and !force
     # TODO limit when this scan occurs
     url = 'https://wwww.virustotal.com/vtapi/v2/file/scan'
-    # TODO file not found ENOENT!!
     json = RestClient.post(url, :key => Settings.vtapi_key,
-                          :file => File.new(self.file_file_name, 'rb'))
+                          :file => File.new(self.file.path, 'rb'))
     res = JSON.parse(json)
+    puts res
     if res['response_code'] == 1
-      sr = self.build_scan_result
+      sr = self.scan_results.build
       sr.vtresource = res['resource']
       sr.vtscan_id = res['scan_id']
       sr.vtpermalink = res['permalink']

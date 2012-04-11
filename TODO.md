@@ -4,9 +4,10 @@
 - make README sexy
 - improve the @active stuff
 
+- run rake doc:... at end for documentation
 
 notes by Yulia.
-need new databases: 
+need new databases:
 -rating
 	dev_id
 	overall_rating
@@ -28,6 +29,4 @@ need new databases:
 	flexibility
 	...blah [ lots of these - each category on answer - new column]
 
-
-
-
+- delete this file :)

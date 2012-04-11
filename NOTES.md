@@ -19,3 +19,31 @@
 - drag an drop links onto various boxes ('Apple Store', 'website', 'Windows Store', etc.)
 
 - model on Yelp
+
+NOTES FOR /WEB
+==============
+
+Options
+-------
+id
+message
+good/badvalue (postive means good, negative bad, w/e)
+form_id
+
+# BASIC FORM
+<%= form_tag
+  <% Option.where(:form_id => 1).each do |o| %>
+  <%= check_box_tag
+
+Form
+----
+id
+name
+
+(1, 'BasicForm')
+(2, 'TechForm')
+
+FormResult
+----------
+user_id
+app_id
