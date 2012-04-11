@@ -50,15 +50,21 @@ survey "Techincal feedback" do
     condition_A :q_4, "==", :a_2          
 
     # When an is_exclusive answer is checked, it unchecks all other options and disables them (using Javascript)
-    q_4 "Choose your favorite meats", :display_type => :inline, :pick => :any
-    a "Chicken"
-    a "Pork"
-    a "Beef"
-    a "Shellfish"
-    a "Fish"
-    a "I don't eat meats!!!", :is_exclusive => true
+    # since we will kwno the app category we can make it very app specifiv
+    # the survey it is - if it a game we can ask one set of questions
+    # but if it is say a :news: app, then qquestion would be different...i dunno
+    q_4 "Choose App category", :display_type => :inline, :pick => :any
+    a "1"
+    a "2"
+    a "3"
+    a "4"
+    a "5"
+    a "6", :is_exclusive => true
     
-    grid "Tell us how often do you cover these each day" do
+    label "Rate specific aspects of the App:"
+    label      "Scale of (1-10) 1- poor, 10 - great"
+
+    grid "Rate each of these" do
       a "1"
       a "2"
       a "3"
@@ -71,7 +77,17 @@ survey "Techincal feedback" do
       a "10"
       q "Security", :pick => :one
       q "Connectivity", :pick => :one
+      q "Performance", :pick => :one
+      q "Maintainability", :pick => :one
+      q "Scalability", :pick => :one
+      q "Design of API", :pick => :one
+      q "Documentation", :pick => :one
+      q "Consistent", :pick => :one
+      q "Power Consumption", :pick => :one
+      q "Complexity", :pick => :one
       q "Responsivness", :pick => :one
+      q "User-friendly", :pick => :one
+
     end
        
     # A basic question with checkboxes
