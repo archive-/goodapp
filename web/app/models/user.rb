@@ -30,7 +30,6 @@ class User < ActiveRecord::Base
   has_many :endorsees, :through => :endorsementees, :class_name => 'User'
   has_many :endorsementers, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
   has_many :endorsers, :through => :endorsementers, :class_name => 'User'
-  has_many :basic_feedbacks
 
   def self.authenticate(email, password)
     user = find_by_email(email)

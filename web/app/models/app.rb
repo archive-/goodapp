@@ -12,7 +12,6 @@ class App < ActiveRecord::Base
   has_many :users, :through => :app_usages, :source => :user
 
   after_save :scan
-  has_many :basic_feedbacks
 
   has_many :scan_results
 
