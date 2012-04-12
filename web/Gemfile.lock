@@ -71,6 +71,7 @@ GEM
     mime-types (1.18)
     multi_json (1.2.0)
     mustache (0.99.4)
+    nokogiri (1.5.2)
     paperclip (2.7.0)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -152,6 +153,7 @@ DEPENDENCIES
   faker
   jquery-rails
   json (= 1.6.5)
+  nokogiri
   paperclip (~> 2.7)
   populator
   rails (= 3.2.1)

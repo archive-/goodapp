@@ -1,6 +1,5 @@
 class AppsController < ApplicationController
   load_and_authorize_resource
-  include FeedbackOptions
 
   def index
   end

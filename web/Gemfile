@@ -23,4 +23,5 @@ gem 'populator'                 # seeding
 gem 'faker'                     # seeding
 gem 'settingslogic'             # putting sensitive info not to check in (api keys)
 gem 'rest-client'               # for virus total communication
-gem 'surveyor'
+gem 'nokogiri'			            # data scraping
+gem 'surveyor'                  # feedback stuff
