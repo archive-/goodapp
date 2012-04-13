@@ -11,6 +11,7 @@ class StaticController < ApplicationController
   end
 
   def search
+    @search_query = params[:q]
   end
 
   def contact

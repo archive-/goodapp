@@ -1,16 +1,26 @@
 <h1>Search Results</h1>
-
-<div class="tabbable tabs-left">
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#apps" data-toggle="tab">Apps</a></li>
-    <li><a href="#devs" data-toggle="tab">Devs</a></li>
-  </ul>
-  <div class="tab-content">
-    <div class="tab-pane active" id="apps">
-      <p>stuff</p>
-    </div>
-    <div class="tab-pane" id="devs">
-      <p>stuff</p>
-    </div>
+     
+<div class="row">
+  <div class="span6">
+    <h1> Apps </h1>
+    <% App.all.each do |app| %>
+    <% if app.name.include?(@search_query) %>
+      <li> 
+        <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
+        <%= link_to app.name, app %>
+        </a>
+      </li>
+    <% end %>
+  <% end %> 
+  </div>
+  <div class="span6">
+    <h1> Devs </h1>
+    <% User.all.each do |dev| %>
+      <% if dev.name.include?(@search_query) %>
+        <%= user_show(dev) %>
+      <% end %>
+    <% end %>
   </div>
 </div>
+
+
