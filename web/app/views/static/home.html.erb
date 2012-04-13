@@ -4,10 +4,10 @@
       <h3>Recent Announcements</h3>
       <br/>
 <% @title.each_with_index do |t, i| %>
-<h3><%= t %>: </h3> <br/><%= @decsr[i] %> <br/><br/>
+<h3><%= link_to t, @link[i] %>: </h3> <br/><%= @decsr[i] %> <br/><br/>
 <% end %>
 
-     <!--- <%= link_to "Windows Store Launches", "http://www.wired.com/gadgetlab/2011/12/windows-8-store-introduced/" %>
+     <!--- 
       <%= image_tag("https://encrypted-tbn3.google.com/images?q=tbn:ANd9GcSH3OevDsWHn4G09ASuw-IvV1vMYL8uaOpd224kld0S-C6SgZixzg", :border=>0, :class => 'dock-item') %>
       <p> The Apple store has reached 25 billion Apps and now is having 25 Billion Apps Countdown Promotion. </p> -->
     </div>
