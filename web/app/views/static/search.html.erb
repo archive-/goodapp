@@ -4,7 +4,7 @@
   <div class="span6">
     <h1> Apps </h1>
     <% App.all.each do |app| %>
-    <% if app.name.include?(@search_query) %>
+    <% if app.name.downcase.include?(@search_query.downcase) %>
       <li> 
         <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
         <%= link_to app.name, app %>
@@ -16,7 +16,7 @@
   <div class="span6">
     <h1> Devs </h1>
     <% User.all.each do |dev| %>
-      <% if dev.name.include?(@search_query) %>
+      <% if dev.name.downcase.include?(@search_query.downcase) %>
         <%= user_show(dev) %>
       <% end %>
     <% end %>
