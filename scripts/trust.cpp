@@ -7,12 +7,14 @@
  *
  * input file format example:
  * 4
- * 0 0 0 1
- * 1 0 0 0
- * 0 1 0 0
- * 0 0 1 0
+ * 2.0 3.0 12.1 40.9
+ * x 0 0 1
+ * 1 x 0 0
+ * 0 1 x 0
+ * 0 0 1 x
  *
  * first number is number of members.
+ * second line shows base trust
  * entries in colum i represent who is truted by member i.
  * in example, 1 trusts 2, 2 trusts 3, 3 trusts 4,
  * and 4 trusts 1. (conversely, entries in row j shows who
@@ -31,16 +33,14 @@
  *
  * trust given to others depends on your trust, which depends
  * (among other things) on the trust of members that trust you
- *
- * TODO add base TRUST values for each node
  */
 
 
 #include <iostream>
 using namespace std;
 
-double tolerance = 0.001;//if no user input desired could make static
-double trust_fraction_given = .2;//if no user input desired could make static
+double tolerance = 0.001; // if no user input desired could make static
+double trust_fraction_given = .2; // if no user input desired could make static
 
 struct trust_list_node
 {
@@ -59,7 +59,7 @@ struct member
 
 void test_structure(member** mem, int length)
 {
-  for (int i = 0; i<length; i++) {
+  for (int i = 0; i < length; i++) {
     cout << "member " << i+1 << " has trust " << mem[i]->total_trust << " and trusts members: ";
     trust_list_node* node = mem[i]->next_trusted_member;
     while (node != NULL) {
@@ -108,31 +108,34 @@ void create_network(member** members, int length)
 
 int main()
 {
-  int num_members;
+  int num_members, ival;
+  char garbage;
+  double dval;
   cin >> num_members;
 
   member *members[num_members];
-  for(int i = 0; i < num_members; i++) {
+  for (int i = 0; i < num_members; i++) {
+    cin >> dval;
     member *new_member = new member;
     new_member->next_trusted_member = NULL;
-    new_member->total_trust = new_member->base_trust = 0;
+    new_member->total_trust = new_member->base_trust = dval;
     new_member->has_propogated = false;
     members[i] = new_member;
   }
-  int val;
-  for(int i=0; i<num_members; i++) {
-    for(int j=0; j<num_members; j++) {
-      cin >> val;
-      if (val != 0) {
+  for (int i = 0; i < num_members; i++) {
+    for (int j = 0; j < num_members; j++) {
+      (i == j) ? cin >> garbage : cin >> ival;
+      if (i == j) ival = 0;
+      if (ival != 0) {
         trust_list_node *new_node = new trust_list_node;
         new_node->member_trusted = i;
         new_node->next_trusted_member = members[j]->next_trusted_member;
         members[j]->next_trusted_member = new_node;
-        members[j]->total_trust = members[j]->base_trust = val;
+        // members[j]->total_trust = members[j]->base_trust = ival;
       }
     }
   }
-  test_structure((members), num_members);
+  // test_structure((members), num_members);
   create_network((members), num_members);
   test_structure((members), num_members);
   return 0;
