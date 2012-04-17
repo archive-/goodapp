@@ -2,14 +2,17 @@
   <div class="span4">
     <div class="news-column">
       <h3>Recent Announcements</h3>
-      <br/>
-<% @title.each_with_index do |t, i| %>
-<h3><%= link_to t, @link[i] %>: </h3> <br/><%= @decsr[i] %> <br/><br/>
-<% end %>
 
-     <!--- 
+      <% cache :expires_in => 86400 do %>
+        <% @title.each_with_index do |t, i| %>
+          <h4><%= link_to t, @link[i] %></h4>
+          <p><%= @decsr[i] %></p>
+        <% end %>
+      <% end %>
+
+      <!---
       <%= image_tag("https://encrypted-tbn3.google.com/images?q=tbn:ANd9GcSH3OevDsWHn4G09ASuw-IvV1vMYL8uaOpd224kld0S-C6SgZixzg", :border=>0, :class => 'dock-item') %>
-       -->
+      -->
     </div>
   </div>
 
@@ -28,13 +31,13 @@
       <h3>Recently Uploaded Apps</h3>
       <ul>
         <% App.all.each do |app| %>
-        <li> 
+          <li>
           <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
-          <%= link_to app.name, app %>
+            <%= link_to app.name, app %>
           </a>
-        </li> 
-      <% end %>  
-      </ul>      
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>
