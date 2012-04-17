@@ -35,6 +35,5 @@ class App < ActiveRecord::Base
       sr.save
     end
   end
-
   handle_asynchronously :scan
 end
