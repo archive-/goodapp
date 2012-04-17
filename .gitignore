@@ -24,5 +24,6 @@ web/db/schema.rb
 web/log/*.log
 web/tmp
 
-# Ignore unnamed compiled binaries
+# Ignore compiled binaries
 a.out
+trust
