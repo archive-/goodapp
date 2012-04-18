@@ -5,7 +5,7 @@
 
       <% cache :expires_in => 86400 do %>
         <% @title.each_with_index do |t, i| %>
-          <h4><%= link_to t, @link[i] %></h4>
+          <h3><%= link_to t, @link[i] %></h4>
           <p><%= @decsr[i] %></p>
         <% end %>
       <% end %>

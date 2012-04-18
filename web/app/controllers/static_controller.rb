@@ -3,7 +3,7 @@ class StaticController < ApplicationController
 
   def home
     @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 24.hours) do
-      scrape
+     scrape
     end
   end
 
@@ -60,7 +60,9 @@ class StaticController < ApplicationController
       if number == i
         title[j] = item.at_css("h2 a").text
         links[j] = item.at_css("h2 a")[:href]
-        decsr[j] = item.at_css("p:nth-child(4)").text
+        if item.at_css("p:nth-child(4)") != nil       
+          decsr[j] = item.at_css("p:nth-child(4)").text
+        end
         break
       end
     end
@@ -78,7 +80,9 @@ class StaticController < ApplicationController
         links[j] = item.at_css(".headline")[:href]
         url_spec = links[j]
         doc3 = Nokogiri::HTML(open(url_spec))
-        decsr[j] = doc3.at_css("p:nth-child(4)").text
+        if doc3.at_css("p:nth-child(4)") != nil
+          decsr[j] = doc3.at_css("p:nth-child(4)").text
+        end
         break
       end
     end
@@ -94,8 +98,9 @@ class StaticController < ApplicationController
         links[j] = item.at_css(".headline")[:href]
         url_spec = links[j]
         doc3 = Nokogiri::HTML(open(url_spec))
-        # TODO check if doc3.at_css returns nil
-        decsr[j] = doc3.at_css("p:nth-child(4)").text
+        if doc3.at_css("p:nth-child(4)") != nil  
+          decsr[j] = doc3.at_css("p:nth-child(4)").text
+        end
         break
       end
     end
@@ -111,7 +116,9 @@ class StaticController < ApplicationController
         links[j] = item.at_css(".headline")[:href]
         url_spec = links[j]
         doc3 = Nokogiri::HTML(open(url_spec))
-        decsr[j] = doc3.at_css("p:nth-child(4)").text
+        if doc3.at_css("p:nth-child(4)") != nil  
+          decsr[j] = doc3.at_css("p:nth-child(4)").text
+        end
         break
       end
     end
@@ -124,7 +131,9 @@ class StaticController < ApplicationController
     doc_tech.css(".left-container").each_with_index do |item, i|
       title[j] =  item.at_css(".embedded-image-post .headline a").text
       links[j] = item.at_css(".embedded-image-post .headline a")[:href]
-      decsr[j] = item.at_css("p:nth-child(1)").text
+      if item.at_css("p:nth-child(1)") != nil  
+        decsr[j] = item.at_css("p:nth-child(1)").text
+      end
     end
 
     return title, decsr, links
