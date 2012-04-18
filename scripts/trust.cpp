@@ -70,6 +70,15 @@ void test_structure(member** mem, int length)
   }
 }
 
+void print_structure(member** mem, int length)
+{
+  for (int i = 0; i < length; i++) {
+    cout << mem[i]->total_trust;
+    if (i < length - 1)
+      cout << " ";
+  }
+}
+
 void propogate_trust(member** members, int member_number, double trust_given)
 {
   if (trust_given < tolerance) {
@@ -125,7 +134,8 @@ int main()
   for (int i = 0; i < num_members; i++) {
     for (int j = 0; j < num_members; j++) {
       (i == j) ? cin >> garbage : cin >> ival;
-      if (i == j) ival = 0;
+      if (i == j)
+        ival = 0;
       if (ival != 0) {
         trust_list_node *new_node = new trust_list_node;
         new_node->member_trusted = i;
@@ -137,6 +147,7 @@ int main()
   }
   // test_structure((members), num_members);
   create_network((members), num_members);
-  test_structure((members), num_members);
+  // test_structure((members), num_members);
+  print_structure((members), num_members);
   return 0;
 }

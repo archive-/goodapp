@@ -27,3 +27,6 @@ web/tmp
 # Ignore compiled binaries
 a.out
 trust
+
+# Ignores generated test files
+data/test*
