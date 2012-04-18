@@ -18,8 +18,7 @@
     cd web         # this is the ruby on rails directory
     bundle install
 
-- finally, start the server (found at http://localhost:3000
-  - still inside the web directory:
+- finally, start the server (point browser to http://localhost:3000)
 
     rails s[erver]
 
