@@ -6,7 +6,10 @@ class AppsController < ApplicationController
 
   def show
     @survey = Survey.first
-    @response_set = ResponseSet.find_or_create_by_user_id(current_user.id, :survey => @survey) if current_user
+    if current_user
+    @response_set = ResponseSet.find_or_create_by_user_id(current_user.id,
+        :survey => @survey)
+    end
   end
 
   def new
