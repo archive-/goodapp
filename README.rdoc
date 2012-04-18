@@ -22,6 +22,14 @@
 
     rails s[erver]
 
+== TESTING
+
+The Rakefile contains all testing tasks for the project.
+
+    rake test:all
+    rake test:trust
+    rake test:web
+
 == NOTES
 
 === From Julia (and previous NOTES.md)
