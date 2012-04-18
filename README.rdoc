@@ -1,0 +1,123 @@
+= goodapp
+
+== GETTING STARTED
+
+- install rvm (ruby version manager): http://beginrescueend.com/rvm/install/
+- make sure that once it's installed you open a new shell (needs to get sourced)
+
+    rvm install 1.9.2
+    rvm use 1.9.2
+    rvm default 1.9.2
+    rvm gemset create goodapp
+    cd <GOODAPP_DIRECTORY>
+
+- rvm should prompt you -- say you trust by typing 'y'
+- now bootstrap the project by installing dependencies specified in web/Gemfile
+
+    gem install bundler
+    cd web         # this is the ruby on rails directory
+    bundle install
+
+- finally, start the server (found at http://localhost:3000
+  - still inside the web directory:
+
+    rails s[erver]
+
+== NOTES
+
+- generated web directory with:
+    rails new web
+
+=== From Julia (and previous NOTES.md)
+
+- users register on goodapp
+- if they have a binary tied to their account, then they are a developer and thus they have a rating
+- user creates account with email address that we confirm (tie to the user)
+  - this email needs to be something that identifies them elsewhere too
+  - what we have: APP STORE DEV -->> email <<-- GOODAPP USER (is_dev => true)
+- user upploads a binary of theirs
+  - we run this binary over as many scanners as we can to generate a baseline
+    - [!] this should never yield negative results, otherwise, immediately throw up flag
+  - have developers somehow gather people to sign off on the validity of their app
+    - api calls so users of dev stores can do this too
+    - this will have a decent influence on the rating (algorithm to be determined)
+  - have developers with certain threshold of trust ENDORSE other developers
+    - this will also have a decent influence on the rating
+- have an api accessible by users with is_distributor => true (supply API key on their dashboard)
+  - fetch information on a developer using their email as a key
+  - allow a system for rating integration + flagging
+    - [!] distributor privilege problem will affect all changes in rating they have made
+
+- drag an drop links onto various boxes ('Apple Store', 'website', 'Windows Store', etc.)
+
+- model on Yelp
+
+NOTES FOR /WEB
+==============
+
+Options
+-------
+id
+message
+good/badvalue (postive means good, negative bad, w/e)
+form_id
+
+# BASIC FORM
+<%= form_tag
+  <% Option.where(:form_id => 1).each do |o| %>
+  <%= check_box_tag
+
+Form
+----
+id
+name
+
+(1, 'BasicForm')
+(2, 'TechForm')
+
+FormResult
+----------
+user_id
+app_id
+
+== TODO
+
+- write more tests (see 'rake stats' --> get closer to 1:2)
+- replace twitter_bootstrap_form_for_ gem
+- get CanCan in there for protecting upload to just devs (tie dev to binary)
+  - or have dev_id_ accessible if the person is admin (or app store)
+
+=== From Julia (and previously TODO.md)
+
+- standardize page headers (decide h1/h2 but then move it to a helper)
+- integrate bootstrap form as a 'plugin' or something
+- remove gutters from everywhere -- can style the same but doesnt work
+- make README sexy
+- improve the @active stuff
+
+- run rake doc:... at end for documentation
+
+need new tables (?):
+
+-rating
+  - dev_id
+  - overall_rating
+  - feedback_rating
+  - endorsement_rating
+  - scanner_rating
+  - prefix_rating [will be either 0 or 0.05]
+  - app_store_data_scraping
+  - third_party_data_scraping
+
+-app feedback
+  - app_id
+  - descripton [composed from checkboxes filled out in form]
+  - rating [individually calculated rating per review]
+
+-techinal app feedback
+  - app_id
+  - usability
+  - flexibility
+  - ...blah [ lots of these - each category on answer - new column]
+
+- delete this file :)
