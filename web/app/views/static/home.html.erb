@@ -1,36 +1,48 @@
-<div class="row">
+<div class="row"> 
+  
   <div class="span4">
     <div class="news-column">
-      <h3>Recent Announcements</h3>
-
-      <% cache :expires_in => 86400 do %>
+      <h3>Whats Happening</h3>
+      <% # not sure why there is a cahche here -- isn't the one in the controller enough? cache :expires_in => 86400 do %>
         <% @title.each_with_index do |t, i| %>
-          <h3><%= link_to t, @link[i] %></h4>
+          <h3><%= link_to t, @link[i] %></h3>
           <p><%= @decsr[i] %></p>
         <% end %>
-      <% end %>
-
-      <!---
-      <%= image_tag("https://encrypted-tbn3.google.com/images?q=tbn:ANd9GcSH3OevDsWHn4G09ASuw-IvV1vMYL8uaOpd224kld0S-C6SgZixzg", :border=>0, :class => 'dock-item') %>
-      -->
+     <% #end %>
     </div>
   </div>
 
   <div class="span4">
     <div class="news-column">
-      <h3>Users</h3>
-      <% User.all.each do |dev| %>
+      <div class="hero-unit">
+        <h1>GoodApp</h1>
+        <p><strong>NULL &copy; 2012</strong></p>
+        <p>
+          <a class="btn btn-primary btn-large">
+            About us
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="news-column">
+      <h3>Featured Developers</h3>
+      <% User.all[(1..10)].each do |dev| %>
         <%= user_show(dev) %>
       <% end %>
     </div>
+    <div class="news-column">
+      <h3>Featured Apps</h3>
+        <% App.all[(1...11)].each do |app| %>
+          <%= app_show(app) %>
+        <% end %>
+    </div>
   </div>
 
   <div class="span4">
     <div class="news-column">
-
-      <h3>Recently Uploaded Apps</h3>
+      <h3>Top Apps</h3>
       <ul>
-        <% App.all.each do |app| %>
+        <% App.all[(1...20)].each do |app| %>
           <li>
           <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
             <%= link_to app.name, app %>
@@ -39,5 +51,12 @@
         <% end %>
       </ul>
     </div>
+    <div class="news-column">
+      <h3>Recent Reviews</h3>
+      <ul>
+          <p>..someone says: </p>
+          <p> BLAH </p>
+      </ul>
+    </div>    
   </div>
 </div>

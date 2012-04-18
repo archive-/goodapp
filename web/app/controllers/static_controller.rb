@@ -2,7 +2,7 @@ class StaticController < ApplicationController
   skip_authorization_check
 
   def home
-    @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 24.hours) do
+    @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 90.minutes) do
      scrape
     end
   end
@@ -128,6 +128,7 @@ class StaticController < ApplicationController
     url_tech = "http://techcrunch.com/mobile/"
     doc_tech = Nokogiri::HTML(open(url_tech))
 
+    # #post-537417 
     doc_tech.css(".left-container").each_with_index do |item, i|
       title[j] =  item.at_css(".embedded-image-post .headline a").text
       links[j] = item.at_css(".embedded-image-post .headline a")[:href]
