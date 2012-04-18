@@ -15,7 +15,7 @@
 - now bootstrap the project by installing dependencies specified in web/Gemfile
 
     gem install bundler
-    cd web         # this is the ruby on rails directory
+    cd web # this is the ruby on rails directory
     bundle install
 
 - finally, start the server (point browser to http://localhost:3000)
@@ -23,9 +23,6 @@
     rails s[erver]
 
 == NOTES
-
-- generated web directory with:
-    rails new web
 
 === From Julia (and previous NOTES.md)
 
@@ -98,7 +95,7 @@ app_id
 
 need new tables (?):
 
--rating
+- rating
   - dev_id
   - overall_rating
   - feedback_rating
@@ -108,12 +105,12 @@ need new tables (?):
   - app_store_data_scraping
   - third_party_data_scraping
 
--app feedback
+- app feedback
   - app_id
   - descripton [composed from checkboxes filled out in form]
   - rating [individually calculated rating per review]
 
--techinal app feedback
+- techinal app feedback
   - app_id
   - usability
   - flexibility
