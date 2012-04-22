@@ -1,4 +1,21 @@
+# to run do: rake db:seed
+
+User.destroy_all
+App.destroy_all
+AppOwnership.destroy_all
+AppUsage.destroy_all
+
 password = "blabla"
+password2 = "password"
+
+User.populate(1) do |user|
+  user.name = 'Clark Kent'
+  user.email = 'clart@example.com'
+  user.password_salt = BCrypt::Engine.generate_salt
+  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
+  user.is_dev = true
+  user.about = "Hi, I'm Clark."
+end
 
 User.populate(1) do |user|
   user.name = 'TJ Koblentz'
@@ -36,6 +53,26 @@ User.populate(1) do |user|
   user.about = "Hi, I'm Jasper."
 end
 
+# user testing 
+User.populate(1) do |user|
+  user.name = 'Normal Jones'
+  user.email = 'normal@example.com'
+  user.password_salt = BCrypt::Engine.generate_salt
+  user.password_hash = BCrypt::Engine.hash_secret(password2, user.password_salt)
+  user.is_dev = false
+  user.about = "Hi, I'm John."
+end
+
+# creating an account for testing -- need to give this user apps
+User.populate(1) do |user|
+  user.name = 'Jenna Bryant'
+  user.email = 'jenna@example.com'
+  user.password_salt = BCrypt::Engine.generate_salt
+  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
+  user.is_dev = true
+  user.about = "Hi, I'm Jenna."
+end
+
 User.populate(50) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
@@ -48,6 +85,11 @@ end
 # there should be other fields added to the app database
 # version, description, type [apple, android, windows]
 # that way we can generate more info
+
+App.populate(1) do |app|
+  app.name = "Angry Birds"
+end
+
 App.populate(40) do |app|
   app.name = Populator.words(2)
 end
@@ -58,9 +100,24 @@ end
 # not sure if this should be App or user
 # and problem here is that we don't want the same app to be
 # assigned to 2 different devs [but more then one app can be assigned to one dev]
-AppOwnership.populate(40) do |app_ownership|
+
+AppOwnership.populate(1) do |app_ownership|
+  app_ownership.user_id = 1..40
+  app_ownership.app_id = 2
+end
+
+AppOwnership.populate(41) do |app_ownership|
   app_ownership.user_id = 1..50
   app_ownership.app_id = 1..40
+end
+
+App.populate(1) do |app|
+  app.name = "Justice League Hero Finder"
+end
+
+AppOwnership.populate(1) do |app_ownership|
+  app_ownership.user_id = 1
+  app_ownership.app_id = 42
 end
 
 # not sure is this should be App or user
