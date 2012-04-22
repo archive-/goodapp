@@ -26,15 +26,19 @@
     </div>
     <div class="news-column">
       <h3>Featured Developers</h3>
-      <% User.all[(1..10)].each do |dev| %>
-        <%= user_show(dev) %>
-      <% end %>
+     <% if User %>
+		<% User.all[(1..10)].each do |dev| %>
+        	<%= user_show(dev) %>
+      	<% end %>
+	<% end%>
     </div>
     <div class="news-column">
       <h3>Featured Apps</h3>
-        <% App.all[(1...11)].each do |app| %>
-          <%= app_show(app) %>
-        <% end %>
+		<% if App %>
+        	<% App.all[(1...11)].each do |app| %>
+          		<%= app_show(app) %>
+        	<% end %>
+		<% end %>
     </div>
   </div>
 
@@ -42,13 +46,15 @@
     <div class="news-column">
       <h3>Top Apps</h3>
       <ul>
-        <% App.all[(1...20)].each do |app| %>
-          <li>
-          <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
-            <%= link_to app.name, app %>
-          </a>
-          </li>
-        <% end %>
+		<% if App %>
+        	<% App.all[(1...20)].each do |app| %>
+          	<li>
+          		<a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
+            		<%= link_to app.name, app %>
+          		</a>
+          	</li>
+     		<% end %>
+		<% end %>
       </ul>
     </div>
     <div class="news-column">

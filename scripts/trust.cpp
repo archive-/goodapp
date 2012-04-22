@@ -54,7 +54,8 @@ struct member
   //double added_trust;
   double total_trust;
   trust_list_node *next_trusted_member;
-  bool has_propogated;
+  //bool has_propogated;
+  int num_trusted_by_user;
 };
 
 void test_structure(member** mem, int length)
@@ -93,8 +94,10 @@ void propogate_trust(member** members, int member_number, double trust_given)
   trust_list_node* node = members[member_number]->next_trusted_member;
   while (node != NULL)
   {
-    propogate_trust(members, node->member_trusted, trust_given * trust_fraction_given);
-    members[node->member_trusted]->has_propogated = true;
+    propogate_trust(members, 
+										node->member_trusted,
+										trust_given * trust_fraction_given / members[member_number]->num_trusted_by_user);
+    //members[node->member_trusted]->has_propogated = true;
     node = node->next_trusted_member;
   }
 }
@@ -109,7 +112,7 @@ void create_network(member** members, int length)
         //cout<<"here2."<<i<<endl;
       propogate_trust(members,
               node->member_trusted,
-              members[i]->base_trust * trust_fraction_given);
+              members[i]->base_trust * trust_fraction_given / members[i]->num_trusted_by_user);
       node = node->next_trusted_member;
     }
   }
@@ -128,7 +131,8 @@ int main()
     member *new_member = new member;
     new_member->next_trusted_member = NULL;
     new_member->total_trust = new_member->base_trust = dval;
-    new_member->has_propogated = false;
+    //new_member->has_propogated = false;
+		new_member->num_trusted_by_user = 0;
     members[i] = new_member;
   }
   for (int i = 0; i < num_members; i++) {
@@ -141,13 +145,14 @@ int main()
         new_node->member_trusted = i;
         new_node->next_trusted_member = members[j]->next_trusted_member;
         members[j]->next_trusted_member = new_node;
+				members[j]->num_trusted_by_user++;
         // members[j]->total_trust = members[j]->base_trust = ival;
       }
     }
   }
   // test_structure((members), num_members);
   create_network((members), num_members);
-  // test_structure((members), num_members);
+  //test_structure((members), num_members);
   print_structure((members), num_members);
   return 0;
 }
