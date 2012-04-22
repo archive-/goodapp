@@ -21,7 +21,7 @@ class App < ActiveRecord::Base
     # pass force if rescan
     return if !self.scan_results.empty? and !force
     # TODO limit when this scan occurs
-    url = 'https://wwww.virustotal.com/vtapi/v2/file/scan'
+    url = 'https://www.virustotal.com/vtapi/v2/file/scan'
     json = RestClient.post(url, :key => Settings.vtapi_key,
                           :file => File.new(self.file.path, 'rb'))
     res = JSON.parse(json)
