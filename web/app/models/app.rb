@@ -17,6 +17,19 @@ class App < ActiveRecord::Base
 
   private
 
+=begin
+  def scrape
+    case self.type
+    when :android
+      # bla
+    when :apple
+      # bla
+    when :windows
+      # bla
+  end
+  handle_asynchronously :scrape
+=end
+
   def scan(force=false)
     # pass force if rescan
     return if !self.scan_results.empty? and !force
