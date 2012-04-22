@@ -26,19 +26,19 @@
     </div>
     <div class="news-column">
       <h3>Featured Developers</h3>
-     <% if User %>
-		<% User.all[(1..10)].each do |dev| %>
+      <% if User %>
+		    <% User.all[(1..10)].each do |dev| %>
         	<%= user_show(dev) %>
       	<% end %>
-	<% end%>
+      <% end%>
     </div>
     <div class="news-column">
       <h3>Featured Apps</h3>
-		<% if App %>
-        	<% App.all[(1...11)].each do |app| %>
-          		<%= app_show(app) %>
-        	<% end %>
-		<% end %>
+		  <% if App %>	
+        <% App.all[(1...11)].each do |app| %>
+          <%= app_show(app) %>
+        <% end %>
+		  <% end %>
     </div>
   </div>
 
@@ -46,22 +46,22 @@
     <div class="news-column">
       <h3>Top Apps</h3>
       <ul>
-		<% if App %>
-        	<% App.all[(1...20)].each do |app| %>
-          	<li>
-          		<a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
-            		<%= link_to app.name, app %>
-          		</a>
-          	</li>
+		  <% if App %>
+        <% App.all[(1...20)].each do |app| %>
+          <li>
+          	<a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
+            <%= link_to app.name, app %>
+          	</a>
+          </li>
      		<% end %>
-		<% end %>
+		  <% end %>
       </ul>
     </div>
     <div class="news-column">
       <h3>Recent Reviews</h3>
       <ul>
-          <p>..someone says: </p>
-          <p> BLAH </p>
+        <p>..someone says: </p>
+        <p> BLAH </p>
       </ul>
     </div>    
   </div>
