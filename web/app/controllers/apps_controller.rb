@@ -19,7 +19,7 @@ class AppsController < ApplicationController
     if @app.save
       # TODO use build
       owned_app = AppOwnership.create(:user_id => current_user.id, :app_id => @app.id)
-      redirect_to root_url, :notice => 'Successfully uploaded your App.'
+      redirect_to @app, :notice => 'Successfully uploaded your App.'
     else
       flash.now.alert = 'App was not uploaded properly.'
       render 'new'
