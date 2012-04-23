@@ -1,68 +1,70 @@
-<div class="row"> 
-  
-  <div class="span4">
+<div class="row">
+  <div class="span8">
     <div class="news-column">
       <h3>Whats Happening</h3>
-      <% # not sure why there is a cahche here -- isn't the one in the controller enough? cache :expires_in => 86400 do %>
-        <% @title.each_with_index do |t, i| %>
-          <h3><%= link_to t, @link[i] %></h3>
-          <p><%= @decsr[i] %></p>
-        <% end %>
-     <% #end %>
-    </div>
-  </div>
-
-  <div class="span4">
-    <div class="news-column">
-      <div class="hero-unit">
-        <h2>GoodApp</h2>
-        <p><strong>NULL &copy; 2012</strong></p>
-        <p>
-          <a class="btn btn-primary btn-large">
-            About us
-          </a>
-        </p>
+      <div id="myCarousel" class="carousel">
+        <div class="carousel-inner">
+            <% @title.each_with_index do |t, i| %>
+              <% if i == 0 %>
+                <div class="active item">
+                  <h3><%= link_to t, @link[i] %></h3>
+                  <p><%= @decsr[i] %></p>
+                </div>
+              <% else %>
+                <div class="item">
+                  <h3><%= link_to t, @link[i] %></h3>
+                  <p><%= @decsr[i] %></p>
+                </div>
+              <% end %>  
+            <% end %>
+        </div>
+    <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
       </div>
     </div>
+
+<div class="row"> 
+  <div class="span4">
+   
     <div class="news-column">
       <h3>Featured Developers</h3>
       <% if User %>
-		    <% User.all[(1..10)].each do |dev| %>
-        	<%= user_show(dev) %>
-      	<% end %>
-      <% end%>
-    </div>
-    <div class="news-column">
-      <h3>Featured Apps</h3>
-		  <% if App %>	
-        <% App.all[(1...11)].each do |app| %>
-          <%= app_show(app) %>
+        <% User.all[(1..10)].each do |dev| %>
+          <%= user_show(dev) %>
         <% end %>
-		  <% end %>
+      <% end%>
     </div>
   </div>
 
   <div class="span4">
     <div class="news-column">
-      <h3>Top Apps</h3>
-      <ul>
-		  <% if App %>
-        <% App.all[(1...20)].each do |app| %>
-          <li>
-          	<a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
-            <%= link_to app.name, app %>
-          	</a>
-          </li>
-     		<% end %>
-		  <% end %>
-      </ul>
+      <h3>Featured Apps</h3>
+      <% if App %>  
+        <% App.all[(1...11)].each do |app| %>
+          <%= app_show(app) %>
+        <% end %>
+      <% end %>
     </div>
+  </div>
+</div>
+</div>
+  
+  <div class="span4">
     <div class="news-column">
       <h3>Recent Reviews</h3>
       <ul>
-        <p>..someone says: </p>
-        <p> BLAH </p>
+      <% if App %>
+        <% App.all[(1...18)].each do |app| %>
+          <li>
+            <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
+            <%= link_to app.name, app %>
+            </a>
+          </li>
+        <% end %>
+      <% end %>
       </ul>
-    </div>    
+    </div>   
   </div>
 </div>
+
