@@ -29,8 +29,6 @@ Web::Application.routes.draw do
 
   post '/endorsements' => 'endorsements#create', :as => :endorsements
   # TODO POST to would be nicer, imo, 'apps/:id/feedback'
-  post 'apps/:app_id/submit_feedback', :to => 'basic_feedbacks#create'
-
-  # TODO add individual resource routes for basic_feedbacks (otherwise broken)
-  resource :basic_feedbacks
+  post '/basic_feedbacks' => 'basic_feedbacks#create', :as => :basic_feedback
+  put '/basic_feedbacks.:id' => 'basic_feedbacks#update', :as => :basic_feedback
 end

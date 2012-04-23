@@ -1,25 +1,29 @@
 <div class="row">
   <div class="span8">
-    <div class="section">
-      <div id="myCarousel" class="carousel">
-        <div class="carousel-inner">
-          <% @title.each_with_index do |t, i| %>
-            <% if i == 0 %>
-              <div class="active item">
-                <h3><%= link_to t, @link[i] %></h3>
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <% @title.each_with_index do |t, i| %>
+          <% if i == 0 %>
+            <div class="item active">
+              <%= image_tag '/assets/crossos.png' %>
+              <div class="carousel-caption">
+                <h4><%= link_to t, @link[i] %></h4>
                 <p><%= @decsr[i] %></p>
               </div>
-            <% else %>
-              <div class="item">
-                <h3><%= link_to t, @link[i] %></h3>
+            </div>
+          <% else %>
+            <div class="item">
+              <%= image_tag '/assets/crossos.png' %>
+              <div class="carousel-caption">
+                <h4><%= link_to t, @link[i] %></h4>
                 <p><%= @decsr[i] %></p>
               </div>
-            <% end %>
+            </div>
           <% end %>
-        </div>
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        <% end %>
       </div>
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div>
 
     <div class="row">
@@ -44,16 +48,9 @@
   <div class="span4">
     <div class="section">
       <h3>Recent Reviews</h3>
-      <ul>
-        <% App.all[0..17].each do |app| %>
-          <li>
-          <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
-            <%= link_to app.name, app %>
-          </a>
-          </li>
-        <% end %>
-      </ul>
+      <% @recent_feedbacks.each do |basic_feedback| %>
+        <%= render basic_feedback %>
+      <% end %>
     </div>
   </div>
 </div>
-

@@ -1,25 +1,6 @@
 <% if current_user && !@app.owners.index(current_user) %> <%# !@app.reviewers.index(@user) %>
 <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#review-modal">Review</a>
-<div class="fade modal container" id="review-modal">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <h3>Review <%= @app.name %></h3>
-  </div>
-  <%# TODO fix the url to post to right path %>
-  <%= semantic_form_for(@response_set, :as => :r, :url => update_my_survey_path(:survey_code => @survey.access_code, :response_set_code => @response_set.access_code, :finish => '1', :app_id => @app.id), :html => {:class => 'modal-form'}) do |f| %>
-  <div class="modal-body">
-    <% @survey.sections.each do |section| %>
-      <% @section = section %>
-      <% (questions = @section.questions).each_with_index do |q, i| %>
-        <%= render :partial => 'partials/question', :locals => {:f => f, :q => q} %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="modal-footer">
-    <%= f.submit 'Submit Feedback', :class => 'btn btn-primary' %>
-  </div>
-  <% end %>
-</div>
+<%= render 'basic_feedbacks/modal_form' %>
 <% end %>
 
 <h1><%= @app.name %></h1>
@@ -56,17 +37,18 @@
           <td>40</td>
           <td>5</td>
           <td>
-              <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
-      <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
-    <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
-
+            <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
+            <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
+            <%= image_tag("glyphicons_049_star.png", :size => "10x10") %> &nbsp;
           </td>
         </tr>
       </table>
     </div>
     <div id="feedbacks">
       <h3>Feedback</h3>
-      <!-- TODO -->
+      <% @basic_feedbacks.each do |basic_feedback| %>
+        <%= render basic_feedback %>
+      <% end %>
     </div>
   </div>
   <div class="span3">

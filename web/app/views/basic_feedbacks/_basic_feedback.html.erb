@@ -1,0 +1,10 @@
+<div class="feedback row-fluid">
+  <div class="attributes span2">
+    <span class="up-attributes">+<%= basic_feedback.ngoods %></span>
+    <span class="down-attributes">-<%= basic_feedback.nbads %></span>
+  </div>
+  <!-- only show app when not on app page -->
+  <span class="span3"><%= app_show(basic_feedback.app) %></span>
+  <span class="span3"><%= user_show(basic_feedback.user) %></span>
+  <p class="span4"><%= basic_feedback.comment %></p>
+</div>

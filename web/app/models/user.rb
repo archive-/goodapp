@@ -26,10 +26,10 @@ class User < ActiveRecord::Base
   has_many :owned_apps, :through => :app_ownerships, :source => :app
   has_many :app_usages
   has_many :used_apps, :through => :app_usages, :source => :app
-  has_many :endorsementees, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
-  has_many :endorsees, :through => :endorsementees, :class_name => 'User'
-  has_many :endorsementers, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
-  has_many :endorsers, :through => :endorsementers, :class_name => 'User'
+  has_many :endorsements_as_endorser, :foreign_key => :endorser_id, :class_name => 'Endorsement'
+  has_many :endorsements_as_endorsee, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
+  has_many :endorsees, :through => :endorsements_as_endorser
+  has_many :endorsers, :through => :endorsements_as_endorsee
 
   def self.authenticate(email, password)
     user = find_by_email(email)

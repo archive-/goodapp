@@ -20,14 +20,12 @@ html {overflow-y: scroll}
 h1 {margin-bottom: 20px}
 .help-inline {color: red}
 .modal-form {margin-bottom: 0}
-.modal-form textarea {width: 98%} /* TODO HACKY */
 .no-bullet {list-style: none; margin-left: 0}
 .ul-inline {overflow: hidden}
 .ul-inline li {float: left}
 .centered-columns th, .centered-columns td {text-align: center}
 .space-left {margin-left: 10px}
-caption {font-size: 1.4em}
-.news-column, .section {min-height:20px; padding:15px; margin-bottom:20px; background-color:#f5f5f5; -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)}
+.section {min-height:20px; padding:15px; margin-bottom:20px; background-color:#f5f5f5; -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)}
 .headshot {text-align: center}
 .headshot h3 {font-size:0.9em}
 #rating-box {height: 180px} /* MATCH WITH PROFILE IMAGE */
@@ -35,9 +33,18 @@ caption {font-size: 1.4em}
 #upload-button {padding: 3px 5px}
 #footer {margin-top: 30px}
 #footer p {padding: 30px 0 40px}
-/* hacking up surveyor because it sort of sucks */
-.modal-body input[type="checkbox"] {display: inline}
-.modal-body {overflow: hidden}
-.q_label {display: none}
-.q_default {float: left; width: 48%; margin-right: 1%}
-.q_default ol {list-style: none; margin-top: 10px}
+.modal-body {overflow:hidden}
+.modal-body input[type="checkbox"] {float:left;width:20px;margin-right:5px}
+.modal-body .half {float:left;width:50%}
+.modal-header, .modal h3, .modal h4 {margin-bottom:10px;padding-bottom:0}
+.modal-body {margin-top:0;padding-top:0}
+.modal-body textarea {width:98%}
+.endorsement {background:#8cdd81;overflow:hidden;padding:5px;margin-bottom:5px}
+.user {border:1px solid black;margin:1px}
+.dev {border:1px solid orange}
+.endorsement .user {float:left;width:60px;margin-right:10px}
+.endorsement p {overflow:hidden}
+.feedback {background:#ccc;margin-bottom:5px;padding:5px}
+.attributes {font-weight:bold;font-size:1.2em;text-align:center}
+.up-attributes {color:green;display:block;border-bottom:1px solid black;padding-bottom:10px}
+.down-attributes {color:red;display:block;padding-top:10px}

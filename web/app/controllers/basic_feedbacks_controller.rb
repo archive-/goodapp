@@ -1,11 +1,20 @@
-class AppsController < ApplicationController
-  load_and_authorize_resource
-
-  def index
+class BasicFeedbacksController < ApplicationController
+  def create
+    @app = App.find(params[:app_id])
+    @basic_feedback = BasicFeedback.new(params[:basic_feedback])
+    @basic_feedback.app_id = @app.id
+    @basic_feedback.user_id = current_user.id
+    if @basic_feedback.save
+      redirect_to @app, :notice => "Successfully updated your feedback for #{@app.name}."
+    else
+      flash.now.alert = "Your feedback was not properly updated."
+      render @app
+    end
   end
 
-  def show
-    @app = App.find(params[:id])
+  def update
+    @app = App.find(params[:app_id])
+    # TODO clean up
     @goods = {:g_speed => 'Fast and reliable',
       :g_ease => 'Easy to use',
       :g_updates => 'Updates are consistent',
@@ -30,25 +39,12 @@ class AppsController < ApplicationController
       :b_overall => 'Doesn\'t perform properly'
     }
     @basic_feedbacks = BasicFeedback.find_all_by_app_id(@app.id)
-    if current_user
-      @basic_feedback = BasicFeedback.find_or_initialize_by_user_id_and_app_id(current_user.id, @app.id)
-    end
-  end
-
-  def new
-  end
-
-  def create
-    if @app.save
-      # TODO use build
-      owned_app = AppOwnership.create(:user_id => current_user.id, :app_id => @app.id)
-      redirect_to @app, :notice => 'Successfully uploaded your App.'
+    @basic_feedback = BasicFeedback.find_by_user_id_and_app_id(current_user, @app)
+    if @basic_feedback.update_attributes(params[:basic_feedback])
+      redirect_to @app, :notice => "Successfully updated your feedback for #{@app.name}."
     else
-      flash.now.alert = 'App was not uploaded properly.'
-      render 'new'
+      flash.now.alert = "Your feedback was not properly updated."
+      render 'apps/show'
     end
-  end
-
-  def flag
   end
 end

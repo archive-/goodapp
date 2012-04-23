@@ -1,6 +1,6 @@
 <% if can?(:create, @endorsement) && @user != current_user && @user.is_dev && !current_user.endorsees.index(@user) %>
   <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#endorse-modal">Endorse</a>
-  <div class="fade modal" id="endorse-modal">
+  <div class="modal hide fade" id="endorse-modal">
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&times;</a>
       <h3>Endorse <%= @user.name %></h3>
@@ -37,25 +37,11 @@
   </div>
   <div class="span7">
     <% if @user.is_dev %>
-    <div id="rating-box">
-      <table class="table centered-columns">
-        <tr>
-          <th>Overall</th>
-          <th>Endorsement</th>
-          <th>Feedback</th>
-        </tr>
-        <tr>
-          <td><%= @user.overall_trust %></td>
-          <td>*</td>
-          <td>*</td>
-        </tr>
-      </table>
       <ul class="no-bullet ul-inline">
       <% @user.owned_apps.limit(4).each do |app| %>
         <li><%= app_show(app) %></li>
       <% end %>
       </ul>
-    </div>
     <% end %>
     <div id="activity-box">
       <h3>Activity Feed</h3>
@@ -65,16 +51,21 @@
   <div class="span3">
     <% if @user.is_dev %>
       <%# TODO SOMETHING WRONG HERE %>
-      <% endorsers = @user.endorsers %>
-      <% num_endorsers = endorsers.size %>
+      <% endorsements = @user.endorsements_as_endorsee %>
+      <% num_endorsers = endorsements.size %>
       <% if num_endorsers.zero? %>
         <h3>Not Endorsed</h3>
         <!-- TODO know him/her? endorse them! -->
       <% else %>
-        <h3>Endorsed By</h3>
+        <h3>Endorsements (<%= num_endorsers %>)</h3>
         <ul class="no-bullet">
-        <% endorsers.each do |endorser| %>
-          <li><%= user_show(endorser) %></li>
+        <% endorsements.each do |endorsement| %>
+          <li>
+            <div class="endorsement">
+              <%= user_show(endorsement.endorser) %>
+              <p><%= endorsement.message %></p>
+            </div>
+          </li>
         <% end %>
         </ul>
       <% end %>

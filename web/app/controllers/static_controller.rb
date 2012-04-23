@@ -5,6 +5,7 @@ class StaticController < ApplicationController
     @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 90.minutes) do
      scrape
     end
+    @recent_feedbacks = BasicFeedback.order('created_at DESC').limit(10)
   end
 
   def about
