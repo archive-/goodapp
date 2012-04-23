@@ -1,5 +1,6 @@
 *.sw[nop]
-~$
+*.*~
+.DS_Store
 
 # Ignore files uploaded via Paperclip
 web/public/system
