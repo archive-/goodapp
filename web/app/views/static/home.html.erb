@@ -15,7 +15,7 @@
                   <h3><%= link_to t, @link[i] %></h3>
                   <p><%= @decsr[i] %></p>
                 </div>
-              <% end %>  
+              <% end %>
             <% end %>
         </div>
     <!-- Carousel nav -->
@@ -24,47 +24,41 @@
       </div>
     </div>
 
-<div class="row"> 
+<div class="row">
   <div class="span4">
-   
+
     <div class="news-column">
       <h3>Featured Developers</h3>
-      <% if User %>
-        <% User.all[(1..10)].each do |dev| %>
-          <%= user_show(dev) %>
-        <% end %>
-      <% end%>
+      <% User.where(:is_dev => true)[0...10].each do |dev| %>
+        <%= user_show(dev) %>
+      <% end %>
     </div>
   </div>
 
   <div class="span4">
     <div class="news-column">
       <h3>Featured Apps</h3>
-      <% if App %>  
-        <% App.all[(1...11)].each do |app| %>
-          <%= app_show(app) %>
-        <% end %>
+      <% App.all[0...10].each do |app| %>
+        <%= app_show(app) %>
       <% end %>
     </div>
   </div>
 </div>
 </div>
-  
+
   <div class="span4">
     <div class="news-column">
       <h3>Recent Reviews</h3>
       <ul>
-      <% if App %>
-        <% App.all[(1...18)].each do |app| %>
-          <li>
-            <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
-            <%= link_to app.name, app %>
-            </a>
-          </li>
-        <% end %>
+      <% App.all[0..17].each do |app| %>
+        <li>
+          <a href="<%= app_url(app) %>" rel="tooltip" class="tooltipped" title="<%= app.name %>">
+          <%= link_to app.name, app %>
+          </a>
+        </li>
       <% end %>
       </ul>
-    </div>   
+    </div>
   </div>
 </div>
 
