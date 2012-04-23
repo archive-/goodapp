@@ -17,11 +17,12 @@ class Endorsement < ActiveRecord::Base
         file.write("#{users.count}\n")
         base_trusts = users.map {|user| "#{user.id}:#{user.base_trust}"}
         users.each do |user|
-          file.puts(base_trusts.join(' '))
+          file.write(base_trusts.join(' '))
         end
         # now print out grid of recommendations
         Endorsement.all.each do |e|
-          file.puts("#{e.endorser_id} #{e.endorsee_id}")
+          file.write("\n")
+          file.write("#{e.endorser_id} #{e.endorsee_id}")
         end
       end
     end
