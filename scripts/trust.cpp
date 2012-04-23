@@ -33,6 +33,7 @@
 
 
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 double tolerance = 0.001; // if no user input desired could make static
@@ -89,7 +90,7 @@ void propagate_trust(member** members, int member_number, double trust_given)
   trust_list_node* node = members[member_number]->next_trusted_member;
   while (node != NULL)
   {
-    propogate_trust(members,
+    propagate_trust(members,
                     node->member_trusted,
                     trust_given * trust_fraction_given / members[member_number]->num_trusted_by_user);
     node = node->next_trusted_member;
@@ -114,9 +115,8 @@ int find_member(int member_id, member* members, int num_members)
     if(members[i].id == member_id)
       return i;
 
-  cout<<"Err: no member "<<member_id<<endl;
-  exit(-1);
-  return -1;
+  cout << "Err: no member " << member_id << endl;
+  exit(1);
 }
 
 int main()
