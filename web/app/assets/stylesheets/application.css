@@ -48,3 +48,4 @@ h1 {margin-bottom: 20px}
 .attributes {font-weight:bold;font-size:1.2em;text-align:center}
 .up-attributes {color:green;display:block;border-bottom:1px solid black;padding-bottom:10px}
 .down-attributes {color:red;display:block;padding-top:10px}
+.carousel img {width:100%}
