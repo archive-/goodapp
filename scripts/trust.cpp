@@ -8,18 +8,14 @@
  * input file format example:
  * 4
  * 2.0 3.0 12.1 40.9
- * x 0 0 1
- * 1 x 0 0
- * 0 1 x 0
- * 0 0 1 x
+ * 1 2
+ * 2 3
+ * 1 4
+ * 4 2
  *
  * first number is number of members.
  * second line shows base trust
- * entries in colum i represent who is truted by member i.
- * in example, 1 trusts 2, 2 trusts 3, 3 trusts 4,
- * and 4 trusts 1. (conversely, entries in row j shows who
- * trusts member j). all members in initial matrix have trust
- * of 1 before algorithm applied.
+ * then recommender_id recommendee_id
  *
  * DID NOT USE RELAXATION/GAUSS-SEIDEL.
  *
@@ -54,7 +50,7 @@ struct member
   double total_trust;
   trust_list_node *next_trusted_member;
   int num_trusted_by_user;
-	int id;
+  int id;
 };
 
 void test_structure(member** mem, int length)
@@ -79,7 +75,7 @@ void print_structure(member** mem, int length)
   }
 }
 
-void propogate_trust(member** members, int member_number, double trust_given)
+void propagate_trust(member** members, int member_number, double trust_given)
 {
   if (trust_given < tolerance) {
     if (trust_given >= tolerance * 0.5) {
@@ -93,9 +89,9 @@ void propogate_trust(member** members, int member_number, double trust_given)
   trust_list_node* node = members[member_number]->next_trusted_member;
   while (node != NULL)
   {
-    propogate_trust(members, 
-										node->member_trusted,
-										trust_given * trust_fraction_given / members[member_number]->num_trusted_by_user);
+    propogate_trust(members,
+                    node->member_trusted,
+                    trust_given * trust_fraction_given / members[member_number]->num_trusted_by_user);
     node = node->next_trusted_member;
   }
 }
@@ -105,8 +101,7 @@ void create_network(member** members, int length)
   for(int i = 0; i < length; i++) {
     trust_list_node *node = members[i]->next_trusted_member;
     while(node != NULL) {
-      propogate_trust(members,
-              node->member_trusted,
+      propagate_trust(members, node->member_trusted,
               members[i]->base_trust * trust_fraction_given / members[i]->num_trusted_by_user);
       node = node->next_trusted_member;
     }
@@ -115,23 +110,19 @@ void create_network(member** members, int length)
 
 int find_member(int member_id, member* members, int num_members)
 {
-	for(int i = 0; i < num_members; i++)
-	{
-		if(members[i].id == member_id)
-		{
-			return i;
-		}
-	}
-	cout<<"Err: no member "<<member_id<<endl;
-	exit(-1);
-	return -1;
-	
+  for(int i = 0; i < num_members; i++)
+    if(members[i].id == member_id)
+      return i;
+
+  cout<<"Err: no member "<<member_id<<endl;
+  exit(-1);
+  return -1;
 }
 
 int main()
 {
-	char colon;
-	int num_members, ival;
+  char colon;
+  int num_members, ival;
   char garbage;
   double dval;
   cin >> num_members;
@@ -140,45 +131,42 @@ int main()
     member *new_member = new member;
     new_member->next_trusted_member = NULL;
     new_member->total_trust = new_member->base_trust = dval;
-		new_member->id = ival;
-		new_member->num_trusted_by_user = 0;
+    new_member->id = ival;
+    new_member->num_trusted_by_user = 0;
     members[i] = new_member;
   }
-	
-	int member_id = -1;
-	int old_id = -1;
-	int trusted_id = -1;
-	int old_trusted = -1;
-	
-	int member_index;
-	int trusted_index;
-	string line;	
-	while(getline(cin, line))
-	{
-		cin >> member_id;
-		cin >> trusted_id;
 
-		if(member_id == -1 || trusted_id == -1)
-		{
-			break;
-		}
-		
-		if(old_id == member_id && old_trusted == trusted_id)
-		{
-			break;
-		}
-		old_id = member_id;
-		old_trusted = trusted_id;
+  int member_id = -1;
+  int old_id = -1;
+  int trusted_id = -1;
+  int old_trusted = -1;
 
-		member_index = find_member(member_id, *members, num_members);
-		trusted_index = find_member(trusted_id, *members, num_members);
-				
-		trust_list_node *new_node = new trust_list_node;
-		new_node->member_trusted = trusted_index;
-		new_node->next_trusted_member = members[member_index]->next_trusted_member;
-		members[member_index]->next_trusted_member = new_node;
-		members[member_index]->num_trusted_by_user++;
-	}
+  int member_index;
+  int trusted_index;
+  string line;
+  while(getline(cin, line))
+  {
+    cin >> member_id;
+    cin >> trusted_id;
+
+    if(member_id == -1 || trusted_id == -1)
+      break;
+
+    if(old_id == member_id && old_trusted == trusted_id)
+      break;
+
+    old_id = member_id;
+    old_trusted = trusted_id;
+
+    member_index = find_member(member_id, *members, num_members);
+    trusted_index = find_member(trusted_id, *members, num_members);
+
+    trust_list_node *new_node = new trust_list_node;
+    new_node->member_trusted = trusted_index;
+    new_node->next_trusted_member = members[member_index]->next_trusted_member;
+    members[member_index]->next_trusted_member = new_node;
+    members[member_index]->num_trusted_by_user++;
+  }
   create_network((members), num_members);
   //test_structure((members), num_members);
   print_structure((members), num_members);
