@@ -29,6 +29,6 @@ Web::Application.routes.draw do
 
   post '/endorsements' => 'endorsements#create', :as => :endorsements
   # TODO POST to would be nicer, imo, 'apps/:id/feedback'
-  post '/basic_feedbacks' => 'basic_feedbacks#create', :as => :basic_feedback
+  post '/basic_feedbacks' => 'basic_feedbacks#create', :as => :basic_feedbacks
   put '/basic_feedbacks.:id' => 'basic_feedbacks#update', :as => :basic_feedback
 end
