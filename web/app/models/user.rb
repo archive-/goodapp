@@ -52,7 +52,11 @@ class User < ActiveRecord::Base
     self.name == 'admin' # TODO
   end
 
-  def overall_rating
+  def overall_trust
+    0.0 # TODO
+  end
+
+  def base_trust
     0.0 # TODO
   end
 end

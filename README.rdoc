@@ -64,12 +64,12 @@ Options
 id
 message
 good/badvalue (postive means good, negative bad, w/e)
-form_id
+form id
 
 # BASIC FORM
-<%= form_tag
+<%= form_tag %>
   <% Option.where(:form_id => 1).each do |o| %>
-  <%= check_box_tag
+  <%= check_box_tag %>
 
 Form
 ----
@@ -81,8 +81,8 @@ name
 
 FormResult
 ----------
-user_id
-app_id
+user id
+app id
 
 == TODO
 
@@ -90,6 +90,7 @@ app_id
 - replace twitter_bootstrap_form_for_ gem
 - get CanCan in there for protecting upload to just devs (tie dev to binary)
   - or have dev_id_ accessible if the person is admin (or app store)
+- better flash messages, on register "Signed up!"
 
 === From Julia (and previously TODO.md)
 
@@ -104,22 +105,22 @@ app_id
 need new tables (?):
 
 - rating
-  - dev_id
-  - overall_rating
-  - feedback_rating
-  - endorsement_rating
-  - scanner_rating
-  - prefix_rating [will be either 0 or 0.05]
-  - app_store_data_scraping
-  - third_party_data_scraping
+  - dev id
+  - overall rating
+  - feedback rating
+  - endorsement rating
+  - scanner rating
+  - prefix rating [will be either 0 or 0.05]
+  - app store data scraping
+  - third party data scraping
 
 - app feedback
-  - app_id
+  - app id
   - descripton [composed from checkboxes filled out in form]
   - rating [individually calculated rating per review]
 
 - techinal app feedback
-  - app_id
+  - app id
   - usability
   - flexibility
   - ...blah [ lots of these - each category on answer - new column]

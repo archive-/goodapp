@@ -5,10 +5,9 @@ class AppsController < ApplicationController
   end
 
   def show
-    @survey = Survey.first
+    @app = App.find(params[:id])
     if current_user
-    @response_set = ResponseSet.find_or_create_by_user_id(current_user.id,
-        :survey => @survey)
+      @basic_feedback = BasicFeedback.find_or_initialize_by_user_and_app(current_user, self)
     end
   end
 
@@ -19,7 +18,7 @@ class AppsController < ApplicationController
     if @app.save
       # TODO use build
       owned_app = AppOwnership.create(:user_id => current_user.id, :app_id => @app.id)
-      redirect_to root_url, :notice => 'Successfully uploaded your App.'
+      redirect_to @app, :notice => 'Successfully uploaded your App.'
     else
       flash.now.alert = 'App was not uploaded properly.'
       render 'new'

@@ -6,7 +6,6 @@ AppOwnership.destroy_all
 AppUsage.destroy_all
 
 password = "blabla"
-password2 = "password"
 
 User.populate(1) do |user|
   user.name = 'Clark Kent'
@@ -53,12 +52,12 @@ User.populate(1) do |user|
   user.about = "Hi, I'm Jasper."
 end
 
-# user testing 
+# user testing
 User.populate(1) do |user|
-  user.name = 'Normal Jones'
+  user.name = 'Normal Example'
   user.email = 'normal@example.com'
   user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password2, user.password_salt)
+  user.password_hash = BCrypt::Engine.hash_secret('password', user.password_salt)
   user.is_dev = false
   user.about = "Hi, I'm John."
 end
