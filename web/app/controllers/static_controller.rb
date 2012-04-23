@@ -60,7 +60,7 @@ class StaticController < ApplicationController
       if number == i
         title[j] = item.at_css("h2 a").text
         links[j] = item.at_css("h2 a")[:href]
-        if item.at_css("p:nth-child(4)") != nil       
+        if item.at_css("p:nth-child(4)") != nil
           decsr[j] = item.at_css("p:nth-child(4)").text
         end
         break
@@ -98,7 +98,7 @@ class StaticController < ApplicationController
         links[j] = item.at_css(".headline")[:href]
         url_spec = links[j]
         doc3 = Nokogiri::HTML(open(url_spec))
-        if doc3.at_css("p:nth-child(4)") != nil  
+        if doc3.at_css("p:nth-child(4)") != nil
           decsr[j] = doc3.at_css("p:nth-child(4)").text
         end
         break
@@ -116,7 +116,7 @@ class StaticController < ApplicationController
         links[j] = item.at_css(".headline")[:href]
         url_spec = links[j]
         doc3 = Nokogiri::HTML(open(url_spec))
-        if doc3.at_css("p:nth-child(4)") != nil  
+        if doc3.at_css("p:nth-child(4)") != nil
           decsr[j] = doc3.at_css("p:nth-child(4)").text
         end
         break
@@ -128,11 +128,11 @@ class StaticController < ApplicationController
     url_tech = "http://techcrunch.com/mobile/"
     doc_tech = Nokogiri::HTML(open(url_tech))
 
-    # #post-537417 
+    # #post-537417
     doc_tech.css(".left-container").each_with_index do |item, i|
       title[j] =  item.at_css(".embedded-image-post .headline a").text
       links[j] = item.at_css(".embedded-image-post .headline a")[:href]
-      if item.at_css("p:nth-child(1)") != nil  
+      if item.at_css("p:nth-child(1)") != nil
         decsr[j] = item.at_css("p:nth-child(1)").text
       end
     end

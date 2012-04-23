@@ -5,10 +5,9 @@ class AppsController < ApplicationController
   end
 
   def show
-    @survey = Survey.first
+    @app = App.find(params[:id])
     if current_user
-    @response_set = ResponseSet.find_or_create_by_user_id(current_user.id,
-        :survey => @survey)
+      @basic_feedback = BasicFeedback.find_or_initialize_by_user_and_app(current_user, self)
     end
   end
 
