@@ -15,29 +15,29 @@ describe 'trust.cpp' do
   end
 
   it 'returns 0 for 4 users w/ 0 base trust and w/o endorsements' do
-    data = ['4', '0 0 0 0', 'x 0 0 0', '0 x 0 0', '0 0 x 0', '0 0 0 x']
+    data = ['4', '1:0 2:0 3:0 4:0']
     File.open($infile, 'w') do |input|
       input.write(data.join("\n"))
     end
     output = `bin/trust < #{$infile}`
-    output.should == '0 0 0 0'
+    output.should == '1:0 2:0 3:0 4:0'
   end
 
   it 'returns 0 for 4 users w/ 0 base trust and w/ endorsements' do
-    data = ['4', '0 0 0 0', 'x 1 0 0', '0 x 1 0', '1 0 x 0', '0 0 1 x']
+    data = ['4', '1:0 2:0 3:0 4:0', '1 2', '2 3', '3 1', '4 3']
     File.open($infile, 'w') do |input|
       input.write(data.join("\n"))
     end
     output = `bin/trust < #{$infile}`
-    output.should == '0 0 0 0'
+    output.should == '1:0 2:0 3:0 4:0'
   end
 
   it '!return 0 for 3 users w/ non-0 base trust and w/o endorsements' do
-    data = ['4', '1 2 1 3', 'x 1 0 0', '0 x 1 0', '1 0 x 0', '0 0 1 x']
+    data = ['4', '1:1 2:2 3:1 4:3', '1 2', '2 3', '3 1', '4 3']
     File.open($infile, 'w') do |input|
       input.write(data.join("\n"))
     end
     output = `bin/trust < #{$infile}`
-    output.should_not == '0 0 0 0'
+    output.should_not == '1:0 2:0 3:0 4:0'
   end
 end
