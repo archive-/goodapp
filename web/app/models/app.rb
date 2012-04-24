@@ -1,15 +1,15 @@
 class App < ActiveRecord::Base
-  validates :name, :presence => true
-  validates_attachment_content_type :logo, :content_type => /image/
+  validates :name, presence: true
+  validates_attachment_content_type :logo, content_type: /image/
   validates_attachment_presence :file
 
-  has_attached_file :logo, :styles => {:medium => "300x300>", :profile => '100x100#', :thumb => "60x60#"}, :default_url => '/assets/no_logo_uploaded.png'
+  has_attached_file :logo, styles: {medium: "300x300>", profile: '100x100#', thumb: "60x60#"}, default_url: '/assets/no_logo_uploaded.png'
   has_attached_file :file
 
   has_many :app_ownerships
-  has_many :owners, :through => :app_ownerships, :source => :user
+  has_many :owners, through: :app_ownerships, source: :user
   has_many :app_usages
-  has_many :users, :through => :app_usages, :source => :user
+  has_many :users, through: :app_usages, source: :user
 
   after_save :scan
 
@@ -35,8 +35,8 @@ class App < ActiveRecord::Base
     return if !self.scan_results.empty? and !force
     # TODO limit when this scan occurs
     url = 'https://www.virustotal.com/vtapi/v2/file/scan'
-    json = RestClient.post(url, :key => Settings.vtapi_key,
-                          :file => File.new(self.file.path, 'rb'))
+    json = RestClient.post(url, key: Settings.vtapi_key,
+                          file: File.new(self.file.path, 'rb'))
     res = JSON.parse(json)
     puts res
     if res['response_code'] == 1

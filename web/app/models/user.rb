@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password
 
-  validates :name, :presence => true
-  validates :email, :uniqueness => true, :presence => true, :email => true
-  validates :password, :presence => true, :confirmation => true, :on => :create
+  validates :name, presence: true
+  validates :email, uniqueness: true, presence: true, email: true
+  validates :password, presence: true, confirmation: true, on: :create
 
-  has_attached_file :avatar, :styles => {:medium => "300x300>", :profile => "180x180>", :thumb => "60x60#"}, :default_url => :gravatar_url
+  has_attached_file :avatar, styles: {medium: "300x300>", profile: "180x180>", thumb: "60x60#"}, default_url: :gravatar_url
 
   # TODO fix this!!!
   Paperclip.interpolates :gravatar_url do |attachment, style|
@@ -23,13 +23,13 @@ class User < ActiveRecord::Base
   end
 
   has_many :app_ownerships
-  has_many :owned_apps, :through => :app_ownerships, :source => :app
+  has_many :owned_apps, through: :app_ownerships, source: :app
   has_many :app_usages
-  has_many :used_apps, :through => :app_usages, :source => :app
-  has_many :endorsements_as_endorser, :foreign_key => :endorser_id, :class_name => 'Endorsement'
-  has_many :endorsements_as_endorsee, :foreign_key => :endorsee_id, :class_name => 'Endorsement'
-  has_many :endorsees, :through => :endorsements_as_endorser
-  has_many :endorsers, :through => :endorsements_as_endorsee
+  has_many :used_apps, through: :app_usages, source: :app
+  has_many :endorsements_as_endorser, foreign_key: :endorser_id, class_name: 'Endorsement'
+  has_many :endorsements_as_endorsee, foreign_key: :endorsee_id, class_name: 'Endorsement'
+  has_many :endorsees, through: :endorsements_as_endorser
+  has_many :endorsers, through: :endorsements_as_endorsee
 
   def self.authenticate(email, password)
     user = find_by_email(email)
