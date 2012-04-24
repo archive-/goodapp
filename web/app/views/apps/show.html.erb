@@ -8,7 +8,7 @@
 <div class="row-fluid">
   <div class="span2">
     <!-- Picture goes here , default will be this, unless one if uploaded with-->
-    <%= image_tag("no_logo_uploaded.png", :size => "100x100") %> &nbsp;
+    <%= image_tag @app.logo.url(:profile), width: "100" %>
     <!--Other information about user goes here -->
     <h3>Description:</h3>
     <% unless @app.description.blank? %>

@@ -70,7 +70,7 @@ void test_structure(member** mem, int length)
 void print_structure(member** mem, int length)
 {
   for (int i = 0; i < length; i++) {
-    cout << mem[i]->total_trust;
+    cout << mem[i]->id<<":"<<mem[i]->total_trust;
     if (i < length - 1)
       cout << " ";
   }
@@ -109,10 +109,10 @@ void create_network(member** members, int length)
   }
 }
 
-int find_member(int member_id, member* members, int num_members)
+int find_member(int member_id, member** members, int num_members)
 {
   for(int i = 0; i < num_members; i++)
-    if(members[i].id == member_id)
+    if(members[i]->id == member_id)
       return i;
 
   cout << "Err: no member " << member_id << endl;
@@ -130,7 +130,11 @@ int main()
   for (int i = 0; i < num_members; i++) {
     member *new_member = new member;
     new_member->next_trusted_member = NULL;
-    new_member->total_trust = new_member->base_trust = dval;
+		cin >> ival;
+		cin >> colon;
+		cin >> dval;
+		new_member->total_trust = dval;
+		new_member->base_trust = dval;
     new_member->id = ival;
     new_member->num_trusted_by_user = 0;
     members[i] = new_member;
@@ -158,8 +162,8 @@ int main()
     old_id = member_id;
     old_trusted = trusted_id;
 
-    member_index = find_member(member_id, *members, num_members);
-    trusted_index = find_member(trusted_id, *members, num_members);
+    member_index = find_member(member_id, members, num_members);
+    trusted_index = find_member(trusted_id, members, num_members);
 
     trust_list_node *new_node = new trust_list_node;
     new_node->member_trusted = trusted_index;
