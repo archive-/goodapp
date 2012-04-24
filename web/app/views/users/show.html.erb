@@ -25,7 +25,7 @@
 <div class="row-fluid">
   <div class="span2">
     <!-- Picture goes here -->
-    <%= image_tag @user.avatar.url(:profile), :width => "180" %>
+    <%= image_tag @user.avatar.url(:profile), width: "180" %>
     <!--Other information about user goes here -->
     <% if !@user.about.blank? %>
       <h3>About</h3>
