@@ -1,9 +1,38 @@
-<% if can?(:create, @endorsement) && @user != current_user && @user.is_dev && !current_user.endorsees.index(@user) %>
-  <a class="btn btn-success pull-right btn-large" data-toggle="modal" href="#endorse-modal">Endorse</a>
+<h1><%= @user.name %></h1>
+<div class="row-fluid">
+  <div class="span3">
+    <!-- Picture goes here -->
+    <%= image_tag @user.avatar.url(:profile), :width => "180" %>
+    <!--Other information about user goes here -->
+    <% if !@user.about.blank? %>
+      <h3>About</h3>
+      <p><%= @user.about %></p>
+    <% elsif its_you %>
+      <h3>About</h3>
+      <p>Your about message is not set, go to your <%= link_to 'account settings', edit_user_path(current_user) %> to set it.</p>
+    <% end %>
+  </div>
+  <div class="span4">
+    <% if @user.is_dev %>
+      <ul class="no-bullet ul-inline">
+      <% @user.owned_apps.limit(4).each do |app| %>
+        <li><%= app_show(app) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    <div id="activity-box">
+      <h3>Activity Feed</h3>
+      <p>Bla did bla.</p>
+    </div>
+  </div>
+  <div class="span5">
+
+  <% if can?(:create, @endorsement) && @user != current_user && @user.is_dev && !current_user.endorsees.index(@user) %>
+  <a class="btn btn-success pull-left btn-large" data-toggle="modal" href="#endorse-modal">Endorse</a>
   <div class="modal hide fade" id="endorse-modal">
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&times;</a>
-      <h3>Endorse <%= @user.name %></h3>
+      <h3>Endorse <%= @user.name %></h3> <br/>
     </div>
     <%= form_for @endorsement, :html => {:class => 'modal-form'} do |f| %>
     <div class="modal-body">
@@ -19,42 +48,13 @@
     <% end %>
   </div>
 <% end %>
-
-<h1><%= @user.name %></h1>
-
-<div class="row-fluid">
-  <div class="span2">
-    <!-- Picture goes here -->
-    <%= image_tag @user.avatar.url(:profile), :width => "180" %>
-    <!--Other information about user goes here -->
-    <% if !@user.about.blank? %>
-      <h3>About</h3>
-      <p><%= @user.about %></p>
-    <% elsif its_you %>
-      <h3>About</h3>
-      <p>Your about message is not set, go to your <%= link_to 'account settings', edit_user_path(current_user) %> to set it.</p>
-    <% end %>
-  </div>
-  <div class="span7">
-    <% if @user.is_dev %>
-      <ul class="no-bullet ul-inline">
-      <% @user.owned_apps.limit(4).each do |app| %>
-        <li><%= app_show(app) %></li>
-      <% end %>
-      </ul>
-    <% end %>
-    <div id="activity-box">
-      <h3>Activity Feed</h3>
-      <p>Bla did bla.</p>
-    </div>
-  </div>
-  <div class="span3">
+<br/><br/><br/>
     <% if @user.is_dev %>
       <%# TODO SOMETHING WRONG HERE %>
       <% endorsements = @user.endorsements_as_endorsee %>
       <% num_endorsers = endorsements.size %>
       <% if num_endorsers.zero? %>
-        <h3>Not Endorsed</h3>
+        <h3>Currently Not Endorsed</h3>
         <!-- TODO know him/her? endorse them! -->
       <% else %>
         <h3>Endorsements (<%= num_endorsers %>)</h3>
