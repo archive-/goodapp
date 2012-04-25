@@ -25,3 +25,4 @@ gem 'settingslogic'             # putting sensitive info not to check in (api ke
 gem 'rest-client'               # for virus total communication
 gem 'nokogiri'                  # data scraping
 gem 'rspec'                     # for testing
+gem 'haml'                      # for templating

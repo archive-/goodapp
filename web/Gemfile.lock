@@ -51,6 +51,7 @@ GEM
       multi_json (~> 1.0)
     faker (1.0.1)
       i18n (~> 0.4)
+    haml (3.1.4)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -140,6 +141,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job_active_record
   faker
+  haml
   jquery-rails
   json (= 1.6.5)
   nokogiri

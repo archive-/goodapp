@@ -1,0 +1,51 @@
+!!!
+%html
+  %head
+    %title Goodapp
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{href: "/"} GoodApp
+          %ul#menu-bar.nav
+            %li{class: ("active" if @active[:about])}
+              = link_to"About", about_path
+            %li{class: ("active" if @active[:contact])}
+              = link_to "Contact", contact_path
+            %li{class: ("active" if @active[:api])}
+              = link_to "API", api_path
+          %form.navbar-search{action: "/search", method: "get"}
+            %input.search-query{type: "text", name: "q", value:params[:q],
+              placeholder: "Search by app or dev"}
+          .pull-right
+            - if current_user
+              %ul#user-info.nav
+                %li.dropdown{class: ("active" if @active == :user)}
+                  %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown"}
+                    = current_user.name
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li= link_to "Profile", current_user
+                    %li= link_to "Account Settings", edit_user_path(current_user)
+                    %li.divider
+                    %li= link_to "Logout", logout_path
+            - else
+              = link_to raw("Login &raquo;"), login_path, class: "btn btn-success"
+              = link_to raw("Register &raquo;"), register_path, class: "btn btn-info"
+          - if current_user
+            - if current_user.is_dev
+              = link_to "Upload an App", upload_path, id: "upload-button",
+                class: "btn btn-primary pull-right"
+            - else
+              = button_to "Upgrade to Dev", upgrade_path,
+                id: "upgrade-button", class: "btn btn-success pull-right"
+    #content.container
+      = render partial: "shared/flash", locals: {flash: flash}
+      = yield
+    #footer.container
+      %p
+        != "<strong>NULL &copy; 2012</strong> - Project in"
+        != "collaboration with <b>Microsoft</b> through UCSB CS189A-B Capstone courses."
