@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery_ui
+//= require autocomplete-rails
 //= require bootstrap.min
 
 $(function() {
@@ -33,4 +35,4 @@ $(function() {
   });
 });
 
-$('#myCarousel').carousel();
+$('#home-carousel').carousel();

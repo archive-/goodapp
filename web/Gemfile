@@ -14,15 +14,16 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'json', '1.6.5'             # TODO 1.6.6 breaks
-gem 'jquery-rails'              # jquery + rails
-gem 'paperclip', '~> 2.7'       # attachments
-gem 'cancan'                    # authorization
-gem 'delayed_job_active_record' # background processing
-gem 'populator'                 # seeding
-gem 'faker'                     # seeding
-gem 'settingslogic'             # putting sensitive info not to check in (api keys)
-gem 'rest-client'               # for virus total communication
-gem 'nokogiri'                  # data scraping
-gem 'rspec'                     # for testing
-gem 'haml'                      # for templating
+gem 'json', '1.6.5'               # TODO 1.6.6 breaks
+gem 'jquery-rails'                # jquery + rails
+gem 'paperclip', '~> 2.7'         # attachments
+gem 'cancan'                      # authorization
+gem 'delayed_job_active_record'   # background processing
+gem 'populator'                   # seeding
+gem 'faker'                       # seeding
+gem 'settingslogic'               # putting sensitive info not to check in (api keys)
+gem 'rest-client'                 # for virus total communication
+gem 'nokogiri'                    # data scraping
+gem 'rspec'                       # for testing
+gem 'haml'                        # for templating
+gem 'rails3-jquery-autocomplete'  # for search and other things

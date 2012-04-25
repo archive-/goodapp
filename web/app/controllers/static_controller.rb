@@ -1,6 +1,18 @@
 class StaticController < ApplicationController
   skip_authorization_check
 
+  # I'm so hacky!
+  def autosearch
+    term = params[:term]
+    items = []
+    alias gai get_autocomplete_items
+    if term && !term.blank?
+      items += gai(model: User, term: term, method: 'name', options: {})
+      items += gai(model: App, term: term, method: 'name', options: {})
+    end
+    render json: json_for_autocomplete(items, 'name')
+  end
+
   def home
     @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 90.minutes) do
      scrape

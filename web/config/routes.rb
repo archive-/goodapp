@@ -1,6 +1,8 @@
 Web::Application.routes.draw do
   root to: 'static#home'
 
+  get '/autosearch' => 'static#autosearch', as: :autosearch
+
   get '/search' => 'static#search', as: :search
   get '/about' => 'static#about', as: :about
   get '/contact' => 'static#contact', as: :contact

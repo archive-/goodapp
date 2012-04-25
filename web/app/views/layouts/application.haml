@@ -18,7 +18,8 @@
             %li{class: ("active" if @active[:api])}
               = link_to "API", api_path
           %form.navbar-search{action: "/search", method: "get"}
-            %input.search-query{type: "text", name: "q", value:params[:q],
+            = autocomplete_field_tag :q, params[:q], autosearch_path, class: "search-query"
+            -# %input.search-query{type: "text", name: "q", value:params[:q],
               placeholder: "Search by app or dev"}
           .pull-right
             - if current_user

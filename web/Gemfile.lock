@@ -89,6 +89,8 @@ GEM
       activesupport (= 3.2.1)
       bundler (~> 1.0)
       railties (= 3.2.1)
+    rails3-jquery-autocomplete (1.0.7)
+      rails (~> 3.0)
     railties (3.2.1)
       actionpack (= 3.2.1)
       activesupport (= 3.2.1)
@@ -148,6 +150,7 @@ DEPENDENCIES
   paperclip (~> 2.7)
   populator
   rails (= 3.2.1)
+  rails3-jquery-autocomplete
   rest-client
   rspec
   sass-rails (~> 3.2.3)
