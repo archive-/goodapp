@@ -86,6 +86,7 @@ app id
 
 == TODO
 
+- validations on contact form!!
 - IMPORTANT : migrate to 1.9.3
 - write more tests (see 'rake stats' --> get closer to 1:2)
 - replace twitter_bootstrap_form_for_ gem
