@@ -1,0 +1,27 @@
+%h1 API (v0.0.1)
+
+%table.table
+  %tr
+    %th Path
+    %th HTTP Method
+    %th Params
+    %th Formats
+    %th Response
+  %tr
+    %td
+      %code /users/:id
+    %td GET
+    %td
+    %td html,json
+    %td
+      User json object with format:
+      %code {id: SOME_ID, trust_rating: REPUTATION}
+  %tr
+    %td
+      %code /apps/:id
+    %td GET
+    %td
+    %td html,json
+    %td
+      App json object with format:
+      %code {id: SOME_ID, trust: TRUST}

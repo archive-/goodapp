@@ -1,0 +1,13 @@
+%h1 Search Results
+.row
+  .span6
+    %h2 Apps
+    - App.all.each do |app|
+      - if app.name.downcase.include?(@search_query.downcase)
+        %li
+          %a.tooltipped{href: app_url(app), rel: "tooltip", title: app.name}= app.name
+  .span6
+    %h2 Devs
+    - User.all.each do |dev|
+      - if dev.name.downcase.include?(@search_query.downcase)
+        = user_show(dev)

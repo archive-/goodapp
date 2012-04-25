@@ -1,0 +1,35 @@
+.row
+  .span8
+    #myCarousel.carousel.slide
+      .carousel-inner
+        - @title.each_with_index do |t, i|
+          - if i == 0
+            .item.active
+              = image_tag "/assets/crossos.png"
+              .carousel-caption
+                %h4= link_to t, @link[i]
+                %p= @decsr[i]
+          - else
+            .item
+              = image_tag "/assets/crossos.png"
+              .carousel-caption
+                %h4= link_to t, @link[i]
+                %p= @decsr[i]
+      %a.carousel-control.left{href: "#myCarousel", 'data-slide' => "prev"} &lsaquo;
+      %a.carousel-control.right{href: "#myCarousel", 'data-slide' => "next"} &rsaquo;
+    .row
+      .span4
+        .section
+          %h3 Featured Developers
+          - User.where(:is_dev => true)[0...10].each do |dev|
+            = user_show(dev)
+      .span4
+        .section
+          %h3 Featured Apps
+          - App.all[0...10].each do |app|
+            = app_show(app)
+  .span4
+    .section
+      %h3 Recent Reviews
+      - @recent_feedbacks.each do |basic_feedback|
+        = render basic_feedback

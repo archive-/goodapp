@@ -1,0 +1,18 @@
+%h1 Contact Us
+= form_tag send_contact_mail_path, class: "form-horizontal" do
+  %fieldset
+    .control-group
+      = label_tag :email, "Your Email", class: "control-label"
+      .controls
+        = text_field_tag :email, "", class: "input-xlarge"
+    .control-group
+      = label_tag :name, "Your Name", class: "control-label"
+      .controls
+        = text_field_tag :name, "", class: "input-xlarge"
+    .control-group
+      = label_tag :message, "Your Message", class: "control-label"
+      .controls
+        = text_area_tag :message, "", rows: 6, class: "input-xlarge"
+    .form-actions
+      = button_tag "Send", class: "btn btn-primary"
+      = button_tag "Cancel", type: "reset", class: "btn"
