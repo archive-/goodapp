@@ -8,6 +8,7 @@ Web::Application.routes.draw do
   get '/contact' => 'static#contact', as: :contact
   post '/contact' => 'static#send_contact_mail', as: :send_contact_mail
   get '/api' => 'static#api', as: :api
+  get '/faq' => 'static#faq', as: :faq
 
   get '/register' => 'users#new', as: :register
   get '/login' => 'sessions#new', as: :login

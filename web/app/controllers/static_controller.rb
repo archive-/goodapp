@@ -38,9 +38,12 @@ class StaticController < ApplicationController
     redirect_to root_url, :notice => 'Message successfully sent.'
   end
 
+  def faq
+    @active[:faq] = true
+  end
+
   def api
     @active[:api] = true
-    @routes = Rails.application.routes.routes
   end
 
   private
