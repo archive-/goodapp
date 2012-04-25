@@ -1,0 +1,8 @@
+.feedback.row-fluid
+  .attributes.span2
+    %span.up-attributes= basic_feedback.ngoods
+    %span.down-attributes= basic_feedback.nbads
+  -# only show app when not on app page
+  %span.span3= app_show(basic_feedback.app)
+  %span.span3= user_show(basic_feedback.user)
+  %p.span4= basic_feedback.comment
