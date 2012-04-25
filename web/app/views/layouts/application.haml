@@ -29,12 +29,15 @@
                     %b.caret
                   %ul.dropdown-menu
                     %li= link_to "Profile", current_user
-                    %li= link_to "Account Settings", edit_user_path(current_user)
+                    %li= link_to "Account Settings",
+                      edit_user_path(current_user)
                     %li.divider
                     %li= link_to "Logout", logout_path
             - else
-              = link_to raw("Login &raquo;"), login_path, class: "btn btn-success"
-              = link_to raw("Register &raquo;"), register_path, class: "btn btn-info"
+              = link_to raw("Login &raquo;"), login_path,
+                class: "btn btn-success"
+              = link_to raw("Register &raquo;"), register_path,
+                class: "btn btn-info"
           - if current_user
             - if current_user.is_dev
               = link_to "Upload an App", upload_path, id: "upload-button",
@@ -48,4 +51,5 @@
     #footer.container
       %p
         != "<strong>NULL &copy; 2012</strong> - Project in"
-        != "collaboration with <b>Microsoft</b> through UCSB CS189A-B Capstone courses."
+        != "collaboration with <b>Microsoft</b> through "
+        != "UCSB CS189A-B Capstone courses."
