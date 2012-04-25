@@ -1,0 +1,20 @@
+= form_for @app, html: {multipart: true, class: "form-horizontal"} do |f|
+  %fieldset
+    %legend Upload an App
+    .control-group
+      = f.label :name, class: "control-label"
+      .controls
+        = f.text_field :name, class: "input-xlarge"
+        %span.help-inline= @app.errors[:name][0]
+    .control-group
+      = f.label :file, class: "control-label"
+      .controls
+        = f.file_field :file
+        %span.help-inline= @app.errors[:file][0]
+    .control-group
+      = f.label :logo, class: "control-label"
+      .controls
+        = f.file_field :logo
+        %span.help-inline= @app.errors[:logo][0]
+    .form-actions
+      = f.submit "Upload", class: "btn btn-primary"
