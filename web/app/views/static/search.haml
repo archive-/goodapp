@@ -2,12 +2,20 @@
 .row
   .span6
     %h2 Apps
+    - found = false
     - App.all.each do |app|
       - if app.name.downcase.include?(@search_query.downcase)
         %li
           %a.tooltipped{href: app_url(app), rel: "tooltip", title: app.name}= app.name
+        - found = true
+    - if !found
+      = "No apps found"
   .span6
     %h2 Devs
+    - found = false
     - User.all.each do |dev|
       - if dev.name.downcase.include?(@search_query.downcase)
-        = user_show(dev)
+        = user_show(dev)        
+        - found = true
+    - if !found
+      = "No devs found"

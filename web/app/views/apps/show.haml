@@ -38,7 +38,12 @@
             = image_tag "glyphicons_049_star.png", size: "10x10"
     #feedbacks
       %h3 Feedback
+      - feedback = false
       - @basic_feedbacks.each do |basic_feedback|
+        - feedback = true
         = render basic_feedback
+      - if !feedback
+        = "Be the first to review"
+        = @app.name
   .span3
     %h3 Similar Apps
