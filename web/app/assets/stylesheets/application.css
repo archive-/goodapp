@@ -48,6 +48,7 @@ h1 {margin-bottom: 20px}
 .dev {border:1px solid orange}
 .endorsement .user {float:left;width:60px;margin-right:10px}
 .endorsement p {overflow:hidden}
+#f-basic { margin-bottom:20px; }
 .feedback {background:#ccc;margin-bottom:5px;padding:5px}
 .attributes {font-weight:bold;font-size:1.2em;text-align:center}
 .up-attributes {color:green;display:block;border-bottom:1px solid black;padding-bottom:10px}

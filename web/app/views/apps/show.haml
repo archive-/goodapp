@@ -1,7 +1,3 @@
-- if current_user && !@app.owners.index(current_user)
-  %a.btn.btn-success.pull-right.btn-large{'data-toggle' => "modal",
-    href: "#review-modal"} Review
-  = render "basic_feedbacks/modal_form"
 
 %h1= @app.name
 
@@ -9,7 +5,7 @@
   .span2
     -# Picture goes here , default will be this, unless one if uploaded with
     = image_tag @app.logo.url(:profile), width: "100"
-    -# Other information about user goes here
+    -# Other information about user goes here    
     %h3 Description
     - unless @app.description.blank?
       %p= @app.description
@@ -18,6 +14,11 @@
     %h3 Version
     %h3 Type
   .span7
+    #f-basic
+    - if current_user && !@app.owners.index(current_user)
+      %a.btn.btn-success.pull-right.btn-large{'data-toggle' => "modal",
+      href: "#review-modal"} Review
+      = render "basic_feedbacks/modal_form"
     #rating-box
       %h3
         Developed by
