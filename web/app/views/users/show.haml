@@ -13,14 +13,16 @@
         Your about message is not set, go to your
         = link_to "account settings", edit_user_path(current_user)
         to set it.
-  .span4
-    - if @user.is_dev
-      %ul.no-bullet.ul-inline
-        - @user.owned_apps.limit(4).each do |app|
-          %li= app_show(app)
-    #activity-box
-      %h3 Activity Feed
-      %p Bla did bla.
+
+  #activity-box
+    %h3 Activity Feed
+    .span4
+      - if @user.is_dev
+        %ul.no-bullet.ul-inline
+          - @user.owned_apps.limit(4).each do |app|
+            %p Uploaded app 
+            = app_show(app)
+            %h4= app.name
   .span5
     - can_endorse = can?(:create, @endorsement)
     - can_endorse &&= @user != current_user

@@ -55,6 +55,6 @@ h1 {margin-bottom: 20px}
 .carousel img {width:100%}
 .carousel {margin-bottom:30px}
 #endorse-button {margin-bottom:20px;width:300px}
-#footer {border-top:1px solid #aaa}
+#footer {border-top:1px solid #aaa; margin-top:40px; margin-bottom: 20px;}
 #footer p {margin:10px 0}
 #footer ul {margin-top:10px}
