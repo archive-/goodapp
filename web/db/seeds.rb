@@ -80,6 +80,7 @@ User.populate(1) do |user|
     user.email = 'regression@test.com'
     user.encrypted_password = User.new.send(:password_digest, "test123")
     user.about = "Test master."
+    user.confirmed_at = Time.now
 end
 
 User.populate(50) do |user|
