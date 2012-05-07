@@ -39,6 +39,5 @@ class BasicFeedback < ActiveRecord::Base
       :b_location_services => 'Uses my location poorly',
       :b_overall => 'Doesn\'t perform properly'
     }
-    puts @@goods["g_ease"]
   end
 end
