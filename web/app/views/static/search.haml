@@ -1,4 +1,5 @@
-%h1 Search Results
+= title 'Search Results'
+
 .row
   .span6
     %h2 Apps
@@ -15,7 +16,7 @@
     - found = false
     - User.all.each do |dev|
       - if dev.name.downcase.include?(@search_query.downcase)
-        = user_show(dev)        
+        = user_show(dev)
         - found = true
     - if !found
       = "No devs found"

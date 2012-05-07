@@ -1,8 +1,8 @@
-#review-modal.modal.hide.fade
+#feedback-modal.modal.hide.fade
   = form_for @basic_feedback do |f|
     .modal-header
       %a.close{'data-dismiss' => "modal"} &times;
-      %h3= "Review " + @app.name
+      %h3= "Feedback for " + @app.name
     .modal-body
       = hidden_field_tag :app_id, @app.id
       .half
@@ -17,7 +17,7 @@
           %label{for: "basic_feedback_" + k.to_s}
             = f.check_box k.to_sym
             = v
-      = f.label :comment, "Add a comment to your review"
+      = f.label :comment, "Add a comment"
       = f.text_area :comment, rows: 4
     .modal-footer
       = f.submit "Submit Feedback", class: "btn btn-primary"
