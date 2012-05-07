@@ -18,36 +18,26 @@ class Endorsement < ActiveRecord::Base
       file = Tempfile.new('goodapp_trust')
       begin
         file.puts "#{users.count}"
-        base_trusts = users.map do |user|
-          "#{user.id}:#{user.base_trust}"
+        base_trusts = []
+        users.map do |user|
+          base_trusts << "#{user.id}:#{user.base_trust}"
         end
-        users.each do |user|
-          file.write(base_trusts.join(' '))
-        end
+        base_trusts.join(' ')
+        file.puts base_trusts
         # now print out grid of recommendations
         Endorsement.all.each do |e|
           file.puts
           file.write("#{e.endorser_id} #{e.endorsee_id}")
         end
-        file.rewind
-        puts '=============== INPUT  ==============='
-        puts file.read
-        puts '======================================'
         executable = File.join(Rails.root, '../bin/trust')
         # TODO error handling!!
         output = `#{executable} < #{file.path}`
-        puts '=============== OUTPUT ==============='
-        puts output
-        puts '======================================'
         pairings = output.split
         trusts = {}
         pairings.each do |pairing|
           id, trust = pairing.split(':')
-          puts id
           trusts[id.to_i] = trust
         end
-        puts trusts # TODO debug
-        # TODO 0=>nil in trusts??
         User.find(trusts.keys).each do |user|
           user.update_attribute(:overall_trust, trusts[user.id])
         end
