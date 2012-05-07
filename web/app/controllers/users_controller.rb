@@ -1,25 +1,12 @@
 class UsersController < ApplicationController
   before_filter :activate_user
-  load_and_authorize_resource :unless => [:new, :create]
+  load_and_authorize_resource
 
   def index
   end
 
   def show
     @endorsement = Endorsement.new
-  end
-
-  def new
-    @active[:register] = true
-  end
-
-  def create
-    @active[:register] = true
-    if @user.save
-      redirect_to root_url, :notice => 'Signed up!'
-    else
-      render 'new'
-    end
   end
 
   def edit
@@ -35,16 +22,12 @@ class UsersController < ApplicationController
   end
 
   def upgrade
-    @user = current_user
-    @user.is_dev = true
-    @user.save
+    current_user.add_role :dev
     redirect_to current_user, :notice => 'Your account is now a developer account.'
   end
 
   def downgrade
-    @user = current_user
-    @user.is_dev = false
-    @user.save
+    current_user.remove_role :dev
     redirect_to current_user, :notice => 'Your account is no longer a developer account.'
   end
 

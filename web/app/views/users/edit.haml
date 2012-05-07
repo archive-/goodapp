@@ -9,20 +9,18 @@
       %fieldset
         %legend Profile Info
         .control-group
-          = control_status(@user, :about)
           = f.label :about, class: "control-label"
           .controls
             = f.text_area :about, rows: 4, class: "input-xlarge"
         .control-group
-          = control_status(@user, :avatar)
           = f.label :avatar, class: "control-label"
           .controls
             = f.file_field :avatar, class: "input-xlarge"
         .form-actions
           = f.submit "Update Profile", class: "btn btn-primary"
           = button_tag "Cancel", type: "reset", class: "btn"
-- if logged_in?
-  - if current_user.is_dev
+- if user_signed_in?
+  - if current_user.has_role? :dev
     %h4 You are a developer
     = button_to "Downgrade to Normal User Account",
       downgrade_path, id: "downgrade-button",

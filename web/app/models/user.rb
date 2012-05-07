@@ -1,12 +1,15 @@
 class User < ActiveRecord::Base
+  rolify
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :name, :email, :password, :password_confirmation, :about, :avatar
+  attr_accessible :email, :password, :password_confirmation,
+    :remember_me, :name, :about, :avatar
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true, email: true
@@ -40,8 +43,10 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}.jpg?size=#{size}&d=#{CGI::escape(default)}"
   end
 
-  def admin?
-    self.name == 'admin' # TODO
+  def self.devs
+    # yuck
+    dev_role_id = Role.find_by_name(:dev).id
+    User.find(UsersRole.find_all_by_role_id(dev_role_id).map(&:user_id))
   end
 
   def overall_trust

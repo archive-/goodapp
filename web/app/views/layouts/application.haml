@@ -15,7 +15,7 @@
               class: "search-query input-xlarge",
               placeholder: "Search by app or dev"
           .pull-right
-            - if current_user
+            - if user_signed_in?
               %ul#user-info.nav
                 %li.dropdown{class: ("active" if @active == :user)}
                   %a.dropdown-toggle{href: "#", 'data-toggle' => "dropdown"}
@@ -26,14 +26,14 @@
                     %li= link_to "Account Settings",
                       edit_user_path(current_user)
                     %li.divider
-                    %li= link_to "Logout", logout_path
+                    %li= link_to "Logout", logout_path, method: :delete
             - else
               = link_to raw("Login &raquo;"), login_path,
                 class: "btn btn-success"
               = link_to raw("Register &raquo;"), register_path,
                 class: "btn btn-info"
           - if current_user
-            - if current_user.is_dev
+            - if current_user.has_role? :dev
               = link_to "Upload an App", upload_path, id: "upload-button",
                 class: "btn btn-primary pull-right"
             - else

@@ -5,7 +5,7 @@
     = image_tag @user.avatar.url(:profile), width: "180"
     -# Other information about user goes here
     %h3 Rating
-    "some number"  
+    "some number"
     - if !@user.about.blank?
       %h3 About
       %p= @user.about
@@ -14,21 +14,21 @@
       %p
         Your about message is not set, go to your
         = link_to "account settings", edit_user_path(current_user)
-        to set it.    
+        to set it.
 
   #activity-box
     %h3 Activity Feed
     .span4
-      - if @user.is_dev
+      - if @user.has_role? :dev
         %ul.no-bullet.ul-inline
           - @user.owned_apps.limit(4).each do |app|
-            %p Uploaded app 
+            %p Uploaded app
             = app_show(app)
             %h4= app.name
   .span5
     - can_endorse = can?(:create, @endorsement)
     - can_endorse &&= @user != current_user
-    - can_endorse &&= @user.is_dev
+    - can_endorse &&= @user.has_role? :dev
     - can_endorse &&= !current_user.endorsees.index(@user)
     - if can_endorse
       %a#endorse-button.btn.btn-success.btn-large{'data-toggle' => "modal",
@@ -46,7 +46,7 @@
           .modal-footer
             = f.submit "Submit Endorsement", confirm: "Are you sure?",
               class: "btn btn-primary"
-    - if @user.is_dev
+    - if @user.has_role? :dev
       - endorsements = @user.endorsements_as_endorsee
       - num_endorsers = endorsements.size
       - if num_endorsers.zero?

@@ -1,6 +1,8 @@
-= form_for @user, html: {class: "form-horizontal"} do |f|
+= form_for(resource, as: resource_name,
+  url: registration_path(resource_name), html: {class: "form-horizontal"}) do |f|
   %fieldset
-    %legend User Info
+    %legend Register
+    -# devise_error_messages!
     .control-group
       = f.label :name, class: "control-label"
       .controls
@@ -11,6 +13,7 @@
       .controls
         = f.text_field :email, class: "input-xlarge"
         %span.help-inline= @user.errors[:email][0]
+        %p.help-block You will need to confirm your email
     .control-group
       = f.label :password, class: "control-label"
       .controls
@@ -22,5 +25,6 @@
         = f.password_field :password_confirmation, class: "input-xlarge"
         %span.help-inline= @user.errors[:password_confirmation][0]
     .form-actions
-      = f.submit class: "btn btn-primary"
-      = button_tag "Cancel", type: "reset", class: "btn"
+      = f.submit "Register", class: "btn btn-primary"
+
+= render "links"

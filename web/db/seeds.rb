@@ -6,59 +6,54 @@ AppOwnership.destroy_all
 AppUsage.destroy_all
 
 password = "blabla"
+# digest = Devise::Models::Encryptable.send(:password_digest, password)
 
 User.populate(1) do |user|
   user.name = 'Clark Kent'
-  user.email = 'clart@example.com'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = true
+  user.email = 'clark@example.com'
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm Clark."
+# end.add_role :admin
 end
+User.last.add_role :admin
 
 User.populate(1) do |user|
   user.name = 'TJ Koblentz'
   user.email = 'tj.koblentz@gmail.com'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = true
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm TJ."
 end
+User.last.add_role :admin
 
 User.populate(1) do |user|
   user.name = 'Yulia Dubinina'
   user.email = 'skiswithtwotips@gmail.com'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = true
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm Yulia."
 end
+User.last.add_role :admin
 
 User.populate(1) do |user|
   user.name = 'Victor Moreira'
   user.email = 'montesinnos@gmail.com'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = true
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm Victor."
 end
+User.last.add_role :admin
 
 User.populate(1) do |user|
   user.name = 'Jasper Fredrickson'
   user.email = 'jrf@umail.ucsb.edu'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = true
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm Jasper."
 end
+User.last.add_role :admin
 
 # user testing
 User.populate(1) do |user|
   user.name = 'Normal Example'
   user.email = 'normal@example.com'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret('password', user.password_salt)
-  user.is_dev = false
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm John."
 end
 
@@ -66,19 +61,18 @@ end
 User.populate(1) do |user|
   user.name = 'Jenna Bryant'
   user.email = 'jenna@example.com'
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = true
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = "Hi, I'm Jenna."
 end
 
 User.populate(50) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
-  user.password_salt = BCrypt::Engine.generate_salt
-  user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
-  user.is_dev = Random.rand(10) < 4
+  user.encrypted_password = User.new.send(:password_digest, password)
   user.about = Populator.sentences(2..4)
+end
+User.last(50).each do |user|
+  user.add_role(:dev) if Random.rand(10) < 4
 end
 
 # there should be other fields added to the app database

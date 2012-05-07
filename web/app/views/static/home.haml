@@ -29,7 +29,7 @@
       .span4
         .section
           %h3 Featured Developers
-          - User.where(:is_dev => true)[0...10].each do |dev|
+          - User.devs[0...10].each do |dev|
             = user_show(dev)
       .span4
         .section

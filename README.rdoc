@@ -86,13 +86,14 @@ app id
 
 == TODO
 
+x change flash messages by devise to use "login" "register" ...
 - validations on contact form!!
-- IMPORTANT : migrate to 1.9.3
+x IMPORTANT : migrate to 1.9.3
 - write more tests (see 'rake stats' --> get closer to 1:2)
-- replace twitter_bootstrap_form_for_ gem
+x replace twitter_bootstrap_form_for_ gem
 - get CanCan in there for protecting upload to just devs (tie dev to binary)
   - or have dev_id_ accessible if the person is admin (or app store)
-- better flash messages, on register "Signed up!"
+x better flash messages, on register "Signed up!"
 
 === From Julia (and previously TODO.md)
 

@@ -1,0 +1,12 @@
+= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {class: "form-horizontal", method: :post}) do |f|
+  %fieldset
+    %legend Resend confirmation instructions
+    = devise_error_messages!
+    .control-group
+      = f.label :email, class: "control-label"
+      .controls
+        = f.email_field :email
+    .form-actions
+      = f.submit "Resend confirmation instructions", class: "btn btn-primary"
+
+= render "links"
