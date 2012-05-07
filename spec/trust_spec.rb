@@ -2,6 +2,9 @@
 
 require 'rspec'
 
+# TODO remake this whole test suite because
+# base_trust + endorsements is dynamic
+
 describe 'trust.cpp' do
   # check compiles
   before(:all) do

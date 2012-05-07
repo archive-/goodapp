@@ -121,18 +121,18 @@ int find_member(int member_id, member** members, int num_members)
 
 void deallocate(member** members, int length)
 {
-	for(int i = 0; i<length; i++)
-	{
-		trust_list_node *node = members[i]->next_trusted_member;
-		while(node != NULL)
-		{
-			members[i]->next_trusted_member = node->next_trusted_member;
-			trust_list_node *node_to_delete = node;
-			delete node_to_delete;
-			node = members[i]->next_trusted_member;
-		}
-		delete members[i];
-	}
+  for(int i = 0; i<length; i++)
+  {
+    trust_list_node *node = members[i]->next_trusted_member;
+    while(node != NULL)
+    {
+      members[i]->next_trusted_member = node->next_trusted_member;
+      trust_list_node *node_to_delete = node;
+      delete node_to_delete;
+      node = members[i]->next_trusted_member;
+    }
+    delete members[i];
+  }
 }
 
 int main()
@@ -146,11 +146,11 @@ int main()
   for (int i = 0; i < num_members; i++) {
     member *new_member = new member;
     new_member->next_trusted_member = NULL;
-		cin >> ival;
-		cin >> colon;
-		cin >> dval;
-		new_member->total_trust = dval;
-		new_member->base_trust = dval;
+    cin >> ival;
+    cin >> colon;
+    cin >> dval;
+    new_member->total_trust = dval;
+    new_member->base_trust = dval;
     new_member->id = ival;
     new_member->num_trusted_by_user = 0;
     members[i] = new_member;
@@ -173,24 +173,24 @@ int main()
       break;
 
     if(old_id != member_id && old_trusted != trusted_id)
-		{
-		  old_id = member_id;
-		  old_trusted = trusted_id;
+    {
+      old_id = member_id;
+      old_trusted = trusted_id;
 
-	    member_index = find_member(member_id, members, num_members);
-	    trusted_index = find_member(trusted_id, members, num_members);
+      member_index = find_member(member_id, members, num_members);
+      trusted_index = find_member(trusted_id, members, num_members);
 
-	    trust_list_node *new_node = new trust_list_node;
-	    new_node->member_trusted = trusted_index;
-	    new_node->next_trusted_member = members[member_index]->next_trusted_member;
-	    members[member_index]->next_trusted_member = new_node;
-	    members[member_index]->num_trusted_by_user++;  
-		}
-    
+      trust_list_node *new_node = new trust_list_node;
+      new_node->member_trusted = trusted_index;
+      new_node->next_trusted_member = members[member_index]->next_trusted_member;
+      members[member_index]->next_trusted_member = new_node;
+      members[member_index]->num_trusted_by_user++;
+    }
+
   }
   create_network((members), num_members);
   //test_structure((members), num_members);
   print_structure((members), num_members);
-	deallocate(members, num_members);
+  deallocate(members, num_members);
   return 0;
 }

@@ -76,12 +76,12 @@ finish_seeding_user(User.last)
 
 # Creates account for Regression test
 User.populate(1) do |user|
-    user.name = 'Regression Test'
-    user.email = 'regression@test.com'
-    user.encrypted_password = User.new.send(:password_digest, "test123")
-    user.about = "Test master."
-    user.confirmed_at = Time.now
+  user.name = 'Regression Test'
+  user.email = 'regression@test.com'
+  user.encrypted_password = digest
+  user.about = "Test master."
 end
+finish_seeding_user(User.last)
 
 User.populate(50) do |user|
   user.name = Faker::Name.name

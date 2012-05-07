@@ -49,11 +49,7 @@ class User < ActiveRecord::Base
     User.find(UsersRole.find_all_by_role_id(dev_role_id).map(&:user_id))
   end
 
-  def overall_trust
-    0.0 # TODO
-  end
-
   def base_trust
-    0.0 # TODO
+    2.3
   end
 end
