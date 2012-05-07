@@ -1,5 +1,8 @@
 #!/usr/bin/env rake
 
+ENV['GMAIL_EMAIL']    = "goodapp.confirm@gmail.com"
+ENV['GMAIL_PASSWORD'] = ">2q3&X__~@s/"
+
 task :default => 'test:all'
 
 namespace :test do
