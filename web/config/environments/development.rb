@@ -26,8 +26,8 @@ Web::Application.configure do
     # tls: true,
     domain: 'gmail.com',
     authentication: 'plain',
-    user_name: ENV['GMAIL_EMAIL'],
-    password: ENV['GMAIL_PASSWORD']
+    user_name: 'goodapp.confirm@gmail.com',
+    password: '>2q3&X__~@s/'
   }
 
   # Print deprecation notices to the Rails logger
