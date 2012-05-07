@@ -36,3 +36,7 @@ $(function() {
 });
 
 $('#home-carousel').carousel();
+
+$(function() {
+    $('a[rel="popover"]').popover();
+});

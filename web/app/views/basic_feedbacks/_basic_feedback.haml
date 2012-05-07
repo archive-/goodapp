@@ -6,3 +6,6 @@
   %span.span3= app_show(basic_feedback.app)
   %span.span3= user_show(basic_feedback.user)
   %p.span4= basic_feedback.comment
+  
+  .details
+    %a.btn.btn-info{"data-content" => basic_feedback.text, "data-original-title" => "Feedback Details", :href => "#", :rel => "popover"} Hover over for details
