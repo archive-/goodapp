@@ -24,4 +24,4 @@ a.out
 trust
 
 # Ignores generated test files
-data/*.in
+data/test[1-3].in
