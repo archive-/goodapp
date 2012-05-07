@@ -5,74 +5,84 @@ App.destroy_all
 AppOwnership.destroy_all
 AppUsage.destroy_all
 
-password = "blabla"
-# digest = Devise::Models::Encryptable.send(:password_digest, password)
+digest = User.new.send(:password_digest, "blabla")
+
+# TODO less hacky
+def finish_seeding_user(user, roles=[])
+  user.confirmed_at = Time.now
+  user.save
+  roles.each do |role|
+    user.add_role role
+  end
+end
 
 User.populate(1) do |user|
   user.name = 'Clark Kent'
   user.email = 'clark@example.com'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm Clark."
-# end.add_role :admin
 end
-User.last.add_role :admin
+finish_seeding_user(User.last, [:admin])
 
 User.populate(1) do |user|
   user.name = 'TJ Koblentz'
   user.email = 'tj.koblentz@gmail.com'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm TJ."
 end
-User.last.add_role :admin
+finish_seeding_user(User.last, [:admin])
 
 User.populate(1) do |user|
   user.name = 'Yulia Dubinina'
   user.email = 'skiswithtwotips@gmail.com'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm Yulia."
 end
-User.last.add_role :admin
+finish_seeding_user(User.last, [:admin])
 
 User.populate(1) do |user|
   user.name = 'Victor Moreira'
   user.email = 'montesinnos@gmail.com'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm Victor."
 end
-User.last.add_role :admin
+finish_seeding_user(User.last, [:admin])
 
 User.populate(1) do |user|
   user.name = 'Jasper Fredrickson'
   user.email = 'jrf@umail.ucsb.edu'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm Jasper."
 end
-User.last.add_role :admin
+finish_seeding_user(User.last, [:admin])
 
 # user testing
 User.populate(1) do |user|
   user.name = 'Normal Example'
   user.email = 'normal@example.com'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm John."
 end
+finish_seeding_user(User.last)
 
 # creating an account for testing -- need to give this user apps
 User.populate(1) do |user|
   user.name = 'Jenna Bryant'
   user.email = 'jenna@example.com'
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = "Hi, I'm Jenna."
 end
+finish_seeding_user(User.last)
 
 User.populate(50) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
-  user.encrypted_password = User.new.send(:password_digest, password)
+  user.encrypted_password = digest
   user.about = Populator.sentences(2..4)
 end
 User.last(50).each do |user|
   user.add_role(:dev) if Random.rand(10) < 4
+  finish_seeding_user(user)
 end
 
 # there should be other fields added to the app database
