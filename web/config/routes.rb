@@ -1,4 +1,6 @@
 Web::Application.routes.draw do
+  devise_for :users
+
   root to: 'static#home'
 
   get '/autosearch' => 'static#autosearch', as: :autosearch

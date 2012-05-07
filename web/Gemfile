@@ -3,17 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.1'
 
 gem 'sqlite3'
-gem 'bcrypt-ruby', :require => 'bcrypt'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer', '0.9.10'  # TODO 1.x breaks
-  gem 'uglifier', '>= 1.0.3'
-end
-
+gem 'devise'
 gem 'json', '1.6.5'               # TODO 1.6.6 breaks
 gem 'jquery-rails'                # jquery + rails
 gem 'paperclip', '~> 2.7'         # attachments

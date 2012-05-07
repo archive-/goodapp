@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :about, :avatar
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessor :password
-  before_save :encrypt_password
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :about, :avatar
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true, email: true
@@ -30,18 +34,6 @@ class User < ActiveRecord::Base
   has_many :endorsements_as_endorsee, foreign_key: :endorsee_id, class_name: 'Endorsement'
   has_many :endorsees, through: :endorsements_as_endorser
   has_many :endorsers, through: :endorsements_as_endorsee
-
-  def self.authenticate(email, password)
-    user = find_by_email(email)
-    user if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-  end
-
-  def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    end
-  end
 
   def gravatar_url(default='monsterid', size=60)
     hash = Digest::MD5.hexdigest(email.downcase.strip)[0..31]
