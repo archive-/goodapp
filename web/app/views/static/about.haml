@@ -1,10 +1,13 @@
+= title 'About'
+
 - [4, 3, 1, 2].each do |i|
   - user = User.find(i)
   %a.tooltipped-bottom.pull-right{href: user_url(i),
     rel: "tooltip", title: user.name}
     = image_tag user.avatar.url(:thumb), class: "pull-right space-left"
-%h1 About GoodApp
+
 %h2 Overview
+
 %p
   Goodapp is a community of apps and developers.
   This community establishes a web of trust between its members,
@@ -12,7 +15,9 @@
   These ratings gives users valuable information about which developers
   have an established and trusted reputation in the community, and
   which developers should be avoided.
+
 %h2 Metrics
+
 %p
   Goodapp is a software application that scans app binaries, attempts
   to detect malicious activity and creates a web of trust. Each developer
@@ -27,7 +32,9 @@
   %li
     statistics based on how many people use the app and the
     rating of the app itself [e.g. how many downloads recorded from app store]
+
 %h2 Github
+
 %p
   This project is open sourced and
   %a{href: "https://github.com/tjeezy/goodapp"} hosted on Github

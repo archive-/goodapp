@@ -88,7 +88,7 @@ app id
 
 x change flash messages by devise to use "login" "register" ...
 - validations on contact form!!
-x IMPORTANT : migrate to 1.9.3
+- IMPORTANT : migrate to 1.9.3
 - write more tests (see 'rake stats' --> get closer to 1:2)
 x replace twitter_bootstrap_form_for_ gem
 - get CanCan in there for protecting upload to just devs (tie dev to binary)
@@ -97,10 +97,10 @@ x better flash messages, on register "Signed up!"
 
 === From Julia (and previously TODO.md)
 
-- standardize page headers (decide h1/h2 but then move it to a helper)
-- integrate bootstrap form as a 'plugin' or something
+x standardize page headers (decide h1/h2 but then move it to a helper)
+o integrate bootstrap form as a 'plugin' or something
 - remove gutters from everywhere -- can style the same but doesnt work
-- make README sexy
+x make README sexy
 - improve the @active stuff
 
 - run rake doc:... at end for documentation
