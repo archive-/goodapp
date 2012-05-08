@@ -15,7 +15,15 @@
     - found = false
     - User.all.each do |dev|
       - if dev.name.downcase.include?(@search_query.downcase)
-        = user_show(dev)        
+        .row
+          .span1
+            = user_show(dev)
+          .span3
+            %a{href: user_url(dev)}= dev.name
+            %br
+            = "Trust Rating: n/a"
+            - #TODO!! display trust rating ^
+        %hr 
         - found = true
     - if !found
       = "No devs found"
