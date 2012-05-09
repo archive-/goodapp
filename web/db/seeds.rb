@@ -17,18 +17,11 @@ def finish_seeding_user(user, roles=[])
 end
 
 User.populate(1) do |user|
-  user.name = 'Clark Kent'
-  user.email = 'clark@example.com'
-  user.encrypted_password = digest
-  user.about = "Hi, I'm Clark."
-end
-finish_seeding_user(User.last, [:admin])
-
-User.populate(1) do |user|
   user.name = 'TJ Koblentz'
   user.email = 'tj.koblentz@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm TJ."
+  user.overall_trust = 0.2
 end
 finish_seeding_user(User.last, [:admin])
 
@@ -37,6 +30,7 @@ User.populate(1) do |user|
   user.email = 'skiswithtwotips@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Yulia."
+  user.overall_trust = 0.2 
 end
 finish_seeding_user(User.last, [:admin])
 
@@ -45,6 +39,7 @@ User.populate(1) do |user|
   user.email = 'montesinnos@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Victor."
+  user.overall_trust = 0.2  
 end
 finish_seeding_user(User.last, [:admin])
 
@@ -53,6 +48,7 @@ User.populate(1) do |user|
   user.email = 'jrf@umail.ucsb.edu'
   user.encrypted_password = digest
   user.about = "Hi, I'm Jasper."
+  user.overall_trust = 0.2  
 end
 finish_seeding_user(User.last, [:admin])
 
@@ -62,6 +58,7 @@ User.populate(1) do |user|
   user.email = 'normal@example.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm John."
+  user.overall_trust = 0.2  
 end
 finish_seeding_user(User.last)
 
@@ -71,6 +68,7 @@ User.populate(1) do |user|
   user.email = 'jenna@example.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Jenna."
+  user.overall_trust = 0.2  
 end
 finish_seeding_user(User.last)
 
@@ -80,6 +78,7 @@ User.populate(1) do |user|
   user.email = 'regression@test.com'
   user.encrypted_password = digest
   user.about = "Test master."
+  user.overall_trust = 0.2  
 end
 finish_seeding_user(User.last)
 
@@ -88,6 +87,7 @@ User.populate(50) do |user|
   user.email = Faker::Internet.email
   user.encrypted_password = digest
   user.about = Populator.sentences(2..4)
+  user.overall_trust = 0.2  
 end
 User.last(50).each do |user|
   user.add_role(:dev) if Random.rand(10) < 4
@@ -140,3 +140,31 @@ AppUsage.populate(5) do |app_usage|
   app_usage.user_id = 1..50
   app_usage.app_id = 1..40
 end
+
+BasicFeedback.populate(50) do |basic_feedback|
+      basic_feedback.user_id = 1..50
+      basic_feedback.app_id = 1..40
+      basic_feedback.g_speed = 0..1
+      basic_feedback.g_ease = 0..1
+      basic_feedback.g_updates = 0..1
+      basic_feedback.g_on_offline = 0..1
+      basic_feedback.g_battery = 0..1
+      basic_feedback.g_personalize = 0..1
+      basic_feedback.g_location_services = 0..1
+      basic_feedback.g_performs = 0..1
+      basic_feedback.g_useful = 0..1
+      basic_feedback.b_battery = 0..1
+      basic_feedback.b_ads = 0..1
+      basic_feedback.b_permissions = 0..1
+      basic_feedback.b_crashes = 0..1
+      basic_feedback.b_privacy = 0..1
+      basic_feedback.b_sounds = 0..1
+      basic_feedback.b_updates = 0..1
+      basic_feedback.b_internet = 0..1
+      basic_feedback.b_money = 0..1
+      basic_feedback.b_other_apps = 0..1
+      basic_feedback.b_location_services = 0..1
+      basic_feedback.b_overall = 0..1
+      basic_feedback.comment = Populator.sentences(0..2)
+end
+
