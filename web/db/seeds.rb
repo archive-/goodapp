@@ -52,26 +52,6 @@ User.populate(1) do |user|
 end
 finish_seeding_user(User.last, [:admin])
 
-# user testing
-User.populate(1) do |user|
-  user.name = 'Normal Example'
-  user.email = 'normal@example.com'
-  user.encrypted_password = digest
-  user.about = "Hi, I'm John."
-  user.overall_trust = 0.2  
-end
-finish_seeding_user(User.last)
-
-# creating an account for testing -- need to give this user apps
-User.populate(1) do |user|
-  user.name = 'Jenna Bryant'
-  user.email = 'jenna@example.com'
-  user.encrypted_password = digest
-  user.about = "Hi, I'm Jenna."
-  user.overall_trust = 0.2  
-end
-finish_seeding_user(User.last)
-
 # Creates account for Regression test
 User.populate(1) do |user|
   user.name = 'Regression Test'
@@ -89,8 +69,9 @@ User.populate(50) do |user|
   user.about = Populator.sentences(2..4)
   user.overall_trust = 0.2  
 end
+
 User.last(50).each do |user|
-  user.add_role(:dev) if Random.rand(10) < 4
+  user.add_role(:dev)
   finish_seeding_user(user)
 end
 
@@ -98,12 +79,23 @@ end
 # version, description, type [apple, android, windows]
 # that way we can generate more info
 
-App.populate(1) do |app|
-  app.name = "Angry Birds"
+App.populate(200) do |app|
+  app.name = Populator.words(2)
 end
 
-App.populate(40) do |app|
-  app.name = Populator.words(2)
+i = 0
+AppOwnership.populate(200) do |app_ownership|
+  app_ownership.app_id = i
+  app_ownership.user_id = 1..50
+  i = i + 1
+end
+
+User.populate(50) do |user|
+  user.name = Faker::Name.name
+  user.email = Faker::Internet.email
+  user.encrypted_password = digest
+  user.about = Populator.sentences(2..4)
+  user.overall_trust = 0.2  
 end
 
 # TODO PROBLEM some apps aren't linked...
@@ -113,37 +105,19 @@ end
 # and problem here is that we don't want the same app to be
 # assigned to 2 different devs [but more then one app can be assigned to one dev]
 
-AppOwnership.populate(1) do |app_ownership|
-  app_ownership.user_id = 1..40
-  app_ownership.app_id = 2
-end
-
-AppOwnership.populate(41) do |app_ownership|
-  app_ownership.user_id = 1..50
-  app_ownership.app_id = 1..40
-end
-
-App.populate(1) do |app|
-  app.name = "Justice League Hero Finder"
-end
-
-AppOwnership.populate(1) do |app_ownership|
-  app_ownership.user_id = 1
-  app_ownership.app_id = 42
-end
 
 # not sure is this should be App or user
 # this should work fine since different users can use multiple apps
 # question: do we only do this for basic users or devs as well?
 # if we do not do this for devs, we would have to put a check there to make sure that user != dev
-AppUsage.populate(5) do |app_usage|
-  app_usage.user_id = 1..50
-  app_usage.app_id = 1..40
+AppUsage.populate(200) do |app_usage|
+  app_usage.user_id = 1..100
+  app_usage.app_id = 1..100
 end
 
-BasicFeedback.populate(50) do |basic_feedback|
-      basic_feedback.user_id = 1..50
-      basic_feedback.app_id = 1..40
+BasicFeedback.populate(400) do |basic_feedback|
+      basic_feedback.user_id = 1..100
+      basic_feedback.app_id = 1..200
       basic_feedback.g_speed = 0..1
       basic_feedback.g_ease = 0..1
       basic_feedback.g_updates = 0..1

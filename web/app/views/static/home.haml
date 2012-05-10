@@ -29,7 +29,7 @@
       .span4
         .section
           %h3 Featured Developers
-          - User.devs[0...10].each do |dev|
+          - User.all[0...10].each do |dev| #where(:is_dev => true)[0...10].each do |dev| - throws error
             = user_show(dev)
       .span4
         .section
@@ -38,6 +38,6 @@
             = app_show(app)
   .span4
     .section
-      %h3 Recent Feedbacks
+      %h3 Recent Reviews
       - @recent_feedbacks.each do |basic_feedback|
         = render basic_feedback

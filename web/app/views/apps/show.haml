@@ -47,3 +47,9 @@
         %b No feedback was left yet. Be the first to leave some!
   .span3
     %h3 Similar Apps
+    - App.all[0...6].each do |app|
+      .row
+        .span2   
+          = app_show(app)
+        .span3   
+          = app.name
