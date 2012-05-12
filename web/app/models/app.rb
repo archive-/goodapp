@@ -3,7 +3,7 @@ class App < ActiveRecord::Base
   validates_attachment_content_type :logo, content_type: /image/
   validates_attachment_presence :file
 
-  has_attached_file :logo, styles: {medium: "300x300>", profile: '100x100#', thumb: "60x60#"}, default_url: '/assets/no_logo_uploaded.png'
+  has_attached_file :logo, styles: {medium: "300x300>", profile: '100x100#', thumb: "60x60#"}, default_url: :gravatar_url # default_url: '/assets/no_logo_uploaded.png'
   has_attached_file :file
 
   has_many :app_ownerships
@@ -50,3 +50,8 @@ class App < ActiveRecord::Base
   end
   handle_asynchronously :scan
 end
+
+ def gravatar_url(default='wavatar', size=60)
+    hash = Digest::MD5.hexdigest(name.downcase.strip)[0..31]
+    "http://www.gravatar.com/avatar/#{hash}.jpg?size=#{size}&d=#{CGI::escape(default)}"
+  end
