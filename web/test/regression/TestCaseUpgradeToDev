@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:3000/" />
-<title>TestCaseChangePassword</title>
+<title>TestCaseUpgradeToDev</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">TestCaseChangePassword</td></tr>
+<tr><td rowspan="1" colspan="3">TestCaseUpgradeToDev</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -37,48 +37,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Regression Test</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=Account Settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_password</td>
-	<td>blabla2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_password_confirmation</td>
-	<td>blabla2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Login »</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_email</td>
-	<td>regression@test.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_password</td>
-	<td>blabla2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>id=upgrade-button</td>
 	<td></td>
 </tr>
 <tr>
@@ -88,24 +48,10 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Account Settings</td>
+	<td>link=Logout</td>
 	<td></td>
 </tr>
-<tr>
-	<td>type</td>
-	<td>id=user_password</td>
-	<td>blabla</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_password_confirmation</td>
-	<td>blabla</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
+
 </tbody></table>
 </body>
 </html>
