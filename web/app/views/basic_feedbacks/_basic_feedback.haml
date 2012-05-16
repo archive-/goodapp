@@ -1,25 +1,25 @@
 .feedback
   - goods, bads = basic_feedback.details
   - goods = goods.map {|g| content_tag(:li, g, class: "up-attribute")}.join
-  - goods = "<ul>#{goods}</ul>"
   - bads = bads.map {|b| content_tag(:li, b, class: "down-attribute")}.join
+  - goods = "<ul>#{goods}</ul>"
   - bads = "<ul>#{bads}</ul>"
-  .btn-group
-    %a.btn.btn-success{'data-content' => goods,
+  .attrbars
+    %a.attrbar.attrbar-good{'data-content' => goods,
       'data-original-title' => "Positive Details",
-      href: "#", rel: "popover"}
-      = "+#{basic_feedback.ngoods}"
-    %a.btn.btn-danger{'data-content' => bads,
+      href: "#", rel: "popover",
+      style: "width: #{basic_feedback.ngoods*5}px"}
+    %a.attrbar.attrbar-bad{'data-content' => bads,
       'data-original-title' => "Negative Details",
-      href: "#", rel: "popover"}
-      = "-#{basic_feedback.nbads}"
+      href: "#", rel: "popover",
+      style: "width: #{basic_feedback.nbads*5}px"}
   .feedback-text
     = user_name_show(basic_feedback.user)
     provided
     feedback for
-    = link_to basic_feedback.app.name, basic_feedback.app
-    - if !basic_feedback.comment.empty?
-      with a
-      %a{'data-content' => basic_feedback.comment,
-        'data-original-title' => "Comment", href: "#", rel: "popover"} comment
-    \.
+    = succeed '.' do
+      = link_to basic_feedback.app.name, basic_feedback.app
+      - if !basic_feedback.comment.empty?
+        with a
+        %a{'data-content' => basic_feedback.comment,
+          'data-original-title' => "Comment", href: "#", rel: "popover"}< comment

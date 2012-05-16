@@ -10,4 +10,15 @@ module UsersHelper
   def user_name_show(user)
     link_to (user == current_user) ? 'You' : user.name, user
   end
+
+  def trust_level(user)
+    case user.overall_trust
+    when 0..20
+      'newbie'
+    when 80..100
+      'worthy'
+    else
+      'none'
+    end
+  end
 end

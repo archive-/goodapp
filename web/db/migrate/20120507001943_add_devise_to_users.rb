@@ -1,9 +1,7 @@
 class AddDeviseToUsers < ActiveRecord::Migration
   def up
-    remove_column :users, :email
-    remove_column :users, :password_hash
-    remove_column :users, :password_salt
-    change_table(:users) do |t|
+    remove_column :users, :email, :password_hash, :password_salt
+    change_table :users  do |t|
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""

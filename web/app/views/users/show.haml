@@ -1,32 +1,29 @@
 = title @user.name
 
-.row-fluid
-  .span3
-    -# Picture goes here
-    = image_tag @user.avatar.url(:profile), width: "180"
-    -# Other information about user goes here
-    %h3 Rating
-    "some number"
-    - if !@user.about.blank?
-      %h3 About
-      %p= @user.about
-    - elsif its_you
-      %h3 About
-      %p
-        Your about message is not set, go to your
-        = link_to "account settings", edit_user_path(current_user)
-        to set it.
+.leftbar
+  = image_tag @user.avatar.url(:profile), width: "180"
+  %h3.trust{class: ("trust-" + trust_level(@user))}
+    = @user.overall_trust
+  - if !@user.about.blank?
+    %h3 About
+    %p= @user.about
+  - elsif its_you
+    %h3 About
+    %p
+      Your about message is not set, go to your
+      = link_to "account settings", edit_user_path(current_user)
+      to set it.
 
+.mainbar
+  -# TODO fix everything below
   #activity-box
     %h3 Activity Feed
-    .span4
-      - if @user.has_role? :dev
-        %ul.no-bullet.ul-inline
-          - @user.owned_apps.limit(4).each do |app|
-            %p Uploaded app
-            = app_show(app)
-            %h4= app.name
-  .span5
+    - if @user.has_role? :dev
+      %ul.no-bullet.ul-inline
+        - @user.owned_apps.limit(4).each do |app|
+          %p Uploaded app
+          = app_show(app)
+          %h4= app.name
     - can_endorse = can?(:create, @endorsement)
     - can_endorse &&= @user != current_user
     - can_endorse &&= @user.has_role? :dev

@@ -15,13 +15,14 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true, presence: true, email: true
   validates :password, presence: true, confirmation: true, on: :create
 
-  has_attached_file :avatar, styles: {medium: "300x300>", profile: "180x180>", thumb: "60x60#"}, default_url: :gravatar_url
+  has_attached_file :avatar,
+    styles: {medium: "300x300#", profile: "180x180#", thumb: "60x60#"},
+    default_url: :gravatar_url
 
-  # TODO fix this!!!
+  # TODO does this still need fixing?
   Paperclip.interpolates :gravatar_url do |attachment, style|
     size = nil
     if size_data = attachment.styles[style].first
-      p size_data
       if thumb_size = size_data.match(/\d+/).to_a.first
         size = thumb_size.to_i
       end
