@@ -1,7 +1,7 @@
 = title @user.name
 
 .leftbar
-  = image_tag @user.avatar.url(:profile), width: "180"
+  = image_tag @user.avatar.url(:profile), width: "180" # TODO :profile == 180px?
   %h3.trust{class: ("trust-" + trust_level(@user))}
     = @user.overall_trust
   - if !@user.about.blank?
@@ -14,51 +14,59 @@
       = link_to "account settings", edit_user_path(current_user)
       to set it.
 
-.mainbar
-  -# TODO fix everything below
+#mainbar
+  - if @user.has_role? :dev
+    .row-fluid
+      .span4
+        - endorsements = @user.endorsements_as_endorsee
+        - num_endorsers = endorsements.size
+        - can_endorse = can?(:create, @endorsement)
+        - can_endorse &&= @user != current_user
+        - can_endorse &&= !current_user.endorsees.index(@user)
+        %h3
+          = "Endorsements (" + num_endorsers.to_s + ")"
+          -# TODO
+          %a &raquo;
+          - if can_endorse
+            %a#endorse-button.btn.btn-small.btn-success{'data-toggle' => "modal",
+              href: "#endorse-modal"} Endorse
+            #endorse-modal.modal.hide.fade
+              .modal-header
+                %a.close{'data-dismiss' => "modal"} &times;
+                %h3= "Endorse " + @user.name
+              = form_for @endorsement, html: {class: "modal-form"} do |f|
+                .modal-body
+                  .control-group
+                    = f.label :message, "Message (optional)"
+                    = f.text_area :message, rows: 6, class: "input-block-level"
+                    %p.help-block.warning
+                      Careful, this action is not reversible (an endorsement is forever).
+                  = f.hidden_field :endorsee_id, value: @user.id
+                .modal-footer
+                  = f.submit "Submit Endorsement", class: "btn btn-primary"
+        %ul.endorsements.no-bullet.ul-inline
+          - endorsements.each do |endorsement|
+            %li
+              %a.dev{'data-content' => endorsement.message,
+                'data-original-title' => "#{endorsement.endorser.name}'s Comment",
+                href: "#{user_url(endorsement.endorser)}", rel: "popover"}
+                = image_tag endorsement.endorser.avatar.url(:thumb)
+      .span4
+        %h3
+          Apps developed
+          %a &raquo;
+        %ul.no-bullet.ul-inline
+          - @user.owned_apps.limit(4).each do |app|
+            = app_show(app)
+      .span4
+        %h3
+          Apps used
+          %a &raquo;
+        %p TODO
+  - else
+    %h3
+      Apps used
+      %a &raquo;
+    %p TODO
   #activity-box
     %h3 Activity Feed
-    - if @user.has_role? :dev
-      %ul.no-bullet.ul-inline
-        - @user.owned_apps.limit(4).each do |app|
-          %p Uploaded app
-          = app_show(app)
-          %h4= app.name
-    - can_endorse = can?(:create, @endorsement)
-    - can_endorse &&= @user != current_user
-    - can_endorse &&= @user.has_role? :dev
-    - can_endorse &&= !current_user.endorsees.index(@user)
-    - if can_endorse
-      %a#endorse-button.btn.btn-success.btn-large{'data-toggle' => "modal",
-        href: "#endorse-modal"}= "Endorse " + @user.name
-      #endorse-modal.modal.hide.fade
-        .modal-header
-          %a.close{'data-dismiss' => "modal"} &times;
-          %h3= "Endorse " + @user.name
-        = form_for @endorsement, html: {class: "modal-form"} do |f|
-          .modal-body
-            .control-group
-              = f.label :message, "Message (optional)"
-              = f.text_area :message, rows: 6, class: "input-block-level"
-            = f.hidden_field :endorsee_id, value: @user.id
-          .modal-footer
-            = f.submit "Submit Endorsement", confirm: "Are you sure?",
-              class: "btn btn-primary"
-    - if @user.has_role? :dev
-      - endorsements = @user.endorsements_as_endorsee
-      - num_endorsers = endorsements.size
-      - if num_endorsers.zero?
-        %h3 Currently Not Endorsed
-        -# TODO know him/her? endorse them!
-      - else
-        %h3= "Endorsements (" + num_endorsers.to_s + ")"
-        %ul.no-bullet
-          - endorsements.each do |endorsement|
-            %li.endorsement
-              = user_show(endorsement.endorser)
-              %p= endorsement.message
-    - else
-      %h3 Apps Used
-      %ul
-      - @user.used_apps.each do |app|
-        %li= link_to app.name, app
