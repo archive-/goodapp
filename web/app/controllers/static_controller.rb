@@ -40,7 +40,7 @@ class StaticController < ApplicationController
       flash[:error] = 'You must enter an email address!'
       redirect_to :action => 'contact'
       return
-    end    
+    end
     if params[:name] && !params[:name].blank?
       @name = params[:name]
     else
@@ -57,9 +57,9 @@ class StaticController < ApplicationController
     end
     if UserMailer.send_contact_mail(@email, @name, @message)
       redirect_to root_url, :notice => 'Message successfully sent.'
-    else 
+    else
       redirect_to root_url, :notice => 'Message was not sent.'
-    end      
+    end
   end
 
   def faq
@@ -94,7 +94,6 @@ class StaticController < ApplicationController
     # first source - WIRED
     url_wired = "http://www.wired.com/gadgetlab/tag/android-market/"
     doc = Nokogiri::HTML(open(url_wired))
-
 
     doc.css(".tag-android-market").each_with_index do |item, i|
       if number == i
@@ -179,4 +178,5 @@ class StaticController < ApplicationController
 
     return title, decsr, links
   end
+  handle_asynchronously :scrape
 end

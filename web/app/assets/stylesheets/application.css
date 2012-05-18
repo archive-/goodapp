@@ -58,7 +58,7 @@ h1 {margin-bottom: 20px}
 .down-attribute {color:red}
 .carousel img {width:100%}
 .carousel {margin-bottom:30px}
-#endorse-button {margin-bottom:20px;width:300px}
+#endorse-button {margin-bottom:10px}
 .faq { width: 650px; margin-bottom:30px;}
 #footer {border-top:1px solid #aaa; margin-top:40px; margin-bottom: 20px;}
 #footer p {margin:10px 0}
@@ -70,8 +70,11 @@ h1 {margin-bottom: 20px}
 .trust-next {background-color: #545c2e} */
 .trust-worthy {background-color: #a1a11e}
 .leftbar {float: left; width: 180px; margin-right: 20px}
-.mainbar {overflow: hidden; zoom: 1}
+#mainbar {overflow: hidden; zoom: 1}
+#mainbar h3 {border-bottom: 1px solid #e3e3e3; margin-bottom: 10px}
 .attrbars {position: relative; overflow: hidden; float: left; text-align: right; width: 50px; margin: 10px; margin-left: 0}
 .attrbar {height: 15px; display: block; float: right; clear: right}
 .attrbar-good {background: #5bb75b}
 .attrbar-bad {background: #da4f49}
+#endorsement-area {overflow: hidden}
+.warning {color: red}

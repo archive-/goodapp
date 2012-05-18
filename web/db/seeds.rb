@@ -23,34 +23,34 @@ User.populate(1) do |user|
   user.about = "Hi, I'm TJ."
   user.overall_trust = 0.2
 end
-finish_seeding_user(User.last, [:admin])
+finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Yulia Dubinina'
   user.email = 'skiswithtwotips@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Yulia."
-  user.overall_trust = 0.2 
+  user.overall_trust = 0.2
 end
-finish_seeding_user(User.last, [:admin])
+finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Victor Moreira'
   user.email = 'montesinnos@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Victor."
-  user.overall_trust = 0.2  
+  user.overall_trust = 0.2
 end
-finish_seeding_user(User.last, [:admin])
+finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Jasper Fredrickson'
   user.email = 'jrf@umail.ucsb.edu'
   user.encrypted_password = digest
   user.about = "Hi, I'm Jasper."
-  user.overall_trust = 0.2  
+  user.overall_trust = 0.2
 end
-finish_seeding_user(User.last, [:admin])
+finish_seeding_user(User.last, [:admin, :dev])
 
 # Creates account for Regression test
 User.populate(1) do |user|
@@ -58,7 +58,7 @@ User.populate(1) do |user|
   user.email = 'regression@test.com'
   user.encrypted_password = digest
   user.about = "Test master."
-  user.overall_trust = 0.2  
+  user.overall_trust = 0.2
 end
 finish_seeding_user(User.last)
 
@@ -67,7 +67,7 @@ User.populate(50) do |user|
   user.email = Faker::Internet.email
   user.encrypted_password = digest
   user.about = Populator.sentences(2..4)
-  user.overall_trust = 0.2  
+  user.overall_trust = 0.2
 end
 
 User.last(50).each do |user|
@@ -95,7 +95,7 @@ User.populate(50) do |user|
   user.email = Faker::Internet.email
   user.encrypted_password = digest
   user.about = Populator.sentences(2..4)
-  user.overall_trust = 0.2  
+  user.overall_trust = 0.2
 end
 
 # TODO PROBLEM some apps aren't linked...
