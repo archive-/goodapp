@@ -1,0 +1,24 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal"}) do |f|
+  %fieldset
+    %legend Login
+
+    .control-group
+      = f.label :email, class: "control-label"
+      .controls
+        = f.email_field :email
+
+    .control-group
+      = f.label :password, class: "control-label"
+      .controls
+        = f.password_field :password
+
+    - if devise_mapping.rememberable?
+      .control-group
+        .remember-me.controls
+          %label.checkbox{for: "user_remember_me"}
+            = f.check_box :remember_me
+            Remember me
+
+    .form-actions
+      = f.submit "Sign in", class: "btn btn-primary"
+      = link_to "Don't have an account? Regsiter", new_user_registration_path, class: "btn btn-warning"

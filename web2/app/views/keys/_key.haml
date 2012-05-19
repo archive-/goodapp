@@ -1,0 +1,8 @@
+.key.alert.alert-success
+  %h3= key.title
+  %pre
+    %code= key.key.truncate(200)
+  .pull-right
+    -# TODO
+    = link_to "Edit", "#", class: "btn btn-info"
+    = button_to "Delete", [user, key], method: "delete", class: "btn btn-danger"

@@ -1,0 +1,39 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+*/
+
+html {overflow-y: scroll}
+.container {width: 940px}
+.alert {margin-bottom: 8px}
+.well {padding: 8px 0}
+.key {overflow: hidden}
+.key .btn {float: left; margin-right: 10px}
+.key .button_to {float: left; margin-bottom: 0}
+.key .button_to .btn {margin-right: 0}
+
+/* ------------------- HEADER ------------------- */
+#logo {margin-left: 0}
+.brand:hover {color: white}
+.brand span {font-size: 0.5em}
+#user-nav {padding: 2px 0} /* TODO FIX THIS */
+.form-inline input, .form-inline select {margin-top: 20px}
+.navbar-form .control-group {margin-bottom: 0}
+#logout-btn {width: 150px}
+#header .button_to {margin-bottom: 0}
+
+/* -------------------  MAIN  ------------------- */
+#main {margin-top: 50px}
+h1 {margin-bottom: 10px}
+
+/* ------------------- FOOTER ------------------- */
+#footer {margin-top: 10px; border-top: 1px solid #e3e3e3; padding-top: 10px}

@@ -1,0 +1,13 @@
+= form_for [user, app], html: {multipart: true, class: "form-horizontal"} do |f|
+  %fieldset
+    %legend Upload a signed app
+    .control-group
+      = f.label :key_id, class: "control-label"
+      .controls
+        = f.select :key_id, user.keys.collect {|k| [k.title, k.id]}, {include_blank: true}
+    .control-group
+      = label_tag :file, 'File', class: "control-label"
+      .controls
+        = file_field_tag :file
+    .form-actions
+      = f.submit class: "btn btn-primary"

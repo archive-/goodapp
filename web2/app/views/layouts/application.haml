@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title
+      GoodApp
+      = yield :title
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #header
+      = render "static/header"
+    #main.container
+      = render partial: "shared/flash", locals: {flash: flash}
+      = yield
+    #footer.container
+      2012 &copy; Team &Oslash; &times; Yulia, TJ, Jasper, Victor
+

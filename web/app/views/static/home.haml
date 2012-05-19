@@ -29,16 +29,16 @@
     .row
       .span4
         .section
-          %h3 Featured Developers
-          - User.all[0...10].each do |dev| #where(:is_dev => true)[0...10].each do |dev| - throws error
+          %h3 Featured *Users*
+          - User.first(10).each do |dev| #where(:is_dev => true)[0...10].each do |dev| - throws error
             = user_show(dev)
       .span4
         .section
           %h3 Featured Apps
-          - App.all[0...10].each do |app|
+          - App.first(10).each do |app|
             = app_show(app)
   .span4
     .section
       %h3 Recent Reviews
-      - @recent_feedbacks.each do |basic_feedback|
+      - @recent_feedbacks.first(7).each do |basic_feedback|
         = render basic_feedback

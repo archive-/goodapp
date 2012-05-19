@@ -1,0 +1,9 @@
+= form_for [user, key] do |f|
+  %fieldset
+    %legend Upload a key
+    = f.label :title, class: "control-label"
+    = f.text_field :title, style: "width: 98%"
+    = f.label :key, class: "control-label"
+    = f.text_area :key, rows: "5", style: "width: 98%"
+    .form-actions
+      = f.submit class: "btn btn-primary"

@@ -1,0 +1,33 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container.row-fluid
+      #logo.span3
+        %a.brand{href: "/"}
+          GoodApp
+          %span.label.label-info Alpha
+      - if user_signed_in?
+        #search.span6
+          = form_tag '/', class: "form-search navbar-form pull-left", method: :get do
+            .control-group
+              .controls
+                .input-prepend
+                  - field = text_field_tag(:q, '', class: "input-xlarge", placeholder: "Not implemented")
+                  = succeed field  do
+                    %label{for: "q"}
+                      %span.add-on Search
+        #user-nav.span3
+          %ul.nav.pull-right
+            %li
+              = link_to current_user do
+                %i.icon-user.icon-white
+            %li
+              = link_to edit_user_path(current_user) do
+                %i.icon-wrench.icon-white
+            %li.divider-vertical
+            %li
+              = button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-warning"
+
+      - else
+        #user-nav.span9
+          -# TODO forgot your password? link
+          = render "devise/sessions/new_inline"
