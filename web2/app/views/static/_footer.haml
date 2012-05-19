@@ -1,0 +1,10 @@
+%p.pull-left
+  2012 &copy; Team &Oslash; &times; Yulia, TJ, Jasper, Victor
+
+%ul.nav.nav-pills.pull-right
+  %li{class: active?("/api")}= link_to "API", api_path
+  -# Other paths?
+    %li{class: active?("/about")}= link_to "About", about_path
+    %li{class: active?("/faq")}= link_to "FAQ", faq_path
+    %li{class: active?("/terms")}= link_to "Terms And Conditions", terms_path
+    %li{class: active?("/privacy")}= link_to "Privacy Policy", privacy_path

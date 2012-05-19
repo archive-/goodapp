@@ -5,9 +5,22 @@
       = f.label :key_id, class: "control-label"
       .controls
         = f.select :key_id, user.keys.collect {|k| [k.title, k.id]}, {include_blank: true}
+        %span.help-inline Used to check the signature on the app
+        %p.help-block
+          Need to
+          = link_to_function "add the key", "$('#keys-pane-link').click()"
+          first?
     .control-group
       = label_tag :file, 'File', class: "control-label"
       .controls
         = file_field_tag :file
+        %p.help-block
+          We only grab
+          %strong metadata
+          from your app and
+          %strong scan it
+          before
+          %strong deleting
+          the uploaded data from our servers.
     .form-actions
       = f.submit class: "btn btn-primary"

@@ -1,0 +1,27 @@
+%h1= title "API"
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Path
+    %th HTTP Method
+    %th Params
+    %th Formats
+    %th Response
+  %tr
+    %td
+      %code /users/:id
+    %td GET
+    %td
+    %td JSON
+    %td
+      User JSON:
+      %code {id: SOME_ID, trust_rating: REPUTATION}
+  %tr
+    %td
+      %code /apps/:id
+    %td GET
+    %td
+    %td JSON
+    %td
+      App JSON:
+      %code {id: SOME_ID, trust: TRUST}

@@ -23,7 +23,7 @@
             %li
               = link_to edit_user_path(current_user) do
                 %i.icon-wrench.icon-white
-            %li.divider-vertical
+            -# %li.divider-vertical
             %li
               = button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-warning"
 
