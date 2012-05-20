@@ -24,7 +24,7 @@ class AppsController < ApplicationController
       flash[:notice] = "Successfully uploaded your app to GoodApp. Processing now (see status below)."
       redirect_to referer
     else
-      flash[:alert] = "There was a problem upload your app to GoodApp."
+      flash[:alert] = "There was a problem uploading your app to GoodApp."
       redirect_to referer
     end
   end

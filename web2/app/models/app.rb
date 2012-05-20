@@ -10,10 +10,10 @@ class App < ActiveRecord::Base
   end
 
   def handle_upload(file, key)
-    self.status = 0
-    self.save
     case file.content_type
     when "application/vnd.android.package-archive"
+      self.status = 0
+      self.save
       handle_android(file, key)
     else
       return false
