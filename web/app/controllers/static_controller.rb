@@ -179,5 +179,5 @@ class StaticController < ApplicationController
     return title, decsr, links
   end
   # TODO check this next line works (in controller)
-  handle_asynchronously :scrape
+  # handle_asynchronously :scrape
 end
