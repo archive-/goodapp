@@ -21,6 +21,9 @@
               = link_to current_user do
                 %i.icon-user.icon-white
             %li
+              = link_to new_user_app_path(current_user) do
+                %i.icon-upload.icon-white
+            %li
               = link_to edit_user_path(current_user) do
                 %i.icon-wrench.icon-white
             -# %li.divider-vertical

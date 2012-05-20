@@ -1,3 +1,5 @@
-.app
-  %h3 app.title
-  -# TODO
+.app.alert.alert-success
+  %h3
+    = show_platform(app.platform)
+    = link_to app.title, [current_user, app]
+    %span.label.label-notice= app.version

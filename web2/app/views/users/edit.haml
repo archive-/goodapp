@@ -1,18 +1,21 @@
-%h1= title "Account Settings"
+- title "Account Settings"
 
 .row-fluid
   .span3.well
     %ul.nav.nav-list
       %li.nav-header= @user.email
       %li.active= link_to "Profile", "#profile-pane", 'data-toggle' => "tab"
+      %li= link_to "Account Settings", "#account-settings-pane", 'data-toggle' => "tab"
       %li= link_to "Keys", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
-      %li= link_to "Apps", "#apps-pane", 'data-toggle' => "tab"
   .span9.tab-content
     #profile-pane.tab-pane.active
       %h2 Profile
       = form_tag "/", class: "form-horizontal" do
         = label_tag :about, "About"
         = text_area_tag :about, '', rows: 5, style: "width: 98%"
+    #account-settings-pane.tab-pane
+      %h2 Account Settings
+      = render partial: "devise/registrations/form", locals: {resource: current_user, method: :put, legend: "Change your settings"}
     #keys-pane.tab-pane
       %h2 Keys
       -# TODO expand this
@@ -22,17 +25,9 @@
       - else
         - @user.keys.each do |key|
           = render partial: key, locals: {user: @user}
-    #apps-pane.tab-pane
-      %h2 Apps
-      - if @user.keys.empty?
-        %p.alert.alert-warning
-          You need to
-          = link_to_function "add keys", "$('#keys-pane-link').click()"
-          to be able to upload apps.
-      - else
-        = render partial: "apps/form", locals: {user: @user, app: App.new}
-        - if @user.apps.empty?
-          %p.alert.alert-info You have no apps, upload some above.
-        - else
-          - @user.apps.each do |app|
-            = render app
+
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $('a[href="' + window.location.hash + '"]').click();
+    });
