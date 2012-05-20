@@ -1,5 +1,7 @@
 .app.alert.alert-success
   %h3
     = show_platform(app.platform)
-    = link_to app.title, [current_user, app]
+    = link_to app.title, [app.user, app]
     %span.label.label-notice= app.version
+  %span
+    %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"

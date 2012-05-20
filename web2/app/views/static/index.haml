@@ -1,12 +1,18 @@
 .row-fluid
+  .span8
+    #promo-box
+      -# TODO
+      TODO Port promo box over
+  .span4
+    %h3 Other Activity
+    -# TODO
+    TODO
+.row-fluid
   .span4
     %h3 Featured Developers
     - User.featured.each do |user|
       = render user
-  .span4
+  .span8
     %h3 Recently Uploaded Apps
     - App.last(10).each do |app|
       = render app
-  .span4
-    %h3 Other Activity
-    hi

@@ -2,6 +2,7 @@ class AppsController < ApplicationController
   def new
     @user = current_user
     @app = App.new
+    @apps = @user.apps.order("created_at DESC")
   end
 
   def create
