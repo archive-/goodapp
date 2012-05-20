@@ -1,1 +1,34 @@
-= render partial: "form", locals: {method: :post, legend: "Don't have an account? Register!"}
+= form_for(resource, as: 'user', url: user_registration_path, html: {class: "form-horizontal"}, method: :post) do |f|
+  %fieldset
+    %legend Don't have an account? Register!
+    - errors = devise_error_messages!(resource)
+    .control-group{class: ("error" if errors [:name])}
+      = f.label :name, class: "control-label"
+      .controls
+        = f.text_field :name
+        - if errors[:name]
+          %span.help-inline
+            = errors[:name].join(' and ')
+    .control-group{class: ("error" if errors [:email])}
+      = f.label :email, class: "control-label"
+      .controls
+        = f.email_field :email
+        - if errors[:email]
+          %span.help-inline
+            = errors[:email].join(' and ')
+    .control-group{class: ("error" if errors [:password])}
+      = f.label :password, class: "control-label"
+      .controls
+        = f.password_field :password
+        - if errors[:password]
+          %span.help-inline
+            = errors[:password].join(' and ')
+    .control-group{class: ("error" if errors [:password_confirmation])}
+      = f.label :password_confirmation, class: "control-label"
+      .controls
+        = f.password_field :password_confirmation
+        - if errors[:password_confirmation]
+          %span.help-inline
+            = errors[:password_confirmation].join(' and ')
+    .form-actions
+      = f.submit class: "btn btn-primary"

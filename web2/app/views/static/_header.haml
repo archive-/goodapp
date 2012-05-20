@@ -24,9 +24,8 @@
               = link_to new_user_app_path(current_user), class: "tooltipped", rel: "tooltip", title: "App Upload" do
                 %i.icon-upload.icon-white
             %li
-              = link_to edit_user_path(current_user), class: "tooltipped", rel: "tooltip", title: "Account Settings" do
+              = link_to edit_user_path(current_user), class: "tooltipped", rel: "tooltip", title: "Edit your Settings" do
                 %i.icon-wrench.icon-white
-            -# %li.divider-vertical
             %li
               = button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-warning"
 

@@ -1,6 +1,10 @@
 .row-fluid
   .span8
-    #promo-box
+    - unless user_signed_in?
+      %p.pull-right
+        Don't have an account?
+        = link_to "Register", new_user_registration_path, class: "btn btn-large btn-primary"
+    #promo-box.clear
       -# TODO
       TODO Port promo box over
   .span4
