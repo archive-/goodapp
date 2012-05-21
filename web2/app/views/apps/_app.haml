@@ -1,15 +1,23 @@
 - haml_tag_if(!defined?(wrapper), :div, id: "app-#{app.id}", class: "app alert alert-success") do
   - if app.status < 100
     .progress.progress-striped.active
-      .bar{style: "width: #{app.status}%"}
+      .bar{style: "width: #{app.status.to_s}%"}
+        %p= app.state
     %span
       %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
     - if !defined? js
-      -# TODO CLEAN THIS UP
+      -# TODO CLEAN THIS UP -- not so many <script>
       - content_for :javascript do
         :javascript
           var refreshApp#{app.id} = function() {
-            (function() { $("#app-#{app.id}").load("/apps/#{app.id}/mini"); console.log("finished #app-#{app.id}"); setTimeout("refreshApp#{app.id}()", 2000); })();
+            (function() {
+              $this = $("#app-#{app.id}");
+              $this.load("/apps/#{app.id}/mini");
+              // TODO (remove comment) this is to stop image flickering once app is finished
+              // TODO stop this one tick sooner (still refreshes once when unnecessary)
+              if ($this.children(".progress").length > 0)
+                setTimeout("refreshApp#{app.id}()", 2000);
+            })();
           };
           $(function() { refreshApp#{app.id}(); });
   - else

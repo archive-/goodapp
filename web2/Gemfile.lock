@@ -104,8 +104,11 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.20.0)
       rufus-scheduler
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rufus-scheduler (2.0.16)
       tzinfo (>= 0.3.23)
+    settingslogic (2.0.8)
     sinatra (1.3.2)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
@@ -139,4 +142,6 @@ DEPENDENCIES
   rails (= 3.2.1)
   resque
   resque-retry
+  rest-client
+  settingslogic
   sqlite3

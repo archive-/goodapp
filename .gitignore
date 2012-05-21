@@ -1,23 +1,24 @@
 *.sw[nop]
 *.*~
 .DS_Store
+*.rdb
 
 # Ignore files uploaded via Paperclip
-web/public/system
+web*/public/system
 
 # Ignore settings file (sensitive info, API keys, etc.)
-web/config/settings
+web*/config/settings
 
 # Ignore bundler config
-web/.bundle
+web*/.bundle
 
 # Ignore the default SQLite database.
-web/db/*.sqlite3
-web/db/schema.rb
+web*/db/*.sqlite3
+web*/db/schema.rb
 
 # Ignore all logfiles and tempfiles.
-web/log/*.log
-web/tmp
+web*/log/*.log
+web*/tmp
 
 # Ignore compiled binaries
 a.out

@@ -7,17 +7,36 @@ class App < ActiveRecord::Base
 
   @queue = :main
 
+  # how status # works:
+  #  0- 40: parsing data, handling the binary upload
+  # 40- 70: sending to virus total
+  # 70-100: retrieving results from virus total, finishing
+
+  def state
+    case self.status
+    when 0..40
+      "Extracting app metadata"
+    when 40..70
+      "Scanning app for malware"
+    when 70...100
+      "Finalizing"
+    else
+      # TODO should never happen
+      "Error"
+    end
+  end
+
   def user
     key.user
   end
 
   def handle_upload(file, key)
-    self.status, self.proper = 0, true ; self.save
+    self.status, self.proper = 10, true ; self.save # start it at 10 to give hope
     # TODO this is bad -- but file past in gets deleted after the response
     rand = (0...5).map { (65 + rand(25)).chr }.join
     tmp = File.new(File.join(Rails.root, "tmp/uploads/#{rand}"), "wb")
     tmp.write(file.read)
-    fpath = File.absolute_path(lesstmpfile)
+    fpath = File.absolute_path(tmp)
     # TODO don't close it yet (we need it for async method, don't like this
     # solution though...
     case file.content_type
@@ -44,10 +63,11 @@ class App < ActiveRecord::Base
           self.version = content.match(/android:versionName="([^"]*)"/)[1]
           self.title = content.match(/application android:label="([^"]*)"/)[1]
           self.platform = :android
-          self.status = 100 ; save
+          self.status = 40 ; save
         end
       end
     end
+    self.scan(fpath)
   rescue Exception => e
     # TODO store/log the exception
     puts e.message
@@ -55,6 +75,24 @@ class App < ActiveRecord::Base
   ensure
     # TODO delete the temp file now
     File.unlink(fpath)
+  end
+
+  def scan(fpath, force=false)
+    return if self.vtpermalink and !force
+    self.status = 70 ; self.save
+    url = "https://www.virustotal.com/vtapi/v2/file/scan"
+    json = RestClient.post(url, key: Settings.vtapi_key, file: File.new(fpath, 'rb'))
+    res = JSON.parse(json)
+    if res["response_code"] == 1
+      self.vtresource = res["resource"]
+      self.vtscan_id = res["scan_id"]
+      self.vtpermalink = res["permalink"]
+      self.vtsha256 = res["sha256"]
+      self.status = 100 ; self.save
+    else
+      # TODO better error handling
+      self.status, self.proper = 100, false ; self.save
+    end
   end
 
   def self.perform(app_id, handle_method, fpath, kee)
