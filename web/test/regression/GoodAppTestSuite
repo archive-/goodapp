@@ -10,6 +10,13 @@
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="TestCaseRegister">TestCaseRegister</a></td></tr>
 <tr><td><a href="TestCaseLogin">TestCaseLogin</a></td></tr>
+<tr><td><a href="TestCaseChangeEmail">TestCaseChangeEmail</a></td></tr>
+<tr><td><a href="TestCaseChangePassword">TestCaseChangePassword</a></td></tr>
+<tr><td><a href="TestCaseEndorse">TestCaseEndorse</a></td></tr>
+<tr><td><a href="TestCaseProfileView">TestCaseProfileView</a></td></tr>
+<tr><td><a href="TestCaseSearchUser">TestCaseSearchUser</a></td></tr>
+<tr><td><a href="TestCaseUpgradeToDev">TestCaseUpgradeToDev</a></td></tr>
+<tr><td><a href="TestCaseUploadApp">TestCaseUploadApp</a></td></tr>
 </tbody></table>
 </body>
 </html>
