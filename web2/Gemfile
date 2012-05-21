@@ -7,3 +7,5 @@ gem "devise"
 gem "haml"
 gem "letter_opener", group: :development
 gem "delayed_job_active_record"
+gem "populator" 
+gem "faker"
