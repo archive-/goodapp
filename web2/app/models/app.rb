@@ -14,14 +14,14 @@ class App < ActiveRecord::Base
     when "application/vnd.android.package-archive"
       self.status = 0
       self.save
-      handle_android(file, key)
+      self.delay.handle_apk(file, key)
     else
       return false
     end
     true
   end
 
-  def handle_android(file, key)
+  def handle_apk(file, key)
     # TODO
     # unzip
     # cat META-INF/CERT.RSA | keytool -printcert
@@ -42,8 +42,6 @@ class App < ActiveRecord::Base
       end
     end
   end
-  # TODO do all the asynchronous handles in a loop
-  handle_asynchronously :handle_android
 
   private
 

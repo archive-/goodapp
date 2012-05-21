@@ -34,4 +34,9 @@ class AppsController < ApplicationController
     @user = User.find(params[:user_id])
     @app = App.find(params[:id])
   end
+
+  def mini
+    @app = App.find(params[:id])
+    render layout: false
+  end
 end

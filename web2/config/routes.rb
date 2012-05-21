@@ -10,6 +10,7 @@ Web2::Application.routes.draw do
     resources :keys
     resources :apps, except: [:new, :create]
   end
+  get "/apps/:id/mini" => "apps#mini", as: :show_app_mini
   get "/settings" => "users#edit", as: :edit_user
   put "/settings" => "users#update", as: :users
   get "/upload" => "apps#new", as: :new_app
