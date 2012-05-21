@@ -42,7 +42,8 @@ class App < ActiveRecord::Base
       end
     end
   end
-  # TODO handle_asynchronously :handle_android
+  # TODO do all the asynchronous handles in a loop
+  handle_asynchronously :handle_android
 
   private
 

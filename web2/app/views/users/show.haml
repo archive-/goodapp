@@ -1,2 +1,22 @@
 %h1= @user.name
-%h2 #TODO
+
+%h4 About
+%p.about-section
+  = @user.about
+
+%h4 Endorsements
+- @endorsements = []
+- if @endorsements.empty?
+  %p.alert.alert-info No endorsements.
+- else
+  %ul.endorsements
+  - @endorsements.each do |endorsement|
+    = render endorsement
+
+%h4 Uploaded Apps
+- @apps = @user.apps # TODO group by platform
+- if @apps.empty?
+  %p.alert.alert-info No apps.
+- else
+  - @apps.each do |app|
+    = render app

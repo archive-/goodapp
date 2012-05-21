@@ -6,3 +6,4 @@ gem "jquery-rails"
 gem "devise"
 gem "haml"
 gem "letter_opener", group: :development
+gem "delayed_job_active_record"

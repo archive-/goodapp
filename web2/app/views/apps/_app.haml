@@ -1,7 +1,23 @@
-.app.alert.alert-success
-  %h3
-    = show_platform(app.platform)
-    = link_to app.title, [app.user, app]
-    %span.label.label-notice= app.version
-  %span
-    %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
+.app.alert.alert-success{id: "app-#{app.id}"}
+  - if app.status < 100
+    -# TODO progress bar
+    %p status &lt; 100
+    %span
+      %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
+    - if defined? js
+      %p hello there
+      -# content_for :javascript do
+        :javascript
+          $(function() {
+            var refreshApp#{app.id} = function() {
+              $("app-#{app.id}").replace('#{escape_javascript(render partial: app, locals: {js: false})}');
+            };
+            //setTimeout(refreshApp#{app.id}, 1000);
+          });
+  - else
+    %h3
+      = show_platform(app.platform)
+      = link_to app.title, [app.user, app]
+      %span.label.label-notice= app.version
+    %span
+      %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"

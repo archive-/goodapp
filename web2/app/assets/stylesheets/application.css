@@ -24,10 +24,10 @@ html {overflow-y: scroll}
 .clear {clear: both}
 
 /* ------------------- HEADER ------------------- */
-#logo {margin-left: 0}
+#logo {margin-left: 0; width: 160px}
 .brand:hover {color: white}
 .brand span {font-size: 0.5em}
-#user-nav {padding: 2px 0} /* TODO FIX THIS */
+#user-nav {padding: 2px 0; float: right} /* TODO FIX THIS */
 .form-inline input, .form-inline select {margin-top: 20px}
 .navbar-form .control-group {margin-bottom: 0}
 #logout-btn {width: 150px}
