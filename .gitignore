@@ -14,7 +14,6 @@ web*/.bundle
 
 # Ignore the default SQLite database.
 web*/db/*.sqlite3
-web*/db/schema.rb
 
 # Ignore all logfiles and tempfiles.
 web*/log/*.log
