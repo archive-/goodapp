@@ -37,6 +37,7 @@ html {overflow-y: scroll}
 #main {margin-top: 60px}
 h1 {margin-bottom: 10px}
 #promo-box {height: 240px; border: 1px solid #e3e3e3; margin-bottom: 20px}
+#welcome-box {padding-right: 10px}
 
 /* ------------------- FOOTER ------------------- */
 #footer {margin-top: 10px; border-top: 1px solid #e3e3e3; padding-top: 10px}

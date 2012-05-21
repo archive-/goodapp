@@ -4,15 +4,14 @@
     %p status &lt; 100
     %span
       %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
-    - if defined? js
-      %p hello there
-      -# content_for :javascript do
+    - if !defined? js
+      - content_for :javascript do
         :javascript
           $(function() {
             var refreshApp#{app.id} = function() {
-              $("app-#{app.id}").replace('#{escape_javascript(render partial: app, locals: {js: false})}');
+              alert($("app-#{app.id}").replace('#{escape_javascript(render partial: app, locals: {js: false})}');
             };
-            //setTimeout(refreshApp#{app.id}, 1000);
+            setTimeout(refreshApp#{app.id}, 1000);
           });
   - else
     %h3
