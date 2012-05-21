@@ -11,17 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520233606) do
+ActiveRecord::Schema.define(:version => 20120521015859) do
 
   create_table "apps", :force => true do |t|
-    t.integer  "key_id",     :null => false
+    t.integer  "key_id",                       :null => false
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "aid"
     t.string   "version"
     t.integer  "status"
     t.string   "platform"
+    t.boolean  "proper",     :default => true, :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -41,11 +42,11 @@ ActiveRecord::Schema.define(:version => 20120520233606) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "keys", :force => true do |t|
-    t.integer  "user_id",    :null => false
+    t.integer  "user_id",                    :null => false
     t.string   "title"
-    t.text     "key",        :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.text     "kee",        :default => "", :null => false
   end
 
   create_table "users", :force => true do |t|

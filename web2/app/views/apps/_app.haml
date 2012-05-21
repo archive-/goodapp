@@ -1,40 +1,17 @@
--# PLEASE FIND A WAY TO ADD THE WRAPPER
-- if !defined? wrapper
-  .app.alert.alert-success{id: "app-#{app.id}"}
-    - if app.status < 100
-      .progress.progress-striped.active
-        .bar{style: "width: #{app.status}%"}
-      %span
-        %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
-      - if !defined? js
-        - content_for :javascript do
-          :javascript
-            $(function() {
-              function refreshApp#{app.id}() {
-                (function() { $("#app-#{app.id}").load("/apps/#{app.id}/mini"); setTimeout('refreshApp#{app.id}()', 3000); })();
-              };
-            });
-    - else
-      %h3
-        = show_platform(app.platform)
-        = link_to app.title, [app.user, app]
-        %span.label.label-notice= app.version
-      %span
-        %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
-- else
+- haml_tag_if(!defined?(wrapper), :div, id: "app-#{app.id}", class: "app alert alert-success") do
   - if app.status < 100
     .progress.progress-striped.active
       .bar{style: "width: #{app.status}%"}
     %span
       %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
     - if !defined? js
+      -# TODO CLEAN THIS UP
       - content_for :javascript do
         :javascript
-          $(function() {
-            function refreshApp#{app.id}() {
-              (function() { $("#app-#{app.id}").load("/apps/#{app.id}/mini"); setTimeout('refreshApp#{app.id}()', 3000); })();
-            };
-          });
+          var refreshApp#{app.id} = function() {
+            (function() { $("#app-#{app.id}").load("/apps/#{app.id}/mini"); console.log("finished #app-#{app.id}"); setTimeout("refreshApp#{app.id}()", 2000); })();
+          };
+          $(function() { refreshApp#{app.id}(); });
   - else
     %h3
       = show_platform(app.platform)

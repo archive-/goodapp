@@ -32,4 +32,8 @@ module ApplicationHelper
     end
   end
 
+  def haml_tag_if(condition, *args, &block)
+    condition ? haml_tag(*args, &block) : yield
+  end
+
 end

@@ -1,8 +1,12 @@
+require "resque/server"
+
 Web2::Application.routes.draw do
   root to: "static#index"
+  mount Resque::Server.new, at: "/resque"
   get "/api" => "static#api"
   get "/about" => "static#about", as: :about
-
+  get "/faq" => "static#faq", as: :faq
+  get "/search" => "static#search", as: :search
   devise_for :users
   resources :users, except: [:edit, :update] do
     resources :keys
