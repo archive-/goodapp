@@ -28,7 +28,7 @@ class App < ActiveRecord::Base
     # solution though...
     case file.content_type
     when "application/vnd.android.package-archive"
-      Resque.enqueue(App, self.id, :handle_apk, fpath, key.id)
+      Resque.enqueue(App, self.id, :handle_apk, fpath: fpath, key_id: key.id)
     else
       progress(100, "Unrecognized filetype", false)
       return false
@@ -36,7 +36,8 @@ class App < ActiveRecord::Base
     true
   end
 
-  def handle_apk(fpath, key_id)
+  def handle_apk(opts={})
+    fpath, key_id = opts["fpath"], opts["key_id"]
     # TODO
     # unzip
     # cat META-INF/CERT.RSA | keytool -printcert
@@ -63,6 +64,13 @@ class App < ActiveRecord::Base
     File.unlink(fpath)
   end
 
+  def virus_total_scrape
+    # self is #<App insance>
+    # self.vtpermalink is the url
+    # scrape and store in local variables, can figure out what table entries we
+    # will replace with them afterwards
+  end
+
   def scan(fpath, force=false)
     return if self.vtpermalink and !force
     progress(70, "Virus Total: Scanning app")
@@ -81,8 +89,8 @@ class App < ActiveRecord::Base
     end
   end
 
-  def self.perform(app_id, handle_method, fpath, key_id)
-    App.find(app_id).send(handle_method, fpath, key_id)
+  def self.perform(app_id, method, opts={})
+    App.find(app_id).send(method, opts)
   end
 
   def self.valids
