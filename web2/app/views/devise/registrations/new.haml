@@ -1,4 +1,4 @@
-= form_for(resource, as: 'user', url: user_registration_path, html: {class: "form-horizontal"}, method: :post) do |f|
+= form_for current_user, as: :user, url: settings_path, method: :post, html: {class: "form-horizontal"} do |f|
   %fieldset
     %legend Don't have an account? Register!
     - errors = devise_error_messages!(resource)
