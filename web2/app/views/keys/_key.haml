@@ -14,18 +14,9 @@
         .bar{style: "width: #{key.status.to_s}%"}
           %p= key.state
       - if !defined? js
-        -# TODO CLEAN THIS UP -- not so many <script>
-        - content_for :javascript do
-          :javascript
-            var refreshKey#{key.id} = function() {
-              $this = $("#key-#{key.id}");
-              $this.load("/keys/#{key.id}/mini");
-              // TODO stop this one tick sooner (still refreshes once when unnecessary)
-              if ($this.find(".progress-success").length > 0) {
-                setTimeout("refreshKey#{key.id}()", 5000);
-              }
-            };
-            $(function() { refreshKey#{key.id}(); });
+        - content_for :javascript_onload do
+          :plain
+            refreshKey(#{key.id});
     - else
       %pre
         -# TODO based on key type (PGP, etc.) maybe show fingerprint instead of key.kee?

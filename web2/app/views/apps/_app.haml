@@ -16,17 +16,8 @@
         .bar{style: "width: #{app.status.to_s}%"}
           %p= app.state
       - if !defined? js
-        -# TODO CLEAN THIS UP -- not so many <script>
-        - content_for :javascript do
-          :javascript
-            var refreshApp#{app.id} = function() {
-              $this = $("#app-#{app.id}");
-              $this.load("/apps/#{app.id}/mini");
-              // TODO (remove comment) this is to stop image flickering once app is finished
-              // TODO stop this one tick sooner (still refreshes once when unnecessary)
-              if ($this.find(".progress-success").length > 0)
-                setTimeout("refreshApp#{app.id}()", 5000);
-            };
-            $(function() { refreshApp#{app.id}(); });
+        - content_for :javascript_onload do
+          :plain
+            refreshApp(#{app.id});
     %span
       %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"

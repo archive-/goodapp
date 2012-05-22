@@ -37,8 +37,15 @@
         - @user.keys.order("created_at DESC").each do |key|
           = render partial: key, locals: {user: @user}
 
-- content_for :javascript do
-  :javascript
-    $(function() {
-      $('a[href="' + window.location.hash + '"]').click();
-    });
+- content_for :javascript_declarations do
+  :plain
+    var refreshKey = function(key_id) {
+      $this = $("#key-" + key_id);
+      $this.load("/keys/" + key_id + "/mini");
+      // TODO stop this one tick sooner (still refreshes once when unnecessary)
+      if ($this.find(".progress-success").length > 0) setTimeout("refreshKey(" + key_id + ")", 5000);
+    };
+
+- content_for :javascript_onload do
+  :plain
+    $('a[href="' + window.location.hash + '"]').click();
