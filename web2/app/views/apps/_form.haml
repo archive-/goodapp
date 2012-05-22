@@ -8,7 +8,7 @@
         %span.help-inline Used to check the signature on the app.
         %p.help-block
           Need to
-          = link_to "add the key", edit_user_path(current_user, anchor: "keys-pane")
+          = link_to "add the key", settings_path(anchor: "keys-pane")
           first?
     .control-group
       = label_tag :file, 'File', class: "control-label"
