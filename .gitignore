@@ -18,6 +18,7 @@ web*/db/*.sqlite3
 # Ignore all logfiles and tempfiles.
 web*/log/*.log
 web*/tmp
+!web2/tmp/uploads/.gitkeep
 
 # Ignore compiled binaries
 a.out
