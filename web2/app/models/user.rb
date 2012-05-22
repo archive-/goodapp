@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :about, :email, :password,
     :password_confirmation, :remember_me
 
-  has_many :keys
+  has_many :keys, dependent: :delete_all
   has_many :apps, through: :keys
 
   validates_presence_of :name

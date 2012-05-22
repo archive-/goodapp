@@ -2,7 +2,7 @@ class Key < ActiveRecord::Base
   attr_accessible :title, :kee
 
   belongs_to :user
-  has_many :apps
+  has_many :apps, dependent: :delete_all
 
   # TODO (uncomment) validates_uniqueness_of :kee
   validates_uniqueness_of :title, scope: :user_id
