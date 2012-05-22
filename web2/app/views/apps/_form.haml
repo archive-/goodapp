@@ -7,9 +7,8 @@
         = f.select :key_id, user.valid_keys.collect {|k| [k.title, k.id]}, {include_blank: true}
         %span.help-inline Used to check the signature on the app.
         %p.help-block
-          Need to
-          = link_to "add the key", settings_path(anchor: "keys-pane")
-          first?
+          Haven't uploaded the right key?
+          = link_to "Add it on your settings page", settings_path(anchor: "keys-pane")
     .control-group
       = label_tag :file, 'File', class: "control-label"
       .controls
