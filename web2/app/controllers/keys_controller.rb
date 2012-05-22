@@ -6,15 +6,15 @@ class KeysController < ApplicationController
     if @key.kee.blank?
       # TODO TODO [in lots of places] needs to be render!!
       flash[:alert] = "The key cannot be blank!"
-      redirect_to edit_user_path(anchor: "keys-pane")
+      redirect_to settings_path(anchor: "keys-pane")
       return
     end
     if @key.handle_upload
       flash[:notice] = "Successfully upload your key to GoodApp. Processing now (see status below)."
-      redirect_to edit_user_path(anchor: "keys-pane")
+      redirect_to settings_path(anchor: "keys-pane")
     else
       flash[:alert] = "There was an error in creating the key."
-      redirect_to edit_user_path(anchor: "keys-pane")
+      redirect_to settings_path(anchor: "keys-pane")
     end
   end
 
@@ -30,7 +30,7 @@ class KeysController < ApplicationController
     @key = Key.find(params[:id])
     if @key.confirmed_at
       flash[:notice] = "Key already confirmed!"
-      redirect_to edit_user_path(anchor: "keys-pane")
+      redirect_to settings_path(anchor: "keys-pane")
       return
     end
     # TODO check key
@@ -38,10 +38,10 @@ class KeysController < ApplicationController
       @key.confirmed_at = Time.now ; @key.save
       @key.progress(100)
       flash[:notice] = "Key successfully confirmed."
-      redirect_to edit_user_path(anchor: "keys-pane")
+      redirect_to settings_path(anchor: "keys-pane")
     else
       flash[:alert] = "Key was not confirmed properly (improper confirmation token)."
-      redirect_to edit_user_path(anchor: "keys-pane")
+      redirect_to settings_path(anchor: "keys-pane")
     end
   end
 
@@ -51,6 +51,6 @@ class KeysController < ApplicationController
     # TODO check key
     @key.destroy
     flash[:notice] = "Deleted the key successfully."
-    redirect_to edit_user_path(anchor: "keys-pane")
+    redirect_to settings_path(anchor: "keys-pane")
   end
 end
