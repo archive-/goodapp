@@ -1,8 +1,37 @@
-.key.alert.alert-success
-  %h3= key.title
-  %pre
-    %code= key.kee.truncate(200)
-  .pull-right
-    -# TODO
-    = link_to "Edit", "#", class: "btn btn-info"
-    = button_to "Delete", [user, key], method: "delete", class: "btn btn-danger"
+- haml_tag_if(!defined?(wrapper), :div, id: "key-#{key.id}", class: "key alert alert-success") do
+  %h3
+    = key.title
+    - if key.style == "pgp"
+      %span.label.label-info{style: "vertical-align: 30%"}= "PGP #{key.fingerprint}"
+  - if !key.proper
+    .progress.progress-danger.progress-striped
+      .bar{style: "width: #{key.status.to_s}%"}
+        %p= key.state
+  - elsif key.status < 100
+    .progress.progress-success.progress-striped.active
+      .bar{style: "width: #{key.status.to_s}%"}
+        %p= key.state
+    - if !defined? js
+      -# TODO CLEAN THIS UP -- not so many <script>
+      - content_for :javascript do
+        :javascript
+          var refreshKey#{key.id} = function() {
+            (function() {
+              $this = $("#key-#{key.id}");
+              $this.load("/keys/#{key.id}/mini");
+              // TODO stop this one tick sooner (still refreshes once when unnecessary)
+              if ($this.children(".progress-success").length > 0)
+                setTimeout("refreshKey#{key.id}()", 2000);
+            })();
+          };
+          $(function() { refreshKey#{key.id}(); });
+  - else
+    %pre
+      -# TODO based on key type (PGP, etc.) maybe show fingerprint instead of key.kee?
+      %code= key.kee.truncate(200)
+    .pull-right
+      -# TODO
+      = link_to "Edit", "#", class: "btn btn-info"
+      = button_to "Delete", [current_user, key], method: "delete", class: "btn btn-danger"
+  %span
+    %em= "uploaded " + distance_of_time_in_words_to_now(key.created_at) + " ago"

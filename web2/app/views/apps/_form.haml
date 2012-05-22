@@ -4,8 +4,8 @@
     .control-group
       = f.label :key_id, class: "control-label"
       .controls
-        = f.select :key_id, user.keys.collect {|k| [k.title, k.id]}, {include_blank: true}
-        %span.help-inline Used to check the signature on the app
+        = f.select :key_id, user.valid_keys.collect {|k| [k.title, k.id]}, {include_blank: true}
+        %span.help-inline Used to check the signature on the app.
         %p.help-block
           Need to
           = link_to "add the key", edit_user_path(current_user, anchor: "keys-pane")

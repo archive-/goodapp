@@ -34,7 +34,7 @@
       - if @user.keys.empty?
         %p.alert.alert-info You have no keys, upload some above.
       - else
-        - @user.keys.each do |key|
+        - @user.keys.order("created_at DESC").each do |key|
           = render partial: key, locals: {user: @user}
 
 - content_for :javascript do

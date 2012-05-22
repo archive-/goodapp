@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
 
+  def valid_keys
+    keys.where(status: 100, proper: true)
+  end
+
   # TODO with high activity?
   # TODO maybe most trusted users??
   def self.featured

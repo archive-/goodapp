@@ -5,7 +5,7 @@ class App < ActiveRecord::Base
 
   after_save :set_aid
 
-  @queue = :main
+  @queue = :main #:apps
 
   # how status # works:
   #  0- 40: parsing data, handling the binary upload
@@ -31,10 +31,10 @@ class App < ActiveRecord::Base
   end
 
   def handle_upload(file, key)
-    self.status, self.proper = 10, true ; self.save # start it at 10 to give hope
+    self.status, self.proper = 10, true ; save # start it at 10 to give hope
     # TODO this is bad -- but file past in gets deleted after the response
-    rand = (0...5).map { (65 + rand(25)).chr }.join
-    tmp = File.new(File.join(Rails.root, "tmp/uploads/#{rand}"), "wb")
+    base = rand(36 ** 8).to_s(36)
+    tmp = File.new(File.join(Rails.root, "tmp/uploads/#{base}"), "wb")
     tmp.write(file.read)
     fpath = File.absolute_path(tmp)
     # TODO don't close it yet (we need it for async method, don't like this
@@ -43,7 +43,7 @@ class App < ActiveRecord::Base
     when "application/vnd.android.package-archive"
       Resque.enqueue(App, self.id, :handle_apk, fpath, key.kee)
     else
-      self.status, self.proper = 100, false ; self.save
+      self.status, self.proper = 100, false ; save
       return false
     end
     true
@@ -79,7 +79,7 @@ class App < ActiveRecord::Base
 
   def scan(fpath, force=false)
     return if self.vtpermalink and !force
-    self.status = 70 ; self.save
+    self.status = 70 ; save
     url = "https://www.virustotal.com/vtapi/v2/file/scan"
     json = RestClient.post(url, key: Settings.vtapi_key, file: File.new(fpath, 'rb'))
     res = JSON.parse(json)
@@ -88,10 +88,10 @@ class App < ActiveRecord::Base
       self.vtscan_id = res["scan_id"]
       self.vtpermalink = res["permalink"]
       self.vtsha256 = res["sha256"]
-      self.status = 100 ; self.save
+      self.status = 100 ; save
     else
       # TODO better error handling
-      self.status, self.proper = 100, false ; self.save
+      self.status, self.proper = 100, false ; save
     end
   end
 

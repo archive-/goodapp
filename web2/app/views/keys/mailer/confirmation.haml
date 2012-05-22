@@ -1,0 +1,5 @@
+%h1= "You added key \"#{@key.title}\" to GoodApp!"
+
+%p You can confirm you own this key through the link below:
+
+%p= link_to "Confirm key \"#{@key.title}\"", key_confirmation_url(@key, @key.confirmation_token)

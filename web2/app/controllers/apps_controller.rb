@@ -10,8 +10,8 @@ class AppsController < ApplicationController
     @user = current_user
     @app = App.new
     @key = Key.find_by_user_id_and_id(current_user.id, params[:app][:key_id])
-    unless @key
-      flash[:alert] = "Please ensure you select one of your keys."
+    if @key.nil? || @user.valid_keys.index(@key).nil?
+      flash[:alert] = "Please ensure you select one of your valid keys."
       redirect_to referer
       return
     end
@@ -31,11 +31,13 @@ class AppsController < ApplicationController
   end
 
   def show
+    # TODO consider privacy?
     @user = User.find(params[:user_id])
     @app = App.find(params[:id])
   end
 
   def mini
+    # TODO consider privacy?
     @app = App.find(params[:id])
     render layout: false
   end
