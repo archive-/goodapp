@@ -5,25 +5,12 @@ class App < ActiveRecord::Base
 
   after_save :set_aid
 
+  # TODO (uncomment) validates_uniqueness_of :version, scope: :title
+
   @queue = :main #:apps
 
-  # how status # works:
-  #  0- 40: parsing data, handling the binary upload
-  # 40- 70: sending to virus total
-  # 70-100: retrieving results from virus total, finishing
-
-  def state
-    case self.status
-    when 0..40
-      "Extracting app metadata"
-    when 40..70
-      "Scanning app for malware"
-    when 70...100
-      "Finalizing"
-    else
-      # TODO should never happen
-      "Error"
-    end
+  def progress(status, state="", proper=true)
+    self.status, self.state, self.proper = status, state, proper ; save
   end
 
   def user
@@ -31,7 +18,7 @@ class App < ActiveRecord::Base
   end
 
   def handle_upload(file, key)
-    self.status, self.proper = 10, true ; save # start it at 10 to give hope
+    progress(10, "Extracting metadata")
     # TODO this is bad -- but file past in gets deleted after the response
     base = rand(36 ** 8).to_s(36)
     tmp = File.new(File.join(Rails.root, "tmp/uploads/#{base}"), "wb")
@@ -41,15 +28,15 @@ class App < ActiveRecord::Base
     # solution though...
     case file.content_type
     when "application/vnd.android.package-archive"
-      Resque.enqueue(App, self.id, :handle_apk, fpath, key.kee)
+      Resque.enqueue(App, self.id, :handle_apk, fpath, key.id)
     else
-      self.status, self.proper = 100, false ; save
+      progress(100, "Unrecognized filetype", false)
       return false
     end
     true
   end
 
-  def handle_apk(fpath, kee)
+  def handle_apk(fpath, key_id)
     # TODO
     # unzip
     # cat META-INF/CERT.RSA | keytool -printcert
@@ -61,17 +48,16 @@ class App < ActiveRecord::Base
           # TODO parse XML -- not string
           content = manifest.read
           self.version = content.match(/android:versionName="([^"]*)"/)[1]
-          self.title = content.match(/application android:label="([^"]*)"/)[1]
+          self.title = title = content.match(/application android:label="([^"]*)"/)[1]
           self.platform = :android
-          self.status = 40 ; save
+          progress(40)
+          raise "Duplicate version upload for #{title}" unless valid?
         end
       end
     end
     self.scan(fpath)
   rescue Exception => e
-    # TODO store/log the exception
-    puts e.message
-    self.status, self.proper = 100, false ; save
+    progress(100, e.message, false)
   ensure
     # TODO delete the temp file now
     File.unlink(fpath)
@@ -79,7 +65,7 @@ class App < ActiveRecord::Base
 
   def scan(fpath, force=false)
     return if self.vtpermalink and !force
-    self.status = 70 ; save
+    progress(70, "Virus Total: Scanning app")
     url = "https://www.virustotal.com/vtapi/v2/file/scan"
     json = RestClient.post(url, key: Settings.vtapi_key, file: File.new(fpath, 'rb'))
     res = JSON.parse(json)
@@ -88,15 +74,15 @@ class App < ActiveRecord::Base
       self.vtscan_id = res["scan_id"]
       self.vtpermalink = res["permalink"]
       self.vtsha256 = res["sha256"]
-      self.status = 100 ; save
+      progress(100)
     else
       # TODO better error handling
-      self.status, self.proper = 100, false ; save
+      progress(100, "Virus Total: Error -- please file bug report", false)
     end
   end
 
-  def self.perform(app_id, handle_method, fpath, kee)
-    App.find(app_id).send(handle_method, fpath, kee)
+  def self.perform(app_id, handle_method, fpath, key_id)
+    App.find(app_id).send(handle_method, fpath, key_id)
   end
 
   private

@@ -4,7 +4,7 @@
 -# TODO add other info? name, etc.
 -# TODO let people *enable* profile page (or have one by default)
 
-= form_for(current_user, as: 'user', url: registration_path('user'), html: {method: :put, class: "form-horizontal"}) do |f|
+= form_for current_user, html: {method: :put, class: "form-horizontal"} do |f|
   %fieldset
     %legend Update your account settings.
     - errors = devise_error_messages!(current_user)

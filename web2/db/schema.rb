@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522052510) do
+ActiveRecord::Schema.define(:version => 20120522090055) do
 
   create_table "apps", :force => true do |t|
     t.integer  "key_id",                        :null => false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20120522052510) do
     t.string   "vtscan_id"
     t.string   "vtpermalink"
     t.string   "vtsha256"
+    t.string   "state"
   end
 
   create_table "delayed_jobs", :force => true do |t|

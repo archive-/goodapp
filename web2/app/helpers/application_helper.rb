@@ -23,12 +23,12 @@ module ApplicationHelper
   end
 
   def show_platform(platform)
-    return unless !platform.blank?
+    return if platform.nil? || platform.blank?
     case platform.to_sym
     when :android
       image_tag "android-robot-logo.jpg", width: "24"
     else
-      "unknown"
+      "??"
     end
   end
 

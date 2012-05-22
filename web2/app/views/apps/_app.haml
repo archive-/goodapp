@@ -1,31 +1,32 @@
-- haml_tag_if(!defined?(wrapper), :div, id: "app-#{app.id}", class: "app alert alert-success") do
-  - if !app.proper
-    .progress.progress-danger.progress-striped
-      .bar{style: "width: #{app.status.to_s}%"}
-        %p= app.state
-  - elsif app.status < 100
-    .progress.progress-success.progress-striped.active
-      .bar{style: "width: #{app.status.to_s}%"}
-        %p= app.state
-    - if !defined? js
-      -# TODO CLEAN THIS UP -- not so many <script>
-      - content_for :javascript do
-        :javascript
-          var refreshApp#{app.id} = function() {
-            (function() {
+- haml_tag_if(!defined?(wrapper), :div, id: "app-#{app.id}", class: "app") do
+  - status = app.proper ? "success" : "danger"
+  .alert{class: "alert-#{status}"}
+    - if !app.proper
+      .progress.progress-danger.progress-striped
+        .bar{style: "width: #{app.status.to_s}%"}
+          %p= app.state
+    - if app.title
+      %h3
+        = show_platform(app.platform)
+        = link_to app.title, [app.user, app]
+        - if app.version
+          %span.label.label-info.header-inline= app.version
+    - if app.status < 100
+      .progress.progress-success.progress-striped.active
+        .bar{style: "width: #{app.status.to_s}%"}
+          %p= app.state
+      - if !defined? js
+        -# TODO CLEAN THIS UP -- not so many <script>
+        - content_for :javascript do
+          :javascript
+            var refreshApp#{app.id} = function() {
               $this = $("#app-#{app.id}");
               $this.load("/apps/#{app.id}/mini");
               // TODO (remove comment) this is to stop image flickering once app is finished
               // TODO stop this one tick sooner (still refreshes once when unnecessary)
-              if ($this.children(".progress-success").length > 0)
-                setTimeout("refreshApp#{app.id}()", 2000);
-            })();
-          };
-          $(function() { refreshApp#{app.id}(); });
-  - else
-    %h3
-      = show_platform(app.platform)
-      = link_to app.title, [app.user, app]
-      %span.label.label-notice= app.version
-  %span
-    %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"
+              if ($this.find(".progress-success").length > 0)
+                setTimeout("refreshApp#{app.id}()", 5000);
+            };
+            $(function() { refreshApp#{app.id}(); });
+    %span
+      %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"

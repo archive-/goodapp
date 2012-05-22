@@ -10,7 +10,7 @@ class KeysController < ApplicationController
       return
     end
     if @key.handle_upload
-      flash[:notice] = "Successfully added the key to your account."
+      flash[:notice] = "Successfully upload your key to GoodApp. Processing now (see status below)."
       redirect_to edit_user_path(anchor: "keys-pane")
     else
       flash[:alert] = "There was an error in creating the key."

@@ -43,7 +43,6 @@ class Key < ActiveRecord::Base
     KeyConfirmer.email(email, self.id).deliver
     progress(60, "PGP: Found key #{fingerprint}. Sent confirmation email to <#{email}>.")
   rescue Exception => e
-    # TODO store/log the execption
     progress(100, e.message, false)
   end
 

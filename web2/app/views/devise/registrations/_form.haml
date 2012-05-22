@@ -1,4 +1,4 @@
-= form_for(resource, as: 'user', url: user_registration_path, html: {class: "form-horizontal"}, method: method) do |f|
+= form_for current_user, html: {method: method, class: "form-horizontal"} do |f|
   %fieldset
     %legend= legend
     - errors = devise_error_messages!(resource)

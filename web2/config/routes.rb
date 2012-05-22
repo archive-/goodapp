@@ -18,7 +18,7 @@ Web2::Application.routes.draw do
   get "/apps/:id/mini" => "apps#mini", as: :show_app_mini
   get "/keys/:id/mini" => "keys#mini", as: :show_key_mini
   get "/settings" => "users#edit", as: :edit_user
-  put "/settings" => "users#update", as: :users
+  put "/settings" => "users#update", as: :user
   get "/upload/app" => "apps#new", as: :new_app
   post "/upload/app" => "apps#create", as: :apps
   # get "/upload/key" => "keys#new", as: :new_key
