@@ -7,10 +7,14 @@ This project uses ruby 1.9.3 (see .rvmrc)
 === Dependencies
 
 * redis
-  - on mac, `brew install redis`
-  - on \*nix, `pacman -S redis` or similar
+  - on mac, <tt>brew install redis</tt>
+  - on \*nix, <tt>pacman -S redis</tt> or similar
 
 === Gems
+
+If using <tt>rvm</tt> (we are), <tt>cd <PATH_TO_goodapp/web2></tt>.
+Make sure that rvm selects <tt>ruby 1.9.3</tt> and the <tt>goodapp</tt> gemset.
+After that, bundle the required gems with the following command:
 
    $ bundle install
 
