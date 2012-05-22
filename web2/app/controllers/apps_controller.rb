@@ -33,7 +33,7 @@ class AppsController < ApplicationController
   def show
     # TODO consider privacy?
     @user = User.find(params[:user_id])
-    @app = App.find(params[:id])
+    @app = App.valids.find(params[:id])
   end
 
   def mini

@@ -85,6 +85,10 @@ class App < ActiveRecord::Base
     App.find(app_id).send(handle_method, fpath, key_id)
   end
 
+  def self.valids
+    App.where(proper: true, status: 100)
+  end
+
   private
 
   def set_aid

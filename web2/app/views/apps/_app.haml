@@ -8,7 +8,7 @@
     - if app.title
       %h3
         = show_platform(app.platform)
-        = link_to app.title, [app.user, app]
+        = link_to_if app.status == 100, app.title, [app.user, app]
         - if app.version
           %span.label.label-info.header-inline= app.version
     - if app.status < 100
