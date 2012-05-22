@@ -19,6 +19,6 @@ class User < ActiveRecord::Base
   # TODO maybe most trusted users??
   def self.featured
     # TODO determined featured users list
-    User.last(20)
+    User.last(5)
   end
 end
