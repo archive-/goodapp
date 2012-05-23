@@ -13,3 +13,4 @@ gem "faker"
 gem "settingslogic"
 gem "rest-client"
 gem "open4"
+gem 'nokogiri'             
