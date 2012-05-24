@@ -12,12 +12,24 @@ App.destroy_all
 
 digest = User.new.send(:password_digest, "blabla")
 
+# TODO less hacky
+=begin
+def finish_seeding_user(user, roles=[])
+  user.confirmed_at = Time.now
+  user.save
+  roles.each do |role|
+    user.add_role role
+  end
+end
+=end
+
 User.populate(1) do |user|
   user.name = 'TJ Koblentz'
   user.email = 'tj.koblentz@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm TJ."
 end
+# finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Yulia Dubinina'
@@ -25,6 +37,7 @@ User.populate(1) do |user|
   user.encrypted_password = digest
   user.about = "Hi, I'm Yulia."
 end
+# finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Victor Moreira'
@@ -32,6 +45,7 @@ User.populate(1) do |user|
   user.encrypted_password = digest
   user.about = "Hi, I'm Victor."
 end
+# finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Jasper Fredrickson'
@@ -39,6 +53,7 @@ User.populate(1) do |user|
   user.encrypted_password = digest
   user.about = "Hi, I'm Jasper."
 end
+# finish_seeding_user(User.last, [:admin, :dev])
 
 # Creates account for Regression test
 User.populate(1) do |user|
@@ -47,10 +62,15 @@ User.populate(1) do |user|
   user.encrypted_password = digest
   user.about = "Test master."
 end
+# finish_seeding_user(User.last, [:admin, :dev])
 
-User.populate(50) do |user|
+User.populate(25) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
   user.encrypted_password = digest
   user.about = Populator.sentences(2..4)
+end
+
+App.populate(40) do |app|
+  app.name = Populator.words(2)
 end

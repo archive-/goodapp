@@ -69,6 +69,12 @@ class App < ActiveRecord::Base
     # self.vtpermalink is the url
     # scrape and store in local variables, can figure out what table entries we
     # will replace with them afterwards
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+
+    
+
   end
 
   def scan(fpath, force=false)
