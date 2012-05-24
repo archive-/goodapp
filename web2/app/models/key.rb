@@ -40,7 +40,7 @@ class Key < ActiveRecord::Base
     raise "PGP: Import error" unless status.exitstatus.zero?
     fingerprint, email = md[1], md[2]
     self.style, self.fingerprint = :pgp, fingerprint ; save
-    KeyConfirmer.email(email, self.id).deliver
+    KeyMailer.email(email, self.id).deliver
     progress(60, "PGP: Found key #{fingerprint}. Sent confirmation email to <#{email}>.")
   rescue Exception => e
     progress(100, e.message, false)
