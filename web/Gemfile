@@ -1,19 +1,16 @@
-source :rubygems
+source:rubygems
 
-gem 'rails', '3.2.1'
-gem 'sqlite3'
-gem 'devise'
-gem 'json', '1.6.5'               # TODO 1.6.6 breaks
-gem 'jquery-rails'                # jquery + rails
-gem 'paperclip', '~> 2.7'         # attachments
-gem 'cancan'                      # authorization
-gem 'rolify'
-gem 'delayed_job_active_record'   # background processing
-gem 'populator'                   # seeding
-gem 'faker'                       # seeding
-gem 'settingslogic'               # putting sensitive info not to check in (api keys)
-gem 'rest-client'                 # for virus total communication
-gem 'nokogiri'                    # data scraping
-gem 'rspec'                       # for testing
-gem 'haml'                        # for templating
-gem 'rails3-jquery-autocomplete'  # for search and other things
+gem "rails", "3.2.1"
+gem "sqlite3"
+gem "jquery-rails"
+gem "devise"
+gem "haml"
+gem "letter_opener", group: :development
+gem "resque"
+gem "resque-retry"
+gem "populator"
+gem "faker"
+gem "settingslogic"
+gem "rest-client"
+gem "open4"
+gem "nokogiri"

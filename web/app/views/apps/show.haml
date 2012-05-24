@@ -1,55 +1,17 @@
+%h1
+  = show_platform(@root_app.platform)
+  = title @root_app.title
 
-%h1= @app.name
-
-.row-fluid
-  .span2
-    -# Picture goes here , default will be this, unless one if uploaded with
-    = image_tag @app.logo.url(:profile), width: "100"
-    -# Other information about user goes here
-    %h3 Description
-    - unless @app.description.blank?
-      %p= @app.description
-    - else
-      %p No description available. Needs to be set.
-    %h3 Version
-    %h3 Type
-  .span7
-    #f-basic
-    - if current_user && !@app.owners.index(current_user)
-      %a.btn.btn-success.pull-right.btn-large{'data-toggle' => "modal",
-      href: "#feedback-modal"} Provide Feedback
-      = render "basic_feedbacks/modal_form"
-    #rating-box
-      %h3
-        Developed by
-        - @app.owners.each do |owner|
-          = link_to owner.name, owner
-      %h3 App stats
-      %table.table.centered-columns
-        %tr
-          %th # Downloads
-          %th # Reviews in Store
-          %th Rating
-        %tr
-          %td 40
-          %td 5
-          %td
-            = image_tag "glyphicons_049_star.png", size: "10x10"
-            = image_tag "glyphicons_049_star.png", size: "10x10"
-            = image_tag "glyphicons_049_star.png", size: "10x10"
-    #feedbacks
-      %h3 Feedback
-      - feedback = false
-      - @basic_feedbacks.each do |basic_feedback|
-        - feedback = true
-        = render basic_feedback
-      - if !feedback
-        %b No feedback was left yet. Be the first to leave some!
-  .span3
-    %h3 Similar Apps
-    - App.all[0...6].each do |app|
-      .row
-        .span2   
-          = app_show(app)
-        .span3   
-          = app.name
+%ul.nav.nav-tabs
+  - @app_versions[0..-2].each do |app|
+    %li{class: ("active" if app.id == @app.id)}
+      %a{'data-toggle' => "tab", href: "#app#{app.id}"}
+        %span.label= app.version
+  - app = @app_versions[-1]
+  %li{class: ("active" if app.id == @app.id)}
+    %a{'data-toggle' => "tab", href: "#app#{app.id}"}
+      %span.label.label-info= app.version
+.tab-content
+  - @app_versions.each do |app|
+    .tab-pane{id: "app#{app.id}", class: ("active" if app.id == @app.id)}
+      %h3= app.title

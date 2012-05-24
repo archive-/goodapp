@@ -1,183 +1,43 @@
 class StaticController < ApplicationController
-  skip_authorization_check
-
-  # I'm so hacky!
-  def autosearch
-    term = params[:term]
-    items = []
-    alias gai get_autocomplete_items
-    if term && !term.blank?
-      items += gai(model: User, term: term, method: 'name', options: {})
-      items += gai(model: App, term: term, method: 'name', options: {})
-    end
-    render json: json_for_autocomplete(items, 'name')
-  end
-
-  def home
-    @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 90.minutes) do
-     scrape
-    end
-    @recent_feedbacks = BasicFeedback.order('created_at DESC').limit(10)
-  end
-
-  def about
-    @active[:about] = true
+  def index
+    @recent_apps = App.valids.order("created_at DESC").limit(4) # paginate
   end
 
   def search
     @search_query = params[:q]
   end
 
-  def contact
-    @active[:contact] = true
-  end
+  def api ; end
+  def contact ; end
 
-  def send_contact_mail
-    # FIX THIS -- need validations -- make form_for with mail object?
+  def send_contact_email
+    # TODO better validations -- make form_for with mail object?
     if params[:email] && !params[:email].blank?
       @email = params[:email]
     else
-      flash[:error] = 'You must enter an email address!'
-      redirect_to :action => 'contact'
+      flash.now.alert = "You must enter an email address!"
+      render "contact"
       return
     end
     if params[:name] && !params[:name].blank?
       @name = params[:name]
     else
-      flash[:error] = 'You must give a name!'
-      redirect_to :action => 'contact'
+      flash.now.alert = "You must give a name!"
+      render "contact"
       return
     end
-    if params[:message] && !params[:message].blank?
-      @message = params[:name]
+    if params[:body] && !params[:body].blank?
+      @body = params[:body]
     else
-      flash[:error] = 'You must enter a message!'
-      redirect_to :action => 'contact'
+      flash.now.alert = "You must enter a message!"
+      render "contact"
       return
     end
-    if UserMailer.send_contact_mail(@email, @name, @message)
-      redirect_to root_url, :notice => 'Message successfully sent.'
+    if UserMailer.email(@email, @name, @body).deliver
+      redirect_to contact_path, :notice => "Thanks for contacting us! We will *definitely* read it!"
     else
-      redirect_to root_url, :notice => 'Message was not sent.'
+      flash.now.alert = "Message was not sent."
+      render "contact"
     end
   end
-
-  def faq
-    @active[:faq] = true
-  end
-
-  def api
-    @active[:api] = true
-  end
-
-  private
-
-  def scrape
-    require 'nokogiri'
-    require 'open-uri'
-
-    # TODO -- since not articles have a description in the same place, sometime
-    # description comes out to be empty -- which causes an exception and page wont load
-    # need to figure out what to do if that happens: look for another paragraph to scrape?
-    # or just look for a different article?
-
-    # for comments =begin =end
-    # would like to display a total of 5 article
-    # would like each time a page loads for different articles to be selected
-    r = Random.new
-    number = r.rand(1...5) # => 22
-    j = 0
-    title = Array.new
-    decsr = Array.new
-    links = Array.new
-
-    # first source - WIRED
-    url_wired = "http://www.wired.com/gadgetlab/tag/android-market/"
-    doc = Nokogiri::HTML(open(url_wired))
-
-    doc.css(".tag-android-market").each_with_index do |item, i|
-      if number == i
-        title[j] = item.at_css("h2 a").text
-        links[j] = item.at_css("h2 a")[:href]
-        if item.at_css("p:nth-child(4)") != nil
-          decsr[j] = item.at_css("p:nth-child(4)").text
-        end
-        break
-      end
-    end
-    j = j + 1
-
-    # second sourse - MASHABLE
-    url_mash_1 = "http://mashable.com/follow/search?q=windows+marketplace"
-    doc_mash = Nokogiri::HTML(open(url_mash_1))
-
-    number_2 = r.rand(1...6)
-
-    doc_mash.css(".short").each_with_index do |item, i|
-      if number_2 == i
-        title[j] =  item.at_css(".headline").text
-        links[j] = item.at_css(".headline")[:href]
-        url_spec = links[j]
-        doc3 = Nokogiri::HTML(open(url_spec))
-        if doc3.at_css("p:nth-child(4)") != nil
-          decsr[j] = doc3.at_css("p:nth-child(4)").text
-        end
-        break
-      end
-    end
-    j = j +1
-    url_mash_2 = "http://mashable.com/follow/search?q=android+market"
-    doc_mash = Nokogiri::HTML(open(url_mash_2))
-
-    number_3 = r.rand(1...6)
-
-    doc_mash.css(".short").each_with_index do |item, i|
-      if number_3 == i
-        title[j] =  item.at_css(".headline").text
-        links[j] = item.at_css(".headline")[:href]
-        url_spec = links[j]
-        doc3 = Nokogiri::HTML(open(url_spec))
-        if doc3.at_css("p:nth-child(4)") != nil
-          decsr[j] = doc3.at_css("p:nth-child(4)").text
-        end
-        break
-      end
-    end
-    j = j + 1
-    url_mash_3 = "http://mashable.com/follow/search?q=apple+store"
-    doc_mash = Nokogiri::HTML(open(url_mash_3))
-
-    number_4 = r.rand(1...6)
-
-    doc_mash.css(".short").each_with_index do |item, i|
-      if number_4 == i
-        title[j] =  item.at_css(".headline").text
-        links[j] = item.at_css(".headline")[:href]
-        url_spec = links[j]
-        doc3 = Nokogiri::HTML(open(url_spec))
-        if doc3.at_css("p:nth-child(4)") != nil
-          decsr[j] = doc3.at_css("p:nth-child(4)").text
-        end
-        break
-      end
-    end
-    j = j + 1
-
-    # third source - TECH CRUNCH - will only grab the top etry..wont iterate thorugh them all
-    url_tech = "http://techcrunch.com/mobile/"
-    doc_tech = Nokogiri::HTML(open(url_tech))
-
-    # #post-537417
-    doc_tech.css(".left-container").each_with_index do |item, i|
-      title[j] =  item.at_css(".embedded-image-post .headline a").text
-      links[j] = item.at_css(".embedded-image-post .headline a")[:href]
-      if item.at_css("p:nth-child(1)") != nil
-        decsr[j] = item.at_css("p:nth-child(1)").text
-      end
-    end
-
-    return title, decsr, links
-  end
-  # TODO check this next line works (in controller)
-  # handle_asynchronously :scrape
 end

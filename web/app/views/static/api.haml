@@ -1,6 +1,6 @@
-= title 'API (v0.0.1)'
+%h1= title "API"
 
-%table.table
+%table.table.table-bordered.table-striped
   %tr
     %th Path
     %th HTTP Method
@@ -12,16 +12,16 @@
       %code /users/:id
     %td GET
     %td
-    %td html,json
+    %td JSON
     %td
-      User json object with format:
+      User JSON:
       %code {id: SOME_ID, trust_rating: REPUTATION}
   %tr
     %td
       %code /apps/:id
     %td GET
     %td
-    %td html,json
+    %td JSON
     %td
-      App json object with format:
+      App JSON:
       %code {id: SOME_ID, trust: TRUST}

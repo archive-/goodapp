@@ -1,11 +1,10 @@
 class UserMailer < ActionMailer::Base
-  # default :to => "example@goodapp.com"
-  default :to => "yulia.dubinina@gmail.com"
+  default to: "goodapp.capstone@gmail.com"
 
-  def send_contact_mail(from_email, from_name, message)
-    body = message
+  def email(from_email, from_name, body)
     mail(:subject => "Contact Form filled out by #{from_name}",
-         :from => from_email, :body => message).deliver
+         :from => from_email,
+         :body => body)
   end
 
 end

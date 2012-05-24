@@ -1,14 +1,12 @@
-- title 'Resend confirmation intructions'
+%h2 Resend confirmation instructions
 
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {class: "form-horizontal", method: :post}) do |f|
-  %fieldset
-    %legend Resend confirmation instructions
-    = devise_error_messages!
-    .control-group
-      = f.label :email, class: "control-label"
-      .controls
-        = f.email_field :email
-    .form-actions
-      = f.submit "Resend confirmation instructions", class: "btn btn-primary"
+= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {method: :post}) do |f|
+  = devise_error_messages!
+  %div
+    = f.label :email
+    %br
+    = f.email_field :email
+  %div
+    = f.submit "Resend confirmation instructions"
 
 = render "links"

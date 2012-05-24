@@ -1,10 +1,4 @@
-= title 'About'
-
-- [4, 3, 1, 2].each do |i|
-  - user = User.find(i)
-  %a.tooltipped-bottom.pull-right{href: user_url(i),
-    rel: "tooltip", title: user.name}
-    = image_tag user.avatar.url(:thumb), class: "pull-right space-left"
+%h1= title 'About'
 
 %h2 Overview
 

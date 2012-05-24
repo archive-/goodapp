@@ -1,54 +1,48 @@
 class AppsController < ApplicationController
-  load_and_authorize_resource
-
-  def index
-  end
-
-  def show
-    @app = App.find(params[:id])
-    @goods = {:g_speed => 'Fast and reliable',
-      :g_ease => 'Easy to use',
-      :g_updates => 'Updates are consistent',
-      :g_on_offline => 'Works on and off line',
-      :g_battery => 'Low battery usage',
-      :g_personalize => 'Ability to personalize',
-      :g_location_services => 'Uses my location nicely',
-      :g_performs => 'Performs as expected',
-      :g_useful => 'Interesting and useful'
-    }
-    @bads = {:b_battery => 'Drains battery',
-      :b_ads => 'Too many advertisements',
-      :b_permissions => 'Doesn\'t ask for permission',
-      :b_crashes => 'Crashes often',
-      :b_privacy => 'Steals private info',
-      :b_sounds => 'Triggers unexpected sounds',
-      :b_updates => 'Updates cause problems',
-      :b_internet => 'Uses too much data',
-      :b_money => 'Charges me without consent',
-      :b_other_apps => 'Opens other app without consent',
-      :b_location_services => 'Uses my location poorly',
-      :b_overall => 'Doesn\'t perform properly'
-    }
-    @basic_feedbacks = BasicFeedback.find_all_by_app_id(@app.id)
-    if current_user
-      @basic_feedback = BasicFeedback.find_or_initialize_by_user_id_and_app_id(current_user.id, @app.id)
-    end
-  end
-
   def new
+    @user = current_user
+    @app = App.new
+    @apps = @user.apps.order("created_at DESC")
   end
 
   def create
-    if @app.save
-      # TODO use build
-      owned_app = AppOwnership.create(:user_id => current_user.id, :app_id => @app.id)
-      redirect_to @app, :notice => 'Successfully uploaded your App.'
+    # TODO set aid to parent if user is uploading a new version of the app
+    @user = current_user
+    @app = App.new
+    @key = Key.find_by_user_id_and_id(current_user.id, params[:app][:key_id])
+    if @key.nil? || @user.valid_keys.index(@key).nil?
+      flash[:alert] = "Please ensure you select one of your valid keys."
+      redirect_to referer
+      return
+    end
+    @app.key_id = @key.id
+    unless params[:file]
+      flash[:alert] = "You must upload a file to upload an app."
+      redirect_to referer
+      return
+    end
+    if @app.handle_upload(params[:file], @key)
+      flash[:notice] = "Successfully uploaded your app to GoodApp. Processing now (see status below)."
+      redirect_to referer
     else
-      flash.now.alert = 'App was not uploaded properly.'
-      render 'new'
+      flash[:alert] = "There was a problem uploading your app to GoodApp."
+      redirect_to referer
     end
   end
 
-  def flag
+  def show
+    # TODO consider privacy?
+    @user = User.find(params[:user_id])
+    # TODO return just app in respond_to js?
+    @app = App.valids.find(params[:id])
+    @app_versions = App.valids.order("created_at ASC").find_all_by_aid(@app.aid)
+    # root_app is most recent version
+    @root_app = @app_versions[-1]
+  end
+
+  def mini
+    # TODO consider privacy?
+    @app = App.find(params[:id])
+    render layout: false
   end
 end

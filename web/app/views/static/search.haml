@@ -1,4 +1,4 @@
-= title 'Search Results'
+%h1= title 'Search Results'
 
 .row
   .span6
@@ -7,7 +7,7 @@
     - App.all.each do |app|
       - if app.name.downcase.include?(@search_query.downcase)
         %li
-          %a.tooltipped{href: app_url(app), rel: "tooltip", title: app.name}= app.name
+          = app.name
         - found = true
     - if !found
       = "No apps found"
@@ -18,13 +18,13 @@
       - if dev.name.downcase.include?(@search_query.downcase)
         .row
           .span1
-            = user_show(dev)
+            = dev.name
           .span3
-            %a{href: user_url(dev)}= dev.name
+            = dev.name
             %br
             = "Trust Rating: n/a"
             - #TODO!! display trust rating ^
-        %hr 
+        %hr
         - found = true
     - if !found
       = "No devs found"

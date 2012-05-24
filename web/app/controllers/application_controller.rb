@@ -1,15 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :empty_active
-
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+  helper_method :referer
 
   private
 
-  def empty_active
-    @active = {}
+  # TODO please no
+  def referer
+    Rails.application.routes.recognize_path(request.referer)
   end
-
 end

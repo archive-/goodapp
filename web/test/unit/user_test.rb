@@ -1,7 +1,6 @@
 require 'test_helper'
 
-class DevTest < ActiveSupport::TestCase
-  # TODO write tests here
+class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

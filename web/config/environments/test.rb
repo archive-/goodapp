@@ -1,4 +1,4 @@
-Web::Application.configure do
+Web2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's
@@ -28,7 +28,7 @@ Web::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = {host: "TODO"}
+  config.action_mailer.default_url_options = {host: "localhost:3000"}
 
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict

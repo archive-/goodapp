@@ -1,36 +1,42 @@
-= title 'Account Settings'
+- title "Settings"
 
-.row
-  .span6
-    = render partial: "users/form"
-  .span6
-    = form_for @user, html: {multipart: true,
-      class: "form-horizontal"} do |f|
-      %fieldset
-        %legend Profile Info
-        .control-group
-          = f.label :about, class: "control-label"
-          .controls
-            = f.text_area :about, rows: 4, class: "input-xlarge"
-        .control-group
-          = f.label :avatar, class: "control-label"
-          .controls
-            = f.file_field :avatar, class: "input-xlarge"
-        .form-actions
-          = f.submit "Update Profile", class: "btn btn-primary"
-          = button_tag "Cancel", type: "reset", class: "btn"
-- if user_signed_in?
-  - if current_user.has_role? :dev
-    %h4 You are a developer
-    = button_to "Downgrade to Normal User Account",
-      downgrade_path, id: "downgrade-button",
-      confirm: "Are you sure you would like to downgrade your account?",
-      class: "btn btn-danger"
-    %p.help-block
-      CAUTION. Downgrading your account to a normal user means you
-      will lose your developer status and trust, as well as the link
-      between you and your App.
-  - else
-    %h4 You are a regular user
-    = button_to "Upgrade to Developer Account", upgrade_path,
-      id: "upgrade-button", class: "btn btn-success"
+.row-fluid
+  .span3.well
+    %ul.nav.nav-list
+      %li.nav-header= @user.email
+      %li.active= link_to "Profile", "#profile-pane", 'data-toggle' => "tab"
+      %li= link_to "Account Settings", "#account-settings-pane", 'data-toggle' => "tab"
+      %li= link_to "Keys", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
+  .span9.tab-content
+    #profile-pane.tab-pane.active
+      %h2 Profile
+      = form_for current_user, as: :user, url: settings_path, method: :put, html: {class: "form-horizontal"} do |f|
+        %fieldset
+          %legend Update your personal information
+          .control-group
+            = f.label :name, class: "control-label"
+            .controls
+              = f.text_field :name
+          .control-group
+            = f.label :about, class: "control-label"
+            .controls
+              = f.text_area :about, rows: 5, style: "width: 98%"
+              %p.help-block This field will be displayed on your profile.
+          .form-actions
+            = f.submit class: "btn btn-primary"
+    #account-settings-pane.tab-pane
+      %h2 Account Settings
+      = render partial: "devise/registrations/form", locals: {resource: current_user, method: :put, legend: "Change your settings"}
+    #keys-pane.tab-pane
+      %h2 Keys
+      -# TODO expand this
+      = render partial: "keys/form", locals: {user: @user, key: Key.new}
+      - if @user.keys.empty?
+        %p.alert.alert-info You have no keys, upload some above.
+      - else
+        - @user.keys.order("created_at DESC").each do |key|
+          = render partial: key, locals: {user: @user}
+
+- content_for :javascript_onload do
+  :plain
+    $('a[href="' + window.location.hash + '"]').click();

@@ -1,39 +1,22 @@
 class UsersController < ApplicationController
-  before_filter :activate_user
-  load_and_authorize_resource
-
-  def index
-  end
-
   def show
-    @endorsement = Endorsement.new
+    @user = User.find(params[:id])
   end
 
   def edit
+    @user = current_user
   end
 
   def update
-    if @user.update_attributes(params[:user])
-      redirect_to @user, :notice => 'Successfully updated your account settings.'
+    @user = current_user
+    # TODO less hacky?
+    anchor = params[:user][:about] ? "profile-pane" : "account-settings-pane"
+    if current_user.update_attributes(params[:user])
+      flash[:notice] = "Successfully updated your settings."
+      redirect_to settings_path(anchor: anchor)
     else
-      flash.now.alert = 'A problem occured when trying to update your account settings.'
-      render 'new'
+      flash[:alert] = "There was an issue in updating your settings."
+      redirect_to settings_path(anchor: anchor)
     end
-  end
-
-  def upgrade
-    current_user.add_role :dev
-    redirect_to current_user, :notice => 'Your account is now a developer account.'
-  end
-
-  def downgrade
-    current_user.remove_role :dev
-    redirect_to current_user, :notice => 'Your account is no longer a developer account.'
-  end
-
-  private
-
-  def activate_user
-    @active[:user] = true
   end
 end
