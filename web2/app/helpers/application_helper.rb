@@ -26,7 +26,7 @@ module ApplicationHelper
     return if platform.nil? || platform.blank?
     case platform.to_sym
     when :android
-      image_tag "android-robot-logo.jpg", width: "24"
+      image_tag "android-robot-logo.jpg", width: "24", style: "vertical-align: 0"
     else
       "??"
     end

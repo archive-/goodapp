@@ -33,7 +33,11 @@ class AppsController < ApplicationController
   def show
     # TODO consider privacy?
     @user = User.find(params[:user_id])
+    # TODO return just app in respond_to js?
     @app = App.valids.find(params[:id])
+    @app_versions = App.valids.order("created_at ASC").find_all_by_aid(@app.aid)
+    # root_app is most recent version
+    @root_app = @app_versions[-1]
   end
 
   def mini

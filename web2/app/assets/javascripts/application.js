@@ -17,3 +17,11 @@
 $(function() {
   $(".tooltipped").tooltip({"placement": "bottom"});
 });
+
+var refreshMini = function(model, id) {
+  $this = $("#" + model + "-" + id);
+  $this.load("/" + model + "s/" + id + "/mini");
+  // TODO (remove comment) this is to stop image flickering once app is finished
+  // TODO stop this one tick sooner (still refreshes once when unnecessary)
+  if ($this.find(".active").length > 0) setTimeout("refreshMini(\"" + model + "\", " + id + ")", 5000);
+};

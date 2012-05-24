@@ -18,6 +18,6 @@
       - if !defined? js
         - content_for :javascript_onload do
           :plain
-            refreshApp(#{app.id});
+            refreshMini("app", #{app.id});
     %span
       %em= "uploaded " + distance_of_time_in_words_to_now(app.created_at) + " ago"

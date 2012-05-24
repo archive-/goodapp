@@ -13,14 +13,3 @@
     .apps
       - @apps.each do |app|
         = render app
-
--# TODO make sure this is anywhere we are doing ajaxy app stuff
-- content_for :javascript_declarations do
-  :plain
-    var refreshApp = function(app_id) {
-      $this = $("#app-" + app_id);
-      $this.load("/apps/" + app_id + "/mini");
-      // TODO (remove comment) this is to stop image flickering once app is finished
-      // TODO stop this one tick sooner (still refreshes once when unnecessary)
-      if ($this.find(".progress-success").length > 0) setTimeout("refreshApp(" + app_id + ")", 5000);
-    }

@@ -5,7 +5,7 @@ class App < ActiveRecord::Base
 
   after_save :set_aid
 
-  # TODO (uncomment) validates_uniqueness_of :version, scope: :title
+  # TODO (uncomment) validates_uniqueness_of :title, scope: [:platform, :version]
 
   @queue = :main #:apps
 

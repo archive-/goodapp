@@ -36,6 +36,7 @@ class KeysController < ApplicationController
     # TODO check key
     if @key.confirmation_token == params[:confirmation_token]
       @key.confirmed_at = Time.now ; @key.save
+      # @key.progress(100, confirmed_at: Time.now)
       @key.progress(100)
       flash[:notice] = "Key successfully confirmed."
       redirect_to settings_path(anchor: "keys-pane")

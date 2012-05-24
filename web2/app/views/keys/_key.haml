@@ -16,7 +16,7 @@
       - if !defined? js
         - content_for :javascript_onload do
           :plain
-            refreshKey(#{key.id});
+            refreshMini("key", #{key.id});
     - else
       %pre
         -# TODO based on key type (PGP, etc.) maybe show fingerprint instead of key.kee?
