@@ -33,7 +33,7 @@ class StaticController < ApplicationController
       render "contact"
       return
     end
-    if UserMailer.email(@email, @name, @body)
+    if UserMailer.email(@email, @name, @body).deliver
       redirect_to contact_path, :notice => "Thanks for contacting us! We will *definitely* read it!"
     else
       flash.now.alert = "Message was not sent."
