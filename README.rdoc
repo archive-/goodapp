@@ -12,7 +12,7 @@ This project uses ruby 1.9.3 (see .rvmrc)
 
 === Gems
 
-If using <tt>rvm</tt> (we are), <tt>cd <PATH_TO_goodapp/web2></tt>.
+If using <tt>rvm</tt> (we are), <tt>cd <PATH_TO_goodapp/web></tt>.
 
 ==== With RVM
 
@@ -44,15 +44,17 @@ Point your browser to http://localhost:3000 and tada!
 
 === Database
 
+   $ cd web
    $ rake db:migrate
 
 === Resque (background job processing)
 
+   $ cd web
    $ COUNT=[NUMWORKERS] QUEUE=main rake resque:workers
 
 == TESTING
 
-The Rakefile contains all testing tasks for the project.
+The Rakefile contains all testing tasks for the project (run in root, not web).
 
     rake test:all
     rake test:trust
