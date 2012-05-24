@@ -1,26 +1,54 @@
-= goodapp
+= README
 
-== GETTING STARTED
+This project uses ruby 1.9.3 (see .rvmrc)
 
-- install rvm (ruby version manager): http://beginrescueend.com/rvm/install/
-- make sure that once it's installed you open a new shell (needs to get sourced)
+== Installation
 
-    rvm install 1.9.2
-    rvm use 1.9.2
-    rvm default 1.9.2
+=== Dependencies
+
+* redis
+  - on mac, <tt>brew install redis</tt>
+  - on \*nix, <tt>pacman -S redis</tt> or similar
+
+=== Gems
+
+If using <tt>rvm</tt> (we are), <tt>cd <PATH_TO_goodapp/web2></tt>.
+
+==== With RVM
+
+Install rvm (ruby version manager): http://beginrescueend.com/rvm/install/
+
+    rvm install 1.9.3
+    rvm use 1.9.3
+    rvm default 1.9.3
     rvm gemset create goodapp
     cd <GOODAPP_DIRECTORY>
 
-- rvm should prompt you -- say you trust by typing 'y'
-- now bootstrap the project by installing dependencies specified in web/Gemfile
+RVM should prompt you -- say you trust the .rvmrc by typing 'y'
+
+Make sure that rvm selects <tt>ruby 1.9.3</tt> and the <tt>goodapp</tt> gemset.
+
+Now bootstrap the project by installing dependencies specified in web/Gemfile
 
     gem install bundler
     cd web # this is the ruby on rails directory
     bundle install
 
-- finally, start the server (point browser to http://localhost:3000)
+This will bundle the required gems.
+
+Finally, start the server.
 
     rails s[erver]
+
+Point your browser to http://localhost:3000 and tada!
+
+=== Database
+
+   $ rake db:migrate
+
+=== Resque (background job processing)
+
+   $ COUNT=[NUMWORKERS] QUEUE=main rake resque:workers
 
 == TESTING
 
