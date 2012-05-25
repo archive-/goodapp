@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @apps = @user.valid_apps
+    @endorsements = @user.endorsements_as_endorsee
   end
 
   def edit

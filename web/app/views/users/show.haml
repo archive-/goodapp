@@ -1,22 +1,38 @@
-%h1= @user.name
+%h1
+  %span#trust-tag.label= @user.total_trust
+  = @user.name
 
-%h4 About
-%p.about-section
-  = @user.about
+- unless @user.about.blank?
+  %h2 About
+  %p.about-section= @user.about
 
-%h4 Endorsements
-%p.pull-right{style: "margin: 5px 5px 0 0"}
-  %button.btn.btn-success Endorse
-- @endorsements = []
+%h2= "Endorsements (#{@user.endorsers.count})"
+- if true # TODO can_endorse?(@user)
+  %p.pull-right{style: "margin: 5px 5px 0 0"}
+    %a.btn.btn-success{'data-toggle' => "modal", href: "#endorse-modal"} Endorse
+  #endorse-modal.modal.hide.fade
+    .modal-header
+      %a.close{'data-dismiss' => "modal"} &times;
+      %h3= "Endorse #{@user.name}"
+    = form_for Endorsement.new, html: {class: "modal-form"} do |f|
+      .modal-body
+        .control-group
+          = f.label :comment, "Comment (optional)"
+          = f.text_area :comment, rows: 6, class: "input-block-level"
+          %p.help-block.warning
+            Careful, this action is not reversible (an endorsement is forever).
+        = f.hidden_field :endorsee_id, value: @user.id
+      .modal-footer
+        = f.submit "Submit Endorsement", class: "btn btn-primary"
 - if @endorsements.empty?
   %p.alert.alert-info No endorsements.
 - else
-  %ul.endorsements
-  - @endorsements.each do |endorsement|
-    = render endorsement
+  .alert.alert-info
+    %ul.endorsements
+      - @endorsements.each do |endorsement|
+        %li= render endorsement
 
-%h4 Uploaded Apps
-- @apps = @user.apps # TODO group by platform
+%h2 Uploaded Apps
 - if @apps.empty?
   %p.alert.alert-info No apps.
 - else

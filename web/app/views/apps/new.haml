@@ -10,6 +10,7 @@
   - if @user.apps.empty?
     %p.alert.alert-info You have no apps, upload some above.
   - else
+    %h2 Recently uploaded by you
     .apps
       - @apps.each do |app|
         = render app

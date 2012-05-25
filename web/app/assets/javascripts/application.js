@@ -25,3 +25,7 @@ var refreshMini = function(model, id) {
   // TODO stop this one tick sooner (still refreshes once when unnecessary)
   if ($this.find(".active").length > 0) setTimeout("refreshMini(\"" + model + "\", " + id + ")", 5000);
 };
+
+var hideMini = function(model, id) {
+  $("#" + model + "-" + id).fadeOut("slow");
+}

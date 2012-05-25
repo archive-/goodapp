@@ -13,7 +13,6 @@ Web2::Application.routes.draw do
   get  "/search" => "static#search", as: :search
   get  "/contact" => "static#contact", as: :contact
   post "/contact" => "static#send_contact_email", as: :send_contact_email
-
   devise_for :users
   resources :users, except: [:edit, :update] do
     # TODO scope keys? so its "/keys/:id"
@@ -28,4 +27,5 @@ Web2::Application.routes.draw do
   get "/upload/app" => "apps#new", as: :new_app
   post "/upload/app" => "apps#create", as: :apps
   post "/upload/key" => "keys#create", as: :keys
+  post "/endorsements" => "endorsements#create", as: :endorsements
 end
