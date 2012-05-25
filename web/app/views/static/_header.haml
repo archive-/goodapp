@@ -22,6 +22,9 @@
         #user-nav.span5
           %ul.nav.pull-right
             %li
+              = link_to root_path, class: "tooltipped", rel: "tooltip", title: "Dashboard" do
+                %i.icon-home.icon-white
+            %li
               = link_to current_user, class: "tooltipped", rel: "tooltip", title: "Profile" do
                 %i.icon-user.icon-white
             %li

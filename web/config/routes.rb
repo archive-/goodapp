@@ -2,6 +2,9 @@ require "resque/server"
 
 Web2::Application.routes.draw do
   # TODO put in authorization so can't hit routes like /settings (obviously)
+  authenticated :user do
+    root to: "static#dashboard"
+  end
   root to: "static#index"
   mount Resque::Server.new, at: "/resque"
   get  "/api" => "static#api"

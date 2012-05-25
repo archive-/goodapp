@@ -3,6 +3,9 @@ class StaticController < ApplicationController
     @recent_apps = App.valids.order("created_at DESC").limit(4) # paginate
   end
 
+  def dashboard
+  end
+
   def search
     @search_query = params[:q]
   end
