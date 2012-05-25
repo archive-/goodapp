@@ -1,11 +1,21 @@
 = form_for key do |f|
   %fieldset
     %legend Upload a key
-    = f.label :title, class: "control-label"
+    = f.label :title
     = f.text_field :title, style: "width: 98%"
     %p.help-block Use any title that will help you remember this key.
-    = f.label :kee, "Key", class: "control-label"
-    = f.text_area :kee, rows: "5", style: "width: 98%"
-    %p.help-block Make sure to paste in the entire, valid key.
+    %ul.nav.nav-tabs
+      %li.active
+        %a{'data-toggle' => "tab", href: "#via-textarea"} Paste
+      %li
+        %a{'data-toggle' => "tab", href: "#via-upload"} Upload
+    .tab-content
+      #via-textarea.tab-pane.active
+        = f.label :kee, "Key"
+        = f.text_area :kee, rows: "5", style: "width: 98%"
+        %p.help-block Make sure to paste in the entire, valid key.
+      #via-upload.tab-pane
+        = f.label :kee_file, "Key"
+        = f.file_field :kee_file
     .form-actions
       = f.submit class: "btn btn-primary"

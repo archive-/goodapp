@@ -3,6 +3,12 @@ class KeysController < ApplicationController
     @user = current_user
     @key = Key.new(params[:key])
     @key.user_id = @user.id
+    if @key.title.blank?
+      # TODO TODO [in lots of places] needs to be render!!
+      flash[:alert] = "You must give your key a title."
+      redirect_to settings_path(anchor: "keys-pane")
+      return
+    end
     if @key.kee.blank?
       # TODO TODO [in lots of places] needs to be render!!
       flash[:alert] = "The key cannot be blank!"

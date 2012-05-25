@@ -1,13 +1,18 @@
 class Key < ActiveRecord::Base
-  attr_accessible :title, :kee
+  attr_accessible :title, :kee, :kee_file
 
   belongs_to :user
   has_many :apps, dependent: :delete_all
 
+  validates_presence_of :title
   # TODO (uncomment) validates_uniqueness_of :kee
   validates_uniqueness_of :title, scope: :user_id
 
   @queue = :main #:keys
+
+  def kee_file=(file)
+    self.kee = file.read
+  end
 
   def progress(status, state="", proper=true)
     self.status, self.state, self.proper = status, state, proper ; save
