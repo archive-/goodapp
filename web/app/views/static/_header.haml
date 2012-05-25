@@ -14,7 +14,7 @@
           .control-group
             .controls
               .input-prepend
-                - field = text_field_tag(:q, '', class: "input-large", placeholder: "Not implemented")
+                - field = text_field_tag(:q, '', class: "input-large", placeholder: "Hit enter to search")
                 = succeed field  do
                   %label{for: "q"}
                     %span.add-on Search

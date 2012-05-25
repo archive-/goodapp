@@ -10,7 +10,7 @@
   - if @user.apps.empty?
     %p.alert.alert-info You have no apps, upload some above.
   - else
-    %h2 Recently uploaded by you
+    %h2 App Upload History
     .apps
-      - @apps.each do |app|
+      - @apps.limit(4).each do |app|
         = render app
