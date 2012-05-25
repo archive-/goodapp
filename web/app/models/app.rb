@@ -26,6 +26,7 @@ class App < ActiveRecord::Base
     fpath = File.absolute_path(tmp)
     # TODO don't close it yet (we need it for async method, don't like this
     # solution though...
+    # TODO content_type is not good enough
     case file.content_type
     when "application/vnd.android.package-archive"
       Resque.enqueue(App, self.id, :handle_apk, fpath: fpath, key_id: key.id)
@@ -48,6 +49,7 @@ class App < ActiveRecord::Base
         File.open("AndroidManifest.xml", "r") do |manifest|
           # TODO parse XML -- not string
           content = manifest.read
+          # TODO if value starts with @, need to check res/ for actual value
           self.version = content.match(/android:versionName="([^"]*)"/)[1]
           self.title = title = content.match(/application android:label="([^"]*)"/)[1]
           self.platform = :android
@@ -69,12 +71,7 @@ class App < ActiveRecord::Base
     # self.vtpermalink is the url
     # scrape and store in local variables, can figure out what table entries we
     # will replace with them afterwards
-    require 'rubygems'
-    require 'nokogiri'
-    require 'open-uri'
-
-    
-
+    # TODO
   end
 
   def scan(fpath, force=false)
