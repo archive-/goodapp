@@ -1,4 +1,4 @@
-- title "Settings"
+%h1= title "Edit your Settings"
 
 .row-fluid
   .span3.well
@@ -9,7 +9,6 @@
       %li= link_to "Keys", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
   .span9.tab-content
     #profile-pane.tab-pane.active
-      %h2 Profile
       = form_for current_user, as: :user, url: settings_path, method: :put, html: {class: "form-horizontal"} do |f|
         %fieldset
           %legend Update your personal information
@@ -25,10 +24,8 @@
           .form-actions
             = f.submit class: "btn btn-primary"
     #account-settings-pane.tab-pane
-      %h2 Account Settings
       = render partial: "devise/registrations/form", locals: {resource: current_user, method: :put, legend: "Change your settings"}
     #keys-pane.tab-pane
-      %h2 Keys
       -# TODO expand this
       = render partial: "keys/form", locals: {user: @user, key: Key.new}
       - if @user.keys.empty?

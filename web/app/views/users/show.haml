@@ -34,8 +34,9 @@
       - @endorsements.each do |endorsement|
         %li= render endorsement
 
+-# TODO only show most recent versions (group by aid and select last created_at)
 %h2
-  = "Uploaded App Versions (#{@apps.count})"
+  = "Uploaded Apps (#{@apps.count})"
 - if @apps.empty?
   %p.alert.alert-info No apps.
 - else
