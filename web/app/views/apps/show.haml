@@ -2,6 +2,18 @@
   = show_platform(@root_app.platform)
   = title @root_app.title
 
+%h2
+  = "Developers (#{@developers.count})"
+- if @developers.empty?
+  %p.alert.alert-info No developers.
+- else
+  .alert.alert-info
+    %ul.endorsements
+      - @developers.each do |developer|
+        %li= render partial: "users/user_inline", locals: {user: developer}
+
+%h2
+  = "Uploaded Versions (#{@app_versions.count})"
 %ul.nav.nav-tabs
   - @app_versions[0..-2].each do |app|
     %li{class: ("active" if app.id == @app.id)}

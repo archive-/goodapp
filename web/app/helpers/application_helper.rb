@@ -36,4 +36,8 @@ module ApplicationHelper
     condition ? haml_tag(*args, &block) : yield
   end
 
+  def github_url
+    "https://github.com/tjeezy/goodapp"
+  end
+
 end

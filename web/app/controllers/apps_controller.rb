@@ -38,6 +38,7 @@ class AppsController < ApplicationController
     @app_versions = App.valids.order("created_at ASC").find_all_by_aid(@app.aid)
     # root_app is most recent version
     @root_app = @app_versions[-1]
+    @developers = [@user]
   end
 
   def mini

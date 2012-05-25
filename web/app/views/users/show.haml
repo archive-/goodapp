@@ -34,7 +34,8 @@
       - @endorsements.each do |endorsement|
         %li= render endorsement
 
-%h2 Uploaded Apps
+%h2
+  = "Uploaded App Versions (#{@apps.count})"
 - if @apps.empty?
   %p.alert.alert-info No apps.
 - else

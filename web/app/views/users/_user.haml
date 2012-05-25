@@ -1,2 +1,2 @@
 .user.alert.alert-notice
-  = link_to user.name, user
+  = link_to raw(content_tag(:span, user.total_trust, class: "label")) + " " + user.name, user
