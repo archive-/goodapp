@@ -47,11 +47,11 @@ class App < ActiveRecord::Base
       apkout = `apktool d -f #{fpath} #{tmpdir}`
       Dir.chdir(tmpdir) do
         File.open("AndroidManifest.xml", "r") do |manifest|
-          # TODO parse XML -- not string
-          content = manifest.read
+          doc = Nokogiri::XML(manifest)
           # TODO if value starts with @, need to check res/ for actual value
-          self.version = content.match(/android:versionName="([^"]*)"/)[1]
-          self.title = title = content.match(/application android:label="([^"]*)"/)[1]
+          self.version = doc.xpath("/manifest/@android:versionName")[0].value
+          self.title = doc.xpath("/manifest/application/@android:label")[0].value
+          self.scrapeid = doc.xpath("/manifest/@package")[0].value
           self.platform = :android
           progress(40)
           raise "Duplicate version upload for #{title}" unless valid?
@@ -89,6 +89,20 @@ class App < ActiveRecord::Base
     else
       # TODO better error handling
       progress(100, "Virus Total: Error -- please file bug report", false)
+    end
+  end
+
+  def scrape
+    # TODO per aid, find the last created_at and use its query_id to adjust
+    # values
+    case self.platform.to_sym
+    when :android
+      url = "https://play.google.com/store/apps/details?id=#{self.scrapeid}"
+      # html = RestClient.get(url)
+      # doc = Nokogiri::HTML(html)
+      # TODO grab data we want
+    else
+      # TODO right now -- do nothing
     end
   end
 
