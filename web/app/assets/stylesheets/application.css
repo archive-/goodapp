@@ -47,6 +47,8 @@ h1 .header-inline {vertical-align: 50%}
 .endorsements {list-style: none; margin: 0}
 .endorsements li {display: inline; margin: 0 10px 0 0}
 #trust-tag {font-size: 1.0em}
+.details {font-style: italic; font-size: 0.6em; color: #bbb}
+.no-bullets {list-style: none; margin: 0}
 
 /* ------------------- FOOTER ------------------- */
 #footer {margin-top: 10px; border-top: 1px solid #e3e3e3; padding-top: 10px}

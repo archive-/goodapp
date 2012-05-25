@@ -6,14 +6,14 @@
     - if @apps.empty?
       %p No apps found by that name.
     - else
-      %ul
-      - @apps.each do |app|
-        %li= render app
+      %ul.no-bullets
+        - @apps.each do |app|
+          %li= render app
   .span6
-    %h2 Devs
+    %h2 Users
     - if @users.empty?
       %p No users found by that name.
     - else
-      %ul
-      - @users.each do |user|
-        %li= render user
+      %ul.no-bullets
+        - @users.each do |user|
+          %li= render user

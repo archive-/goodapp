@@ -6,7 +6,9 @@
   %h2 About
   %p.about-section= @user.about
 
-%h2= "Endorsements (#{@user.endorsers.count})"
+%h2
+  = "Endorsements (#{@user.endorsers.count})"
+  %span.details Rollover endorsers to see endorsement comment, if any.
 - if true # TODO can_endorse?(@user)
   %p.pull-right{style: "margin: 5px 5px 0 0"}
     %a.btn.btn-success{'data-toggle' => "modal", href: "#endorse-modal"} Endorse
