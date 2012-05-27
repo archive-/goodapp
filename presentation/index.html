@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <link rel="stylesheet" href="lib/zenburn.css" />
     <style type="text/css">
+      #demoframe {border: 4px solid #eee}
       .small {font-size: 0.5em}
       .good {color: #66ee44}
       .bad {color: #ff4444}
       .orange {color: #ffbb66}
       .row {overflow: hidden}
       .leftcol {float: left; width: 450px}
+      .top-padding {padding-top: 30px}
       .rightcol {overflow: hidden; zoom: 1; padding-left: 30px; margin-top: 30px}
       svg {margin: 30px 0; height: 400px}
       .nostyle {border: 0 !important; background: transparent !important;
@@ -71,8 +73,7 @@
               <li>View PDFs</li>
               <li>...</li>
             </ul>
-            <br>
-            <br>
+            <br><br>
             <div class="fragment">
               <h2><span class="bad">Bad</span> App Features <span class="fragment">(malicious)</span></h2>
               <ul>
@@ -104,8 +105,7 @@
                   <li>More developers</li>
                   <li>More apps!</li>
                 </ul>
-                <br>
-                <br>
+                <br><br>
                 <p>500,000+ iOS Apps</p>
               </div>
             </div>
@@ -145,59 +145,48 @@
         </section>
         <section>
           <section>
-            <h2> Why GoodApp? </h2>
-            <p> GoodApp focuses on developers and their reputations, not the reputations of Apps themselves, by assigning each developer a rating. </p>
+            <h2>Why GoodApp?</h2>
+            <ul>
+              <li>Different approach to malware</li>
+              <li>Developer-centric</li>
+              <li>Absolute trustworthiness</li>
+              <li>Intuitive interface</li>
+              <li>Awesome API</li>
+            </ul>
+            <!-- TODO subsections to delve into each points or discuss them
+            here -->
           </section>
-          <section>
-            <h2> Why GoodApp? </h2>
-            <ul>
-            <li> differnt approach to malware </li>
-            <li> changing an App community into a developer community </li>
-            <li> give people an idea of who is trustworthy </li>
-            <li> intuitive interface </li>
-            </ul>          
-          </section>          
         </section>
-        <section>        
+        <section>
           <section>
-            <h2>GoodApp system</h2>
-            <ul>
-            <li> Virus Total </li>
-            <li> Trust Algorithm </li>
-            <li> Rating formula </li>
-            </ul>  
+            <h2>The GoodApp system</h2>
+            <h4>Delving into the components</h4>
           </section>
           <section>
             <h2>Virus Total</h2>
-            <img src="img/virustotal.png" class="leftcol" />
-            <div class="rightcol">
-              <p>Binary scanning by multiple well know scanners</p>
-            </div>
-          </section>  
+            <h4>Focused on Binary scanning so we don't have to</h4>
+            <img src="img/virustotal.png" />
+          </section>
           <section>
             <h2>Trust Algorithm</h2>
-            <div class="leftcol">          
-              <p>Creating a web of truts</p>
-              <p> Trust propogation </p4>
-            </div>
-            <img src="img/trust.png" class="rightcol" />
-          </section> 
+            <h4>Creating the web & Propagating trust</h4>
+            <img src="img/trust.png" />
+          </section>
           <section>
             <h2>Rating Formula</h2>
-              <h4> Explain spectrum below </h4>
-              <img src="img/spectrum.png"/>            
-          </section>                           
-        </section>                  
+            <h4>Generating an absolute trust value</h4>
+            <img src="img/spectrum.png"/>
+          </section>
+        </section>
         <section>
           <h2>Demo</h2>
-          <iframe width="900" height="500" src="http://localhost:3000"></iframe>
+          <iframe id="demoframe" width="900" height="500" src="http://localhost:3000"></iframe>
         </section>
         <section>
         <section>
           <h2>Conclusion/Future</h2>
-          <br>
-          <h3>BLAH</h3>
-        </section>        
+          <h4>[TODO]</h4>
+        </section>
           <section>
             <h1>Thanks!</h1>
             <br>

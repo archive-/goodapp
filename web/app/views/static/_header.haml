@@ -1,32 +1,33 @@
 .navbar.navbar-fixed-top
   .navbar-inner
-    .row-fluid
+    .container-fluid
       - if !user_signed_in?
-        #user-nav.span6
+        #user-nav
           -# TODO forgot your password? link
           = render "devise/sessions/new_inline"
-      #logo.span2
-        %a.brand{href: "/"}
-          GoodApp
-          %span.label.label-info Alpha
-      #search.span3
-        = form_tag search_path, class: "form-search navbar-form pull-left", method: :get do
-          .control-group
-            .controls
-              .input-prepend
-                - field = text_field_tag(:q, '', class: "input-large", placeholder: "Hit enter to search")
-                = succeed field  do
-                  %label{for: "q"}
-                    %span.add-on Search
+      %a#logo.brand{href: "/"}
+        GoodApp
+        %span.label.label-info Alpha
+      = form_tag search_path, class: "form-search navbar-form pull-left", id: "search", method: :get do
+        .control-group
+          .controls
+            .input-prepend
+              - field = text_field_tag :q, '', class: "input-large", placeholder: "Hit enter to search"
+              = succeed field  do
+                %label{for: "q"}
+                  %span.add-on Search
       - if user_signed_in?
-        #user-nav.span5
-          %ul.nav.pull-right
+        #user-nav
+          %ul.nav
             %li
               = link_to root_path, class: "tooltipped", rel: "tooltip", title: "Dashboard" do
                 %i.icon-home.icon-white
             %li
               = link_to current_user, class: "tooltipped", rel: "tooltip", title: "Profile" do
                 %i.icon-user.icon-white
+            %li.responsive-hidden
+              = link_to search_path, class: "tooltipped", rel: "tooltip", title: "Search" do
+                %i.icon-search.icon-white
             %li
               = link_to new_app_path, class: "tooltipped", rel: "tooltip", title: "App Upload" do
                 %i.icon-upload.icon-white

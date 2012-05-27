@@ -1,19 +1,28 @@
-%h1= title "Search Results"
+%h1= title "Search"
 
-.row-fluid
-  .span6
-    %h2 Apps
-    - if @apps.empty?
-      %p No apps found by that name.
-    - else
-      %ul.no-bullets
-        - @apps.each do |app|
-          %li= render app
-  .span6
-    %h2 Users
-    - if @users.empty?
-      %p No users found by that name.
-    - else
-      %ul.no-bullets
-        - @users.each do |user|
-          %li= render user
+= form_tag search_path, class: "form-inline", method: :get do
+  %fieldset
+    = text_field_tag :q, params[:q], class: "input-xlarge"
+    = submit_tag "Search", class: "btn btn-primary"
+
+- if params[:q].blank?
+  %p
+    %em Perform a search to see the results below.
+- else
+  .row-fluid
+    .span6
+      %h2 Apps
+      - if @apps.empty?
+        %p No apps found by that name.
+      - else
+        %ul.no-bullets
+          - @apps.each do |app|
+            %li= render app
+    .span6
+      %h2 Users
+      - if @users.empty?
+        %p No users found by that name.
+      - else
+        %ul.no-bullets
+          - @users.each do |user|
+            %li= render user

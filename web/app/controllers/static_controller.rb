@@ -7,9 +7,11 @@ class StaticController < ApplicationController
   end
 
   def search
-    @search_query = params[:q]
-    @apps = App.valids.where("title LIKE ?", "%#{@search_query}%")
-    @users = User.where("name LIKE ?", "%#{@search_query}%")
+    if !params[:q].blank?
+      @search_query = params[:q]
+      @apps = App.valids.where("title LIKE ?", "%#{@search_query}%")
+      @users = User.where("name LIKE ?", "%#{@search_query}%")
+    end
   end
 
   def api ; end
