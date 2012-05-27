@@ -1,6 +1,6 @@
 .navbar.navbar-fixed-top
   .navbar-inner
-    .container.row-fluid
+    .row-fluid
       - if !user_signed_in?
         #user-nav.span6
           -# TODO forgot your password? link
@@ -9,7 +9,7 @@
         %a.brand{href: "/"}
           GoodApp
           %span.label.label-info Alpha
-      #search.span4
+      #search.span3
         = form_tag search_path, class: "form-search navbar-form pull-left", method: :get do
           .control-group
             .controls

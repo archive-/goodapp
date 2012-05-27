@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GoodApp Presentation</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="lib/zenburn.css" />
+    <style type="text/css">
+      .small {font-size: 0.5em}
+      .good {color: #66ee44}
+      .bad {color: #ff4444}
+      .orange {color: #ffbb66}
+      .row {overflow: hidden}
+      .leftcol {float: left; width: 450px}
+      .rightcol {overflow: hidden; zoom: 1; padding-left: 30px; margin-top: 30px}
+      .overleft {position: absolute; top: 10%; left: 0}
+      svg {margin: 30px 0; height: 400px}
+      .nostyle {border: 0 !important; background: transparent !important;
+        -webkit-box-shadow: none !important; box-shadow: none !important}
+    </style>
+  </head>
+  <body>
+    <div id="reveal">
+      <div class="state-background"></div>
+      <div class="slides">
+        <section>
+          <section>
+            <h1>GoodApp</h1>
+            <h3>A novel* approach to<br>(software) application classification</h3>
+            <h4>A UCSB Capstone Project 2012</h4>
+            <br><br>
+            <p>Team &Oslash;</p>
+            <p>(advised by Microsoft)</p>
+          </section>
+          <section>
+            <h2>Yulia Dubinina</h2>
+            <h4>The Russian-American</h4>
+            <img src="img/yulia.jpg" />
+          </section>
+          <section>
+            <h2>TJ Koblentz</h2>
+            <h4>The French-American</h4>
+            <img src="img/tj.png" />
+          </section>
+          <section>
+            <h2>Victor Moreira</h2>
+            <h4>The Portuguese-American</h4>
+            <img src="img/victor.jpg" />
+          </section>
+          <section>
+            <h2>Jasper Fredrickson</h2>
+            <h4>The TRUE American</h4>
+            <img src="img/jasper.jpg" />
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Applications about 10 years ago</h2>
+            <!-- TODO png with transparency? three different w/ 1 malicious -->
+            <img src="img/office_2000.jpg" />
+            <img src="img/office_2000.jpg" />
+            <img src="img/office_2000.jpg" />
+          </section>
+          <section>
+            <h2><span class="good">Good</span> App Features</h2>
+            <ul>
+              <li>Allowed you to edit documents</li>
+              <li>Browse the web</li>
+              <li>View PDFs</li>
+              <li>...</li>
+            </ul>
+            <br>
+            <br>
+            <div class="fragment">
+              <h2><span class="bad">Bad</span> App Features <span class="fragment">(malicious)</span></h2>
+              <ul>
+                <li>Stealing your credit card information</li>
+                <li>Corrupting your operating system</li>
+                <li>...</li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <h2>Wild App 'goodness' breakdown</h2>
+            <div class="chart" id="pie1"></div>
+          </section>
+          <section>
+            <h2>Determining the division</h2>
+            <ul>
+              <li>Anti-virus programs</li>
+              <li>Malware scanners</li>
+              <li>...</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Applications today</h2>
+            <div class="row">
+              <img src="img/apps.jpg" class="leftcol" />
+              <div class="rightcol">
+                <ul>
+                  <li>More platforms</li>
+                  <li>More developers</li>
+                  <li>More apps!</li>
+                </ul>
+                <br>
+                <br>
+                <p>500,000+ iOS Apps</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>We were asked to write a <span class="orange">new malware scanner</span></h2>
+            <br>
+            <h3>To better determine the line in quickly expanding, young
+              application platforms.</h3>
+            <h4>(primarily the mobile space)</h4>
+            <br>
+            <div class="fragment">
+              <h2>But we thought:</h2>
+              <h2>wait, there's a <span class="orange">problem</span>.</h2>
+            </div>
+            <div class="fragment">
+              <img src="img/norton.png" class="overleft" />
+            </div>
+          </section>
+          <section>
+            <h2>... And gray area</h2>
+            <div class="chart" id="pie2"></div>
+            <div class="fragment">
+              <h4>Quite a bit of it</h4>
+            </div>
+          </section>
+          <section>
+            <h2>[video]</h2>
+            <h4>(or something describing 'this gray area'</h4>
+          </section>
+        </section>
+        <section>
+          <h2>This is where GoodApp comes in</h2>
+          <h4>TODO</h4>
+        </section>
+        <section>
+          <h2>Demo</h2>
+          <iframe width="900" height="500" src="http://localhost:3000"></iframe>
+        </section>
+        <section>
+          <h1>Thanks!</h1>
+          <br>
+          <h3>Questions?</h3>
+        </section>
+      </div>
+      <aside class="controls">
+        <a class="left" href="#">&#x25c4;</a>
+        <a class="right" href="#">&#x25ba;</a>
+        <a class="up" href="#">&#x25b2;</a>
+        <a class="down" href="#">&#x25bc;</a>
+      </aside>
+      <div class="progress"><span></span></div>
+    </div>
+    <script src="js/reveal.min.js"></script>
+    <script src="js/d3.v2.min.js"></script>
+    <script>
+      /* slideshow initialization */
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        loop: false,
+        mouseWheel: false,
+        rollingLinks: true,
+        theme: 'default',
+        transition: 'default'
+      });
+
+      /* pie charts */
+      var w = 900,
+          h = 400,
+          r = 200,
+          colors = ["#66ee44", "#ff4444", "#888"],
+          data1 = [
+            {"label": "good", "value": 40},
+            {"label": "bad", "value": 60}],
+          data2 = [
+            {"label": "good", "value": 20},
+            {"label": "bad", "value": 50},
+            {"label": "baod", "value": 30}];
+
+      var text_transform = function(d) {
+        d.innerRadius = 0;
+        d.outerRadius = r;
+        return "translate(" + arc.centroid(d) + ")";
+      };
+
+      var vis1 = d3.select("#pie1")
+        .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
+        .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+      var vis2 = d3.select("#pie2")
+        .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
+        .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+
+      var arc = d3.svg.arc().outerRadius(r);
+      var pie = d3.layout.pie().value(function(d) { return d.value; });
+
+      arcs1 = vis1.selectAll("g.slice")
+        .data(pie).enter().append("svg:g").attr("class", "slice");
+      arcs1.append("svg:path")
+        .attr("fill", function(d, i) { return colors[i]; })
+        .attr("d", arc);
+      arcs1.append("svg:text")
+        .attr("transform", text_transform)
+        .attr("text-anchor", "middle")
+        .text(function(d, i) { return data1[i].label; });
+
+      arcs2 = vis2.selectAll("g.slice")
+        .data(pie).enter().append("svg:g").attr("class", "slice");
+      arcs2.append("svg:path")
+        .attr("fill", function(d, i) { return colors[i]; })
+        .attr("d", arc);
+      arcs2.append("svg:text")
+        .attr("transform", text_transform)
+        .attr("text-anchor", "middle")
+        .text(function(d, i) { return data2[i].label; });
+    </script>
+  </body>
+</html>

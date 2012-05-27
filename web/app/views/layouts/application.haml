@@ -10,10 +10,10 @@
   %body
     #header
       = render "static/header"
-    #main.container
+    #main.container-fluid
       = render partial: "shared/flash", locals: {flash: flash}
       = yield
-    #footer.container
+    #footer.container-fluid
       = render "static/footer"
     :javascript
       /* declarations */
