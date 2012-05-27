@@ -15,10 +15,10 @@
       .row {overflow: hidden}
       .leftcol {float: left; width: 450px}
       .rightcol {overflow: hidden; zoom: 1; padding-left: 30px; margin-top: 30px}
-      .overleft {position: absolute; top: 10%; left: 0}
       svg {margin: 30px 0; height: 400px}
       .nostyle {border: 0 !important; background: transparent !important;
         -webkit-box-shadow: none !important; box-shadow: none !important}
+      .cover-slide {position: absolute; top: 0; left: 0}
     </style>
   </head>
   <body>
@@ -121,12 +121,18 @@
               <h2>But we thought:</h2>
               <h2>wait, there's a <span class="orange">problem</span>.</h2>
             </div>
-            <div class="fragment">
-              <img src="img/norton.png" class="overleft" />
+            <div class="cover-slide">
+              <img src="img/norton.png" width="270" class="fragment nostyle" />
+              <img src="img/mse.png" width="270" class="fragment nostyle" />
+              <img src="img/kapersky.png" width="270" class="fragment nostyle" />
             </div>
           </section>
           <section>
-            <h2>... And gray area</h2>
+            <h2>[describe problem]</h2>
+            <h4>(Lots of people already working on this problem)</h4>
+          </section>
+          <section>
+            <h2>... Oh, and gray area</h2>
             <div class="chart" id="pie2"></div>
             <div class="fragment">
               <h4>Quite a bit of it</h4>
