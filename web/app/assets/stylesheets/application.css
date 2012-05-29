@@ -23,12 +23,15 @@ html {overflow-y: scroll}
 .inline {display: inline}
 .clear {clear: both}
 .container-fluid {max-width: 940px; margin: 0 auto}
-.nav-tabs > li {margin-bottom: -2px} /* fix active tabs in nav */
+.nav-tabs > li {margin-bottom: -2px; margin-right: -2px} /* fix active tabs in nav */
+.tabs-left .control-label {width: 50px}
+.tabs-left .controls {margin-left: 80px}
 
 /* ------------------- HEADER ------------------- */
 .brand:hover {color: white}
 .brand span {font-size: 0.5em}
 #user-nav {float: right}
+#user-nav .nav {margin: 0}
 .navbar-form .control-group {margin-bottom: 0}
 .navbar-form input {margin-top: 0}
 #logout-btn {width: 150px}
@@ -51,16 +54,18 @@ h1 .header-inline {vertical-align: 50%}
 .details {font-style: italic; font-size: 0.6em; color: #bbb}
 .no-bullets {list-style: none; margin: 0}
 .responsive-hidden {display: none !important}
+.key .progress, .key pre {clear: both; margin-top: 10px}
+.key h3 span {font-size: 0.7em; font-weight: normal}
 
 /* ------------------- FOOTER ------------------- */
 #footer {margin-top: 10px; border-top: 1px solid #e3e3e3; padding-top: 10px}
 #footer p {margin-top: 10px}
 
 /* --------------- MEDIA QUERIES ---------------- */
-@media (min-width: 710px) {
+@media (min-width: 720px) {
   #header .input-large {width: 300px}
 }
-@media (max-width: 660px) {
+@media (max-width: 670px) {
   #search {display: none}
   .responsive-hidden {display: inherit !important}
 }
