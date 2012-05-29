@@ -62,7 +62,7 @@ h1 .header-inline {vertical-align: 50%}
 #footer p {margin-top: 10px}
 
 /* --------------- MEDIA QUERIES ---------------- */
-@media (min-width: 750px) {
+@media (min-width: 770px) {
   #header .input-large {width: 300px}
 }
 @media (max-width: 690px) {
