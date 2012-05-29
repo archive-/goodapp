@@ -1,5 +1,6 @@
 class Key < ActiveRecord::Base
-  attr_accessible :title, :kee, :kee_file
+  attr_accessible :title, :kee, :kee_file, :email
+  attr_reader :kee_file, :email
 
   belongs_to :user
   has_many :apps, dependent: :delete_all
@@ -14,6 +15,16 @@ class Key < ActiveRecord::Base
     self.kee = file.read
   end
 
+  def email=(email)
+    # TODO validate email
+    self.style = :email
+    self.title = self.kee = email
+  end
+
+  def email_key?
+    self.style && self.style.to_sym == :email
+  end
+
   def progress(status, state="", proper=true)
     self.status, self.state, self.proper = status, state, proper ; save
   end
@@ -21,6 +32,7 @@ class Key < ActiveRecord::Base
   def handle_upload
     progress(10, "Checking key") # start it at 10 to give hope
     # TODO next two lines slow enough to bg?
+    # TODO look for the BEGIN AND END to determine if PGP
     if self.kee.index(/PGP PUBLIC KEY/)
       Resque.enqueue(Key, self.id, :handle_pgp)
     else

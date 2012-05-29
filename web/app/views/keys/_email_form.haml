@@ -1,0 +1,10 @@
+= form_for key, html: {class: "form-horizontal"} do |f|
+  %fieldset
+    %legend Add an email
+    .control-group
+      = f.label :email, class: "control-label"
+      .controls
+        = f.text_field :email, class: "input-xlarge"
+        %p.help-block You will need to confirm this email.
+    .form-actions
+      = f.submit class: "btn btn-primary"

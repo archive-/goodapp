@@ -1,21 +1,29 @@
-= form_for key do |f|
+= form_for key, html: {class: "form-horizontal"} do |f|
   %fieldset
     %legend Upload a key
-    = f.label :title
-    = f.text_field :title, style: "width: 98%"
-    %p.help-block Use any title that will help you remember this key.
-    %ul.nav.nav-tabs
-      %li.active
-        %a{'data-toggle' => "tab", href: "#via-textarea"} Paste
-      %li
-        %a{'data-toggle' => "tab", href: "#via-upload"} Upload
-    .tab-content
-      #via-textarea.tab-pane.active
-        = f.label :kee, "Key"
-        = f.text_area :kee, rows: "5", style: "width: 98%"
-        %p.help-block Make sure to paste in the entire, valid key.
-      #via-upload.tab-pane
-        = f.label :kee_file, "Key"
-        = f.file_field :kee_file
+    .control-group
+      = f.label :title, class: "control-label"
+      .controls
+        = f.text_field :title, style: "width: 98%"
+        %p.help-block Use any title that will help you remember this key.
+    .tabbable.tabs-left
+      %ul.nav.nav-tabs
+        %li.active
+          %a{'data-toggle' => "tab", href: "#via-textarea"} Paste
+        %li
+          %a{'data-toggle' => "tab", href: "#via-upload"} Upload
+      .tab-content
+        #via-textarea.tab-pane.active
+          .control-group
+            = f.label :kee, "Key", class: "control-label"
+            .controls
+              = f.text_area :kee, rows: "5", style: "width: 98%"
+              %p.help-block Make sure to paste in the entire, valid key.
+        #via-upload.tab-pane
+          .control-group
+            = f.label :kee_file, "Key", class: "control-label"
+            .controls
+              = f.file_field :kee_file
+              %p.help-block Upload key file will overwrite pasted key.
     .form-actions
       = f.submit class: "btn btn-primary"

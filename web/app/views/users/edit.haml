@@ -3,10 +3,12 @@
 .row-fluid
   .span3.well
     %ul.nav.nav-list
-      %li.nav-header= @user.email
+      %li.nav-header MAIN
       %li.active= link_to "Profile", "#profile-pane", 'data-toggle' => "tab"
       %li= link_to "Account Settings", "#account-settings-pane", 'data-toggle' => "tab"
-      %li= link_to "Keys", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
+      %li= link_to "Keys & Emails", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
+      %li.nav-header EXTERNAL
+      %li= link_to "Github", "#github-pane", id: "github-pane-link", 'data-toggle' => "tab"
   .span9.tab-content
     #profile-pane.tab-pane.active
       = form_for current_user, as: :user, url: settings_path, method: :put, html: {class: "form-horizontal"} do |f|
@@ -26,13 +28,24 @@
     #account-settings-pane.tab-pane
       = render partial: "devise/registrations/form", locals: {resource: current_user, method: :put, legend: "Change your settings"}
     #keys-pane.tab-pane
-      -# TODO expand this
-      = render partial: "keys/form", locals: {user: @user, key: Key.new}
+      %p.label.label-info Any email you confirm on GoodApp will be added as an email key.
+      %ul.nav.nav-tabs
+        %li
+          %a{'data-toggle' => "tab", href: "#email-key"} Add an Email
+        %li.active
+          %a{'data-toggle' => "tab", href: "#key-key"} Upload a Key
+      .tab-content
+        #email-key.tab-pane
+          = render partial: "keys/email_form", locals: {user: @user, key: Key.new}
+        #key-key.tab-pane.active
+          = render partial: "keys/form", locals: {user: @user, key: Key.new}
       - if @user.keys.empty?
         %p.alert.alert-info You have no keys, upload some above.
       - else
         - @user.keys.order("created_at DESC").each do |key|
           = render partial: key, locals: {user: @user}
+    #github-pane.tab-pane
+      blank
 
 - content_for :javascript_onload do
   :plain

@@ -3,24 +3,32 @@ class KeysController < ApplicationController
     @user = current_user
     @key = Key.new(params[:key])
     @key.user_id = @user.id
-    if @key.title.blank?
-      # TODO TODO [in lots of places] needs to be render!!
-      flash[:alert] = "You must give your key a title."
-      redirect_to settings_path(anchor: "keys-pane")
-      return
-    end
-    if @key.kee.blank?
-      # TODO TODO [in lots of places] needs to be render!!
-      flash[:alert] = "The key cannot be blank!"
-      redirect_to settings_path(anchor: "keys-pane")
-      return
-    end
-    if @key.handle_upload
+    if @key.email_key?
+      @key.progress(60, "Email: Sent confirmation email to <#{@key.kee}>.")
+      # TODO validate email?
+      KeyMailer.email(@key.kee, @key.id).deliver
       flash[:notice] = "Successfully upload your key to GoodApp. Processing now (see status below)."
       redirect_to settings_path(anchor: "keys-pane")
     else
-      flash[:alert] = "There was an error in creating the key."
-      redirect_to settings_path(anchor: "keys-pane")
+      if @key.title.blank?
+        # TODO TODO [in lots of places] needs to be render!!
+        flash[:alert] = "You must give your key a title."
+        redirect_to settings_path(anchor: "keys-pane")
+        return
+      end
+      if @key.kee.blank?
+        # TODO TODO [in lots of places] needs to be render!!
+        flash[:alert] = "The key cannot be blank!"
+        redirect_to settings_path(anchor: "keys-pane")
+        return
+      end
+      if @key.handle_upload
+        flash[:notice] = "Successfully upload your key to GoodApp. Processing now (see status below)."
+        redirect_to settings_path(anchor: "keys-pane")
+      else
+        flash[:alert] = "There was an error in creating the key."
+        redirect_to settings_path(anchor: "keys-pane")
+      end
     end
   end
 
@@ -41,8 +49,8 @@ class KeysController < ApplicationController
     end
     # TODO check key
     if @key.confirmation_token == params[:confirmation_token]
+      # TODO if key.style != :email, Key.create email key
       @key.confirmed_at = Time.now ; @key.save
-      # @key.progress(100, confirmed_at: Time.now)
       @key.progress(100)
       flash[:notice] = "Key successfully confirmed."
       redirect_to settings_path(anchor: "keys-pane")
