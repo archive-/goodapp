@@ -48,12 +48,12 @@
       - if @user.github_account.gid
         -# TODO move these lazy styles into css and add classes
         %div.alert.alert-success{style: "overflow: hidden"}
-          -# TODO make button_to and style properly
           = image_tag @user.github_account.avatar_url, class: "pull-left", style: "margin-right: 10px"
           %div{style: "overflow: hidden; zoom: 1"}
             %a{href: "https://github.com/#{@user.github_account.username}"}
               %h2{style: "display: inline"}
                 = @user.github_account.username
+                -# TODO make button_to and style properly
                 = link_to raw('<i class="icon-refresh"></i>'), github_sync_path, method: :put, class: "refresh"
             %p= "#{pluralize(@user.github_account.repos, "Repositories")} | #{pluralize(@user.github_account.watchers, "Watchers")}"
             %p.label.label-success= "+ #{@user.github_account.rating} rating"
