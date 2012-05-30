@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    session[:tab] ||= :profile
     @user = current_user
   end
 
