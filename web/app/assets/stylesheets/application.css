@@ -26,6 +26,7 @@ html {overflow-y: scroll}
 .nav-tabs > li {margin-bottom: -2px; margin-right: -2px} /* fix active tabs in nav */
 .tabs-left .control-label {width: 50px}
 .tabs-left .controls {margin-left: 80px}
+.centered {display: block; margin: 0 auto}
 
 /* ------------------- HEADER ------------------- */
 .brand:hover {color: white}
