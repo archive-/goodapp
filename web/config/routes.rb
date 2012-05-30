@@ -29,5 +29,6 @@ Web::Application.routes.draw do
   post "/upload/app" => "apps#create", as: :apps
   post "/upload/key" => "keys#create", as: :keys
   post "/endorsements" => "endorsements#create", as: :endorsements
-  put "/users/:id/github" => "users#github_connect", as: :github_connect
+  post "/github-connect" => "users#github_connect", as: :github_connect
+  put "/github-sync" => "users#github_sync", as: :github_sync
 end

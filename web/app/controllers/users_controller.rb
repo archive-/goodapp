@@ -22,6 +22,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def github_sync
+    session[:tab] = :github
+    @user = current_user
+    unless @user.github_account
+      flash.now.alert = "You can't sync your Github account if it isn't connected!"
+      return render "new"
+    end
+    GithubAccount.sync(@user.id)
+    return redirect_to referer, notice: "Your Github account was successfully synced."
+  end
+
   def github_connect
     session[:tab] = :github
     @user = current_user
@@ -38,7 +49,7 @@ class UsersController < ApplicationController
       json = RestClient.get("https://api.github.com/users/#{params[:username]}")
       github_user = ActiveSupport::JSON.decode(json)
       if github_user["email"] == @key.title
-        GithubAccount.sync(current_user.id, github_user["id"], github_user["login"], github_user["avatar_url"])
+        GithubAccount.sync(current_user.id, github_user["login"])
         return redirect_to referer, notice: "Your Github account was successfully connected, #{params[:username]}."
       else
         flash.now.alert = "Your email key does not match the Github email for that username."
