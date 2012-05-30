@@ -16,6 +16,8 @@ class StaticController < ApplicationController
 
   def api ; end
   def contact ; end
+  def trust ; end
+
 
   def send_contact_email
     # TODO better validations -- make form_for with mail object?
