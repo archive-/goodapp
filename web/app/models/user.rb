@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
 
+  auto_strip :name, :email, :about
+
   def valid_keys
     keys.where(status: 100, proper: true)
   end

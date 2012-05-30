@@ -9,6 +9,8 @@ class Key < ActiveRecord::Base
   # TODO (uncomment) validates_uniqueness_of :kee
   validates_uniqueness_of :title, scope: :user_id
 
+  auto_strip :title, :kee
+
   @queue = :main #:keys
 
   def kee_file=(file)
@@ -18,7 +20,7 @@ class Key < ActiveRecord::Base
   def email=(email)
     # TODO validate email
     self.style = :email
-    self.title = self.kee = email
+    self.title = self.kee
   end
 
   def email_key?

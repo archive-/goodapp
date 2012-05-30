@@ -7,6 +7,8 @@ class App < ActiveRecord::Base
 
   # TODO (uncomment) validates_uniqueness_of :title, scope: [:platform, :version]
 
+  auto_strip :title
+
   @queue = :main #:apps
 
   def progress(status, state="", proper=true)
