@@ -31,12 +31,12 @@ class User < ActiveRecord::Base
   end
 
   def base_rating
-    self.github_account.rating
+    self.github_account.rating if self.github_account
   end
 
   # calculated and stored
   def rating
-    self.base_rating
+    self.base_rating || 0.0
   end
 
   # TODO with high activity?
