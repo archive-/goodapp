@@ -4,6 +4,7 @@ class StaticController < ApplicationController
   end
 
   def dashboard
+    @user = current_user
   end
 
   def search

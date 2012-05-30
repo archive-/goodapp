@@ -49,11 +49,13 @@ class KeysController < ApplicationController
     if @key.confirmation_token == params[:confirmation_token]
       if !@key.email_key?
         # create email key for email used as confirmation
-        Key.create({user_id: @key.user_id, title: @key.confirmation_email,
-                   kee: @key.confirmation_email, status: 100, proper: true,
-                   style: :email, confirmed_at: Time.now}, without_protection: true)
+        email_key = Key.new({user_id: @key.user_id, title: @key.confirmation_email,
+          kee: @key.confirmation_email, status: 100, proper: true,
+          style: :email, confirmed_at: Time.now}, without_protection: true)
+        email_key.update_rating
       end
       @key.confirmed_at = Time.now ; @key.save
+      @key.update_rating
       @key.progress(100)
       return redirect_to settings_path(anchor: "keys-pane"),
         notice: "Key successfully confirmed."

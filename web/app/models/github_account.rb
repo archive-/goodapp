@@ -21,7 +21,8 @@ class GithubAccount < ActiveRecord::Base
     # 14379 is how many people are watching rails
     # can't just sum watchers because you get 1 for each repo (but avg is not
     # good either)
-    github_account.rating = (github_account.watchers - github_account.repos) / 10000.0
+    rating = (github_account.watchers - github_account.repos) / 10000.0
+    github_rating = rating > 1.0 ? 1.0 : rating
     github_account.save
   end
 end

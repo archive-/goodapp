@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530043357) do
+ActiveRecord::Schema.define(:version => 20120530212443) do
 
   create_table "apps", :force => true do |t|
     t.integer  "key_id",                        :null => false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120530043357) do
     t.datetime "confirmation_sent_at"
     t.string   "style"
     t.string   "fingerprint"
+    t.decimal  "rating"
   end
 
   create_table "users", :force => true do |t|

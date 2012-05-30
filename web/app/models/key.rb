@@ -20,15 +20,22 @@ class Key < ActiveRecord::Base
   def email=(email)
     # TODO validate email
     self.style = :email
-    self.title = self.kee
+    self.title = self.kee = email
   end
 
   def email_key?
     self.style && self.style.to_sym == :email
   end
 
+  def update_rating
+    # TODO move this
+    corporations = {'microsoft.com' => 1.0, 'google.com' => 1.0, 'facebook.com' => 1.0, 'yahoo.com' => 1.0}
+    suffix = self.kee.split(/@/)[1]
+    self.rating = corporations[suffix] ; save
+  end
+
   def progress(status, state="", proper=true)
-    self.status, self.state, self.proper = status, state, proper ; save
+    self.status, self.state, self.proper = status, state, proper ; self.save
   end
 
   def handle_upload

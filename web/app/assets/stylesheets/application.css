@@ -30,6 +30,8 @@ html {overflow-y: scroll}
 /*.refresh {background-color: transparent; background-image:url("glyphicons-halflings.png"); background-position:-240px -24px; background-repeat: no-repeat; width:16px !important; height:18px !important}*/
 .refresh {vertical-align: sub; font-weight:bold; line-height:18px; color:#000;text-shadow:0 1px 0 #fff;opacity:.5;filter:alpha(opacity=50)}
 .refresh:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.7;filter:alpha(opacity=70)}
+.alert .label {margin: 9px 0 0}
+.corporate-email {background: #faa732; margin-left: 0; font-size: inherit !important}
 
 /* ------------------- HEADER ------------------- */
 .brand:hover {color: white}

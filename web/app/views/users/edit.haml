@@ -11,20 +11,7 @@
       %li{class: active?(:github)}= link_to "Github", "#github-pane", id: "github-pane-link", 'data-toggle' => "tab"
   .span9.tab-content
     #profile-pane.tab-pane{class: active?(:profile)}
-      = form_for current_user, as: :user, url: settings_path, method: :put, html: {class: "form-horizontal"} do |f|
-        %fieldset
-          %legend Update your personal information
-          .control-group
-            = f.label :name, class: "control-label"
-            .controls
-              = f.text_field :name
-          .control-group
-            = f.label :about, class: "control-label"
-            .controls
-              = f.text_area :about, rows: 5, style: "width: 98%"
-              %p.help-block This field will be displayed on your profile.
-          .form-actions
-            = f.submit class: "btn btn-primary"
+      = render partial: "users/profile_form", locals: {user: current_user}
     #account-settings-pane.tab-pane{class: active?(:account_settings)}
       = render partial: "devise/registrations/form", locals: {resource: current_user, method: :put, legend: "Change your settings"}
     #keys-pane.tab-pane{class: active?(:keys)}

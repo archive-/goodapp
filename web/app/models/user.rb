@@ -32,13 +32,23 @@ class User < ActiveRecord::Base
     apps.where(status: 100, proper: true)
   end
 
+  def max_email_key
+    self.valid_email_keys.max {|a, b| (a.rating || 0) <=> (b.rating || 0)}
+  end
+
   def base_rating
-    self.github_account.rating if self.github_account
+    base_rating = 0.0
+    # GITHUB - 10%
+    base_rating += self.github_account.rating * 10.0 if self.github_account
+    # CORPORATE EMAIL - 10%
+    base_rating += self.max_email_key.rating * 10.0 if self.max_email_key.rating
+    # TODO more
+    base_rating
   end
 
   # calculated and stored
   def rating
-    self.base_rating || 0.0
+    self.base_rating
   end
 
   # TODO with high activity?

@@ -1,7 +1,14 @@
 %h1= title "Dashboard"
 
-%p This page is under heavy development.
-
--# TODO
--# Upload app -->
--# etc
+%h2 Trust Rating Contributions
+%ul
+  - if @user.github_account
+    %li
+      %p.label.label-success
+        Github:
+        = "+ #{@user.github_account.rating * 10.0} rating"
+  - if @user.max_email_key.rating
+    %li
+      %p.label.label-success
+        Corporate Email:
+        = "+ #{@user.max_email_key.rating * 10.0} rating"

@@ -6,7 +6,12 @@
         -# TODO = link_to "Edit", "#", class: "btn btn-info"
         = button_to "Delete", [current_user, key], method: "delete", class: "btn btn-danger"
     %h3
-      = key.title
+      - if key.email_key? && key.rating
+        - prefix, suffix = key.title.split(/@/)
+        = prefix + "@"
+        %span.corporate-email.label= suffix
+      - else
+        = key.title
       - if key.style == "pgp"
         %span.label.label-info{style: "vertical-align: 0%"}= "PGP #{key.fingerprint}"
       - elsif key.style == "email"
@@ -30,3 +35,6 @@
         %pre
           -# TODO based on key type (PGP, etc.) maybe show fingerprint instead of key.kee?
           %code= key.kee.truncate(200)
+      - else
+        - if key.rating
+          %p.label.label-success= "+ #{key.rating} rating"
