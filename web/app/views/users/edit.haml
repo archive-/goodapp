@@ -4,13 +4,13 @@
   .span3.well
     %ul.nav.nav-list
       %li.nav-header MAIN
-      %li.active= link_to "Profile", "#profile-pane", 'data-toggle' => "tab"
-      %li= link_to "Account Settings", "#account-settings-pane", 'data-toggle' => "tab"
-      %li= link_to "Keys & Emails", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
+      %li{class: active?(:profile)}= link_to "Profile", "#profile-pane", 'data-toggle' => "tab"
+      %li{class: active?(:account_settings)}= link_to "Account Settings", "#account-settings-pane", 'data-toggle' => "tab"
+      %li{class: active?(:keys)}= link_to "Keys & Emails", "#keys-pane", id: "keys-pane-link", 'data-toggle' => "tab"
       %li.nav-header EXTERNAL
-      %li= link_to "Github", "#github-pane", id: "github-pane-link", 'data-toggle' => "tab"
+      %li{class: active?(:github)}= link_to "Github", "#github-pane", id: "github-pane-link", 'data-toggle' => "tab"
   .span9.tab-content
-    #profile-pane.tab-pane.active
+    #profile-pane.tab-pane{class: active?(:profile)}
       = form_for current_user, as: :user, url: settings_path, method: :put, html: {class: "form-horizontal"} do |f|
         %fieldset
           %legend Update your personal information
@@ -25,9 +25,9 @@
               %p.help-block This field will be displayed on your profile.
           .form-actions
             = f.submit class: "btn btn-primary"
-    #account-settings-pane.tab-pane
+    #account-settings-pane.tab-pane{class: active?(:account_settings)}
       = render partial: "devise/registrations/form", locals: {resource: current_user, method: :put, legend: "Change your settings"}
-    #keys-pane.tab-pane
+    #keys-pane.tab-pane{class: active?(:keys)}
       %p.label.label-info Any email you confirm on GoodApp will be added as an email key.
       %ul.nav.nav-tabs
         %li
@@ -44,9 +44,19 @@
       - else
         - @user.keys.order("created_at DESC").each do |key|
           = render partial: key, locals: {user: @user}
-    #github-pane.tab-pane
-      blank
+    #github-pane.tab-pane{class: active?(:github)}
+      - if @user.github_account.gid
+        -# TODO move these lazy styles into css and add classes
+        %div.alert.alert-success{style: "overflow: hidden"}
+          = image_tag @user.github_account.avatar_url, class: "pull-left", style: "margin-right: 10px"
+          %div{style: "overflow: hidden; zoom: 1"}
+            %a{href: "https://github.com/#{@user.github_account.username}"}
+              %h2{style: "display: inline"}= @user.github_account.username
+            %p= "#{pluralize(@user.github_account.repos, "Repositories")} | #{pluralize(@user.github_account.watchers, "Watchers")}"
+            %p.label.label-success= "+ #{@user.github_account.rating} rating"
+      = render partial: "users/github_form", locals: {user: @user, action: @user.github_account.gid ? "Change" : "Connect"}
 
 - content_for :javascript_onload do
   :plain
     $('a[href="' + window.location.hash + '"]').click();
+    window.location.hash = "";

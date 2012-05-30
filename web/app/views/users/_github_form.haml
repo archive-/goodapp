@@ -1,0 +1,17 @@
+= form_tag github_connect_path(current_user), method: :put, class: "form-horizontal" do |f|
+  %fieldset
+    %legend= "#{action} your Github Account"
+    .control-group
+      = label_tag :key_id, "Key", class: "control-label"
+      .controls
+        = select_tag :key_id, options_for_select(user.valid_email_keys.collect {|k| [k.title, k.id]}, selected: params[:key_id]), {include_blank: true}
+        %span.help-inline Used to crosscheck the email on Github.
+        %p.help-block
+          Haven't uploaded the right email key?
+          = link_to "Add it on your settings page", settings_path(anchor: "keys-pane")
+    .control-group
+      = label_tag :username, "Github Username", class: "control-label"
+      .controls
+        = text_field_tag :username, params[:username]
+    .form-actions
+      = submit_tag "#{action} Github Account", class: "btn btn-primary"

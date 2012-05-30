@@ -14,18 +14,29 @@ class User < ActiveRecord::Base
   has_many :endorsees, through: :endorsements_as_endorser
   has_many :endorsers, through: :endorsements_as_endorsee
 
+  has_one :github_account
+
   validates_presence_of :name
 
   def valid_keys
     keys.where(status: 100, proper: true)
   end
 
+  def valid_email_keys
+    keys.where(status: 100, style: "email", proper: true)
+  end
+
   def valid_apps
     apps.where(status: 100, proper: true)
   end
 
-  def total_trust
-    0.0
+  def base_rating
+    self.github_account.rating
+  end
+
+  # calculated and stored
+  def rating
+    self.base_rating
   end
 
   # TODO with high activity?

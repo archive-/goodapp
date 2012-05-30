@@ -1,5 +1,6 @@
 class KeysController < ApplicationController
   def create
+    session[:tab] = :keys
     @user = current_user
     @key = Key.new(params[:key])
     @key.user_id = @user.id

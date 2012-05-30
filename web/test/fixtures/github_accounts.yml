@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gid: 1
+  repos: 1
+  watchers: 1
+  rating: 1
+
+two:
+  gid: 1
+  repos: 1
+  watchers: 1
+  rating: 1

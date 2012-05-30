@@ -7,8 +7,15 @@ module ApplicationHelper
     title
   end
 
-  def active?(url)
-    url == request.path ? 'active' : ''
+  def active?(str)
+    case str
+    when Symbol
+      session[:tab] == str
+    when String
+      request.path == str
+    else
+      false
+    end ? "active" : ""
   end
 
   def bootstrap_flash(type)

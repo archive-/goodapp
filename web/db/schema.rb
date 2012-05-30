@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525164239) do
+ActiveRecord::Schema.define(:version => 20120530043357) do
 
   create_table "apps", :force => true do |t|
     t.integer  "key_id",                        :null => false
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(:version => 20120525164239) do
     t.text     "comment"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "github_accounts", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "gid"
+    t.integer  "repos"
+    t.integer  "watchers"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "username"
+    t.string   "avatar_url"
+    t.decimal  "rating"
   end
 
   create_table "keys", :force => true do |t|

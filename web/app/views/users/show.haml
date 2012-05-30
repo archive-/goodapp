@@ -1,5 +1,5 @@
 %h1
-  %span#trust-tag.label= @user.total_trust
+  = rating(@user)
   = @user.name
 
 - unless @user.about.blank?
