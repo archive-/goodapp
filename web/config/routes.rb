@@ -28,4 +28,5 @@ Web2::Application.routes.draw do
   post "/upload/app" => "apps#create", as: :apps
   post "/upload/key" => "keys#create", as: :keys
   post "/endorsements" => "endorsements#create", as: :endorsements
+  put "/users/:id/github" => "users#github_connect", as: :github_connect
 end
