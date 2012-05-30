@@ -11,6 +11,7 @@ Web2::Application.routes.draw do
   get  "/about" => "static#about", as: :about
   get  "/faq" => "static#faq", as: :faq
   get  "/search" => "static#search", as: :search
+  get  "/trust" => "static#trust", as: :trust 
   get  "/contact" => "static#contact", as: :contact
   post "/contact" => "static#send_contact_email", as: :send_contact_email
   devise_for :users
