@@ -18,7 +18,6 @@ class StaticController < ApplicationController
   def contact ; end
   def trust ; end
 
-
   def send_contact_email
     # TODO better validations -- make form_for with mail object?
     if params[:email] && !params[:email].blank?
