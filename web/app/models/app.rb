@@ -68,6 +68,36 @@ class App < ActiveRecord::Base
     File.unlink(fpath)
   end
 
+
+  def handle_xap(opts={})
+    fpath, key_id = opts["fpath"], opts["key_id"]
+    Dir.mktmpdir do |tmpdir|
+      Dir.chdir(tmpdir) do
+        File.open("WMAppManifest.xml", "r") do |manifest|
+          doc = Nokogiri::XML(manifest)
+          # FORMAT: <App xmlns="" ProductID="{f7c1e22b-d002-4d44-afa1-22e36b40ae10}" Title="GoodApp70" 
+          # RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  
+          # Author="GoodApp70 author" Description="Sample description" Publisher="GoodApp70">
+          doc.xpath("//App").each do |node|
+            self.title = node['Title']
+            self.version = node['Version']
+            # can also get author, description and ublisher from file" 
+          end
+          self.platform = :windows
+          progress(40)
+          raise "Duplicate version upload for #{title}" unless valid?
+        end
+      end
+    end
+    self.scan(fpath)
+  rescue Exception => e
+    progress(100, e.message, false)
+  ensure
+    # TODO delete the temp file now
+    File.unlink(fpath)
+  end
+
+
   def virus_total_scrape
     # self is #<App insance>
     # self.vtpermalink is the url
