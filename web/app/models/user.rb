@@ -36,12 +36,16 @@ class User < ActiveRecord::Base
     self.valid_email_keys.max {|a, b| (a.rating || 0) <=> (b.rating || 0)}
   end
 
+  def max_email_key_rating
+    max_email_key ? (max_email_key.rating || 0.0) : 0.0
+  end
+
   def base_rating
     base_rating = 0.0
     # GITHUB - 10%
     base_rating += self.github_account.rating * 10.0 if self.github_account
     # CORPORATE EMAIL - 10%
-    base_rating += self.max_email_key.rating * 10.0 if self.max_email_key.rating
+    base_rating += self.max_email_key_rating * 10.0
     # TODO more
     base_rating
   end

@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def edit
-    session[:tab] = :profile
+    # TODO can't decide on this -- this is better for github actions
+    session[:tab] ||= :profile
     @user = current_user
   end
 
@@ -37,6 +38,10 @@ class UsersController < ApplicationController
     session[:tab] = :github
     @user = current_user
     @key = Key.find_by_user_id_and_id(current_user.id, params[:key_id])
+    unless @key
+      flash.now.alert = "You must supply a valid key that you own!"
+      return render "edit"
+    end
     if params[:username].blank?
       flash.now.alert = "Github username can't be blank!"
       return render "edit"
@@ -50,7 +55,7 @@ class UsersController < ApplicationController
       github_user = ActiveSupport::JSON.decode(json)
       if github_user["email"] == @key.title
         GithubAccount.sync(current_user.id, github_user["login"])
-        return redirect_to referer, notice: "Your Github account was successfully connected, #{params[:username]}."
+        return redirect_to settings_path, notice: "Your Github account was successfully connected, #{params[:username]}."
       else
         flash.now.alert = "Your email key does not match the Github email for that username."
         return render "edit"

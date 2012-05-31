@@ -32,7 +32,7 @@
         - @user.keys.order("created_at DESC").each do |key|
           = render partial: key, locals: {user: @user}
     #github-pane.tab-pane{class: active?(:github)}
-      - if @user.github_account.gid
+      - if @user.github_account
         -# TODO move these lazy styles into css and add classes
         %div.alert.alert-success{style: "overflow: hidden"}
           = image_tag @user.github_account.avatar_url, class: "pull-left", style: "margin-right: 10px"
@@ -44,7 +44,7 @@
                 = link_to raw('<i class="icon-refresh"></i>'), github_sync_path, method: :put, class: "refresh"
             %p= "#{pluralize(@user.github_account.repos, "Repositories")} | #{pluralize(@user.github_account.watchers, "Watchers")}"
             %p.label.label-success= "+ #{@user.github_account.rating} rating"
-      = render partial: "users/github_form", locals: {user: @user, action: @user.github_account.gid ? "Change" : "Connect"}
+      = render partial: "users/github_form", locals: {user: @user, action: @user.github_account ? "Change" : "Connect"}
 
 - content_for :javascript_onload do
   :plain

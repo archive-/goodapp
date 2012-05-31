@@ -34,7 +34,11 @@ class KeysController < ApplicationController
   def mini
     @user = current_user
     @key = Key.find_by_user_id_and_id(current_user.id, params[:id])
-    # TODO check key
+    unless @key
+      # TODO check does this work?
+      flash.now.alert = "You don't own that key!"
+      return render "edit"
+    end
     render layout: false
   end
 
