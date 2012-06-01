@@ -10,7 +10,8 @@ module VtGetReportJob
     if res["response_code"] == 1
       app.vtpos = res["positives"].to_i
       app.vttotal = res["total"].to_i
-      app.vtrating = 1.0 - (app.vtpos * 1.0 / app.vttotal)
+      vtrating = 1.0 - (app.vtpos ** 2).to_f / app.vttotal
+      app.vtrating = vrating > 0.0 ? vtrating : 0.0
       app.progress(100)
     else
       # TODO back off a bit and try again later (every 20 minutes)?
