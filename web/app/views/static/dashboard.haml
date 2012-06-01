@@ -1,14 +1,34 @@
 %h1= title "Dashboard"
 
 %h2 Trust Rating Contributions
-%ul
-  - if @user.github_account
-    %li
-      %p.label.label-success
-        Github:
-        = "+ #{@user.github_account.rating * 10.0} rating"
-  - if @user.max_email_key && @user.max_email_key.rating
-    %li
-      %p.label.label-success
-        Corporate Email:
-        = "+ #{@user.max_email_key_rating * 10.0} rating"
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Category
+      %th Rating
+      %th
+  %tbody
+    %tr
+      %td Github
+      %td= @user.github_account_rating * 10.0
+      %td
+        = succeed "." do
+          = link_to "Update your Github account", settings_path(anchor: "github-pane")
+    %tr
+      %td Corporate Email
+      %td= @user.max_email_key_rating * 10.0
+      %td
+        = succeed "." do
+          = link_to "Add a corporate email", settings_path(anchor: "keys-pane")
+    %tr
+      %td Uploaded Apps
+      %td= @user.avg_app_rating * 40.0
+      %td Convince people to give your apps positive feedback.
+    %tr
+      %td Endorsements
+      %td= @user.rating - @user.base_rating
+      %td
+        = succeed "!" do
+          Get endorsed on
+          = link_to "your profile page", current_user
