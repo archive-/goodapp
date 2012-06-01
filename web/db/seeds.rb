@@ -21,7 +21,7 @@ def finish_seeding_user(user, roles=[])
     user.add_role role
   end
 end
-=end
+
 
 User.populate(1) do |user|
   user.name = 'TJ Koblentz'
@@ -71,6 +71,13 @@ User.populate(25) do |user|
   user.about = Populator.sentences(2..4)
 end
 
-App.populate(40) do |app|
-  app.name = Populator.words(2)
+i = 0
+Key.populate(25) do |key|
+  key.rating = 1..100
+  key.user_id = i
+  key.kee = "test"
+  key.proper = true
+  i = i + 1
 end
+
+=end
