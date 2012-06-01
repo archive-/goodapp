@@ -15,6 +15,11 @@ class App < ActiveRecord::Base
     self.status, self.state, self.proper = status, state, proper ; save
   end
 
+  def rating
+    # TODO combine vtrating, +/- rating, etc.
+    self.vtrating || 0.0
+  end
+
   def user
     key.user
   end
@@ -68,26 +73,19 @@ class App < ActiveRecord::Base
     File.unlink(fpath)
   end
 
-  def virus_total_scrape
-    # self is #<App insance>
-    # self.vtpermalink is the url
-    # scrape and store in local variables, can figure out what table entries we
-    # will replace with them afterwards
-    # TODO
-  end
-
   def scan(fpath, force=false)
     return if self.vtpermalink and !force
-    progress(70, "Virus Total: Scanning app")
+    progress(70, "Virus Total: Sending binary")
     url = "https://www.virustotal.com/vtapi/v2/file/scan"
-    json = RestClient.post(url, key: Settings.vtapi_key, file: File.new(fpath, 'rb'))
+    json = RestClient.post(url, apikey: Settings.vtapi_key, file: File.new(fpath, 'rb'))
     res = JSON.parse(json)
     if res["response_code"] == 1
       self.vtresource = res["resource"]
       self.vtscan_id = res["scan_id"]
       self.vtpermalink = res["permalink"]
       self.vtsha256 = res["sha256"]
-      progress(100)
+      Resque.enqueue_at_with_queue(:main, 20.minutes.from_now, VtGetReportJob, app_id: self.id) # TODO this won't work
+      progress(90, "Virus Total: Awaiting scan results")
     else
       # TODO better error handling
       progress(100, "Virus Total: Error -- please file bug report", false)
@@ -109,6 +107,8 @@ class App < ActiveRecord::Base
   end
 
   def self.perform(app_id, method, opts={})
+    # if method.nil?
+    # first parameter is a hash
     App.find(app_id).send(method, opts)
   end
 

@@ -1,5 +1,3 @@
-require "resque/server"
-
 Web::Application.routes.draw do
   # TODO put in authorization so can't hit routes like /settings (obviously)
   authenticated :user do

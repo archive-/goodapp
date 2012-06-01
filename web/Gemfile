@@ -8,6 +8,7 @@ gem "haml"
 gem "letter_opener", group: :development
 gem "resque"
 gem "resque-retry"
+gem "resque-scheduler"
 gem "populator"
 gem "faker"
 gem "settingslogic"

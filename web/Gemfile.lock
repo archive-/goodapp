@@ -146,6 +146,7 @@ DEPENDENCIES
   rails (= 3.2.1)
   resque
   resque-retry
+  resque-scheduler
   rest-client
   settingslogic
   sqlite3

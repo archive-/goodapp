@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
   end
 
   def max_email_key_rating
-    max_email_key ? (max_email_key.rating || 0.0) : 0.0
+    mek = max_email_key
+    mek ? (mek.rating || 0.0) : 0.0
   end
 
   def base_rating

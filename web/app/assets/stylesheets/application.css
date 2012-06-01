@@ -64,7 +64,7 @@ h1 .header-inline {vertical-align: 50%}
 .key h3 span {font-size: 0.7em; font-weight: normal}
 
 /* ------------------- FOOTER ------------------- */
-#footer {margin-top: 10px; border-top: 1px solid #e3e3e3; padding-top: 10px}
+#footer {margin: 10px auto 60px; border-top: 1px solid #e3e3e3; padding-top: 10px}
 #footer p {margin-top: 10px}
 
 /* --------------- MEDIA QUERIES ---------------- */
