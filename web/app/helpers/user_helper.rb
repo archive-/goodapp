@@ -1,7 +1,7 @@
 module UserHelper
 
-  def ratingclass(num)
-    case num.to_i
+  def ratingclass(rating)
+    case rating.to_i
     when 0..20
       "trust-none"
     when 20..40
