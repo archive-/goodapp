@@ -67,6 +67,16 @@ class User < ActiveRecord::Base
     self.base_rating
   end
 
+  def has_endorsed?(endorsee)
+    self.endorsees.map {|e| e.id}.index(endorsee.id)
+  end
+
+  def self.can_endorse?(endorser, endorsee)
+    return false unless endorser && endorsee   # if either is nil
+    return false if endorser.id == endorsee.id # endorsing self
+    !endorser.has_endorsed?(endorsee)
+  end
+
   # TODO with high activity?
   # TODO maybe most trusted users??
   def self.featured

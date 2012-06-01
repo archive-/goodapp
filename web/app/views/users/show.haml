@@ -9,7 +9,8 @@
 %h2
   = "Endorsements (#{@user.endorsers.count})"
   %span.details Rollover endorsers to see endorsement comment, if any.
-- if true # TODO can_endorse?(@user)
+
+- if User.can_endorse?(current_user, @user)
   %p.pull-right{style: "margin: 5px 5px 0 0"}
     %a.btn.btn-success{'data-toggle' => "modal", href: "#endorse-modal"} Endorse
   #endorse-modal.modal.hide.fade
@@ -26,6 +27,7 @@
         = f.hidden_field :endorsee_id, value: @user.id
       .modal-footer
         = f.submit "Submit Endorsement", class: "btn btn-primary"
+
 - if @endorsements.empty?
   %p.alert.alert-info No endorsements.
 - else
