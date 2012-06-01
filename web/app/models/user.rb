@@ -32,12 +32,18 @@ class User < ActiveRecord::Base
     apps.where(status: 100, proper: true)
   end
 
+  def avg_app_rating
+    return 0.0 if self.valid_apps.empty?
+    self.valid_apps.map {|a| a.rating}.inject(:+).to_f / self.valid_apps.count
+  end
+
   def max_email_key
-    self.valid_email_keys.max {|a, b| (a.rating || 0) <=> (b.rating || 0)}
+    self.valid_email_keys.max {|a, b| (a.rating || 0.0) <=> (b.rating || 0.0)}
   end
 
   def max_email_key_rating
     mek = max_email_key
+    # because key.rating can be nil (if not email key -- *poor* design)
     mek ? (mek.rating || 0.0) : 0.0
   end
 
@@ -47,7 +53,8 @@ class User < ActiveRecord::Base
     base_rating += self.github_account.rating * 10.0 if self.github_account
     # CORPORATE EMAIL - 10%
     base_rating += self.max_email_key_rating * 10.0
-    # TODO more
+    # APPS
+    base_rating += self.avg_app_rating * 40.0
     base_rating
   end
 

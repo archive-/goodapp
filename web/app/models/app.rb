@@ -15,9 +15,16 @@ class App < ActiveRecord::Base
     self.status, self.state, self.proper = status, state, proper ; save
   end
 
+  def fbrating
+    # TODO placeholder
+    0.0
+  end
+
   def rating
+    # virus total threshold
+    return 0.0 if !self.vtrating || self.vtrating < 0.4
     # TODO combine vtrating, +/- rating, etc.
-    self.vtrating || 0.0
+    self.vtrating * 0.2 + self.fbrating * 0.8
   end
 
   def user

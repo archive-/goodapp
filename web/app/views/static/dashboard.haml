@@ -7,7 +7,7 @@
       %p.label.label-success
         Github:
         = "+ #{@user.github_account.rating * 10.0} rating"
-  - if @user.max_email_key
+  - if @user.max_email_key && @user.max_email_key.rating
     %li
       %p.label.label-success
         Corporate Email:

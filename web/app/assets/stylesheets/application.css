@@ -32,6 +32,7 @@ html {overflow-y: scroll}
 .refresh:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.7;filter:alpha(opacity=70)}
 .alert .label {margin: 9px 0 0}
 .corporate-email {background: #faa732; margin-left: 0; font-size: inherit !important}
+.vert-margin {margin: 10px 0}
 
 /* ------------------- HEADER ------------------- */
 .brand:hover {color: white}
@@ -75,3 +76,13 @@ h1 .header-inline {vertical-align: 50%}
   #search {display: none}
   .responsive-hidden {display: inherit !important}
 }
+
+/* --------------- TRUST LEVELS ----------------- */
+/* TODO pick better colors or put black on foreground on some
+ * ... hurts my eyes! */
+.trust-none {}
+.trust-low {background: #ffdd66}
+.trust-midlow {background: #cccc88}
+.trust-midhigh {background: #66eedd}
+.trust-high {background: #66dd55}
+.notrust {background: #ff0044}
