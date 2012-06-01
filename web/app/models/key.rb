@@ -1,5 +1,6 @@
 class Key < ActiveRecord::Base
   attr_accessible :title, :kee, :kee_file, :email
+
   attr_reader :kee_file, :email
 
   belongs_to :user

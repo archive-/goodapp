@@ -1,8 +1,8 @@
 class Endorsement < ActiveRecord::Base
+  attr_accessible :endorsee_id, :comment
+
   belongs_to :endorser, class_name: "User"
   belongs_to :endorsee, class_name: "User"
-
-  attr_accessible :endorsee_id, :comment
 
   validates :endorsee_id,
     presence: true,
