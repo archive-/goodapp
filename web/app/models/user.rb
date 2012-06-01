@@ -47,10 +47,14 @@ class User < ActiveRecord::Base
     mek ? (mek.rating || 0.0) : 0.0
   end
 
+  def github_account_rating
+    self.github_account ? self.github_account.rating : 0.0
+  end
+
   def base_rating
     base_rating = 0.0
     # GITHUB - 10%
-    base_rating += self.github_account.rating * 10.0 if self.github_account
+    base_rating += self.github_account_rating * 10.0
     # CORPORATE EMAIL - 10%
     base_rating += self.max_email_key_rating * 10.0
     # APPS
