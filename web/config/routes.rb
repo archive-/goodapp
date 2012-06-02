@@ -12,7 +12,7 @@ Web::Application.routes.draw do
   get  "/trust" => "static#trust", as: :trust
   get  "/contact" => "static#contact", as: :contact
   post "/contact" => "static#send_contact_email", as: :send_contact_email
-  devise_for :users
+  devise_for :users, controllers: {confirmations: "users/confirmations"}
   resources :users, except: [:edit, :update] do
     # TODO scope keys? so its "/keys/:id"
     resources :keys, except: [:new, :create]

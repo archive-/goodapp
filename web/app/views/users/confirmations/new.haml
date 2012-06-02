@@ -1,6 +1,7 @@
 %h2 Resend confirmation instructions
 
 = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {method: :post}) do |f|
+  -# TODO may be a problem here with Users::ConfirmationController
   = devise_error_messages!
   %div
     = f.label :email
