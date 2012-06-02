@@ -1,5 +1,4 @@
 module VtGetReportJob
-
   @queue = :main
 
   def self.perform(opts={})
@@ -18,5 +17,4 @@ module VtGetReportJob
       Resque.enqueue_at_with_queue(:main, 10.minutes.from_now, VtGetReportJob, app_id: app.id)
     end
   end
-
 end

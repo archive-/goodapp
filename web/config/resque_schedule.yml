@@ -1,0 +1,5 @@
+github_account_sync:
+  cron: "0 0 * * *"
+  class: GithubAccountSyncJob
+  args:
+  description: Every day at midnight, resync all github accounts

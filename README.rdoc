@@ -50,7 +50,8 @@ Point your browser to http://localhost:3000 and tada!
 === Resque (background job processing)
 
    $ cd web
-   $ COUNT=[NUMWORKERS] QUEUE=main rake resque:workers
+   $ VERBOSE=1 rake resque:scheduler
+   $ VERBOSE=1 COUNT=[numworkers] rake resque:scheduler
 
 == TESTING
 
