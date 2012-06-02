@@ -3,6 +3,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @apps = @user.valid_apps
     @endorsements = @user.endorsements_as_endorsee
+    respond_to do |format|
+      format.html
+      format.json { render json: @user}
+    end
   end
 
   def edit

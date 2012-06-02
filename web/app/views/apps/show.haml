@@ -3,14 +3,18 @@
   = title @root_app.title
 
 %h2
-  = "Developers (#{@developers.count})"
-- if @developers.empty?
+  -# TODO support more than one dev
+  = "Developers (1)"
+-# if @developers.empty?
   %p.alert.alert-info No developers.
-- else
+-# else
   .alert.alert-info
-    %ul.endorsements
+    %ul.developers
       - @developers.each do |developer|
         %li= render partial: "users/user_inline", locals: {user: developer}
+.alert.alert-info
+  %ul.developers
+    %li= render partial: "users/user_inline", locals: {user: @app.user}
 
 %h2
   = "Uploaded Versions (#{@app_versions.count})"

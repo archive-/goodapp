@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
     self.endorsees.map {|e| e.id}.index(endorsee.id)
   end
 
+  def as_json(opts={})
+    {id: self.id, name: self.name, rating: self.rating}
+  end
+
   def self.can_endorse?(endorser, endorsee)
     return false unless endorser && endorsee   # if either is nil
     return false if endorser.id == endorsee.id # endorsing self

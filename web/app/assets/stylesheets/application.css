@@ -55,8 +55,8 @@ h1 {margin-bottom: 10px}
 h3 .header-inline {vertical-align: 30%}
 h1 .header-inline {vertical-align: 50%}
 .app h3 {margin-bottom: 5px}
-.endorsements {list-style: none; margin: 0}
-.endorsements li {display: inline; margin: 0 10px 0 0}
+.endorsements, .developers {list-style: none; margin: 0}
+.endorsements li, .developers li {display: inline; margin: 0 10px 0 0}
 #trust-tag {font-size: 1.0em}
 .details {font-style: italic; font-size: 0.6em; color: #bbb}
 .no-bullets {list-style: none; margin: 0}

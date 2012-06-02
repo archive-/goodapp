@@ -11,6 +11,10 @@ class App < ActiveRecord::Base
 
   @queue = :main #:apps
 
+  def as_json(opts={})
+    {id: self.id, title: self.title, rating: self.rating}
+  end
+
   def progress(status, state="", proper=true)
     self.status, self.state, self.proper = status, state, proper ; save
   end

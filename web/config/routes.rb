@@ -18,6 +18,7 @@ Web::Application.routes.draw do
     resources :keys, except: [:new, :create]
     resources :apps, except: [:new, :create]
   end
+  get "/apps/:id" => "apps#show", as: :app
   get "/keys/:id/confirm/:confirmation_token" => "keys#confirm", as: :key_confirmation
   get "/apps/:id/mini" => "apps#mini", as: :show_app_mini
   get "/keys/:id/mini" => "keys#mini", as: :show_key_mini
