@@ -13,19 +13,12 @@ module EndorsementRatingSyncJob
       end
       executable = File.join(Rails.root, "../bin/trust")
       output = `#{executable} < #{file.path}`
-      $stdout.puts("==== FILE ====")
-      file.rewind
-      $stdout.puts(file.read)
-      $stdout.puts("==== OUTPUT ====")
-      $stdout.puts(output)
       pairings = output.split
       ratings = {}
       pairings.each do |pairing|
         id, rating = pairing.split(":")
         ratings[id.to_i] = rating.to_f
       end
-      $stdout.puts("==== RATINGS ====")
-      $stdout.puts(ratings.inspect)
       users = User.find(ratings.keys)
       endorsement_ratings = {}
       users.each do |user|
