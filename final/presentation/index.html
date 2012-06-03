@@ -23,6 +23,8 @@
       .cover-slide {position: absolute; top: 0; left: 0}
       .panel {width: 25%; float: left}
       .panel h2 {text-align: center}
+      .shaded .visible {opacity: 0.4}
+      .shaded .highlighted {opacity: 1 !important}
     </style>
   </head>
   <body>
@@ -38,26 +40,26 @@
             <p>Team &Oslash;</p>
             <p>(advised by Microsoft)</p>
           </section>
-          <section>
-            <div class="panel">
+          <section class="shaded">
+            <div class="panel visible highlighted">
               <h2>Yulia Dubinina</h2>
-              <h4>The Russian-American</h4>
+              <h4>The Russian-<br>American</h4>
               <img src="img/yulia.jpg" width="200px" />
               <h4>Leader</h4>
             </div>
             <div class="panel fragment">
               <h2>TJ Koblentz</h2>
-              <h4>The French-American</h4>
+              <h4>The French-<br>American</h4>
               <img src="img/tj.png" width="200px" />
             </div>
             <div class="panel fragment">
               <h2>Victor Moreira</h2>
-              <h4>The Brazilian-American</h4>
+              <h4>The Brazilian-<br>American</h4>
               <img src="img/victor.jpg" width="200px" />
             </div>
             <div class="panel fragment">
               <h2>Jasper Fredrickson</h2>
-              <h4>The TRUE American</h4>
+              <h4>The <span class="good">TRUE</span><br>American</h4>
               <img src="img/jasper.jpg" width="200px" />
             </div>
           </section>
@@ -244,67 +246,80 @@
     </div>
     <script src="js/reveal.min.js"></script>
     <script src="js/d3.v2.min.js"></script>
+    <script src="js/jquery-1.7.2.min.js"></script>
     <script>
-      /* slideshow initialization */
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        loop: false,
-        mouseWheel: false,
-        rollingLinks: true,
-        theme: 'default',
-        transition: 'default'
+      $(function() {
+        /* slideshow */
+        Reveal.addEventListener("fragmentshown", function(e) {
+          alert("HIIII");
+          $(".visible").removeClass("highlighted");
+          $(e.fragment).addClass("highlighted");
+        });
+
+        window.addEventListener("fragmenthidden", function(e) {
+          $(e.fragment).prev().addClass("highlighted");
+        });
+
+        Reveal.initialize({
+          controls: true,
+          progress: true,
+          history: true,
+          loop: false,
+          mouseWheel: false,
+          rollingLinks: true,
+          theme: "default",
+          transition: "default"
+        });
+
+        /* pie charts */
+        var w = 900,
+            h = 400,
+            r = 200,
+            colors = ["#66ee44", "#ff4444", "#888"],
+            data1 = [
+              {"label": "good", "value": 40},
+              {"label": "bad", "value": 60}],
+            data2 = [
+              {"label": "good", "value": 20},
+              {"label": "bad", "value": 50},
+              {"label": "baod", "value": 30}];
+
+        var text_transform = function(d) {
+          d.innerRadius = 0;
+          d.outerRadius = r;
+          return "translate(" + arc.centroid(d) + ")";
+        };
+
+        var vis1 = d3.select("#pie1")
+          .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
+          .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+        var vis2 = d3.select("#pie2")
+          .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
+          .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+
+        var arc = d3.svg.arc().outerRadius(r);
+        var pie = d3.layout.pie().value(function(d) { return d.value; });
+
+        arcs1 = vis1.selectAll("g.slice")
+          .data(pie).enter().append("svg:g").attr("class", "slice");
+        arcs1.append("svg:path")
+          .attr("fill", function(d, i) { return colors[i]; })
+          .attr("d", arc);
+        arcs1.append("svg:text")
+          .attr("transform", text_transform)
+          .attr("text-anchor", "middle")
+          .text(function(d, i) { return data1[i].label; });
+
+        arcs2 = vis2.selectAll("g.slice")
+          .data(pie).enter().append("svg:g").attr("class", "slice");
+        arcs2.append("svg:path")
+          .attr("fill", function(d, i) { return colors[i]; })
+          .attr("d", arc);
+        arcs2.append("svg:text")
+          .attr("transform", text_transform)
+          .attr("text-anchor", "middle")
+          .text(function(d, i) { return data2[i].label; });
       });
-
-      /* pie charts */
-      var w = 900,
-          h = 400,
-          r = 200,
-          colors = ["#66ee44", "#ff4444", "#888"],
-          data1 = [
-            {"label": "good", "value": 40},
-            {"label": "bad", "value": 60}],
-          data2 = [
-            {"label": "good", "value": 20},
-            {"label": "bad", "value": 50},
-            {"label": "baod", "value": 30}];
-
-      var text_transform = function(d) {
-        d.innerRadius = 0;
-        d.outerRadius = r;
-        return "translate(" + arc.centroid(d) + ")";
-      };
-
-      var vis1 = d3.select("#pie1")
-        .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
-        .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
-      var vis2 = d3.select("#pie2")
-        .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
-        .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
-
-      var arc = d3.svg.arc().outerRadius(r);
-      var pie = d3.layout.pie().value(function(d) { return d.value; });
-
-      arcs1 = vis1.selectAll("g.slice")
-        .data(pie).enter().append("svg:g").attr("class", "slice");
-      arcs1.append("svg:path")
-        .attr("fill", function(d, i) { return colors[i]; })
-        .attr("d", arc);
-      arcs1.append("svg:text")
-        .attr("transform", text_transform)
-        .attr("text-anchor", "middle")
-        .text(function(d, i) { return data1[i].label; });
-
-      arcs2 = vis2.selectAll("g.slice")
-        .data(pie).enter().append("svg:g").attr("class", "slice");
-      arcs2.append("svg:path")
-        .attr("fill", function(d, i) { return colors[i]; })
-        .attr("d", arc);
-      arcs2.append("svg:text")
-        .attr("transform", text_transform)
-        .attr("text-anchor", "middle")
-        .text(function(d, i) { return data2[i].label; });
     </script>
   </body>
 </html>
