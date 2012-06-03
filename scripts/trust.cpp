@@ -189,7 +189,7 @@ int main()
 
   }
   create_network((members), num_members);
-  test_structure((members), num_members);
+  //test_structure((members), num_members);
   print_structure((members), num_members);
   deallocate(members, num_members);
   return 0;
