@@ -59,12 +59,13 @@ class User < ActiveRecord::Base
     base_rating += self.max_email_key_rating * 10.0
     # APPS
     base_rating += self.avg_app_rating * 40.0
+    # weighted to 60%
     base_rating
   end
 
   # calculated and stored
   def rating
-    self.base_rating
+    self.base_rating + (self.endorsement_rating || 0.0) * 30.0
   end
 
   def has_endorsed?(endorsee)

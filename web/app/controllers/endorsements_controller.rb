@@ -3,6 +3,7 @@ class EndorsementsController < ApplicationController
     @endorsement = Endorsement.new(params[:endorsement])
     @endorsement.endorser_id = current_user.id
     if @endorsement.save
+      Endorsement.queue_resync
       return redirect_to referer,
         notice: "Successfully endorsed #{@endorsement.endorsee.name}."
     else

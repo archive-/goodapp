@@ -32,7 +32,11 @@ class Key < ActiveRecord::Base
     # TODO move this
     corporations = {'microsoft.com' => 1.0, 'google.com' => 1.0, 'facebook.com' => 1.0, 'yahoo.com' => 1.0}
     suffix = self.kee.split(/@/)[1]
-    self.rating = corporations[suffix] ; save
+    email_rating = corporations[suffix]
+    if email_rating
+      Endorsement.queue_resync
+      self.rating = email_rating ; save
+    end
   end
 
   def progress(status, state="", proper=true)

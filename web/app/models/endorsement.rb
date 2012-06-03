@@ -12,4 +12,8 @@ class Endorsement < ActiveRecord::Base
   def not_yourself
     errors.add(:endorsee_id, "can't be yourself") if endorser_id == endorsee_id
   end
+
+  def self.queue_resync
+    Resque.enqueue(EndorsementRatingSyncJob)
+  end
 end

@@ -23,7 +23,11 @@ class GithubAccount < ActiveRecord::Base
     # can't just sum watchers because you get 1 for each repo (but avg is not
     # good either)
     rating = (github_account.watchers - github_account.repos) / 10000.0
-    github_account.rating = rating > 1.0 ? 1.0 : rating
+    rating = rating > 1.0 ? 1.0 : rating
+    if github_account.rating != rating
+      Endorsement.queue_resync
+      github_account.rating = rating
+    end
     github_account.save
   end
 end

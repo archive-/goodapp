@@ -10,7 +10,11 @@ module VtGetReportJob
       app.vtpos = res["positives"].to_i
       app.vttotal = res["total"].to_i
       vtrating = 1.0 - (app.vtpos ** 2).to_f / app.vttotal
-      app.vtrating = vtrating > 0.0 ? vtrating : 0.0
+      vtrating = vtrating > 0.0 ? vtrating : 0.0
+      if app.vtrating != vtrating
+        Endorsement.queue_resync
+        app.vtrating = vtrating
+      end
       app.progress(100)
     else
       # TODO back off a bit and try again later (every 20 minutes)?

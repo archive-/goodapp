@@ -27,7 +27,7 @@
       %td Convince people to give your apps positive feedback.
     %tr
       %td Endorsements
-      %td= @user.rating - @user.base_rating
+      %td= @user.endorsement_rating * 30.0
       %td
         = succeed "!" do
           Get endorsed on
