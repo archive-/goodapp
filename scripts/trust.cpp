@@ -172,7 +172,7 @@ int main()
     if(member_id == -1 || trusted_id == -1)
       break;
 
-    if(old_id != member_id && old_trusted != trusted_id)
+    if(old_id != member_id || old_trusted != trusted_id)
     {
       old_id = member_id;
       old_trusted = trusted_id;
