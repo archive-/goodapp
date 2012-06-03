@@ -1,0 +1,3 @@
+A great thing about GoodApp is the amount of potential it has. For the future, we have many goals and milestone.
+Firstly and most importantly, we're aiming be a part of the the app stores. Whenever a potential user visits an app page in the app store, it displays the respective GoodApp rating.
+Our project
