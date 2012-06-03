@@ -30,7 +30,7 @@ class Key < ActiveRecord::Base
 
   def update_rating
     # TODO move this
-    corporations = {'microsoft.com' => 1.0, 'google.com' => 1.0, 'facebook.com' => 1.0, 'yahoo.com' => 1.0}
+    corporations = {'microsoft.com' => 1.0, 'google.com' => 1.0, 'fb.com' => 1.0, 'yahoo-inc.com' => 1.0}
     suffix = self.kee.split(/@/)[1]
     email_rating = corporations[suffix]
     if email_rating
