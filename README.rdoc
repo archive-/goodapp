@@ -36,11 +36,27 @@ Now bootstrap the project by installing dependencies specified in web/Gemfile
 
 This will bundle the required gems.
 
+Then, since we are approaching the demo, I changed some things to make things
+seem more "legit".
+
+    # in /etc/hosts add the following lines
+    127.0.0.1 goodapp.com api.goodapp.com
+
 Finally, start the server.
 
     rails s[erver]
 
-Point your browser to http://localhost:3000 and tada!
+Point your browser to http://goodapp.com:3000 and tada!
+
+==== Running on port 80
+
+To run on port 80, simply use the following.
+
+    sudo -E rails s[erver] -p 80
+
+[BEWARE] Issue with the letter\_opener gem.
+It uses $BROWSER to open the email and it is quite unsafe
+to run a brower as root -- do this at your own risk.
 
 === Database
 
