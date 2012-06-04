@@ -23,8 +23,6 @@
       .cover-slide {position: absolute; top: 0; left: 0}
       .panel {width: 25%; float: left}
       .panel h2 {text-align: center}
-      .shaded .visible {opacity: 0.4}
-      .shaded .highlighted {opacity: 1 !important}
     </style>
   </head>
   <body>
@@ -40,8 +38,8 @@
             <p>Team &Oslash;</p>
             <p>(advised by Microsoft)</p>
           </section>
-          <section class="shaded">
-            <div class="panel visible highlighted">
+          <section data-state="customevent" class="shaded">
+            <div class="panel visible">
               <h2>Yulia Dubinina</h2>
               <h4>The Russian-<br>American</h4>
               <img src="img/yulia.jpg" width="200px" />
@@ -80,7 +78,7 @@
             </div>
             <div class="fragment">
               <img src="img/good3.jpg" width="300px"/>
-            </div>            
+            </div>
           </section>
           <section>
             <h2><span class="bad">Bad</span> App Features <span class="fragment">(malicious)</span></h2>
@@ -97,12 +95,12 @@
             </div>
             <div class="fragment">
               <img src="img/bad3.jpeg" width="300px"/>
-            </div>              
-          </section>          
+            </div>
+          </section>
           <section>
             <h2>Wild App 'goodness' breakdown</h2>
             <div class="chart" id="pie1"></div>
-            <div class="fragment"><h4>Not to scale</h4></div>    
+            <div class="fragment"><h4>Not to scale</h4></div>
           </section>
           <section>
             <h2>Applications about 10 years ago</h2>
@@ -134,16 +132,16 @@
             <div class="fragment">
               <li>300,000 apps developed in 3 years and rapidly growing</li>
             </div>
-            <br>   
+            <br>
             <div class="fragment">
               <li>10.9 billion App downloads</li>
             </div>
-            <br>              
+            <br>
             <div class="fragment">
               <li>64% of mobile phone time is spent on apps</li>
             </div>
-            </ul>        
-          </section>          
+            </ul>
+          </section>
           <section>
             <h2>The focus was to come up with <span class="orange">new techniques for malware scanning</span></h2>
             <br>
@@ -275,17 +273,7 @@
     <script src="js/jquery-1.7.2.min.js"></script>
     <script>
       $(function() {
-        /* slideshow */
-        Reveal.addEventListener("fragmentshown", function(e) {
-          alert("HIIII");
-          $(".visible").removeClass("highlighted");
-          $(e.fragment).addClass("highlighted");
-        });
-
-        window.addEventListener("fragmenthidden", function(e) {
-          $(e.fragment).prev().addClass("highlighted");
-        });
-
+        // slideshow
         Reveal.initialize({
           controls: true,
           progress: true,
@@ -297,7 +285,29 @@
           transition: "default"
         });
 
-        /* pie charts */
+        // hacked up with jquery (since Reveal.addEventListener
+        // doesn't f**king work -- check no other events trigger this
+        // TODO backwards doesn't work
+        $("body").on("click keyup", function() {
+          var i = 0;
+          $visibles = $(".shaded .visible");
+          $visibles.each(function() {
+            if (i < ($visibles.length - 1))
+              $(this).fadeTo("fast", 0.4);
+            i++;
+          });
+        });
+
+        // Reveal.addEventListener("fragmentshown", function(e) {
+          // $(".visible").removeClass("highlighted");
+          // $(e.fragment).addClass("highlighted");
+        // });
+
+        // Reveal.addEventListener("fragmenthidden", function(e) {
+          // $(e.fragment).prev().addClass("highlighted");
+        // });
+
+        // pie charts
         var w = 900,
             h = 400,
             r = 200,
