@@ -3,14 +3,14 @@ module EndorsementRatingSyncJob
 
   def self.perform(opts={})
     users = User.all
-    now = Time.now
-    file = Tempfile.new("goodapp_er_sync")
+    file = Tempfile.new("goodapp_sync_")
     begin
       file.puts("#{users.count}")
       file.puts(users.map {|u| "#{u.id}:#{u.base_rating}"}.join(" "))
       Endorsement.all.each do |endorsement|
         file.puts("#{endorsement.endorser_id} #{endorsement.endorsee_id}")
       end
+      file.rewind # TODO segfaults w/o this line!
       executable = File.join(Rails.root, "../bin/trust")
       output = `#{executable} < #{file.path}`
       pairings = output.split
