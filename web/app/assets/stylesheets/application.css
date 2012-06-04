@@ -86,3 +86,8 @@ h1 .header-inline {vertical-align: 50%}
 .trust-midhigh {background: #66eedd}
 .trust-high {background: #66dd55}
 .notrust {background: #ff0044}
+
+/* -------------- LOGO NAMESPACES --------------- */
+#logo .namespace-separator, #logo .namespace {font-size: 1em}
+#logo .namespace-separator {color: #3a87ad}
+#logo .namespace {color: orange}
