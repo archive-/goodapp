@@ -19,3 +19,48 @@ And that's how our new approach that we hope
                   <li>Cover neglected area</li>
                   <li>Great potential</li>
                 </ul>
+
+
+Final Final Script:
+
+Open source:
+All the tools we use on our service are open source. In addition, tools and products we use to develop are also open source, for example Git, Github and Eclipse.
+
+Community:
+We are a community. The more people use our service, the better it gets. And since we're built on users' input and feedback GoodApp is able to focus on real life issues. The community also gets to see our source code, increasing the trust 
+
+
+
+  <section>
+            <h2>Community driven</h2>
+              <ul>
+                <li>The bigger it gets, the better it gets</li>
+                <li>Real life issues</li>
+                <li>Coding help from users</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Attack on multiple fronts</h2>
+            <ul>
+              <li>Each individual feature can be improved</li>
+              <li>New malicious ideas and new solutions</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Data analysis</h2>
+            <ul>
+              <li>Understand the environment</li>
+              <li>Focus on more common issues</li>
+              <li>Predict new problems</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Goal</h2>
+            <h4>Integration with app stores</h4>
+            <img src="img/appstoreintegration.png" width="250" />
+          </section>
+          <section>
+            <h1>Thanks!</h1>
+            <br>
+            <h3>Questions?</h3>
+          </section>
