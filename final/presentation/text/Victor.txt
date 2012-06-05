@@ -4,3 +4,4 @@ GoodApp is community driven. The bigger it gets, the better it gets. And being t
 Since our solution is built of individual parts and actions, we can add or upgrade…
 
 
+All the tools and products we've listed so far in this presentation and in the demo are free or open source. All the other tools that we've used but haven't mentioned yet are also open source, most importantly Git for our version control.
