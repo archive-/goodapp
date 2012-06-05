@@ -226,31 +226,31 @@
             <h4>Delving into the components</h4>
             <img src="img/cogs.png" width="400" class="nostyle" />
           </section>
-      	<section>
-      	<h2>Web Interface</h2>
-      	<ul>
-        	<li>Written in Ruby on Rails</li>
-      	</ul>
-      	</section>
-		<section>
-			<h2>Developer Verification</h2>
-			<ul>
-				<li>Email Verification</li>
-		        <li>PGP Verification</li>
-		        <li>Developer Key Registration</li>
-	        	<li>Git Hub Monitoring</li>
-			</ul>
-		</section>
-        <section>
-          <h2>Endorsements</h2>
-          <!-- <h4>Creating the web & Propagating trust</h4> -->
-          <img src="img/uncle_sam_endorse.png" width="600" class="fragment nostyle" />
-        </section>
-		<section>
-          <h2>Virus Total</h2>
-          <h4>Focused on Binary scanning so we don't have to</h4>
-          <img src="img/virustotal.png" />
-        </section>
+          <section>
+            <h2>Web Interface</h2>
+            <ul>
+              <li>Written in Ruby on Rails</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Developer Verification</h2>
+            <ul>
+              <li>Email Verification</li>
+              <li>PGP Verification</li>
+              <li>Developer Key Registration</li>
+              <li>Git Hub Monitoring</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Endorsements</h2>
+            <!-- <h4>Creating the web & Propagating trust</h4> -->
+            <img src="img/uncle_sam_endorse.png" width="600" class="fragment nostyle" />
+          </section>
+          <section>
+            <h2>Virus Total</h2>
+            <h4>Focused on Binary scanning so we don't have to</h4>
+            <img src="img/virustotal.png" />
+          </section>
           <section>
             <h2>Rating Formula</h2>
             <h4>Generating an absolute trust value</h4>
@@ -271,11 +271,11 @@
           </section>
           <section>
             <h2>Community driven</h2>
-              <ul>
-                <li>The bigger it gets, the better it gets</li>
-                <li>Real life issues</li>
-                <li>Coding help from users</li>
-              </ul>
+            <ul>
+              <li>The bigger it gets, the better it gets</li>
+              <li>Real life issues</li>
+              <li>Coding help from users</li>
+            </ul>
           </section>
           <section>
             <h2>Attack on multiple fronts</h2>
@@ -310,102 +310,102 @@
           </section>
         </section>
       </div>
-      <aside class="controls">
-        <a class="left" href="#">&#x25c4;</a>
-        <a class="right" href="#">&#x25ba;</a>
-        <a class="up" href="#">&#x25b2;</a>
-        <a class="down" href="#">&#x25bc;</a>
-      </aside>
-      <div class="progress"><span></span></div>
-    </div>
-    <script src="js/reveal.min.js"></script>
-    <script src="js/d3.v2.min.js"></script>
-    <script src="js/jquery-1.7.2.min.js"></script>
-    <script>
-      $(function() {
-        // slideshow
-        Reveal.initialize({
-          controls: true,
-          progress: true,
-          history: true,
-          loop: false,
-          mouseWheel: false,
-          rollingLinks: true,
-          theme: "default",
-          transition: "default"
-        });
-
-        // hacked up with jquery (since Reveal.addEventListener
-        // doesn't f**king work -- check no other events trigger this
-        // TODO backwards doesn't work
-        $("body").on("click keyup", function() {
-          var i = 0;
-          $visibles = $(".shaded .visible");
-          $visibles.each(function() {
-            if (i < ($visibles.length - 1))
-              $(this).fadeTo("fast", 0.4);
-            i++;
-          });
-        });
-
-        // Reveal.addEventListener("fragmentshown", function(e) {
-          // $(".visible").removeClass("highlighted");
-          // $(e.fragment).addClass("highlighted");
-        // });
-
-        // Reveal.addEventListener("fragmenthidden", function(e) {
-          // $(e.fragment).prev().addClass("highlighted");
-        // });
-
-        // pie charts
-        var w = 900,
-            h = 400,
-            r = 200,
-            colors = ["#66ee44", "#ff4444", "#888"],
-            data1 = [
-              {"label": "good", "value": 40},
-              {"label": "bad", "value": 60}],
-            data2 = [
-              {"label": "good", "value": 20},
-              {"label": "bad", "value": 50},
-              {"label": "baod", "value": 30}];
-
-        var text_transform = function(d) {
-          d.innerRadius = 0;
-          d.outerRadius = r;
-          return "translate(" + arc.centroid(d) + ")";
-        };
-
-        var vis1 = d3.select("#pie1")
-          .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
-          .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
-        var vis2 = d3.select("#pie2")
-          .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
-          .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
-
-        var arc = d3.svg.arc().outerRadius(r);
-        var pie = d3.layout.pie().value(function(d) { return d.value; });
-
-        arcs1 = vis1.selectAll("g.slice")
-          .data(pie).enter().append("svg:g").attr("class", "slice");
-        arcs1.append("svg:path")
-          .attr("fill", function(d, i) { return colors[i]; })
-          .attr("d", arc);
-        arcs1.append("svg:text")
-          .attr("transform", text_transform)
-          .attr("text-anchor", "middle")
-          .text(function(d, i) { return data1[i].label; });
-
-        arcs2 = vis2.selectAll("g.slice")
-          .data(pie).enter().append("svg:g").attr("class", "slice");
-        arcs2.append("svg:path")
-          .attr("fill", function(d, i) { return colors[i]; })
-          .attr("d", arc);
-        arcs2.append("svg:text")
-          .attr("transform", text_transform)
-          .attr("text-anchor", "middle")
-          .text(function(d, i) { return data2[i].label; });
+    <aside class="controls">
+    <a class="left" href="#">&#x25c4;</a>
+    <a class="right" href="#">&#x25ba;</a>
+    <a class="up" href="#">&#x25b2;</a>
+    <a class="down" href="#">&#x25bc;</a>
+    </aside>
+    <div class="progress"><span></span></div>
+  </div>
+  <script src="js/reveal.min.js"></script>
+  <script src="js/d3.v2.min.js"></script>
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script>
+    $(function() {
+      // slideshow
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        loop: false,
+        mouseWheel: false,
+        rollingLinks: true,
+        theme: "default",
+        transition: "default"
       });
-    </script>
-  </body>
+
+      // hacked up with jquery (since Reveal.addEventListener
+      // doesn't f**king work -- check no other events trigger this
+      // TODO backwards doesn't work
+      $("body").on("click keyup", function() {
+        var i = 0;
+        $visibles = $(".shaded .visible");
+        $visibles.each(function() {
+          if (i < ($visibles.length - 1))
+          $(this).fadeTo("fast", 0.4);
+          i++;
+        });
+      });
+
+      // Reveal.addEventListener("fragmentshown", function(e) {
+        // $(".visible").removeClass("highlighted");
+        // $(e.fragment).addClass("highlighted");
+        // });
+
+      // Reveal.addEventListener("fragmenthidden", function(e) {
+        // $(e.fragment).prev().addClass("highlighted");
+        // });
+
+      // pie charts
+      var w = 900,
+      h = 400,
+      r = 200,
+      colors = ["#66ee44", "#ff4444", "#888"],
+      data1 = [
+      {"label": "good", "value": 40},
+      {"label": "bad", "value": 60}],
+      data2 = [
+      {"label": "good", "value": 20},
+      {"label": "bad", "value": 50},
+      {"label": "baod", "value": 30}];
+
+      var text_transform = function(d) {
+        d.innerRadius = 0;
+        d.outerRadius = r;
+        return "translate(" + arc.centroid(d) + ")";
+      };
+
+      var vis1 = d3.select("#pie1")
+      .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
+      .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+      var vis2 = d3.select("#pie2")
+      .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
+      .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+
+      var arc = d3.svg.arc().outerRadius(r);
+      var pie = d3.layout.pie().value(function(d) { return d.value; });
+
+      arcs1 = vis1.selectAll("g.slice")
+      .data(pie).enter().append("svg:g").attr("class", "slice");
+      arcs1.append("svg:path")
+      .attr("fill", function(d, i) { return colors[i]; })
+      .attr("d", arc);
+      arcs1.append("svg:text")
+      .attr("transform", text_transform)
+      .attr("text-anchor", "middle")
+      .text(function(d, i) { return data1[i].label; });
+
+      arcs2 = vis2.selectAll("g.slice")
+      .data(pie).enter().append("svg:g").attr("class", "slice");
+      arcs2.append("svg:path")
+      .attr("fill", function(d, i) { return colors[i]; })
+      .attr("d", arc);
+      arcs2.append("svg:text")
+      .attr("transform", text_transform)
+      .attr("text-anchor", "middle")
+      .text(function(d, i) { return data2[i].label; });
+    });
+  </script>
+</body>
 </html>
