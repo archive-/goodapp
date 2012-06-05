@@ -27,7 +27,9 @@ Open source:
 All the tools we use on our service are open source. In addition, tools and products we use to develop are also open source, for example Git, Github and Eclipse.
 
 Community:
-We are a community. The more people use our service, the better it gets. And since we're built on users' input and feedback GoodApp is able to focus on real life issues. The community also gets to see our source code, increasing the trust 
+We are a community. The more people use our service, the better it gets. And since we're built on users' input and feedback GoodApp is able to focus on real life issues. The community also gets to participate in the source code.
+
+
 
 
 
