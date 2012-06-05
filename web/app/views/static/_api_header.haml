@@ -1,0 +1,11 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      %a#logo.brand{href: "/"}
+        GoodApp
+        %span.namespace-separator> ::
+        %span.namespace API
+        %span.label.label-info Alpha
+      #user-nav
+        %ul.nav
+          %li= link_to raw("Back to GoodApp &raquo;"), root_url

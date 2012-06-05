@@ -9,7 +9,10 @@
     = csrf_meta_tags
   %body
     #header
-      = render "static/header"
+      - if request.subdomain == "api"
+        = render "static/api_header"
+      - else
+        = render "static/header"
     #main.container-fluid
       = render partial: "shared/flash", locals: {flash: flash}
       = yield

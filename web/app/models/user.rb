@@ -82,10 +82,8 @@ class User < ActiveRecord::Base
     !endorser.has_endorsed?(endorsee)
   end
 
-  # TODO with high activity?
-  # TODO maybe most trusted users??
-  def self.featured
-    # TODO determined featured users list
-    User.last(5)
+  def self.most_trusted
+    # TODO well, this is horrible (write rating to DB instead of virtual attr)
+    User.all.sort {|a, b| b.rating <=> a.rating}[0..5]
   end
 end

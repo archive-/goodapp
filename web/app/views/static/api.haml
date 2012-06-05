@@ -1,5 +1,13 @@
 %h1= title "API"
 
+%p
+  = succeed "." do
+    All API calls are made to
+    %code http://api.goodapp.com
+  Responses are in
+  %code JSON
+  format unless otherwise specified.
+
 %table.table.table-bordered.table-striped
   %tr
     %th Path
@@ -7,13 +15,13 @@
     %th Response
   %tr
     %td
-      %code /users/:id.json
+      %code /users/:id
     %td GET
     %td
       %code {"id":0,"name":"Joe Schmo","rating":98.32}
   %tr
     %td
-      %code /apps/:id.json
+      %code /apps/:id
     %td GET
     %td
       %code {"id":0,"title":"Sudoku","rating":23.45}
