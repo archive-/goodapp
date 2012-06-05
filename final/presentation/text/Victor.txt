@@ -1,0 +1,21 @@
+A great thing about GoodApp is the amount of potential it has. For the future, we have many goals and milestone.
+Firstly and most importantly, we're aiming be a part of the the app stores. Whenever a potential user visits an app page in the app store, it displays the respective GoodApp rating.
+GoodApp is community driven. The bigger it gets, the better it gets. And being this close to our user base allows us to focus and tackle and most important issues at the moment. As soon as one of our user is victim of malicious activity, he or she can report and every other user is now warned.
+Since our solution is built of individual parts and actions, we can add or upgrade…
+
+
+Final script:
+All the tools and products we've listed so far in this presentation and in the demo are free or open source. All the other tools that we've used but haven't mentioned yet are also open source, most importantly Git for our version control. (anything else we have used and we would like to put in here? Last minute mention?)This openness leads to another important part of our project: the community.The GoodApp concept is not a one way street. Most of our content comes from our users. And the more participant users we get the better the product gets. When we are up and running, users will be able to report real life issues that they are facing with apps and that will help to protect other users that might be interested in this malicious app. This constant user feedback and the compartmentalized manner in which we built the GoodApp service allow us to be able to tackle different types of malicious apps effectively.  It’s really easy for us to build or attach a new component to our service to go against a new type of attack (or malicious intent) from bad developers.Another cool feature, and a little less obvious, is data analysis. With a big influx of data and feedback we can start analyzing what's the most common malicious activities and give more attention in that area. Hopefully, this analysis can also help predict what the new spots that bad developers will be focusing and we will be ready  for them.
+
+To wrap it up, this is what we expect GoodApp to do in the future. /Points at screen.
+
+/Closing statement?
+
+
+
+   <h2>Conclusion</h2>
+                <ul>
+                  <li>New approach</li>
+                  <li>Cover neglected area</li>
+                  <li>Great potential</li>
+                </ul>
