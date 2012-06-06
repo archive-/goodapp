@@ -29,3 +29,5 @@ var refreshMini = function(model, id) {
 var hideMini = function(model, id) {
   $("#" + model + "-" + id).fadeOut("slow");
 }
+
+$('#myCarousel').carousel();
