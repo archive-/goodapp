@@ -33,6 +33,7 @@ html {overflow-y: scroll}
 .alert .label {margin: 9px 0 0}
 .corporate-email {background: #faa732; margin-left: 0; font-size: inherit !important}
 .vert-margin {margin: 10px 0}
+#endorse-graph {width: 500px; height: 200px; display: block; margin: 0 auto}
 
 /* ------------------- HEADER ------------------- */
 .brand:hover {color: white}

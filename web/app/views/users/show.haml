@@ -2,6 +2,8 @@
   = rating(@user)
   = @user.name
 
+%canvas#endorse-graph{width: "500", height: "200"}
+
 - unless @user.about.blank?
   %h2 About
   %p.about-section= @user.about
@@ -44,3 +46,22 @@
 - else
   - @apps.each do |app|
     = render app
+
+- content_for :javascript_onload do
+  :plain
+    var graph = new Graph();
+    var black = {color: "black"};
+    var #{@user.name.gsub(/ /, "")} = graph.newNode({label: "#{@user.name}"});
+  - (@user.endorsers + @user.endorsees).each do |user|
+    :plain
+      var #{user.name.gsub(/ /, "")} = graph.newNode({label: "#{user.name}"});
+  - @user.endorsers.each do |endorser|
+    - endorser_name = endorser.name.gsub(/ /, "")
+    :plain
+      graph.newEdge(#{endorser_name}, #{@user.name.gsub(/ /, "")}, black);
+  - @user.endorsees.each do |endorsee|
+    - endorsee_name = endorsee.name.gsub(/ /, "")
+    :plain
+      graph.newEdge(#{@user.name.gsub(/ /, "")}, #{endorsee_name}, black);
+  :plain
+    var springy = $("#endorse-graph").springy({graph: graph});

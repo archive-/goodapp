@@ -6,12 +6,22 @@
           Don't have an account?
           = link_to "Register", new_user_registration_path, class: "btn btn-large btn-primary"
         %h2 Welcome to GoodApp
-    #promo-box.clear
-      boo
+    #promo-box.carousel.clear
+      .carousel-inner
+        - @tlds.each_with_index do |tld, i|
+          .item{class: ("active" if i == 0)}
+            = image_tag "/assets/crossos.png"
+            .carousel-caption
+              %h4= link_to tld[:title], tld[:link]
+              %p= tld[:description]
+      %a.carousel-control.left{href: "#promo-box",
+        'data-slide' => "prev"} &lsaquo;
+      %a.carousel-control.right{href: "#promo-box",
+        'data-slide' => "next"} &rsaquo;
   .span4
     %h3 Other Activity
     -# TODO
-    TODO
+    = "*coming soon*"
 .row-fluid
   .span4
     %h3 Most Trusted Developers
