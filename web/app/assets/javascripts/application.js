@@ -16,6 +16,8 @@
 //= require bootstrap-tooltip
 //= require bootstrap-tab
 //= require bootstrap-carousel
+//= require springy
+//= require springyui
 
 $(function() {
   $(".tooltipped").tooltip({"placement": "bottom"});

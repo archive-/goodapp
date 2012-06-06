@@ -219,12 +219,14 @@
           <section>
             <h2>So who are these developers?</h2>
             <div class="fragment">
+              <h4>Apple Store</h4>
               <iframe class="full" src="http://itunes.apple.com/us/app/infinity-blade/id387428400"></iframe>
             </div>
           </section>
           <section>
             <h2>So who are these developers?</h2>
-            <img src="img/android_store.png" class="overlapped fragment" width="800" />
+            <h4>Android Store</h4>
+            <img src="img/android_store.png" class="overlapped" width="800" />
             <img src="img/android_store2.png" class="overlapped fragment" width="800" />
           </section>
           <section>
@@ -232,12 +234,17 @@
             <br><br>
             <h4 class="fragment">They should have a <span class="blue">rating</span></h4>
             <h4 class="fragment">It should be <span class="blue">public</span> and <span class="blue">visible</span></h4>
-            <h4 class="fragment"><span class="blue">transparent</span></h4>
+            <br>
+            <h2 class="fragment">transparency</h2>
           </section>
           <section>
             <h2>Pretty Good Privacy (PGP)</h2>
             <h4>A sidenote</h4>
             <img src="img/linus.png" class="fragment" width="800" />
+          </section>
+          <section>
+            <h2>Endorsements in GoodApp</h2>
+            <canvas class="fragment" width="800" height="400" id="endorse-graph"></canvas>
           </section>
         </section>
         <section>
@@ -249,7 +256,7 @@
           <section>
             <h2>Web Interface</h2>
               <h4>Ruby on Rails</h4>
-			<img src="img/ruby_on_rails.png" width="300" class="nostyle" />
+      <img src="img/ruby_on_rails.png" width="300" class="nostyle" />
           </section>
           <section>
             <h2>Developer Verification</h2>
@@ -258,9 +265,9 @@
               <li>PGP</li>
               <li>Developer Key</li>
             </ul>
-			<img src="img/key.png" class="nostyle" />
+      <img src="img/key.png" class="nostyle" />
           </section>
-		  <section>
+      <section>
             <h2>Virus Total</h2>
             <h4>Focused on Binary scanning so we don't have to</h4>
             <img src="img/virustotal.png" />
@@ -274,9 +281,9 @@
             <img src="img/endorsements.png" width="600" class=" nostyle" />
           </section>
           <section>
-			<h2>Third Party Data</h2>
-			<img src="img/github.png" class="nostyle" />
-		  </section>
+            <h2>Third Party Data</h2>
+            <img src="img/github.png" class="nostyle" />
+          </section>
           <section>
             <h2>Rating Formula</h2>
             <h4>Generating an absolute trust value</h4>
@@ -337,6 +344,8 @@
     <script src="js/reveal.min.js"></script>
     <script src="js/d3.v2.min.js"></script>
     <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/springy.js"></script>
+    <script src="js/springyui.js"></script>
     <script>
       $(function() {
         // slideshow
@@ -421,6 +430,20 @@
         .attr("transform", text_transform)
         .attr("text-anchor", "middle")
         .text(function(d, i) { return data2[i].label; });
+
+        var graph = new Graph();
+        var black = {color: "black"};
+        var tj = graph.newNode({label: "TJ Koblentz"});
+        var victor = graph.newNode({label: "Victor Moreira"});
+        var jasper = graph.newNode({label: "Jasper Fredrickson"});
+        var yulia = graph.newNode({label: "Yulia Dubinina"});
+        graph.newEdge(tj, victor, black);
+        graph.newEdge(tj, yulia, black);
+        graph.newEdge(tj, jasper, black);
+        graph.newEdge(jasper, victor, black);
+        graph.newEdge(yulia, jasper, black);
+        graph.newEdge(yulia, tj, black);
+        var springy = $("#endorse-graph").springy({graph: graph});
       });
     </script>
   </body>
