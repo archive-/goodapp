@@ -3,6 +3,7 @@ Web::Application.routes.draw do
   # TODO put in authorization so can't hit routes like /settings (obviously)
   constraints subdomain: "api" do
     get "/" => "static#api", as: :api
+    get "/users" => "users#index", format: :json
     get "/users/:id" => "users#show", format: :json
     get "/apps/:id" => "apps#show", format: :json
   end

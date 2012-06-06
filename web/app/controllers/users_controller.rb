@@ -1,6 +1,19 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
+    respond_to do |format|
+      format.html
+      format.json {
+        @response = []
+        unless params[:email].blank?
+          email_key = Key.find_by_kee(params[:email])
+          unless email_key.nil?
+            @response = [User.find(email_key.user_id)]
+          end
+        end
+        render json: @response
+      }
+    end
   end
 
   def show
@@ -9,7 +22,7 @@ class UsersController < ApplicationController
     @endorsements = @user.endorsements_as_endorsee
     respond_to do |format|
       format.html
-      format.json { render json: @user}
+      format.json {render json: @user}
     end
   end
 
