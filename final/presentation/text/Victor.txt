@@ -24,14 +24,19 @@ And that's how our new approach that we hope
 Final Final Script:
 
 Open source:
+While developing this project, we used Git and hosted the code on GitHub. Besides being an awesome version control, it allows us to be open source
+ This helps
 All the tools we use on our service are open source. In addition, tools and products we use to develop are also open source, for example Git, Github and Eclipse.
 
 Community:
 GoodApp is a community. The more people use our service, the better it gets. And since we're built on users' input and feedback GoodApp is able to focus on real life issues. The community also gets to participate in the source code.
 
-Data analysis:
-We expect a huge influx of data. This data is very valuable for us. We can analyze it and gather information of most common and damaging malicious activities.  can be analyzed so we can 
+Centralized and transparent.
 
+Data analysis: (expand upon it)
+We expect a huge influx of data. This data is very valuable for us. We can analyze it and gather information of most common and damaging malicious activities.  
+
+Goal:
 
 
   <section>
