@@ -3,7 +3,7 @@ Final Final Script:
 
 [Slide/30seconds]Open source:
 
-During the development of GoodApp, we've used Git for version control and GitHub for hosting. GitHub is an awesome collaboration tool, and collaboration is a very important word for our project in two aspects:
+During the development of GoodApp, we've used Git for version control and GitHub for hosting. As most of you know, GitHub is an excellent collaboration tool, and collaboration is a very important word for our project in two aspects:
 First, we are open source.
 And second: we are community driven 
 
