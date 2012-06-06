@@ -1,0 +1,66 @@
+So why GoodApp?
+
+An application doesn't just pop out of anywhere [slide change].
+
+... And it certainly doesn't just suddendly turn bad either [slide change].
+(well, for the most part)
+
+[slide change]
+TODO -- talk about app lifecycle a bit (long development, continued support after)
+
+[slide change]
+Who makes an app?
+
+[show fragment]
+This is a random application on the Apple app store.
+why can't i click this? [move pointer to "Chair Entertainment Group, LLC"]
+
+[slide change]
+And android is slightly better but not THAT much different.
+
+we can click here [show fragment]
+and see what other apps they have developed
+as well as visit their website.
+
+how transparent! <lol>
+
+[slide change]
+goodapp wants developers to be accounted for
+
+[show fragment]
+they should have a rating
+
+[show fragment]
+and it should be public and visible
+
+<breath a few seconds>
+
+[slide change]
+(pgp picture or something)
+pgp is an interesting system.
+
+using public and private key cryptography, i can ensure
+that an email from my friend victor is indeeed from him.
+if he's signed the email with his private pgp key,
+i can check the email's authenticity by verifying the
+signature with his public key.
+
+[slide change]
+here's linus's pgp key hosted on the mit pgp keyserver.
+if i trust any of these people, i can rest assured that
+this public key is in fact linus's because these people
+have said so.
+
+[slide change]
+goodapp shares this concept of endorsements and trusts.
+
+in the same way people can recommend others on services
+like linkedin, developers can endorse each other on goodapp.
+
+goodapp then uses various inputs to determine absolute
+trust ratings for each developer thus giving insight
+into the "goodness" of that developer's applications.
+
+TODO -- fix transition
+i'll now hand it over to jasper who will delve more deeply
+into goodapp's components that make up this absolute rating.
