@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <link rel="stylesheet" href="lib/zenburn.css" />
     <style type="text/css">
+      br {clear: both}
       #demoframe {border: 4px solid #eee}
       .small {font-size: 0.5em}
       .good {color: #66ee44}
@@ -23,9 +24,10 @@
       svg {margin: 30px 0; height: 400px}
       .nostyle {border: 0 !important; background: transparent !important;
         -webkit-box-shadow: none !important; box-shadow: none !important}
-      .cover-slide {position: absolute; top: 0; left: 0}
+      .cover-slide {position: absolute; top: 0; left: 0; width: 100%}
       .panel {width: 25%; float: left}
-      .panel2 {width: 30%; float: left; padding:5px;}      
+      .panel2 {width: 30%; float: left; padding:5px;}
+      .panel3 {width: 50%; float: left}
       .panel h2 {text-align: center}
     </style>
   </head>
@@ -78,15 +80,15 @@
             </div>
             <div>
               <div class="panel2 fragment">
-                <img src="img/good1.gif" width="250px"/>
+                <img src="img/good1.gif" width="250"/>
               </div>
               <div class="panel2 fragment">
-                <img src="img/good2.jpg" width="250px"/>
+                <img src="img/good2.jpg" width="250"/>
               </div>
               <div class="panel2 fragment">
-                <img src="img/good3.jpg" width="300px"/>
-              </div> 
-            </div>           
+                <img src="img/good3.jpg" width="250"/>
+              </div>
+            </div>
           </section>
           <section>
             <div>
@@ -105,17 +107,14 @@
                 <img src="img/bad2.jpeg" width="250px"/>
               </div>
               <div class="panel2 fragment">
-                <img src="img/bad3.jpeg" width="300px"/>
-              </div> 
-            </div> 
-            <div class="cover-slide">
-              <img src="img/mal.png" class="fragment nostyle" />
+                <img src="img/bad3.jpeg" width="250px"/>
+              </div>
             </div>
-          </section>          
+          </section>
           <section>
-            <h2>Wild App 'goodness' breakdown</h2>
+            <h2>Wild App 'goodness' breakdown*</h2>
             <div class="chart" id="pie1"></div>
-            <div class="fragment"><h4>Not to scale</h4></div>
+            <div class="fragment"><h4>*Not to scale</h4></div>
           </section>
           <section>
             <h2>Applications about 10 years ago</h2>
@@ -125,9 +124,9 @@
           </section>
           <section>
             <h2>Applications about 10 years ago</h2>
-            <img src="img/store.jpg" width="500" class="fragment" />
-            <img src="img/cd.jpeg" class="fragment" />
-          </section>          
+            <img src="img/store.jpg" width="500" />
+            <img src="img/cd.jpeg" />
+          </section>
           <section>
             <h2>Applications today</h2>
             <div class="row">
@@ -197,9 +196,7 @@
         </section>
         <section>
           <section>
-            <h2>Why do we need a <span class="orange">new</span> solution?</h2>
-            <br><br>
-            <h2>Why GoodApp?</h2>
+            <h2><span class="orange">Why</span> GoodApp?</h2>
           </section>
           <section data-state="good-bg">
             <h2>App</h2>
@@ -230,25 +227,30 @@
             <img src="img/cogs.png" width="400" class="nostyle" />
           </section>
           <section>
-            <h2>Virus Total</h2>
-            <h4>Focused on Binary scanning so we don't have to</h4>
-            <img src="img/virustotal.png" />
+            <h2>Web Interface</h2>
+            <ul>
+              <li>Written in Ruby on Rails</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Developer Verification</h2>
+            <ul>
+              <li>Email Verification</li>
+              <li>PGP Verification</li>
+              <li>Developer Key Registration</li>
+              <li>Git Hub Monitoring</li>
+            </ul>
           </section>
           <section>
             <h2>Endorsements</h2>
             <!-- <h4>Creating the web & Propagating trust</h4> -->
             <img src="img/uncle_sam_endorse.png" width="600" class="fragment nostyle" />
           </section>
-      <section>
-      <h2>Web Interface</h2>
-      <ul>
-        <li>Written in Ruby on Rails</li>
-        <li>Email Verification</li>
-        <li>PGP Verification</li>
-        <li>Developer Key Registration</li>
-        <li>Git Hub Monitoring</li>
-      </ul>
-      </section>
+          <section>
+            <h2>Virus Total</h2>
+            <h4>Focused on Binary scanning so we don't have to</h4>
+            <img src="img/virustotal.png" />
+          </section>
           <section>
             <h2>Rating Formula</h2>
             <h4>Generating an absolute trust value</h4>
@@ -260,35 +262,19 @@
           <iframe id="demoframe" width="900" height="500" src="http://localhost:3000"></iframe>
         </section>
         <section>
-          <section>
-            <h2>Costs</h2>
-            <ul>
-              <li>Build with open-source tools</li>
-              <li>Final product also open-source</li>
-            </ul>
+            <section>
+                <img src="img/opensource.png" width="250" class="nostyle"/>
+                <div class="panel2 fragment">
+                  <img src="img/gitlogo.png" width="250" class="nostyle" />
+                  <img src="img/githublogo.png" width="250" class="nostyle" />
+                  <img src="img/eclipselogo.png" width="250" class="nostyle" />
+                </div>
           </section>
           <section>
-            <h2>Community driven</h2>
-              <ul>
-                <li>The bigger it gets, the better it gets</li>
-                <li>Real life issues</li>
-                <li>Coding help from users</li>
-              </ul>
+              <img src="img/community2.png" class="nostyle"/>
           </section>
           <section>
-            <h2>Attack on multiple fronts</h2>
-            <ul>
-              <li>Each individual feature can be improved</li>
-              <li>New malicious ideas and new solutions</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Data analysis</h2>
-            <ul>
-              <li>Understand the environment</li>
-              <li>Focus on more common issues</li>
-              <li>Predict new problems</li>
-            </ul>
+            <img src="img/dataanalysis.jpg" class="nostyle"/>
           </section>
           <section>
             <h2>Goal</h2>
@@ -297,16 +283,22 @@
           </section>
           <section>
             <h1>Thanks!</h1>
-            <br>
-            <h3>Questions?</h3>
+            <div class="panel3">
+              <img src="img/ucsb.png" width="200" class="nostyle" />
+            </div>
+            <div class="panel3">
+              Microsoft
+            </div>
+            <br><br>
+            <h3 class="fragment">Questions?</h3>
           </section>
         </section>
       </div>
       <aside class="controls">
-        <a class="left" href="#">&#x25c4;</a>
-        <a class="right" href="#">&#x25ba;</a>
-        <a class="up" href="#">&#x25b2;</a>
-        <a class="down" href="#">&#x25bc;</a>
+      <a class="left" href="#">&#x25c4;</a>
+      <a class="right" href="#">&#x25ba;</a>
+      <a class="up" href="#">&#x25b2;</a>
+      <a class="down" href="#">&#x25bc;</a>
       </aside>
       <div class="progress"><span></span></div>
     </div>
@@ -335,7 +327,7 @@
           $visibles = $(".shaded .visible");
           $visibles.each(function() {
             if (i < ($visibles.length - 1))
-              $(this).fadeTo("fast", 0.4);
+            $(this).fadeTo("fast", 0.4);
             i++;
           });
         });
@@ -343,24 +335,24 @@
         // Reveal.addEventListener("fragmentshown", function(e) {
           // $(".visible").removeClass("highlighted");
           // $(e.fragment).addClass("highlighted");
-        // });
+          // });
 
         // Reveal.addEventListener("fragmenthidden", function(e) {
           // $(e.fragment).prev().addClass("highlighted");
-        // });
+          // });
 
         // pie charts
         var w = 900,
-            h = 400,
-            r = 200,
-            colors = ["#66ee44", "#ff4444", "#888"],
-            data1 = [
-              {"label": "good", "value": 40},
-              {"label": "bad", "value": 60}],
-            data2 = [
-              {"label": "good", "value": 20},
-              {"label": "bad", "value": 50},
-              {"label": "baod", "value": 30}];
+        h = 400,
+        r = 200,
+        colors = ["#66ee44", "#ff4444", "#888"],
+        data1 = [
+        {"label": "good", "value": 40},
+        {"label": "bad", "value": 60}],
+        data2 = [
+        {"label": "good", "value": 20},
+        {"label": "bad", "value": 50},
+        {"label": "baod", "value": 30}];
 
         var text_transform = function(d) {
           d.innerRadius = 0;
@@ -369,34 +361,34 @@
         };
 
         var vis1 = d3.select("#pie1")
-          .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
-          .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+        .append("svg:svg").data([data1]).attr("width", w).attr("heigh", h)
+        .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
         var vis2 = d3.select("#pie2")
-          .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
-          .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
+        .append("svg:svg").data([data2]).attr("width", w).attr("heigh", h)
+        .append("svg:g").attr("transform", "translate(" + 450 + "," + r + ")");
 
         var arc = d3.svg.arc().outerRadius(r);
         var pie = d3.layout.pie().value(function(d) { return d.value; });
 
         arcs1 = vis1.selectAll("g.slice")
-          .data(pie).enter().append("svg:g").attr("class", "slice");
+        .data(pie).enter().append("svg:g").attr("class", "slice");
         arcs1.append("svg:path")
-          .attr("fill", function(d, i) { return colors[i]; })
-          .attr("d", arc);
+        .attr("fill", function(d, i) { return colors[i]; })
+        .attr("d", arc);
         arcs1.append("svg:text")
-          .attr("transform", text_transform)
-          .attr("text-anchor", "middle")
-          .text(function(d, i) { return data1[i].label; });
+        .attr("transform", text_transform)
+        .attr("text-anchor", "middle")
+        .text(function(d, i) { return data1[i].label; });
 
         arcs2 = vis2.selectAll("g.slice")
-          .data(pie).enter().append("svg:g").attr("class", "slice");
+        .data(pie).enter().append("svg:g").attr("class", "slice");
         arcs2.append("svg:path")
-          .attr("fill", function(d, i) { return colors[i]; })
-          .attr("d", arc);
+        .attr("fill", function(d, i) { return colors[i]; })
+        .attr("d", arc);
         arcs2.append("svg:text")
-          .attr("transform", text_transform)
-          .attr("text-anchor", "middle")
-          .text(function(d, i) { return data2[i].label; });
+        .attr("transform", text_transform)
+        .attr("text-anchor", "middle")
+        .text(function(d, i) { return data2[i].label; });
       });
     </script>
   </body>

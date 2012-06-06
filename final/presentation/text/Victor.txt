@@ -5,17 +5,65 @@ Since our solution is built of individual parts and actions, we can add or upgra
 
 
 Final script:
-All the tools and products we've listed so far in this presentation and in the demo are free or open source. All the other tools that we've used but haven't mentioned yet are also open source, most importantly Git for our version control. (anything else we have used and we would like to put in here? Last minute mention?)This openness leads to another important part of our project: the community.The GoodApp concept is not a one way street. Most of our content comes from our users. And the more participant users we get the better the product gets. When we are up and running, users will be able to report real life issues that they are facing with apps and that will help to protect other users that might be interested in this malicious app. This constant user feedback and the compartmentalized manner in which we built the GoodApp service allow us to be able to tackle different types of malicious apps effectively.  It’s really easy for us to build or attach a new component to our service to go against a new type of attack (or malicious intent) from bad developers.Another cool feature, and a little less obvious, is data analysis. With a big influx of data and feedback we can start analyzing what's the most common malicious activities and give more attention in that area. Hopefully, this analysis can also help predict what the new spots that bad developers will be focusing and we will be ready  for them.
+All the tools and products we've listed so far in this presentation and in the demo are free or open source. All the other tools that we've used but haven't mentioned yet are also open source, most importantly Git and GitHub for our version control. (anything else we have used and we would like to put in here? Last minute mention?)This openness leads to another important part of our project: the community.The GoodApp concept is not a one way street. Most of our content comes from our users. And the more participant users we get the better the product gets. When we are up and running, users will be able to report real life issues that they are facing with apps and that will help to protect other users that might be interested in this malicious app. This constant user feedback and the compartmentalized manner in which we built the GoodApp service allow us to be able to tackle different types of malicious apps effectively.  It’s really easy for us to build or attach a new component to our service to go against a new type of attack (or malicious intent) from bad developers.Another cool feature, and a little less obvious, is data analysis. With a big influx of data and feedback we can start analyzing what's the most common malicious activities and give more attention in that area. Hopefully, this analysis can also help predict what the new spots that bad developers will be focusing and we will be ready  for them.
 
 To wrap it up, this is what we expect GoodApp to do in the future. /Points at screen.
 
 /Closing statement?
 
 
-
+And that's how our new approach that we hope 
    <h2>Conclusion</h2>
                 <ul>
                   <li>New approach</li>
                   <li>Cover neglected area</li>
                   <li>Great potential</li>
                 </ul>
+
+
+Final Final Script:
+
+Open source:
+All the tools we use on our service are open source. In addition, tools and products we use to develop are also open source, for example Git, Github and Eclipse.
+
+Community:
+GoodApp is a community. The more people use our service, the better it gets. And since we're built on users' input and feedback GoodApp is able to focus on real life issues. The community also gets to participate in the source code.
+
+Data analysis:
+We expect a huge influx of data. This data is very valuable for us. We can analyze it and gather information of most common and damaging malicious activities.  can be analyzed so we can 
+
+
+
+  <section>
+            <h2>Community driven</h2>
+              <ul>
+                <li>The bigger it gets, the better it gets</li>
+                <li>Real life issues</li>
+                <li>Coding help from users</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Attack on multiple fronts</h2>
+            <ul>
+              <li>Each individual feature can be improved</li>
+              <li>New malicious ideas and new solutions</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Data analysis</h2>
+            <ul>
+              <li>Understand the environment</li>
+              <li>Focus on more common issues</li>
+              <li>Predict new problems</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Goal</h2>
+            <h4>Integration with app stores</h4>
+            <img src="img/appstoreintegration.png" width="250" />
+          </section>
+          <section>
+            <h1>Thanks!</h1>
+            <br>
+            <h3>Questions?</h3>
+          </section>
