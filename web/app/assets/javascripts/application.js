@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap.min
+//= require bootstrap-tooltip
+//= require bootstrap-tab
+//= require bootstrap-carousel
 
 $(function() {
   $(".tooltipped").tooltip({"placement": "bottom"});
@@ -30,4 +33,4 @@ var hideMini = function(model, id) {
   $("#" + model + "-" + id).fadeOut("slow");
 }
 
-$('#myCarousel').carousel();
+$('.carousel').carousel();

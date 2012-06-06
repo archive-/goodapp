@@ -1,10 +1,10 @@
 class StaticController < ApplicationController
+
   def index
     @recent_apps = App.valids.order("created_at DESC").limit(4) # paginate
-    
-    @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 24.hours) do
+    @tlds = Rails.cache.fetch("scraped", expires_in: 24.hours) do
       scrape
-    end   
+    end
   end
 
   def dashboard
@@ -56,45 +56,75 @@ class StaticController < ApplicationController
 
   private
 
-  def scrape
-    require 'nokogiri' 
-    require 'open-uri'
- 
-    r = Random.new
-    number = r.rand(1...5)
-    
-    j = 0 
-    title = Array.new 
-    decsr = Array.new
-    links = Array.new 
-   
-    url_wired = "http://www.wired.com/gadgetlab/tag/android-market/"
-
-    doc = Nokogiri::HTML(open(url_wired))
-
+  def scrape_wired(doc, article_number=Random.rand(5)+1)
+    title = link = description = nil
     doc.css(".tag-android-market").each_with_index do |item, i|
-      title[j] = item.at_css("h2 a").text
-      links[j] = item.at_css("h2 a")[:href]     
-      decsr[j] = item.at_css("p:nth-child(4)").text
-      j = j + 1
-    end
-
-    j = j + 1
-
-    url_mash_1 = "http://mashable.com/follow/search?q=windows+marketplace" 
-    doc_mash = Nokogiri::HTML(open(url_mash_1)) 
-
-    number_2 = r.rand(1...5) 
-
-    doc_mash.css(".short").each_with_index do |item, i|
-      if number_2 == i
-        title[j] =  item.at_css(".headline").text
-        links[j] = item.at_css(".headline")[:href] 
-        url_spec = links[j] 
-        doc3 = Nokogiri::HTML(open(url_spec)) 
-        decsr[j] = doc3.at_css("p:nth-child(4)").text
-        break 
+      if i == article_number
+        dom_a = item.at_css("h2 a")
+        title = dom_a.text
+        link = dom_a[:href]
+        dom_description = item.at_css("p:nth-child(4)")
+        unless dom_description.nil?
+          description = dom_description.text
+        end
+        break
       end
-    end   
+    end
+    {title: title, link: link, description: description}
+  end
+
+  def scrape_mashable(doc, article_number=Random.rand(6)+1)
+    title = link = description = nil
+    doc.css(".short").each_with_index do |item, i|
+      if i == article_number
+        title = item.at_css(".headline").text
+        link = item.at_css(".headline")[:href]
+        subdoc = Nokogiri::HTML(RestClient.get(link))
+        dom_description = subdoc.at_css("p:nth-child(4)")
+        unless dom_description.nil?
+          description = dom_description.text
+        end
+      end
+    end
+    {title: title, link: link, description: description}
+  end
+
+  def scrape_techcrunch(doc)
+    title = link = description = nil
+    doc.css(".left-container").each_with_index do |item, i|
+      dom_title = item.at_css(".embedded-image-post .headline a")
+      title = dom_title.text
+      link = dom_title[:href]
+      dom_description = item.at_css("p:nth-child(1)")
+      unless dom_description.nil?
+        description = dom_description.text
+      end
+    end
+    {title: title, link: link, description: description}
+  end
+
+  def scrape
+    # source => url
+    sources = {
+      wired:
+        "http://www.wired.com/gadgetlab/tag/android-market/",
+      mashable_windows:
+        "http://mashable.com/follow/search?q=windows+marketplace",
+      mashable_android:
+        "http://mashable.com/follow/search?q=android+marketplace",
+      mashable_apple:
+        "http://mashable.com/follow/search?q=apple+marketplace",
+      techcrunch:
+        "http://techcrunch.com/mobile/"}
+
+    tlds = []
+    sources.each_with_index do |(source, url), i|
+      doc = Nokogiri::HTML(RestClient.get(url))
+      tld = send("scrape_#{source.to_s.split("_")[0]}", doc)
+      unless tld.any? {|k, v| v.nil?}
+        tlds << tld
+      end
+    end
+    tlds
   end
 end
