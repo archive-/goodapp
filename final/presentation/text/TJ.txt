@@ -33,6 +33,8 @@ they should have a rating
 [show fragment]
 and it should be public and visible
 
+... transparent
+
 <breath a few seconds>
 
 [slide change]
@@ -45,7 +47,7 @@ if he's signed the email with his private pgp key,
 i can check the email's authenticity by verifying the
 signature with his public key.
 
-[slide change]
+[show fragment]
 here's linus's pgp key hosted on the mit pgp keyserver.
 if i trust any of these people, i can rest assured that
 this public key is in fact linus's because these people
