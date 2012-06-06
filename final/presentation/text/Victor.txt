@@ -1,69 +1,35 @@
-A great thing about GoodApp is the amount of potential it has. For the future, we have many goals and milestone.
-Firstly and most importantly, we're aiming be a part of the the app stores. Whenever a potential user visits an app page in the app store, it displays the respective GoodApp rating.
-GoodApp is community driven. The bigger it gets, the better it gets. And being this close to our user base allows us to focus and tackle and most important issues at the moment. As soon as one of our user is victim of malicious activity, he or she can report and every other user is now warned.
-Since our solution is built of individual parts and actions, we can add or upgrade…
-
-
-Final script:
-All the tools and products we've listed so far in this presentation and in the demo are free or open source. All the other tools that we've used but haven't mentioned yet are also open source, most importantly Git and GitHub for our version control. (anything else we have used and we would like to put in here? Last minute mention?)This openness leads to another important part of our project: the community.The GoodApp concept is not a one way street. Most of our content comes from our users. And the more participant users we get the better the product gets. When we are up and running, users will be able to report real life issues that they are facing with apps and that will help to protect other users that might be interested in this malicious app. This constant user feedback and the compartmentalized manner in which we built the GoodApp service allow us to be able to tackle different types of malicious apps effectively.  It’s really easy for us to build or attach a new component to our service to go against a new type of attack (or malicious intent) from bad developers.Another cool feature, and a little less obvious, is data analysis. With a big influx of data and feedback we can start analyzing what's the most common malicious activities and give more attention in that area. Hopefully, this analysis can also help predict what the new spots that bad developers will be focusing and we will be ready  for them.
-
-To wrap it up, this is what we expect GoodApp to do in the future. /Points at screen.
-
-/Closing statement?
-
-
-And that's how our new approach that we hope 
-   <h2>Conclusion</h2>
-                <ul>
-                  <li>New approach</li>
-                  <li>Cover neglected area</li>
-                  <li>Great potential</li>
-                </ul>
-
 
 Final Final Script:
 
-Open source:
-All the tools we use on our service are open source. In addition, tools and products we use to develop are also open source, for example Git, Github and Eclipse.
+[Slide/30seconds]Open source:
 
-Community:
-GoodApp is a community. The more people use our service, the better it gets. And since we're built on users' input and feedback GoodApp is able to focus on real life issues. The community also gets to participate in the source code.
-
-Data analysis:
-We expect a huge influx of data. This data is very valuable for us. We can analyze it and gather information of most common and damaging malicious activities.  can be analyzed so we can 
+During the development of GoodApp, we've used Git for version control and GitHub for hosting. GitHub is an awesome collaboration tool, and collaboration is a very important word for our project in two aspects:
+First, we are open source.
+And second: we are community driven 
 
 
+[Slide/35s]Community:
 
-  <section>
-            <h2>Community driven</h2>
-              <ul>
-                <li>The bigger it gets, the better it gets</li>
-                <li>Real life issues</li>
-                <li>Coding help from users</li>
-              </ul>
-          </section>
-          <section>
-            <h2>Attack on multiple fronts</h2>
-            <ul>
-              <li>Each individual feature can be improved</li>
-              <li>New malicious ideas and new solutions</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Data analysis</h2>
-            <ul>
-              <li>Understand the environment</li>
-              <li>Focus on more common issues</li>
-              <li>Predict new problems</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Goal</h2>
-            <h4>Integration with app stores</h4>
-            <img src="img/appstoreintegration.png" width="250" />
-          </section>
-          <section>
-            <h1>Thanks!</h1>
-            <br>
-            <h3>Questions?</h3>
-          </section>
+We expect the GoodApp community to actively participate in making GoodApp better and more effective, by both providing content and helping on the code. Collaboration is great weapon against of the biggest problem in the area:
+	amount of apps that we need to be rated
+	diversity in the app stores
+
+
+
+[Slide/40s]Centralized & transparent
+
+App stores are unique and there is no communication among them, creating a complicated complicated environment.
+	[Bullet]Each store has its policies and they vary greatly, while GoodApp has an unified consistent policy for all apps.
+	[Bullet]A developer might have been banned from one app store, but he's running freely in another. GoodApp rates a developer regardless of the app environment.
+	[Bullet]App stores might have some rules that are only beneficial to them and not very clear. In  GoodApp all of the rules are clear and aim to protect the user.
+
+
+[Slide/30]Data analysis
+
+All this data that we gather from community is extremely valuable to us. To make GoodApp more effective, we can analyze this data to better understand malicious activities and how we can protect our users.
+
+[Slide]Integration with app stores
+After all it's sad and done and GoodApp is running at full speed, our goal is to integrate our service to the current app stores.
+
+[Thanks]
+We would like to thank UCSB and Microsoft for the opportunity, and that's it for GoodApp, a new approach to developer trust and app security.
