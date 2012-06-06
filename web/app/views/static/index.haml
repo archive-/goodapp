@@ -7,24 +7,7 @@
           = link_to "Register", new_user_registration_path, class: "btn btn-large btn-primary"
         %h2 Welcome to GoodApp
     #promo-box.clear
-      .carousel-inner
-        - @title.each_with_index do |t, i|
-          - if i == 0
-            .item.active
-              = image_tag "/assets/crossos.png"
-              .carousel-caption
-                %h4= link_to t, @link[i]
-                %p= @decsr[i]
-          - else
-            .item
-              = image_tag "/assets/crossos.png"
-              .carousel-caption
-                %h4= link_to t, @link[i]
-                %p= @decsr[i]
-      %a.carousel-control.left{href: "#home-carousel",
-        'data-slide' => "prev"} &lsaquo;
-      %a.carousel-control.right{href: "#home-carousel",
-        'data-slide' => "next"} &rsaquo;
+      boo
   .span4
     %h3 Other Activity
     -# TODO

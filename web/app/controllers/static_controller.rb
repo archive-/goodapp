@@ -2,7 +2,9 @@ class StaticController < ApplicationController
   def index
     @recent_apps = App.valids.order("created_at DESC").limit(4) # paginate
     
-    @title, @decsr, @link = scrape  
+    @title, @decsr, @link = Rails.cache.fetch('scrape', :expires_in => 24.hours) do
+      scrape
+    end   
   end
 
   def dashboard

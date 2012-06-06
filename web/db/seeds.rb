@@ -9,51 +9,49 @@
 
 User.destroy_all
 App.destroy_all
+Key.destroy_all
 
 digest = User.new.send(:password_digest, "blabla")
-
-# TODO less hacky
-=begin
-def finish_seeding_user(user, roles=[])
-  user.confirmed_at = Time.now
-  user.save
-  roles.each do |role|
-    user.add_role role
-  end
-end
-
 
 User.populate(1) do |user|
   user.name = 'TJ Koblentz'
   user.email = 'tj.koblentz@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm TJ."
+  user.endorsement_rating = 0
+  user.confirmed_at = "2012-06-06 06:17:52"
+  user.confirmation_sent_at = "2012-06-06 06:17:46"    
 end
-# finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Yulia Dubinina'
   user.email = 'skiswithtwotips@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Yulia."
+  user.endorsement_rating = 0 
+  user.confirmed_at = "2012-06-06 06:17:52" 
+  user.confirmation_sent_at = "2012-06-06 06:17:46"  
 end
-# finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Victor Moreira'
   user.email = 'montesinnos@gmail.com'
   user.encrypted_password = digest
   user.about = "Hi, I'm Victor."
+  user.endorsement_rating = 0
+  user.confirmed_at = "2012-06-06 06:17:52"
+  user.confirmation_sent_at = "2012-06-06 06:17:46"        
 end
-# finish_seeding_user(User.last, [:admin, :dev])
 
 User.populate(1) do |user|
   user.name = 'Jasper Fredrickson'
   user.email = 'jrf@umail.ucsb.edu'
   user.encrypted_password = digest
   user.about = "Hi, I'm Jasper."
+  user.endorsement_rating = 0 
+  user.confirmed_at = "2012-06-06 06:17:52"
+  user.confirmation_sent_at = "2012-06-06 06:17:46"       
 end
-# finish_seeding_user(User.last, [:admin, :dev])
 
 # Creates account for Regression test
 User.populate(1) do |user|
@@ -61,23 +59,39 @@ User.populate(1) do |user|
   user.email = 'regression@test.com'
   user.encrypted_password = digest
   user.about = "Test master."
+  user.endorsement_rating = 0 
+  user.confirmed_at = "2012-06-06 06:17:52"
+  user.confirmation_sent_at = "2012-06-06 06:17:46"       
 end
-# finish_seeding_user(User.last, [:admin, :dev])
 
-User.populate(25) do |user|
+# populate some other users
+User.populate(5) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
   user.encrypted_password = digest
   user.about = Populator.sentences(2..4)
+  user.endorsement_rating = 0 
+  user.confirmed_at = "2012-06-06 06:17:52"  
+  user.confirmation_sent_at = "2012-06-06 06:17:46"  
 end
 
-i = 0
-Key.populate(25) do |key|
+# populate keys
+Key.populate(8) do |key|
   key.rating = 1..100
-  key.user_id = i
+  key.title = "testing"
+  key.user_id = 1..8
   key.kee = "test"
   key.proper = true
-  i = i + 1
+  key.user_id = 1..10 
 end
 
-=end
+# populate apps
+App.populate(10) do |app|
+  app.title = Populator.words(1..2)
+  app.key_id = 1..8
+  app.proper = true
+  app.aid = 1..8 
+  app.status = 100
+  app.version = 1.1...1.3
+end
+
