@@ -1,35 +1,35 @@
 
 Final Final Script:
 
-[Slide 30s]Open source:
+[Slide/30seconds]Open source:
 
 During the development of GoodApp, we've used Git for version control and GitHub for hosting. GitHub is an awesome collaboration tool, and collaboration is a very important word for our project in two aspects:
 First, we are open source.
 And second: we are community driven 
 
 
-[Slide]Community:
+[Slide/35s]Community:
 
-We expect the GoodApp community to actively participate in making GoodApp better and more effective, by both providing content and helping on the code. Collaboration is great weapon against two of the biggest problem in the area:
-	amount of apps that we needs to be rated
+We expect the GoodApp community to actively participate in making GoodApp better and more effective, by both providing content and helping on the code. Collaboration is great weapon against of the biggest problem in the area:
+	amount of apps that we need to be rated
 	diversity in the app stores
 
 
 
-[Slide]Centralized & transparent
+[Slide/40s]Centralized & transparent
 
-App stores are unique and there is no communication among them. That creates a very complicated environment.
+App stores are unique and there is no communication among them, creating a complicated complicated environment.
 	[Bullet]Each store has its policies and they vary greatly, while GoodApp has an unified consistent policy for all apps.
 	[Bullet]A developer might have been banned from one app store, but he's running freely in another. GoodApp rates a developer regardless of the app environment.
 	[Bullet]App stores might have some rules that are only beneficial to them and not very clear. In  GoodApp all of the rules are clear and aim to protect the user.
 
 
-[Slide]Data analysis
+[Slide/30]Data analysis
 
-All this data that we gather from community is extremely valuable to us. To make GoodApp better, we can analyze this data to understand malicious activities and how  we can protect our users.
+All this data that we gather from community is extremely valuable to us. To make GoodApp more effective, we can analyze this data to better understand malicious activities and how we can protect our users.
 
 [Slide]Integration with app stores
-
+After all it's sad and done and GoodApp is running at full speed, our goal is to integrate our service to the current app stores.
 
 [Thanks]
-We would like to thank UCSB and Microsoft for the opportunity, and that's it for GoodApp, a new approach to qualify app security.
+We would like to thank UCSB and Microsoft for the opportunity, and that's it for GoodApp, a new approach to developer trust and app security.
