@@ -52,7 +52,7 @@
     var graph = new Graph();
     var black = {color: "black"};
     var #{@user.name.gsub(/ /, "")} = graph.newNode({label: "#{@user.name}"});
-  - (@user.endorsers + @user.endorsees).each do |user|
+  - (@user.endorsers + @user.endorsees - [@user]).each do |user|
     :plain
       var #{user.name.gsub(/ /, "")} = graph.newNode({label: "#{user.name}"});
   - @user.endorsers.each do |endorser|

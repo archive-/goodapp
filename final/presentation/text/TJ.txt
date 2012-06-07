@@ -1,5 +1,3 @@
-So why GoodApp?
-
 An application doesn't just pop out of anywhere [slide change].
 
 ... And it certainly doesn't just suddendly turn bad either [slide change].
@@ -33,7 +31,10 @@ they should have a rating
 [show fragment]
 and it should be public and visible
 
-... transparent
+goodapp is a web service that gives developers ratings,
+makes these ratings public and visible.
+
+most importantly, goodapp focuses on transparency
 
 <breath a few seconds>
 
